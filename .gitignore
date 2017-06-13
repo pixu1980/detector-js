@@ -1,0 +1,31 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+*.css.map
+
+# OS or Editor folders
+.idea
+.DS_Store
+.cache
+.project
+.settings
+.tmproj
+.vscode
+.sass-cache
+nbproject
+Thumbs.db
+
+# Bower Components.
+bower_components/
+
+# NPM packages folder.
+node_modules/
+
