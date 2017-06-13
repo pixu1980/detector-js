@@ -1,0 +1,31 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+    "source": {
+        "include": ["./src"],
+        "includePattern": ".+\\.js$",
+        "excludePattern": "(docs)"
+    },
+    "plugins": [],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": true,
+        "systemName": "DetectorJS",
+        "footer": "",
+        "copyright": "2017 &copy; Created by blackmirror1980",
+        "navType": "vertical",
+        "theme": "spacelab",
+        "linenums": true,
+        "collapseSymbols": false,
+        "inverseNav": false
+    },
+    "opts": {
+        "template": "../ink-docstrap/template",
+        "encoding": "utf8",
+        "destination": "docs",
+        "recurse": true,
+        "private": true
+    }
+}
