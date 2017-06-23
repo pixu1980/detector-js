@@ -122,7 +122,7 @@ module.exports = {
       // external dependency, but we're also specifying how
       // lodash should be loaded in different scenarios
       // (more on that below)
-      lodash: {
+      'flavor-js': {
         root: "ƒ",
         commonjs: "FlavorJS",
         commonjs2: "FlavorJS",
