@@ -124,9 +124,9 @@ module.exports = {
       // (more on that below)
       'flavor-js': {
         root: "ƒ",
-        commonjs: "FlavorJS",
-        commonjs2: "FlavorJS",
-        amd: "FlavorJS"
+        commonjs: "flavor-js",
+        commonjs2: "flavor-js",
+        amd: "flavor-js"
       }
     }
   ],
