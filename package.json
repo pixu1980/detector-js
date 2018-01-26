@@ -1,10 +1,17 @@
 {
   "name": "detector-js",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js & feature.js)",
   "main": "dist/detector.js",
   "scripts": {
-    "build": "webpack"
+    "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
+    "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built'",
+    "build": "webpack --progress",
+    "build:release": "npm run readme && npm run build && npm run docs",
+    "build:release:patch": "npm version patch && npm run build:release",
+    "build:release:minor": "npm version minor && npm run build:release",
+    "build:release:major": "npm version major && npm run build:release",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -12,7 +19,12 @@
   },
   "keywords": [
     "javascript",
-    "ES6"
+    "detector",
+    "feature",
+    "npm",
+    "module",
+    "library",
+    "es6"
   ],
   "author": "Black Mirror",
   "license": "MIT",
@@ -20,40 +32,31 @@
     "url": "https://github.com/blackmirror1980/detector-js/issues"
   },
   "homepage": "https://github.com/blackmirror1980/detector-js#readme",
+  "documentation": "https://blackmirror1980.github.io/detector-js/docs/index.html",
   "dependencies": {
-    "bowser": "^1.7.0",
+    "bowser": "^1.9.1",
     "feature-js": "0.0.1",
-    "flavor-js": "^0.3.9",
-    "platform": "^1.3.4"
+    "flavor-js": "^0.4.2",
+    "platform": "^1.3.5"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.24.0",
-    "babel-eslint": "^7.2.1",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-add-jsdoc-properties": "^0.1.4",
-    "babel-plugin-lodash": "^3.2.11",
-    "babel-preset-env": "^1.3.2",
-    "babel-preset-es2015": "^6.6.0",
-    "clean-webpack-plugin": "^0.1.15",
-    "compression-webpack-plugin": "^0.3.2",
-    "copy-webpack-plugin": "^4.0.1",
-    "eslint": "^3.9.1",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-config-standard": "^7.1.0",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^6.6.0",
-    "eslint-plugin-standard": "^2.1.1",
-    "exports-loader": "^0.6.3",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
-    "imports-loader": "^0.6.5",
-    "lodash-webpack-plugin": "^0.11.2",
-    "webpack": "^1.14.0",
-    "webpack-node-externals": "^1.5.4"
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "docdash": "^0.4.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.0",
+    "ink-docstrap": "^1.3.2",
+    "jsdoc": "^3.5.5",
+    "lodash-webpack-plugin": "^0.11.4",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-ver-plugin": "0.0.2"
   }
 }
