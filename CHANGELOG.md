@@ -1,3 +1,11 @@
+## [Version 0.0.10](https://github.com/blackmirror1980/detector-js/releases/tag/v0.0.10) (2018-1-26)
+
+### New features
+
+- added battery feature detection: [`3f3afb1`](https://github.com/blackmirror1980/detector-js/commit/3f3afb1)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.0.9...v0.0.10)
+
 ## [Version 0.0.9](https://github.com/blackmirror1980/detector-js/releases/tag/v0.0.9) (2018-1-26)
 
 ### Bug fixes
