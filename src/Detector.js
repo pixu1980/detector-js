@@ -200,6 +200,7 @@ export default class Detector {
       f.inherit({
         async: feature.async,
         addEventListener: feature.addEventListener,
+        battery: !!navigator.battery,
         canvas: feature.canvas,
         classList: feature.classList,
         cors: feature.cors,
