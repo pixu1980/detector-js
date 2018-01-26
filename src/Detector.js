@@ -3,8 +3,9 @@ import feature from 'feature-js';
 import bowser from 'bowser';
 import ƒ from 'flavor-js';
 
-const navigator = window.navigator;
-const ua = navigator.userAgent;
+import release from './release.json';
+
+const {navigator} = window;
 
 export default class Detector {
   constructor() {
@@ -13,6 +14,14 @@ export default class Detector {
     this.browser = this.getBrowser();
     this.features = this.getFeatures();
     this.audio = this.getAudio();
+
+    const detectorJSStatus = {
+      initialized: true,
+      version: release.version,
+      build: release.buildDate,
+    };
+
+    console.log('DetectorJS initialized', detectorJSStatus);
   }
 
   getPlatform() {
@@ -54,7 +63,7 @@ export default class Detector {
         firefoxOS: bowser.firefoxos,
         iOS: bowser.ios && platform.os.family === 'iOS',
         linux: bowser.linux && ['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'].contains(platform.os.family),
-        macOS: /Mac OS/.test(ua) && bowser.mac && ['OS X', 'macOS'].contains(platform.os.family),
+        macOS: /Mac OS/.test(navigator.userAgent) && bowser.mac && ['OS X', 'macOS'].contains(platform.os.family),
         sailfish: bowser.sailfish,
         tizen: bowser.tizen,
         windows: bowser.windows && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].contains(platform.os.family),
@@ -84,7 +93,7 @@ export default class Detector {
           webkit: bowser.webkit && platform.layout === 'WebKit',
         },
         android: bowser.android, // native android browser
-        arora: /Arora/.test(ua),
+        arora: /Arora/.test(navigator.userAgent),
         bada: bowser.bada, // native bada browser
         blackberry: bowser.blackberry, // native blackberry browser
         chrome: bowser.chrome && platform.name.contains('Chrome'),
@@ -93,17 +102,17 @@ export default class Detector {
         edge: bowser.msedge && platform.name === 'Microsoft Edge',
         ejecta: typeof window.ejecta !== 'undefined',
         electron: platform.name === 'Electron',
-        epiphany: /Epiphany/.test(ua),
+        epiphany: /Epiphany/.test(navigator.userAgent),
         firefox: bowser.firefox && platform.name.contains('Firefox'),
         firefoxMobile: bowser.firefox && ['Firefox for iOS', 'Firefox Mobile'].contains(platform.name),
         ie: bowser.msie && platform.name.contains('IE'),
         ieMobile: bowser.msie && bowser.mobile && platform.name === 'IE Mobile',
-        midori: /Midori/.test(ua),
+        midori: /Midori/.test(navigator.userAgent),
         opera: bowser.opera && platform.name.contains('Opera'),
         operaMobile: bowser.opera && bowser.mobile && ['Opera Mini', 'Opera Mobile'].contains(platform.name),
         phantom: bowser.phantom && platform.name === 'PhantomJS',
         safari: bowser.safari && platform.name.contains('Safari'),
-        safariMobile: /Mobile Safari/.test(ua) && bowser.safari && bowser.ios && bowser.mobile && platform.name.contains('Safari'),
+        safariMobile: /Mobile Safari/.test(navigator.userAgent) && bowser.safari && bowser.ios && bowser.mobile && platform.name.contains('Safari'),
         sailfish: bowser.sailfish,
         seamonkey: bowser.seamonkey && platform.name === 'SeaMonkey',
         samsung: bowser.samsungBrowser, // native samsung browser
