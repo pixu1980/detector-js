@@ -340,6 +340,7 @@ var Detector = function () {
         f.inherit({
           async: _featureJs2.default.async,
           addEventListener: _featureJs2.default.addEventListener,
+          battery: !!navigator.battery,
           canvas: _featureJs2.default.canvas,
           classList: _featureJs2.default.classList,
           cors: _featureJs2.default.cors,
@@ -2324,7 +2325,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Fri Jan 26 2018 16:04:35 GMT+0100 (CET)","version":"0.0.8"}}
+module.exports = {"version":{"name":"detector-js","buildDate":"Fri Jan 26 2018 16:59:12 GMT+0100 (CET)","version":"0.0.10"}}
 
 /***/ })
 /******/ ]);
