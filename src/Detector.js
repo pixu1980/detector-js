@@ -97,7 +97,7 @@ export default class Detector {
         bada: bowser.bada, // native bada browser
         blackberry: bowser.blackberry, // native blackberry browser
         chrome: bowser.chrome && platform.name.contains('Chrome'),
-        chromeMobile: bowser.chrome && bowser.mobile && platform.name === 'Chrome Modile',
+        chromeMobile: bowser.chrome && bowser.mobile && platform.name === 'Chrome Mobile',
         cocoonJS: navigator.isCocoonJS,
         edge: bowser.msedge && platform.name === 'Microsoft Edge',
         ejecta: typeof window.ejecta !== 'undefined',
