@@ -52,6 +52,7 @@ const config = {
 
 const umd = _.merge({}, config, {
   devtool: 'sourcemap',
+  mode: 'development',
   output: {
     filename: filename + '.js',
     libraryTarget: 'umd',
@@ -66,6 +67,7 @@ const umd = _.merge({}, config, {
 });
 
 const umdProd = _.merge({}, config, {
+  mode: 'production',
   output: {
     filename: filename + '.min.js',
     libraryTarget: 'umd',
