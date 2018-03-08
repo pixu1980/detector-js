@@ -2360,7 +2360,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Thu Mar 08 2018 10:16:38 GMT+0100 (CET)","version":"0.0.10"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Thu Mar 08 2018 10:17:25 GMT+0100 (CET)","version":"0.0.10"}};
 
 /***/ }),
 
