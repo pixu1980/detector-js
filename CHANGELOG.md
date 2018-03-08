@@ -1,3 +1,12 @@
+## [Version 0.0.11](https://github.com/blackmirror1980/detector-js/releases/tag/v0.0.11) (2018-3-8)
+
+### Bug fixes
+
+- v0.0.10: [`ce37a3f`](https://github.com/blackmirror1980/detector-js/commit/ce37a3f)
+- bumped ssri to v5.2.4 in order to fix the security vulnerability issue: [`0db5264`](https://github.com/blackmirror1980/detector-js/commit/0db5264)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.0.10...v0.0.11)
+
 ## [Version 0.0.10](https://github.com/blackmirror1980/detector-js/releases/tag/v0.0.10) (2018-1-26)
 
 ### New features
