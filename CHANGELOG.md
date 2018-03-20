@@ -1,3 +1,11 @@
+## [Version 0.1.1](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.1) (2018-3-20)
+
+### Bug fixes
+
+- added css flags by default: [`07ffc88`](https://github.com/blackmirror1980/detector-js/commit/07ffc88)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.0...v0.1.1)
+
 ## [Version 0.1.0](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.0) (2018-3-20)
 
 ### Breaking changes
