@@ -3,7 +3,7 @@
 import Detector from './Detector';
 
 const detectorInitialized = (!!window && window instanceof Window && !!window.detector && window.detector instanceof Detector);
-const detector = detectorInitialized ? window.detector : new Detector(true);
+const detector = detectorInitialized ? window.detector : new Detector(true).default;
 
 window.detector = detector;
 
