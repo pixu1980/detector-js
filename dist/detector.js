@@ -2479,7 +2479,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var detectorInitialized = !!window && window instanceof Window && !!window.detector && window.detector instanceof _Detector2.default; /*global Window*/
 
-var detector = detectorInitialized ? window.detector : new _Detector2.default(true).default;
+var detector = detectorInitialized ? window.detector : new _Detector2.default(true);
 
 window.detector = detector;
 
@@ -2494,7 +2494,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:51:03 GMT+0100 (CET)","version":"0.1.3"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:55:57 GMT+0100 (CET)","version":"0.1.4"}};
 
 /***/ }),
 
