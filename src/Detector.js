@@ -362,6 +362,6 @@ export default class Detector {
   }
 
   setCssFlags() {
-    document.documentElement.className += this.cssFlags.join(' ');;
+    document.documentElement.className += this.cssFlags.join(' ');
   }
 }
