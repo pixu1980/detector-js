@@ -1,3 +1,11 @@
+## [Version 0.1.0](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.0) (2018-3-20)
+
+### Breaking changes
+
+- updated version/build stuff added html css classes feature updated dependencies: [`9cc3932`](https://github.com/blackmirror1980/detector-js/commit/9cc3932)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.0.11...v0.1.0)
+
 ## [Version 0.0.11](https://github.com/blackmirror1980/detector-js/releases/tag/v0.0.11) (2018-3-8)
 
 ### Bug fixes
