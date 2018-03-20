@@ -34,7 +34,6 @@
   "dependencies": {
     "bowser": "^1.9.3",
     "feature-js": "0.0.1",
-    "flavor-js": "^0.4.8",
     "platform": "^1.3.5"
   },
   "devDependencies": {
