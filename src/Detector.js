@@ -1,7 +1,6 @@
 import platform from 'platform';
 import feature from 'feature-js';
 import bowser from 'bowser';
-import ƒ from 'flavor-js';
 
 import release from './release.json';
 
@@ -24,7 +23,7 @@ export default class Detector {
       this.setCssFlags();
     }
 
-    const detectorJSStatus = release.version.inherit({
+    const detectorJSStatus = _.merge(release.version, {
       initialized: true,
     });
 
@@ -36,7 +35,7 @@ export default class Detector {
 
     try {
       // see https://github.com/bestiejs/platform.js/blob/master/doc/README.md#readme
-      p.inherit({
+      _.merge(p, {
         description: platform.description,
         manufacturer: platform.manufacturer, // eg. 'Apple', 'Archos', 'Amazon', 'Asus', 'Barnes & Noble', 'BlackBerry', 'Google', 'HP', 'HTC', 'LG', 'Microsoft', 'Motorola', 'Nintendo', 'Nokia', 'Samsung' and 'Sony'
         desktop: !bowser.mobile && !bowser.tablet,
@@ -65,7 +64,7 @@ export default class Detector {
     const o = {};
 
     try {
-      o.inherit({
+      _.merge(o, {
         architecture: platform.os.architecture === 32 ? 'x86' : 'x64',
         name: platform.os.family,
         version: platform.os.version || bowser.osversion,
@@ -75,11 +74,11 @@ export default class Detector {
         chromeOS: bowser.chromeos,
         firefoxOS: bowser.firefoxos,
         iOS: bowser.ios && platform.os.family === 'iOS',
-        linux: bowser.linux && ['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'].contains(platform.os.family),
-        macOS: /Mac OS/.test(navigator.userAgent) && bowser.mac && ['OS X', 'macOS'].contains(platform.os.family),
+        linux: bowser.linux && _.includes(['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'], platform.os.family),
+        macOS: /Mac OS/.test(navigator.userAgent) && bowser.mac && _.includes(['OS X', 'macOS'], platform.os.family),
         sailfish: bowser.sailfish,
         tizen: bowser.tizen,
-        windows: bowser.windows && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].contains(platform.os.family),
+        windows: bowser.windows && _.includes(['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'], platform.os.family),
         windowsPhone: bowser.windowsphone && platform.os.family === 'Windows Phone',
       });
 
@@ -109,7 +108,7 @@ export default class Detector {
     const b = {};
 
     try {
-      b.inherit({
+      _.merge(b, {
         name: bowser.name || platform.name,
         version: bowser.version,
         // WebApp mode in iOS
@@ -125,23 +124,23 @@ export default class Detector {
         arora: /Arora/.test(navigator.userAgent),
         bada: bowser.bada, // native bada browser
         blackberry: bowser.blackberry, // native blackberry browser
-        chrome: bowser.chrome && platform.name.contains('Chrome'),
+        chrome: bowser.chrome && _.includes(platform.name, 'Chrome'),
         chromeMobile: bowser.chrome && bowser.mobile && platform.name === 'Chrome Mobile',
         cocoonJS: navigator.isCocoonJS,
         edge: bowser.msedge && platform.name === 'Microsoft Edge',
         ejecta: typeof window.ejecta !== 'undefined',
         electron: platform.name === 'Electron',
         epiphany: /Epiphany/.test(navigator.userAgent),
-        firefox: bowser.firefox && platform.name.contains('Firefox'),
-        firefoxMobile: bowser.firefox && ['Firefox for iOS', 'Firefox Mobile'].contains(platform.name),
-        ie: bowser.msie && platform.name.contains('IE'),
+        firefox: bowser.firefox && _.includes(platform.name, 'Firefox'),
+        firefoxMobile: bowser.firefox && _.includes(['Firefox for iOS', 'Firefox Mobile'], platform.name),
+        ie: bowser.msie && _.includes(platform.name, 'IE'),
         ieMobile: bowser.msie && bowser.mobile && platform.name === 'IE Mobile',
         midori: /Midori/.test(navigator.userAgent),
-        opera: bowser.opera && platform.name.contains('Opera'),
-        operaMobile: bowser.opera && bowser.mobile && ['Opera Mini', 'Opera Mobile'].contains(platform.name),
+        opera: bowser.opera && _.includes(platform.name, 'Opera'),
+        operaMobile: bowser.opera && bowser.mobile && _.includes(['Opera Mini', 'Opera Mobile'], platform.name),
         phantom: bowser.phantom && platform.name === 'PhantomJS',
-        safari: bowser.safari && platform.name.contains('Safari'),
-        safariMobile: /Mobile Safari/.test(navigator.userAgent) && bowser.safari && bowser.ios && bowser.mobile && platform.name.contains('Safari'),
+        safari: bowser.safari && _.includes(platform.name, 'Safari'),
+        safariMobile: /Mobile Safari/.test(navigator.userAgent) && bowser.safari && bowser.ios && bowser.mobile && _.includes(platform.name, 'Safari'),
         sailfish: bowser.sailfish,
         seamonkey: bowser.seamonkey && platform.name === 'SeaMonkey',
         samsung: bowser.samsungBrowser, // native samsung browser
@@ -203,7 +202,7 @@ export default class Detector {
       const audioElement = document.createElement('audio');
 
       if (!!audioElement.canPlayType) {
-        a.inherit({
+        _.merge(a, {
           ogg: audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
           opus: audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
           mp3: audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
@@ -238,7 +237,7 @@ export default class Detector {
       const videoElement = document.createElement('video');
 
       if (!!videoElement.canPlayType) {
-        v.inherit({
+        _.merge(v, {
           mp4: videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
           ogv: videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
           webm: videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '',
@@ -268,7 +267,7 @@ export default class Detector {
         // Add it to the body to get the computed style.
         document.body.insertBefore(el, null);
 
-        ['-webkit-transform', '-o-transform', '-ms-transform', '-moz-transform', 'transform'].each((t) => {
+        _.each(['-webkit-transform', '-o-transform', '-ms-transform', '-moz-transform', 'transform'], (t) => {
           if (!!el.style[t]) {
             el.style[t] = 'translate3d(1px,1px,1px)';
             hasCSS3D = window.getComputedStyle(el).getPropertyValue(t);
@@ -298,7 +297,7 @@ export default class Detector {
     try {
       navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
-      f.inherit({
+      _.merge(f, {
         async: feature.async,
         addEventListener: feature.addEventListener,
         battery: !!navigator.battery,
