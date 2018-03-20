@@ -151,11 +151,11 @@ export default class Detector {
       });
 
       if (!!addCssFlags) {
-        !!b.blink && this.cssFlags.push('djs-engine-blink');
-        !!b.gecko && this.cssFlags.push('djs-engine-gecko');
-        !!b.trident && this.cssFlags.push('djs-engine-trident');
-        !!b.edgeHTML && this.cssFlags.push('djs-engine-edge');
-        !!b.webkit && this.cssFlags.push('djs-engine-webkit');
+        !!b.engine.blink && this.cssFlags.push('djs-engine-blink');
+        !!b.engine.gecko && this.cssFlags.push('djs-engine-gecko');
+        !!b.engine.trident && this.cssFlags.push('djs-engine-trident');
+        !!b.engine.edgeHTML && this.cssFlags.push('djs-engine-edge');
+        !!b.engine.webkit && this.cssFlags.push('djs-engine-webkit');
 
         !!b.android && this.cssFlags.push('djs-browser-android-native');
         !!b.arora && this.cssFlags.push('djs-browser-arora');
