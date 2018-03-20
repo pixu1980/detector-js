@@ -1,3 +1,11 @@
+## [Version 0.1.2](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.2) (2018-3-20)
+
+### Bug fixes
+
+- remove flavor-js dependency in order to make it work with angular5 router: [`fe510d0`](https://github.com/blackmirror1980/detector-js/commit/fe510d0)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.1...v0.1.2)
+
 ## [Version 0.1.1](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.1) (2018-3-20)
 
 ### Bug fixes
