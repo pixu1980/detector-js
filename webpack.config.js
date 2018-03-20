@@ -32,12 +32,6 @@ const config = {
     ]
   },
   externals: {
-    'flavor-js': {
-      root: "ƒ",
-      commonjs: "flavor-js",
-      commonjs2: "flavor-js",
-      amd: "flavor-js"
-    },
     lodash: {
       commonjs: 'lodash',
       commonjs2: 'lodash',

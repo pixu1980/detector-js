@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("flavor-js"));
+		module.exports = factory(require("lodash"));
 	else if(typeof define === 'function' && define.amd)
-		define("detector", ["flavor-js"], factory);
+		define("detector", ["lodash"], factory);
 	else if(typeof exports === 'object')
-		exports["detector"] = factory(require("flavor-js"));
+		exports["detector"] = factory(require("lodash"));
 	else
-		root["detector"] = factory(root["ƒ"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE_flavor_js__) {
+		root["detector"] = factory(root["_"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_lodash__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -2039,6 +2039,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _lodash = __webpack_require__(/*! lodash */ "lodash");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _platform = __webpack_require__(/*! platform */ "./node_modules/platform/platform.js");
 
 var _platform2 = _interopRequireDefault(_platform);
@@ -2050,10 +2054,6 @@ var _featureJs2 = _interopRequireDefault(_featureJs);
 var _bowser = __webpack_require__(/*! bowser */ "./node_modules/bowser/src/bowser.js");
 
 var _bowser2 = _interopRequireDefault(_bowser);
-
-var _flavorJs = __webpack_require__(/*! flavor-js */ "flavor-js");
-
-var _flavorJs2 = _interopRequireDefault(_flavorJs);
 
 var _release = __webpack_require__(/*! ./release.json */ "./src/release.json");
 
@@ -2087,7 +2087,7 @@ var Detector = function () {
       this.setCssFlags();
     }
 
-    var detectorJSStatus = _release2.default.version.inherit({
+    var detectorJSStatus = _lodash2.default.merge(_release2.default.version, {
       initialized: true
     });
 
@@ -2103,7 +2103,7 @@ var Detector = function () {
 
       try {
         // see https://github.com/bestiejs/platform.js/blob/master/doc/README.md#readme
-        p.inherit({
+        _lodash2.default.merge(p, {
           description: _platform2.default.description,
           manufacturer: _platform2.default.manufacturer, // eg. 'Apple', 'Archos', 'Amazon', 'Asus', 'Barnes & Noble', 'BlackBerry', 'Google', 'HP', 'HTC', 'LG', 'Microsoft', 'Motorola', 'Nintendo', 'Nokia', 'Samsung' and 'Sony'
           desktop: !_bowser2.default.mobile && !_bowser2.default.tablet,
@@ -2135,7 +2135,7 @@ var Detector = function () {
       var o = {};
 
       try {
-        o.inherit({
+        _lodash2.default.merge(o, {
           architecture: _platform2.default.os.architecture === 32 ? 'x86' : 'x64',
           name: _platform2.default.os.family,
           version: _platform2.default.os.version || _bowser2.default.osversion,
@@ -2145,11 +2145,11 @@ var Detector = function () {
           chromeOS: _bowser2.default.chromeos,
           firefoxOS: _bowser2.default.firefoxos,
           iOS: _bowser2.default.ios && _platform2.default.os.family === 'iOS',
-          linux: _bowser2.default.linux && ['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'].contains(_platform2.default.os.family),
-          macOS: /Mac OS/.test(navigator.userAgent) && _bowser2.default.mac && ['OS X', 'macOS'].contains(_platform2.default.os.family),
+          linux: _bowser2.default.linux && _lodash2.default.includes(['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'], _platform2.default.os.family),
+          macOS: /Mac OS/.test(navigator.userAgent) && _bowser2.default.mac && _lodash2.default.includes(['OS X', 'macOS'], _platform2.default.os.family),
           sailfish: _bowser2.default.sailfish,
           tizen: _bowser2.default.tizen,
-          windows: _bowser2.default.windows && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].contains(_platform2.default.os.family),
+          windows: _bowser2.default.windows && _lodash2.default.includes(['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'], _platform2.default.os.family),
           windowsPhone: _bowser2.default.windowsphone && _platform2.default.os.family === 'Windows Phone'
         });
 
@@ -2182,7 +2182,7 @@ var Detector = function () {
       var b = {};
 
       try {
-        b.inherit({
+        _lodash2.default.merge(b, {
           name: _bowser2.default.name || _platform2.default.name,
           version: _bowser2.default.version,
           // WebApp mode in iOS
@@ -2198,23 +2198,23 @@ var Detector = function () {
           arora: /Arora/.test(navigator.userAgent),
           bada: _bowser2.default.bada, // native bada browser
           blackberry: _bowser2.default.blackberry, // native blackberry browser
-          chrome: _bowser2.default.chrome && _platform2.default.name.contains('Chrome'),
+          chrome: _bowser2.default.chrome && _lodash2.default.includes(_platform2.default.name, 'Chrome'),
           chromeMobile: _bowser2.default.chrome && _bowser2.default.mobile && _platform2.default.name === 'Chrome Mobile',
           cocoonJS: navigator.isCocoonJS,
           edge: _bowser2.default.msedge && _platform2.default.name === 'Microsoft Edge',
           ejecta: typeof window.ejecta !== 'undefined',
           electron: _platform2.default.name === 'Electron',
           epiphany: /Epiphany/.test(navigator.userAgent),
-          firefox: _bowser2.default.firefox && _platform2.default.name.contains('Firefox'),
-          firefoxMobile: _bowser2.default.firefox && ['Firefox for iOS', 'Firefox Mobile'].contains(_platform2.default.name),
-          ie: _bowser2.default.msie && _platform2.default.name.contains('IE'),
+          firefox: _bowser2.default.firefox && _lodash2.default.includes(_platform2.default.name, 'Firefox'),
+          firefoxMobile: _bowser2.default.firefox && _lodash2.default.includes(['Firefox for iOS', 'Firefox Mobile'], _platform2.default.name),
+          ie: _bowser2.default.msie && _lodash2.default.includes(_platform2.default.name, 'IE'),
           ieMobile: _bowser2.default.msie && _bowser2.default.mobile && _platform2.default.name === 'IE Mobile',
           midori: /Midori/.test(navigator.userAgent),
-          opera: _bowser2.default.opera && _platform2.default.name.contains('Opera'),
-          operaMobile: _bowser2.default.opera && _bowser2.default.mobile && ['Opera Mini', 'Opera Mobile'].contains(_platform2.default.name),
+          opera: _bowser2.default.opera && _lodash2.default.includes(_platform2.default.name, 'Opera'),
+          operaMobile: _bowser2.default.opera && _bowser2.default.mobile && _lodash2.default.includes(['Opera Mini', 'Opera Mobile'], _platform2.default.name),
           phantom: _bowser2.default.phantom && _platform2.default.name === 'PhantomJS',
-          safari: _bowser2.default.safari && _platform2.default.name.contains('Safari'),
-          safariMobile: /Mobile Safari/.test(navigator.userAgent) && _bowser2.default.safari && _bowser2.default.ios && _bowser2.default.mobile && _platform2.default.name.contains('Safari'),
+          safari: _bowser2.default.safari && _lodash2.default.includes(_platform2.default.name, 'Safari'),
+          safariMobile: /Mobile Safari/.test(navigator.userAgent) && _bowser2.default.safari && _bowser2.default.ios && _bowser2.default.mobile && _lodash2.default.includes(_platform2.default.name, 'Safari'),
           sailfish: _bowser2.default.sailfish,
           seamonkey: _bowser2.default.seamonkey && _platform2.default.name === 'SeaMonkey',
           samsung: _bowser2.default.samsungBrowser, // native samsung browser
@@ -2279,7 +2279,7 @@ var Detector = function () {
         var audioElement = document.createElement('audio');
 
         if (!!audioElement.canPlayType) {
-          a.inherit({
+          _lodash2.default.merge(a, {
             ogg: audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
             opus: audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
             mp3: audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
@@ -2317,7 +2317,7 @@ var Detector = function () {
         var videoElement = document.createElement('video');
 
         if (!!videoElement.canPlayType) {
-          v.inherit({
+          _lodash2.default.merge(v, {
             mp4: videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
             ogv: videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
             webm: videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== ''
@@ -2348,7 +2348,7 @@ var Detector = function () {
           // Add it to the body to get the computed style.
           document.body.insertBefore(el, null);
 
-          ['-webkit-transform', '-o-transform', '-ms-transform', '-moz-transform', 'transform'].each(function (t) {
+          _lodash2.default.each(['-webkit-transform', '-o-transform', '-ms-transform', '-moz-transform', 'transform'], function (t) {
             if (!!el.style[t]) {
               el.style[t] = 'translate3d(1px,1px,1px)';
               hasCSS3D = window.getComputedStyle(el).getPropertyValue(t);
@@ -2381,7 +2381,7 @@ var Detector = function () {
       try {
         navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
-        f.inherit({
+        _lodash2.default.merge(f, {
           async: _featureJs2.default.async,
           addEventListener: _featureJs2.default.addEventListener,
           battery: !!navigator.battery,
@@ -2494,18 +2494,18 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:20:12 GMT+0100 (CET)","version":"0.1.1"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:38:10 GMT+0100 (CET)","version":"0.1.2"}};
 
 /***/ }),
 
-/***/ "flavor-js":
-/*!**********************************************************************************************!*\
-  !*** external {"root":"ƒ","commonjs":"flavor-js","commonjs2":"flavor-js","amd":"flavor-js"} ***!
-  \**********************************************************************************************/
+/***/ "lodash":
+/*!*************************************************************************************!*\
+  !*** external {"commonjs":"lodash","commonjs2":"lodash","amd":"lodash","root":"_"} ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_flavor_js__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_lodash__;
 
 /***/ })
 

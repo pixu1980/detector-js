@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.1.1
+v0.1.2
 
 ## Badges
 
@@ -38,7 +38,6 @@ npm install detector-js --save
 
 - [bowser](https://ghub.io/bowser): Lightweight browser detector
 - [feature-js](https://ghub.io/feature-js): FeatureJS is a fast, simple and lightweight browser feature detection library in 1kb.
-- [flavor-js](https://ghub.io/flavor-js): FlavorJS the definitive JS natives chainable extensions methods (based on lodash &amp; ES6)
 - [platform](https://ghub.io/platform): A platform detection library that works on nearly all JavaScript platforms.
 
 ## Dev Dependencies
