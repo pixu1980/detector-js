@@ -211,7 +211,7 @@ export default class Detector {
           //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
           //   bit.ly/iphoneoscodecs
           wav: audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
-          m4a: audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '') !== '',
+          m4a: (audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '',
           webm: audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '',
         });
 
