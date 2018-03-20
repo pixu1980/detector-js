@@ -1,3 +1,13 @@
+## [Version 0.1.3](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.3) (2018-3-20)
+
+### Bug fixes
+
+- added lodash dependency: [`fa38af3`](https://github.com/blackmirror1980/detector-js/commit/fa38af3)
+- fixed engine css flags: [`445de93`](https://github.com/blackmirror1980/detector-js/commit/445de93)
+- fixed detector export: [`6231490`](https://github.com/blackmirror1980/detector-js/commit/6231490)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.2...v0.1.3)
+
 ## [Version 0.1.2](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.2) (2018-3-20)
 
 ### Bug fixes
