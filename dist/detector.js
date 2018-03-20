@@ -2224,11 +2224,11 @@ var Detector = function () {
         });
 
         if (!!addCssFlags) {
-          !!b.blink && this.cssFlags.push('djs-engine-blink');
-          !!b.gecko && this.cssFlags.push('djs-engine-gecko');
-          !!b.trident && this.cssFlags.push('djs-engine-trident');
-          !!b.edgeHTML && this.cssFlags.push('djs-engine-edge');
-          !!b.webkit && this.cssFlags.push('djs-engine-webkit');
+          !!b.engine.blink && this.cssFlags.push('djs-engine-blink');
+          !!b.engine.gecko && this.cssFlags.push('djs-engine-gecko');
+          !!b.engine.trident && this.cssFlags.push('djs-engine-trident');
+          !!b.engine.edgeHTML && this.cssFlags.push('djs-engine-edge');
+          !!b.engine.webkit && this.cssFlags.push('djs-engine-webkit');
 
           !!b.android && this.cssFlags.push('djs-browser-android-native');
           !!b.arora && this.cssFlags.push('djs-browser-arora');
@@ -2479,7 +2479,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var detectorInitialized = !!window && window instanceof Window && !!window.detector && window.detector instanceof _Detector2.default; /*global Window*/
 
-var detector = detectorInitialized ? window.detector : new _Detector2.default(true);
+var detector = detectorInitialized ? window.detector : new _Detector2.default(true).default;
 
 window.detector = detector;
 
@@ -2494,7 +2494,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:38:10 GMT+0100 (CET)","version":"0.1.2"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:51:03 GMT+0100 (CET)","version":"0.1.3"}};
 
 /***/ }),
 
