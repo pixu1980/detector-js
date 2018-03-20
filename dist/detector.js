@@ -2287,7 +2287,7 @@ var Detector = function () {
             //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
             //   bit.ly/iphoneoscodecs
             wav: audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
-            m4a: audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '') !== '',
+            m4a: (audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '',
             webm: audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== ''
           });
 
@@ -2479,7 +2479,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var detectorInitialized = !!window && window instanceof Window && !!window.detector && window.detector instanceof _Detector2.default; /*global Window*/
 
-var detector = detectorInitialized ? window.detector : new _Detector2.default();
+var detector = detectorInitialized ? window.detector : new _Detector2.default(true);
 
 window.detector = detector;
 
@@ -2494,7 +2494,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:03:16 GMT+0100 (CET)","version":"0.1.0"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:20:12 GMT+0100 (CET)","version":"0.1.1"}};
 
 /***/ }),
 
