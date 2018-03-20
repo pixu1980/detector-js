@@ -2068,19 +2068,28 @@ var _window = window,
 
 var Detector = function () {
   function Detector() {
+    var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
     _classCallCheck(this, Detector);
 
-    this.platform = this.getPlatform();
-    this.os = this.getOS();
-    this.browser = this.getBrowser();
-    this.features = this.getFeatures();
-    this.audio = this.getAudio();
+    if (!!addCssFlags) {
+      this.cssFlags = [];
+    }
 
-    var detectorJSStatus = {
-      initialized: true,
-      version: _release2.default.version,
-      build: _release2.default.buildDate
-    };
+    this.platform = this.getPlatform(addCssFlags);
+    this.os = this.getOS(addCssFlags);
+    this.browser = this.getBrowser(addCssFlags);
+    this.features = this.getFeatures(addCssFlags);
+    this.audio = this.getAudio(addCssFlags);
+    this.video = this.getVideo(addCssFlags);
+
+    if (!!addCssFlags) {
+      this.setCssFlags();
+    }
+
+    var detectorJSStatus = _release2.default.version.inherit({
+      initialized: true
+    });
 
     console.log('DetectorJS initialized', detectorJSStatus);
   }
@@ -2088,6 +2097,8 @@ var Detector = function () {
   _createClass(Detector, [{
     key: 'getPlatform',
     value: function getPlatform() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       var p = {};
 
       try {
@@ -2104,6 +2115,12 @@ var Detector = function () {
           // iPhone: false,
           // iPad: false,
         });
+
+        if (!!addCssFlags) {
+          !!p.desktop && this.cssFlags.push('djs-desktop');
+          !!p.phone && this.cssFlags.push('djs-phone');
+          !!p.tablet && this.cssFlags.push('djs-tablet');
+        }
       } catch (e) {
         throw e;
       }
@@ -2113,6 +2130,8 @@ var Detector = function () {
   }, {
     key: 'getOS',
     value: function getOS() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       var o = {};
 
       try {
@@ -2133,6 +2152,22 @@ var Detector = function () {
           windows: _bowser2.default.windows && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].contains(_platform2.default.os.family),
           windowsPhone: _bowser2.default.windowsphone && _platform2.default.os.family === 'Windows Phone'
         });
+
+        if (!!addCssFlags) {
+          !!o.android && this.cssFlags.push('djs-os-android');
+          !!o.bada && this.cssFlags.push('djs-os-bada');
+          !!o.blackberry && this.cssFlags.push('djs-os-blackberry');
+          !!o.chromeOS && this.cssFlags.push('djs-os-chromeos');
+          !!o.firefoxOS && this.cssFlags.push('djs-os-firefoxos');
+          !!o.iOS && this.cssFlags.push('djs-os-ios');
+          !!o.linux && this.cssFlags.push('djs-os-linux');
+          !!o.macOS && this.cssFlags.push('djs-os-macos');
+          !!o.sailfish && this.cssFlags.push('djs-os-sailfish');
+          !!o.tizen && this.cssFlags.push('djs-os-tizen');
+          !!o.windows && this.cssFlags.push('djs-os-windows');
+          !!o.windowsPhone && this.cssFlags.push('djs-os-windowsphone');
+          !!o.version && this.cssFlags.push('djs-os-version-' + o.version);
+        }
       } catch (e) {
         throw e;
       }
@@ -2142,6 +2177,8 @@ var Detector = function () {
   }, {
     key: 'getBrowser',
     value: function getBrowser() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       var b = {};
 
       try {
@@ -2185,6 +2222,43 @@ var Detector = function () {
           tizen: _bowser2.default.tizen, //- native browser
           webOS: _bowser2.default.webos //- native browser
         });
+
+        if (!!addCssFlags) {
+          !!b.blink && this.cssFlags.push('djs-engine-blink');
+          !!b.gecko && this.cssFlags.push('djs-engine-gecko');
+          !!b.trident && this.cssFlags.push('djs-engine-trident');
+          !!b.edgeHTML && this.cssFlags.push('djs-engine-edge');
+          !!b.webkit && this.cssFlags.push('djs-engine-webkit');
+
+          !!b.android && this.cssFlags.push('djs-browser-android-native');
+          !!b.arora && this.cssFlags.push('djs-browser-arora');
+          !!b.bada && this.cssFlags.push('djs-browser-bada');
+          !!b.blackberry && this.cssFlags.push('djs-browser-blackberry');
+          !!b.chrome && this.cssFlags.push('djs-browser-chrome');
+          !!b.chromeMobile && this.cssFlags.push('djs-browser-chrome-mobile');
+          !!b.cocoonJS && this.cssFlags.push('djs-browser-cocoonjs');
+          !!b.edge && this.cssFlags.push('djs-browser-edge');
+          !!b.ejecta && this.cssFlags.push('djs-browser-ejecta');
+          !!b.electron && this.cssFlags.push('djs-browser-electron');
+          !!b.epiphany && this.cssFlags.push('djs-browser-epiphany');
+          !!b.firefox && this.cssFlags.push('djs-browser-firefox');
+          !!b.firefoxMobile && this.cssFlags.push('djs-browser-firefox-mobile');
+          !!b.ie && this.cssFlags.push('djs-browser-ie');
+          !!b.ieMobile && this.cssFlags.push('djs-browser-ie-mobile');
+          !!b.midori && this.cssFlags.push('djs-browser-midori');
+          !!b.opera && this.cssFlags.push('djs-browser-opera');
+          !!b.operaMobile && this.cssFlags.push('djs-browser-opera-mobile');
+          !!b.phantom && this.cssFlags.push('djs-browser-phantom');
+          !!b.safari && this.cssFlags.push('djs-browser-safari');
+          !!b.safariMobile && this.cssFlags.push('djs-browser-safari-mobile');
+          !!b.sailfish && this.cssFlags.push('djs-browser-sailfish');
+          !!b.seamonkey && this.cssFlags.push('djs-browser-seamonkey');
+          !!b.samsung && this.cssFlags.push('djs-browser-samsung');
+          !!b.silk && this.cssFlags.push('djs-browser-silk');
+          !!b.tizen && this.cssFlags.push('djs-browser-tizen');
+          !!b.webOS && this.cssFlags.push('djs-browser-webos');
+          !!b.version && this.cssFlags.push('djs-browser-version-' + b.version);
+        }
       } catch (e) {
         throw e;
       }
@@ -2194,6 +2268,8 @@ var Detector = function () {
   }, {
     key: 'getAudio',
     value: function getAudio() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       var a = {
         audioData: !!window.Audio,
         webAudio: !!(window.webkitAudioContext || window.AudioContext)
@@ -2204,22 +2280,60 @@ var Detector = function () {
 
         if (!!audioElement.canPlayType) {
           a.inherit({
-            ogg: audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ''),
-            opus: audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, ''),
-            mp3: audioElement.canPlayType('audio/mpeg;').replace(/^no$/, ''),
+            ogg: audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
+            opus: audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
+            mp3: audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
             // Mimetypes accepted:
             //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
             //   bit.ly/iphoneoscodecs
-            wav: audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, ''),
-            m4a: audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, ''),
-            webm: audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '')
+            wav: audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
+            m4a: audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '') !== '',
+            webm: audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== ''
           });
+
+          if (!!addCssFlags) {
+            !!a.ogg && this.cssFlags.push('djs-audio-ogg');
+            !!a.opus && this.cssFlags.push('djs-audio-opus');
+            !!a.mp3 && this.cssFlags.push('djs-audio-mp3');
+            !!a.wav && this.cssFlags.push('djs-audio-wav');
+            !!a.m4a && this.cssFlags.push('djs-audio-m4a');
+            !!a.webm && this.cssFlags.push('djs-audio-webm');
+          }
         }
       } catch (e) {
         throw e;
       }
 
       return a;
+    }
+  }, {
+    key: 'getVideo',
+    value: function getVideo() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var v = {};
+
+      try {
+        var videoElement = document.createElement('video');
+
+        if (!!videoElement.canPlayType) {
+          v.inherit({
+            mp4: videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
+            ogv: videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
+            webm: videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== ''
+          });
+
+          if (!!addCssFlags) {
+            !!v.mp4 && this.cssFlags.push('djs-video-mp4');
+            !!v.ogv && this.cssFlags.push('djs-video-ogv');
+            !!v.webm && this.cssFlags.push('djs-video-webm');
+          }
+        }
+      } catch (e) {
+        throw e;
+      }
+
+      return v;
     }
   }, {
     key: 'checkFeature',
@@ -2260,6 +2374,8 @@ var Detector = function () {
   }, {
     key: 'getFeatures',
     value: function getFeatures() {
+      var addCssFlags = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       var f = {};
 
       try {
@@ -2308,11 +2424,29 @@ var Detector = function () {
           webGL: this.checkFeature('webGL') && _featureJs2.default.webGL,
           worker: !!window.Worker
         });
+
+        if (!!addCssFlags) {
+          !!f.css3D && this.cssFlags.push('djs-feature-css3d');
+          !!f.cssTransform && this.cssFlags.push('djs-feature-css-transforms');
+          !!f.cssTransition && this.cssFlags.push('djs-feature-css-transitions');
+          !!f.fullscreen && this.cssFlags.push('djs-feature-fullscreen');
+          !!f.motion && this.cssFlags.push('djs-feature-device-motion');
+          !!f.orientation && this.cssFlags.push('djs-feature-device-orientation');
+          !!f.pixelRatio && this.cssFlags.push('djs-feature-pixel-ratio-' + f.pixelRatio);
+          !!f.remUnit && this.cssFlags.push('djs-feature-rem-unit');
+          !!f.touch && this.cssFlags.push('djs-feature-touch');
+          !!f.webGL && this.cssFlags.push('djs-feature-webgl');
+        }
       } catch (e) {
         throw e;
       }
 
       return f;
+    }
+  }, {
+    key: 'setCssFlags',
+    value: function setCssFlags() {
+      document.documentElement.className += this.cssFlags.join(' ');
     }
   }]);
 
@@ -2360,7 +2494,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Thu Mar 08 2018 10:18:29 GMT+0100 (CET)","version":"0.0.11"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:03:16 GMT+0100 (CET)","version":"0.1.0"}};
 
 /***/ }),
 
