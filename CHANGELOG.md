@@ -1,3 +1,11 @@
+## [Version 0.1.4](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.4) (2018-3-20)
+
+### Bug fixes
+
+- fixed global detector export: [`bb06ac3`](https://github.com/blackmirror1980/detector-js/commit/bb06ac3)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.3...v0.1.4)
+
 ## [Version 0.1.3](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.3) (2018-3-20)
 
 ### Bug fixes
