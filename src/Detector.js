@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import platform from 'platform';
 import feature from 'feature-js';
 import bowser from 'bowser';
