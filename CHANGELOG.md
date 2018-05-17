@@ -1,3 +1,11 @@
+## [Version 0.1.6](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.6) (2018-5-17)
+
+### Bug fixes
+
+- pkg-2-readme template updated: [`cee6fe2`](https://github.com/blackmirror1980/detector-js/commit/cee6fe2)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.5...v0.1.6)
+
 ## [Version 0.1.5](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.5) (2018-5-17)
 
 ### New features
