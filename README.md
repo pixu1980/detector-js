@@ -4,13 +4,17 @@
 Black Mirror
 
 ## Version
-v0.1.5
+v0.1.6
 
 ## Badges
 
 [![NPM](https://nodei.co/npm/detector-js.png)](https://nodei.co/npm/detector-js/)
 
-[![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/blob/master/LICENSE) [![Build Status](https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master)](https://travis-ci.org/blackmirror1980/detector-js) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/detector-js?branch=master)
+[![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](hhttps://img.shields.io/npm/dm/detector-js.svg)
+
+[![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/blob/master/LICENSE) 
+
+[![Build Status](https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master)](https://travis-ci.org/blackmirror1980/detector-js) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/detector-js?branch=master)
 
 ## Documentation
 Check out the [Latest Documentation](https://blackmirror1980.github.io/detector-js/docs/index.html) here
