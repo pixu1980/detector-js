@@ -284,6 +284,8 @@ export default class Detector {
       } else if (f === 'webGL') {
         el = document.createElement('canvas');
         return !!window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl'));
+      } else if (f === 'webVR') {
+        return !!('getVRDisplays' in navigator);
       }
     } catch (error) {
       return false;
@@ -339,6 +341,7 @@ export default class Detector {
         vibration: navigator.vibrate,
         viewportUnit: feature.viewportUnit,
         webGL: this.checkFeature('webGL') && feature.webGL,
+        webVR: this.checkFeature('webVR'),
         worker: !!window.Worker,
       });
 
@@ -353,6 +356,7 @@ export default class Detector {
         !!f.remUnit && this.cssFlags.push('djs-feature-rem-unit');
         !!f.touch && this.cssFlags.push('djs-feature-touch');
         !!f.webGL && this.cssFlags.push('djs-feature-webgl');
+        !!f.webVR && this.cssFlags.push('djs-feature-webvr');
       }
     } catch (e) {
       throw e;
