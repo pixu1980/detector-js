@@ -2364,6 +2364,8 @@ var Detector = function () {
         } else if (f === 'webGL') {
           el = document.createElement('canvas');
           return !!window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl'));
+        } else if (f === 'webVR') {
+          return !!('getVRDisplays' in navigator);
         }
       } catch (error) {
         return false;
@@ -2422,6 +2424,7 @@ var Detector = function () {
           vibration: navigator.vibrate,
           viewportUnit: _featureJs2.default.viewportUnit,
           webGL: this.checkFeature('webGL') && _featureJs2.default.webGL,
+          webVR: this.checkFeature('webVR'),
           worker: !!window.Worker
         });
 
@@ -2436,6 +2439,7 @@ var Detector = function () {
           !!f.remUnit && this.cssFlags.push('djs-feature-rem-unit');
           !!f.touch && this.cssFlags.push('djs-feature-touch');
           !!f.webGL && this.cssFlags.push('djs-feature-webgl');
+          !!f.webVR && this.cssFlags.push('djs-feature-webvr');
         }
       } catch (e) {
         throw e;
@@ -2494,7 +2498,7 @@ exports.default = detector;
 /*! exports provided: version, default */
 /***/ (function(module) {
 
-module.exports = {"version":{"name":"detector-js","buildDate":"Tue Mar 20 2018 15:55:57 GMT+0100 (CET)","version":"0.1.4"}};
+module.exports = {"version":{"name":"detector-js","buildDate":"Thu May 17 2018 10:15:32 GMT+0200 (CEST)","version":"0.1.6"}};
 
 /***/ }),
 
