@@ -1,3 +1,11 @@
+## [Version 0.1.5](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.5) (2018-5-17)
+
+### New features
+
+- added webVR detection flag bumped dependencies: [`626e7e8`](https://github.com/blackmirror1980/detector-js/commit/626e7e8)
+
+[...full changes](https://github.com/blackmirror1980/detector-js/compare/v0.1.4...v0.1.5)
+
 ## [Version 0.1.4](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.4) (2018-3-20)
 
 ### Bug fixes
