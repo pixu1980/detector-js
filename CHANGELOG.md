@@ -1,3 +1,11 @@
+## [Version 0.1.7](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.1.7) (2019-1-15)
+
+### Bug fixes
+
+- replaced webpack with rollup: [`2425bb6`](https://github.com/:blackmirror1980/detector-js/commit/2425bb6)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v0.1.6...v0.1.7)
+
 ## [Version 0.1.6](https://github.com/blackmirror1980/detector-js/releases/tag/v0.1.6) (2018-5-17)
 
 ### Bug fixes
