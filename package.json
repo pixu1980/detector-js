@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js & feature.js)",
   "main": "dist/detector.min.js",
   "scripts": {
