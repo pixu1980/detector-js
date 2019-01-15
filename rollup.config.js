@@ -12,9 +12,8 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      dir: 'dist',
       name: 'Detector',
-      file: pkg.browser,
+      file: pkg.main,
       format: 'umd',
       globals: {
         'bowser': 'bowser',
