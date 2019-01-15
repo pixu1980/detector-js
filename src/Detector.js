@@ -1,9 +1,11 @@
+/*jshint expr: true */
+
 import _ from 'lodash';
 import platform from 'platform';
 import feature from 'feature-js';
 import bowser from 'bowser';
 
-import release from './release.json';
+// import release from './release.json';
 
 const { navigator } = window;
 
@@ -24,11 +26,11 @@ export default class Detector {
       this.setCssFlags();
     }
 
-    const detectorJSStatus = _.merge(release.version, {
-      initialized: true,
-    });
+    // const detectorJSStatus = _.merge(release.version, {
+    //   initialized: true,
+    // });
 
-    console.log('DetectorJS initialized', detectorJSStatus);
+    // console.log('DetectorJS initialized', detectorJSStatus);
   }
 
   getPlatform(addCssFlags = false) {
@@ -278,13 +280,19 @@ export default class Detector {
         document.body.removeChild(el);
 
         return (!!hasCSS3D && hasCSS3D.length > 0 && hasCSS3D !== 'none');
-      } else if (f === 'fullscreen') {
+      }
+
+      if (f === 'fullscreen') {
         el = document.createElement('canvas');
         return !!el.requestFullscreen || !!el.webkitRequestFullscreen || !!el.msRequestFullscreen || !!el.mozRequestFullScreen;
-      } else if (f === 'webGL') {
+      }
+
+      if (f === 'webGL') {
         el = document.createElement('canvas');
         return !!window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl'));
-      } else if (f === 'webVR') {
+      }
+
+      if (f === 'webVR') {
         return !!('getVRDisplays' in navigator);
       }
     } catch (error) {
