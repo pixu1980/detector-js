@@ -1,3 +1,12 @@
+## [Version 0.1.8](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.1.8) (2019-1-15)
+
+### Bug fixes
+
+- fixed output file: [`1655c34`](https://github.com/:blackmirror1980/detector-js/commit/1655c34)
+- fixed release script: [`6dfb73a`](https://github.com/:blackmirror1980/detector-js/commit/6dfb73a)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v0.1.7...v0.1.8)
+
 ## [Version 0.1.7](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.1.7) (2019-1-15)
 
 ### Bug fixes
