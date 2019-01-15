@@ -10,7 +10,7 @@
     "build:dev": "rollup -c -w",
     "prebuild": "rm -rf dist",
     "build": "NODE_ENV=production rollup -c",
-    "release": "yarn git-prepare && yarn build",
+    "release": "yarn build && yarn git-prepare",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
