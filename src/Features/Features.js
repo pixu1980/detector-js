@@ -1,24 +1,3 @@
-/*!
- * FEATURE.JS 1.0.1, A Fast, simple and lightweight browser feature
- * detection library in just 1kb.
- *
- * http://featurejs.com
- *
- * CSS 3D Transform, CSS Transform, CSS Transition, Canvas, SVG,
- * addEventListener, querySelectorAll, matchMedia, classList API,
- * placeholder, localStorage, History API, Viewport Units, REM Units,
- * CORS, WebGL, Service Worker, Context Menu, Geolocation,
- * Device Motion, Device Orientation, Touch, Async, Defer,
- * Srcset, Sizes & Picture Element.
- *
- *
- * USAGE EXAMPLE:
- * if (feature.webGL) {
- *   console.log("webGL supported!");
- * }
- *
- * Author: @viljamis, https://viljamis.com
- */
 export default class Features {
   isOldBrowser() {
     return !!(/(Android\s(1.|2.))|(Silk\/1.)/i.test(window.navigator.userAgent));

@@ -236,11 +236,11 @@ export function merge(...objs) {
    * @param {Function} callback The function executed per own property.
    */
   export function forOwn(object, callback) {
-    for (const key in object) {
-      if (hasOwnProperty.call(object, key)) {
+    Object.keys(object).forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         callback(object[key], key, object);
       }
-    }
+    });
   }
 
   /**
