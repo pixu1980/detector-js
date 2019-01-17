@@ -1,3 +1,79 @@
+
+
+export default class Features {
+  /**
+   * A utility function to clean up the OS name.
+   *
+   * @private
+   * @param {string} os The OS name to clean up.
+   * @param {string} [pattern] A `RegExp` pattern matching the OS name.
+   * @param {string} [label] A label for the OS.
+   */
+  cleanupOS(os, pattern, label) {
+    // Platform tokens are defined at:
+    // http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    // http://web.archive.org/web/20081122053950/http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
+    let data = {
+      '10.0': '10',
+      '6.4': '10 Technical Preview',
+      '6.3': '8.1',
+      '6.2': '8',
+      '6.1': 'Server 2008 R2 / 7',
+      '6.0': 'Server 2008 / Vista',
+      '5.2': 'Server 2003 / XP 64-bit',
+      '5.1': 'XP',
+      '5.01': '2000 SP1',
+      '5.0': '2000',
+      '4.0': 'NT',
+      '4.90': 'ME',
+    };
+    // Detect Windows version from platform tokens.
+    if (pattern && label && /^Win/i.test(os) && !/^Windows Phone /i.test(os)
+        && (data = data[/[\d.]+$/.exec(os)])) {
+      os = 'Windows ' + data;
+    }
+    // Correct character case and cleanup string.
+    os = String(os);
+
+    if (pattern && label) {
+      os = os.replace(RegExp(pattern, 'i'), label);
+    }
+
+    os = this.format(
+      os.replace(/ ce$/i, ' CE')
+        .replace(/\bhpw/i, 'web')
+        .replace(/\bMacintosh\b/, 'Mac OS')
+        .replace(/_PowerPC\b/i, ' OS')
+        .replace(/\b(OS X) [^ \d]+/i, '$1')
+        .replace(/\bMac (OS X)\b/, '$1')
+        .replace(/\/(\d)/, ' $1')
+        .replace(/_/g, '.')
+        .replace(/(?: BePC|[ .]*fc[ \d.]+)$/i, '')
+        .replace(/\bx86\.64\b/gi, 'x86_64')
+        .replace(/\b(Windows Phone) OS\b/, '$1')
+        .replace(/\b(Chrome OS \w+) [\d.]+\b/, '$1')
+        .split(' on ')[0],
+    );
+
+    return os;
+  }
+
+  /**
+   * Trim and conditionally capitalize string values.
+   *
+   * @private
+   * @param {string} string The string to format.
+   * @returns {string} The formatted string.
+   */
+  format(string) {
+    string = trim(string);
+    return /^(?:webOS|i(?:OS|P))/.test(string)
+      ? string
+      : capitalize(string);
+  }
+}
+
+
 /*!
  * Platform.js
  * Copyright 2014-2018 Benjamin Tan
@@ -31,12 +107,6 @@
     root = freeGlobal;
   }
 
-  /**
-   * Used as the maximum length of an array-like object.
-   * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-   * for more details.
-   */
-  let maxSafeInteger = Math.pow(2, 53) - 1;
 
   /** Regular expression to detect Opera. */
   let reOpera = /\bOpera/;
@@ -53,192 +123,10 @@
   /** Used to resolve the internal `[[Class]]` of values. */
   let toString = objectProto.toString;
 
-  /*--------------------------------------------------------------------------*/
 
-  /**
-   * Capitalizes a string value.
-   *
-   * @private
-   * @param {string} string The string to capitalize.
-   * @returns {string} The capitalized string.
-   */
-  function capitalize(string) {
-    string = String(string);
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
 
-  /**
-   * A utility function to clean up the OS name.
-   *
-   * @private
-   * @param {string} os The OS name to clean up.
-   * @param {string} [pattern] A `RegExp` pattern matching the OS name.
-   * @param {string} [label] A label for the OS.
-   */
-  function cleanupOS(os, pattern, label) {
-    // Platform tokens are defined at:
-    // http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
-    // http://web.archive.org/web/20081122053950/http://msdn.microsoft.com/en-us/library/ms537503(VS.85).aspx
-    let data = {
-      '10.0': '10',
-      6.4: '10 Technical Preview',
-      6.3: '8.1',
-      6.2: '8',
-      6.1: 'Server 2008 R2 / 7',
-      '6.0': 'Server 2008 / Vista',
-      5.2: 'Server 2003 / XP 64-bit',
-      5.1: 'XP',
-      5.01: '2000 SP1',
-      '5.0': '2000',
-      '4.0': 'NT',
-      '4.90': 'ME',
-    };
-    // Detect Windows version from platform tokens.
-    if (pattern && label && /^Win/i.test(os) && !/^Windows Phone /i.test(os)
-        && (data = data[/[\d.]+$/.exec(os)])) {
-      os = 'Windows ' + data;
-    }
-    // Correct character case and cleanup string.
-    os = String(os);
 
-    if (pattern && label) {
-      os = os.replace(RegExp(pattern, 'i'), label);
-    }
 
-    os = format(
-      os.replace(/ ce$/i, ' CE')
-        .replace(/\bhpw/i, 'web')
-        .replace(/\bMacintosh\b/, 'Mac OS')
-        .replace(/_PowerPC\b/i, ' OS')
-        .replace(/\b(OS X) [^ \d]+/i, '$1')
-        .replace(/\bMac (OS X)\b/, '$1')
-        .replace(/\/(\d)/, ' $1')
-        .replace(/_/g, '.')
-        .replace(/(?: BePC|[ .]*fc[ \d.]+)$/i, '')
-        .replace(/\bx86\.64\b/gi, 'x86_64')
-        .replace(/\b(Windows Phone) OS\b/, '$1')
-        .replace(/\b(Chrome OS \w+) [\d.]+\b/, '$1')
-        .split(' on ')[0],
-    );
-
-    return os;
-  }
-
-  /**
-   * An iteration utility for arrays and objects.
-   *
-   * @private
-   * @param {Array|Object} object The object to iterate over.
-   * @param {Function} callback The function called per iteration.
-   */
-  function each(object, callback) {
-    let index = -1,
-      length = object ? object.length : 0;
-
-    if (typeof length === 'number' && length > -1 && length <= maxSafeInteger) {
-      while (++index < length) {
-        callback(object[index], index, object);
-      }
-    } else {
-      forOwn(object, callback);
-    }
-  }
-
-  /**
-   * Trim and conditionally capitalize string values.
-   *
-   * @private
-   * @param {string} string The string to format.
-   * @returns {string} The formatted string.
-   */
-  function format(string) {
-    string = trim(string);
-    return /^(?:webOS|i(?:OS|P))/.test(string)
-      ? string
-      : capitalize(string);
-  }
-
-  /**
-   * Iterates over an object's own properties, executing the `callback` for each.
-   *
-   * @private
-   * @param {Object} object The object to iterate over.
-   * @param {Function} callback The function executed per own property.
-   */
-  function forOwn(object, callback) {
-    for (let key in object) {
-      if (hasOwnProperty.call(object, key)) {
-        callback(object[key], key, object);
-      }
-    }
-  }
-
-  /**
-   * Gets the internal `[[Class]]` of a value.
-   *
-   * @private
-   * @param {*} value The value.
-   * @returns {string} The `[[Class]]`.
-   */
-  function getClassOf(value) {
-    return value == null
-      ? capitalize(value)
-      : toString.call(value).slice(8, -1);
-  }
-
-  /**
-   * Host objects can return type values that are different from their actual
-   * data type. The objects we are concerned with usually return non-primitive
-   * types of "object", "function", or "unknown".
-   *
-   * @private
-   * @param {*} object The owner of the property.
-   * @param {string} property The property to check.
-   * @returns {boolean} Returns `true` if the property value is a non-primitive, else `false`.
-   */
-  function isHostType(object, property) {
-    let type = object != null ? typeof object[property] : 'number';
-    return !/^(?:boolean|number|string|undefined)$/.test(type)
-      && (type == 'object' ? !!object[property] : true);
-  }
-
-  /**
-   * Prepares a string for use in a `RegExp` by making hyphens and spaces optional.
-   *
-   * @private
-   * @param {string} string The string to qualify.
-   * @returns {string} The qualified string.
-   */
-  function qualify(string) {
-    return String(string).replace(/([ -])(?!$)/g, '$1?');
-  }
-
-  /**
-   * A bare-bones `Array#reduce` like utility function.
-   *
-   * @private
-   * @param {Array} array The array to iterate over.
-   * @param {Function} callback The function called per iteration.
-   * @returns {*} The accumulated result.
-   */
-  function reduce(array, callback) {
-    let accumulator = null;
-    each(array, (value, index) => {
-      accumulator = callback(accumulator, value, index, array);
-    });
-    return accumulator;
-  }
-
-  /**
-   * Removes leading and trailing whitespace from a string.
-   *
-   * @private
-   * @param {string} string The string to trim.
-   * @returns {string} The trimmed string.
-   */
-  function trim(string) {
-    return String(string).replace(/^ +| +$/g, '');
-  }
 
   /*--------------------------------------------------------------------------*/
 
