@@ -14,7 +14,7 @@ const features = new Features();
 const userAgent = new UserAgent();
 
 export default class Detector {
-  constructor(cssFlags = false, cssFlagsPrefix = 'djs-') {
+  constructor(cssFlags = false, cssFlagsPrefix = 'djs') {
     if (!!cssFlags) {
       this._cssFlags = [];
       this._cssFlagsPrefix = cssFlagsPrefix;
@@ -337,6 +337,6 @@ export default class Detector {
   }
 
   setCssFlags() {
-    document.documentElement.className += this._cssFlags.join(' ' + this._cssFlagsPrefix);
+    document.documentElement.className += this._cssFlags.join(' ' + this._cssFlagsPrefix + '-');
   }
 }

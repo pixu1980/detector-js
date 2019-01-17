@@ -3,23 +3,18 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-bitwise */
 /**
- * Merges two or more objects
- * @param {...Object} objs
- * @return {Object}
+ * Used as the maximum length of an array-like object.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
  */
-export function merge(...objs) {
-  return [...objs].reduce((acc, obj) => Object.keys(obj).reduce((a, k) => {
-      acc[k] = acc.hasOwnProperty(k) ? [].concat(acc[k]).concat(obj[k]) : obj[k];
-      return acc;
-    }, {}), {});
-  }
+export const maxSafeInteger = Math.pow(2, 53) - 1;
 
 /**
- * Get first matched item for a string
- * @param {RegExp} regexp
- * @param {String} ua
- * @return {Array|{index: number, input: string}|*|boolean|string}
- */
+* Get first matched item for a string
+* @param {RegExp} regexp
+* @param {String} ua
+* @return {Array|{index: number, input: string}|*|boolean|string}
+*/
 export function getFirstMatch(regexp, ua) {
   const match = ua.match(regexp);
   return (match && match.length > 0 && match[1]) || '';
@@ -186,6 +181,119 @@ export function compareVersions(versionA, versionB, isLoose = false) {
   return null;
 }
 
+/**
+ * Prepares a string for use in a `RegExp` by making hyphens and spaces optional.
+ *
+ * @private
+ * @param {string} string The string to qualify.
+ * @returns {string} The qualified string.
+ */
+export function qualifyForRegEx(string) {
+  return String(string).replace(/([ -])(?!$)/g, '$1?');
+}
+
+/**
+ * Capitalizes a string value.
+ *
+ * @private
+ * @param {string} string The string to capitalize.
+ * @returns {string} The capitalized string.
+ */
+export function capitalize(string) {
+  string = String(string);
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Removes leading and trailing whitespace from a string.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} The trimmed string.
+ */
+export function trim(string) {
+  return String(string).replace(/^ +| +$/g, '');
+}
+
+
+/**
+ * Merges two or more objects
+ * @param {...Object} objs
+ * @return {Object}
+ */
+export function merge(...objs) {
+  return [...objs].reduce((acc, obj) => Object.keys(obj).reduce((a, k) => {
+    acc[k] = acc.hasOwnProperty(k) ? [].concat(acc[k]).concat(obj[k]) : obj[k];
+    return acc;
+  }, {}), {});
+}
+
+  /**
+   * Iterates over an object's own properties, executing the `callback` for each.
+   *
+   * @private
+   * @param {Object} object The object to iterate over.
+   * @param {Function} callback The function executed per own property.
+   */
+  export function forOwn(object, callback) {
+    for (const key in object) {
+      if (hasOwnProperty.call(object, key)) {
+        callback(object[key], key, object);
+      }
+    }
+  }
+
+  /**
+   * Gets the internal `[[Class]]` of a value.
+   *
+   * @private
+   * @param {*} value The value.
+   * @returns {string} The `[[Class]]`.
+   */
+  export function getClassOf(value) {
+    return value == null
+      ? capitalize(value)
+      : toString.call(value).slice(8, -1);
+  }
+
+  /**
+   * Host objects can return type values that are different from their actual
+   * data type. The objects we are concerned with usually return non-primitive
+   * types of "object", "function", or "unknown".
+   *
+   * @private
+   * @param {*} object The owner of the property.
+   * @param {string} property The property to check.
+   * @returns {boolean} Returns `true` if the property value is a non-primitive, else `false`.
+   */
+  export function isHostType(object, property) {
+    const type = object != null ? typeof object[property] : 'number';
+    return !/^(?:boolean|number|string|undefined)$/.test(type)
+      && (type === 'object' ? !!object[property] : true);
+  }
+
+
+/**
+ * An iteration utility for arrays and objects.
+ *
+ * @private
+ * @param {Array|Object} object The object to iterate over.
+ * @param {Function} callback The function called per iteration.
+ */
+export function each(object, callback) {
+  let index = -1;
+  const length = object ? object.length : 0;
+
+  if (typeof length === 'number' && length > -1 && length <= maxSafeInteger) {
+    while (++index < length) {
+      callback(object[index], index, object);
+    }
+  } else {
+    forOwn(object, callback);
+  }
+}
+
+
 export default {
   merge,
   getFirstMatch,
@@ -195,4 +303,7 @@ export default {
   getAndroidVersionName,
   getVersionPrecision,
   compareVersions,
+  qualifyForRegEx,
+  capitalize,
+  trim,
 };
