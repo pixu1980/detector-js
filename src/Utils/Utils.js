@@ -2,48 +2,13 @@
 /* eslint-disable no-void */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-bitwise */
+
 /**
  * Used as the maximum length of an array-like object.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
 export const maxSafeInteger = Math.pow(2, 53) - 1;
-
-/**
-* Get first matched item for a string
-* @param {RegExp} regexp
-* @param {String} ua
-* @return {Array|{index: number, input: string}|*|boolean|string}
-*/
-export function getFirstMatch(regexp, ua) {
-  const match = ua.match(regexp);
-  return (match && match.length > 0 && match[1]) || '';
-}
-
-/**
- * Get second matched item for a string
- * @param regexp
- * @param {String} ua
- * @return {Array|{index: number, input: string}|*|boolean|string}
- */
-export function getSecondMatch(regexp, ua) {
-  const match = ua.match(regexp);
-  return (match && match.length > 1 && match[2]) || '';
-}
-
-/**
- * Match a regexp and return a constant or undefined
- * @param {RegExp} regexp
- * @param {String} ua
- * @param {*} _const Any const that will be returned if regexp matches the string
- * @return {*}
- */
-export function matchAndReturnConst(regexp, ua, _const) {
-  if (regexp.test(ua)) {
-    return _const;
-  }
-  return void (0);
-}
 
 export function getWindowsVersionName(version) {
   switch (version) {
@@ -77,7 +42,7 @@ export function getWindowsVersionName(version) {
  *    6.x - Marshmallow
  *    7.x - Nougat
  *    8.x - Oreo
- *    9.x - ?
+ *    9.x - Pie
  *
  * @example
  *   getAndroidVersionName("7.0") // 'Nougat'
@@ -102,6 +67,7 @@ export function getAndroidVersionName(version) {
   if (v[0] === 6) return 'Marshmallow';
   if (v[0] === 7) return 'Nougat';
   if (v[0] === 8) return 'Oreo';
+  if (v[0] === 9) return 'Pie';
   return undefined;
 }
 
@@ -251,9 +217,7 @@ export function merge(...objs) {
    * @returns {string} The `[[Class]]`.
    */
   export function getClassOf(value) {
-    return value == null
-      ? capitalize(value)
-      : toString.call(value).slice(8, -1);
+    return !value ? capitalize(value) : toString.call(value).slice(8, -1);
   }
 
   /**
@@ -268,8 +232,8 @@ export function merge(...objs) {
    */
   export function isHostType(object, property) {
     const type = object != null ? typeof object[property] : 'number';
-    return !/^(?:boolean|number|string|undefined)$/.test(type)
-      && (type === 'object' ? !!object[property] : true);
+
+    return !/^(?:boolean|number|string|undefined)$/.test(type) && (type === 'object' ? !!object[property] : true);
   }
 
 
@@ -296,14 +260,9 @@ export function each(object, callback) {
 
 export default {
   merge,
-  getFirstMatch,
-  getSecondMatch,
-  matchAndReturnConst,
   getWindowsVersionName,
   getAndroidVersionName,
   getVersionPrecision,
   compareVersions,
   qualifyForRegEx,
-  capitalize,
-  trim,
 };
