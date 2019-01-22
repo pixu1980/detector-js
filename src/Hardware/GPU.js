@@ -22,24 +22,28 @@ export default class GPU extends FlagsClass {
       renderer: 'unknown',
     };
 
-    const canvas = document.createElement('canvas');
-    const webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    try {
+      const canvas = document.createElement('canvas');
+      const webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
-    if (webGLContext) {
-      const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
+      if (webGLContext) {
+        const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
 
-      if (dbgRenderInfo != null) {
+        if (dbgRenderInfo != null) {
+          info.merge({
+            vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
+            model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
+            renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL),
+          });
+        }
+
         info.merge({
-          vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
-          model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
-          renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL),
+          webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
+          webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER),
         });
       }
-
-      info.merge({
-        webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
-        webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER),
-      });
+    } catch(e) {
+      console.warn('webGL is not supported', e.message);
     }
 
     return info;
