@@ -1,4 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
+import Asserts from '../Utils/Asserts';
 
 export default class CPU extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'cpu') {
@@ -32,13 +33,11 @@ export default class CPU extends FlagsClass {
   getArchitecture() {
     window.navigator.cpuClass = window.navigator.cpuClass || 'x86';
 
-    const asserts64 = [
+    if(Asserts.one([
       window.navigator.cpuClass === 'x64',
       ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(window.navigator.platform),
       /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua),
-    ];
-
-    if(asserts64.some(assert => !!assert)) {
+    ])) {
       window.navigator.cpuClass = 'x64';
     }
 
@@ -46,77 +45,71 @@ export default class CPU extends FlagsClass {
   }
 
   getSparc() {
-    const asserts = [
+    return Asserts.one([
       /(sun4\w)[;\)]/i.test(this._ua),
       /sparc(?:64)?(?=;);/i.test(this._ua),
-    ];
-
-    return asserts.some(assert => !!assert);
+    ]);
   }
 
   getIrix() {
-    return /irix(?:64)?(?=;);/i.test(this._ua);
+    return Asserts.all([
+      /irix(?:64)?(?=;);/i.test(this._ua),
+    ]);
   }
 
   getMips() {
-    return /mips(?:64)?(?=;);/i.test(this._ua);
+    return Asserts.all([
+      /mips(?:64)?(?=;);/i.test(this._ua),
+    ]);
   }
 
   getRisc() {
-    return /pa-risc(?:64)?(?=;);/i.test(this._ua);
+    return Asserts.all([
+      /pa-risc(?:64)?(?=;);/i.test(this._ua),
+    ]);
   }
 
   getAvr() {
-    return /(?=atmel\s)avr/i.test(this._ua);
+    return Asserts.all([
+      /(?=atmel\s)avr/i.test(this._ua),
+    ]);
   }
 
   getArm() {
-    const asserts = [
+    return Asserts.one([
       /windows\s(ce|mobile);\sppc;/i.test(this._ua),
       /arm(?:64|(?=v\d+[;l]))/i.test(this._ua),
-    ];
-
-    return asserts.some(assert => !!assert);
+    ]);
   }
 
   getPowerPC() {
-    const asserts = [
+    return Asserts.one([
       /((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua),
       window.navigator.platform === 'MacPPC',
-    ];
-
-    return asserts.some(assert => !!assert);
+    ]);
   }
 
   getAmd() {
-    const asserts64 = [
+    return Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       window.navigator.cpuClass === 'x64' || window.navigator.platform === 'Linux x86_64',
-    ];
-
-    const asserts32 = [
+    ]) || Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
       window.navigator.cpuClass === 'x86',
-    ];
-
-    return asserts64.every(assert => !!assert) || asserts32.some(assert => !!assert);
+    ]);
   }
 
   getIntel() {
-    const asserts64 = [
+    return Asserts.one([
       /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       window.navigator.cpuClass === 'x64' || window.navigator.platform === 'MacIntel' || window.navigator.platform === 'Linux x86_64',
-    ];
-
-    const asserts32 = [
+    ]) || Asserts.one([
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /(ia32(?=;))/i.test(this._ua),
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
       window.navigator.cpuClass === 'x86',
-    ];
-
-    return asserts64.some(assert => !!assert) || asserts32.some(assert => !!assert);
+    ]);
   }
 }

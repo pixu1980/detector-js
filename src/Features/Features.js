@@ -1,19 +1,7 @@
 import FlagsClass from '../Core/FlagsClass';
+import Asserts from '../Utils/Asserts';
 
 export default class Features extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'feature') {
-    super(ua, cssFlagsPrefix);
-
-    this.file = this.getFile();
-    this.fileSystem = this.getFileSystem();
-
-    // var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
-
-    // for (var value in performance) {
-    //   console.log(value);
-    // }
-  }
-
   isOldBrowser() {
     return !!(/(Android\s(1.|2.))|(Silk\/1.)/i.test(this._ua));
   }
@@ -34,6 +22,58 @@ export default class Features extends FlagsClass {
     });
   }
 
+  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'feature') {
+    super(ua, cssFlagsPrefix);
+
+    this.addEventListener = this.getAddEventListener();
+    this.asyncScript = this.getAsyncScript();
+    this.battery = this.getBattery();
+    this.cors = this.getCors();
+    this.deferScript = this.getDeferScript();
+    this.file = this.getFile();
+    this.fileSystem = this.getFileSystem();
+    this.fullscreen = this.getFullscreen();
+    this.fullscreenKeyboard = this.getFullscreenKeyboard();
+    this.geolocation = this.getGeolocation();
+    this.historyAPI = this.getHistoryAPI();
+    this.littleEndian = this.getLittleEndian();
+    this.localStorage = this.getLocalStorage();
+    this.matchMedia = this.getMatchMedia();
+    this.querySelector = this.getQuerySelector();
+    this.querySelectorAll = this.getQuerySelectorAll();
+    this.serviceWorker = this.getServiceWorker();
+    this.typedArray = this.getTypedArray();
+    this.userMedia = this.getUserMedia();
+    this.vibration = this.getVibration();
+    this.worker = this.getWorker();
+
+    // var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+
+    // for (var value in performance) {
+    //   console.log(value);
+    // }
+  }
+
+  getAddEventListener() {
+    return !!window.addEventListener;
+  }
+
+  getAsyncScript() {
+    return ('async' in document.createElement('script'));
+  }
+
+  getBattery() {
+    return !!window.navigator.battery;
+  }
+
+  getCors() {
+    return ('XMLHttpRequest' in window && 'withCredentials' in new window.XMLHttpRequest());
+  }
+
+  getDeferScript() {
+    return ('defer' in document.createElement('script'));
+  }
+
   getFile() {
     return !!window.File && !!window.FileReader && !!window.FileList && !!window.Blob;
   }
@@ -42,14 +82,73 @@ export default class Features extends FlagsClass {
     return !!window.requestFileSystem;
   }
 
-  get getUserMedia() {
+  getFullscreen() {
+    const el = document.createElement('canvas');
+    return !!el.requestFullscreen || !!el.webkitRequestFullscreen || !!el.msRequestFullscreen || !!el.mozRequestFullScreen;
+  }
+
+  getFullscreenKeyboard() {
+    return window.Element && 'ALLOW_KEYBOARD_INPUT' in window.Element;
+  }
+
+  getGeolocation() {
+    return ('geolocation' in window.navigator);
+  }
+
+  getHistoryAPI() {
+    return (window.history && 'pushState' in window.history);
+  }
+
+  getLittleEndian() {
+    return (typeof Int8Array !== 'undefined') && new Int8Array(new Int16Array([1]).buffer)[0] > 0;
+  }
+
+  getLocalStorage() {
+    const test = 'x';
+
+    try {
+      window.localStorage.setItem(test, test);
+      window.localStorage.removeItem(test);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  getMatchMedia() {
+    return !!window.matchMedia;
+  }
+
+  getQuerySelector() {
+    return !!document.querySelector;
+  }
+
+  getQuerySelectorAll() {
+    return !!document.querySelectorAll;
+  }
+
+  getServiceWorker() {
+    return ('serviceWorker' in window.navigator);
+  }
+
+  getTypedArray() {
+    return (typeof Int8Array !== 'undefined');
+  }
+
+  getUserMedia() {
     window.navigator.getUserMedia = window.navigator.getUserMedia || window.navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || window.navigator.msGetUserMedia;
 
     return !!window.navigator.getUserMedia;
   }
 
-  get littleEndian() {
-    return (typeof Int8Array !== 'undefined') && new Int8Array(new Int16Array([1]).buffer)[0] > 0;
+  getVibration() {
+    window.navigator.vibrate = window.navigator.vibrate || window.navigator.webkitVibrate || window.navigator.mozVibrate || window.navigator.msVibrate || false;
+
+    return window.navigator.vibrate;
+  }
+
+  getWorker() {
+    return !!window.Worker;
   }
 
   get mspointer() {
@@ -66,20 +165,6 @@ export default class Features extends FlagsClass {
 
   get quirksMode() {
     return document.compatMode !== 'CSS1Compat';
-  }
-
-  get typedArray() {
-    return (typeof Int8Array !== 'undefined');
-  }
-
-  get vibration() {
-    window.navigator.vibrate = window.navigator.vibrate || window.navigator.webkitVibrate || window.navigator.mozVibrate || window.navigator.msVibrate || false;
-
-    return window.navigator.vibrate;
-  }
-
-  get worker() {
-    return !!window.Worker;
   }
 
   get css3D() {
@@ -116,25 +201,6 @@ export default class Features extends FlagsClass {
     return this.prefixes('transition') !== null;
   }
 
-  // Test if addEventListener is supported
-  get addEventListener() {
-    return !!window.addEventListener;
-  }
-
-  // Test if querySelectorAll is supported
-  get querySelectorAll() {
-    return !!document.querySelectorAll;
-  }
-
-  // Test if matchMedia is supported
-  get matchMedia() {
-    return !!window.matchMedia;
-  }
-
-  get battery() {
-    return !!window.navigator.battery;
-  }
-
   // Test if Device Motion is supported
   get deviceMotion() {
     return ('DeviceMotionEvent' in window);
@@ -158,29 +224,6 @@ export default class Features extends FlagsClass {
   // Test if placeholder attribute is supported
   get placeholder() {
     return ('placeholder' in document.createElement('input'));
-  }
-
-  // Test if localStorage is supported
-  get localStorage() {
-    const test = 'x';
-
-    try {
-      window.localStorage.setItem(test, test);
-      window.localStorage.removeItem(test);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  }
-
-  // Test if History API is supported
-  get historyAPI() {
-    return (window.history && 'pushState' in window.history);
-  }
-
-  // Test if ServiceWorkers are supported
-  get serviceWorker() {
-    return ('serviceWorker' in window.navigator);
   }
 
   // Test if viewport units are supported
@@ -210,22 +253,27 @@ export default class Features extends FlagsClass {
 
   // Test if Canvas is supported
   get canvas() {
-    const el = document.createElement('canvas');
+    const canvas = document.createElement('canvas');
 
-    return !!(el.getContext && el.getContext('2d'));
+    return !!(canvas.getContext && canvas.getContext('2d'));
   }
 
   // Test if SVG is supported
   get svg() {
-    return !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
+    return Asserts.all([
+      !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect,
+    ]);
   }
 
   // Test if WebGL is supported
   get webGL() {
-    const el = document.createElement('canvas');
-
     try {
-      return !!(window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl')));
+      const canvas = document.createElement('canvas');
+
+      return Asserts.one([
+        !!window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')),
+        !!window.WebGL2RenderingContext && canvas.getContext('webgl2'),
+      ]);
     } catch (err) {
       return false;
     }
@@ -233,60 +281,42 @@ export default class Features extends FlagsClass {
 
   // Test if WebVR is supported
   get webVR() {
-    return !!('getVRDisplays' in window.navigator);
-  }
-
-  // Test if cors is supported
-  get cors() {
-    return ('XMLHttpRequest' in window && 'withCredentials' in new window.XMLHttpRequest());
+    return Asserts.all([
+      !!('getVRDisplays' in window.navigator),
+    ]);
   }
 
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
   get touch() {
-    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) && (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
-  }
-
-  // Test if async attribute is supported
-  get async() {
-    return ('async' in document.createElement('script'));
-  }
-
-  // Test if defer attribute is supported
-  get defer() {
-    return ('defer' in document.createElement('script'));
-  }
-
-  // Test if Geolocation is supported
-  get geolocation() {
-    return ('geolocation' in window.navigator);
+    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) &&
+    (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
   }
 
   // Test if img srcset attribute is supported
   get srcset() {
-    return ('srcset' in document.createElement('img'));
+    return Asserts.all([
+      ('srcset' in document.createElement('img')),
+    ]);
   }
 
   // Test if img sizes attribute is supported
   get sizes() {
-    return ('sizes' in document.createElement('img'));
+    return Asserts.all([
+      ('sizes' in document.createElement('img')),
+    ]);
   }
 
   // Test if Picture element is supported
   get pictureElement() {
-    return 'HTMLPictureElement' in window;
+    return Asserts.all([
+      'HTMLPictureElement' in window,
+    ]);
   }
 
   // Test if Picture element is supported
   get dialogElement() {
-    return 'HTMLDialogElement' in window;
-  }
-
-  get fullscreen() {
-    const el = document.createElement('canvas');
-    return !!el.requestFullscreen || !!el.webkitRequestFullscreen || !!el.msRequestFullscreen || !!el.mozRequestFullScreen;
-  }
-
-  get fullscreenKeyboard() {
-    return window.Element && 'ALLOW_KEYBOARD_INPUT' in window.Element;
+    return Asserts.all([
+      'HTMLDialogElement' in window,
+    ]);
   }
 }
