@@ -7,14 +7,24 @@ export default class Browsers extends FlagsClass {
     super(ua, cssFlagsPrefix);
 
     this._versionDefaultRegEx = /version\/(\d+(\.?_?\d+)+)/i;
-    this._version = this._ua.match(this._versionDefaultRegEx)[1];
+
+    this._ua.match(this._versionDefaultRegEx);
+
+    this._version = RegExp.$1;
   }
 
   get AndroidBrowser() {
-    return Asserts.all([
+    if(Asserts.all([
       !/like android/i.test(this._ua),
       /android/i.test(this._ua),
-    ]);
+      /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ])) {
+      this._version = RegExp.$1;
+
+      return true;
+    }
+
+    return false;
   }
 
   get Brave() {
@@ -48,9 +58,16 @@ export default class Browsers extends FlagsClass {
   }
 
   get Chrome() {
-    return Asserts.one([
-      /chrome/i.test(this._ua),
-    ]);
+    if(Asserts.all([
+      /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+      !this.AndroidBrowser,
+    ])) {
+      this._version = RegExp.$1;
+
+      return true;
+    }
+
+    return false;
   }
 
   get Chromium() {
@@ -69,7 +86,7 @@ export default class Browsers extends FlagsClass {
       /(?:opera)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
       /(?:opr|opios)[\s/](\S+)/i.test(this._ua),
     ])) {
-      this._version = RegExp.$1 || this._version;
+      this._version = RegExp.$1;
 
       return true;
     }
@@ -87,13 +104,15 @@ export default class Browsers extends FlagsClass {
     return Asserts.one([
       /safari|applewebkit/i.test(this._ua),
       /safari/i.test(this._ua) && !this.Chrome && !this.PhantomJS,
+    ]) && Asserts.all([
+      !this.AndroidBrowser,
     ]);
   }
 
   get SafariMobile() {
     return Asserts.one([
       /iphone|ipad|ipod/i.test(this._ua),
-      /safari/i.test(this._ua) && !this.Chrome && !this.PhantomJS,
+      /safari/i.test(this._ua) && !this.Chrome && !this.PhantomJS && !this.AndroidBrowser,
     ]);
   }
 

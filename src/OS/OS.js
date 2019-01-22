@@ -1,4 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
+import Asserts from '../Core/Asserts';
 
 export default class OS extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'os') {
@@ -6,28 +7,44 @@ export default class OS extends FlagsClass {
   }
 
   //! Desktop OSs
-  get windows() {
-    return window.navigator.appVersion.includes('Win');
+  get Windows() {
+    return Asserts.one([
+      /Win/i.test(this._ua),
+    ]);
   }
 
   get macOS() {
-    return window.navigator.appVersion.includes('Mac');
+    return Asserts.all([
+      /Mac/i.test(this._ua),
+      !/like Mac/i.test(this._ua),
+      !this.iOS,
+      !/Mobile\//i.test(this._ua),
+    ]);
   }
 
-  get unix() {
-    return window.navigator.appVersion.includes('X11');
+  get Unix() {
+    return Asserts.one([
+      /X11/i.test(this._ua),
+    ]);
   }
 
-  get linux() {
-    return window.navigator.appVersion.includes('Linux');
+  get Linux() {
+    return Asserts.all([
+      /Linux/i.test(this._ua),
+      !this.Android,
+    ]);
   }
 
   //! Mobile OSs
   get iOS() {
-    return /iPad|iPhone|iPod/i.test(this._ua) && !window.MSStream;
+    return Asserts.one([
+      /iPad|iPhone|iPod/i.test(this._ua) && !window.MSStream,
+    ]);
   }
 
   get Android() {
-    return /Android/i.test(this._ua);
+    return Asserts.one([
+      /Android/i.test(this._ua),
+    ]);
   }
 }
