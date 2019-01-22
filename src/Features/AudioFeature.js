@@ -1,4 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
+import Asserts from '../Utils/Asserts';
 
 export default class AudioFeature extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'audio') {
@@ -24,65 +25,59 @@ export default class AudioFeature extends FlagsClass {
   }
 
   get supported() {
-    const asserts = [
+    return Asserts.all([
       !!window.Audio,
       !!this._audioElement,
       this._audioElement instanceof window.HTMLAudioElement && this._audioElement instanceof window.HTMLMediaElement,
       !!this._audioElement.canPlayType,
-    ];
-
-    return asserts.every(assert => !!assert);
+    ]);
   }
 
   getContext() {
-    return !!window.AudioContext;
+    return Asserts.all([
+      !!window.AudioContext,
+    ]);
   }
 
   getMp3() {
-    if (this.supported) {
-      return this._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getWebm() {
-    if (this.supported) {
-      return this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getOgg() {
-    if (this.supported) {
-      return this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getOpus() {
-    if (this.supported) {
-      return this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getWav() {
-    if (this.supported) {
-      return this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getM4a() {
-    if (this.supported) {
-      return (this._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || this._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      (this._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || this._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '',
+    ], true);
   }
 }

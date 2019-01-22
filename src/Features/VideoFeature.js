@@ -1,4 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
+import Asserts from '../Utils/Asserts';
 
 export default class VideoFeature extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'video') {
@@ -14,36 +15,31 @@ export default class VideoFeature extends FlagsClass {
   }
 
   get supported() {
-    const asserts = [
+    return Asserts.all([
       !!this._videoElement,
       this._videoElement instanceof window.HTMLVideoElement && this._videoElement instanceof window.HTMLMediaElement,
       !!this._videoElement.canPlayType,
-    ];
-
-    return asserts.every(assert => !!assert);
+    ]);
   }
 
   getMp4() {
-    if(this.supported) {
-      return this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getOgv() {
-    if(this.supported) {
-      return this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
+    ], true);
   }
 
   getWebm() {
-    if(this.supported) {
-      return this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '';
-    }
-
-    return false;
+    return Asserts.all([
+      this.supported,
+      this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '',
+    ], true);
   }
 }

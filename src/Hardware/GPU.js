@@ -23,7 +23,7 @@ export default class GPU extends FlagsClass {
     };
 
     const canvas = document.createElement('canvas');
-    const webGLContext = canvas.getContext('experimental-webgl');
+    const webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
     if (webGLContext) {
       const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');

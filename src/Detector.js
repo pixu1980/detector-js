@@ -2,13 +2,19 @@
 
 // import Platform from './Platform/Platform';
 
+//! Hardware
 import CPU from './Hardware/CPU';
+import GPU from './Hardware/GPU';
+
+//! Software
 import OS from './OS/OS';
-import Engines from './Engines/Engines';
+import Browsers from './Browsers/Browsers';
+import Engines from './Browsers/Engines';
+
+//! Features
 import Features from './Features/Features';
 import VideoFeature from './Features/VideoFeature';
 import AudioFeature from './Features/AudioFeature';
-import GPU from './Hardware/GPU';
 
 export default class Detector {
   constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
@@ -28,14 +34,11 @@ export default class Detector {
     //! Software
     this.os = this.getOS(cssFlags);
     this.platform = this.getPlatform(cssFlags);
-
+    this.browser = this.getBrowsers(cssFlags);
     this.engines = this.getEngines(cssFlags);
+
+    //! Features
     this.features = this.getFeatures(cssFlags);
-    this.audio = this.getAudio(cssFlags);
-    this.video = this.getVideo(cssFlags);
-
-
-    this.browser = this.getBrowser(cssFlags);
 
     if (!!cssFlags) {
       this.setCssFlags();
@@ -100,46 +103,37 @@ export default class Detector {
     return engines.toFlags();
   }
 
+  getBrowsers(cssFlags = false) {
+    const browsers = new Browsers(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(browsers.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return browsers.toFlags();
+  }
+
   getFeatures(cssFlags = false) {
     const features = new Features(this._ua);
-
-    try {
-      if (!!cssFlags) {
-        this._cssFlags = this._cssFlags.concat(features.toCssFlags());
-      }
-    } catch (e) {
-      throw e;
-    }
-
-    return features.toFlags();
-  }
-
-  getVideo(cssFlags = false) {
     const video = new VideoFeature(this._ua);
-
-    try {
-      if (!!cssFlags) {
-        this._cssFlags = this._cssFlags.concat(video.toCssFlags());
-      }
-    } catch (e) {
-      throw e;
-    }
-
-    return video.toFlags();
-  }
-
-  getAudio(cssFlags = false) {
     const audio = new AudioFeature(this._ua);
 
     try {
       if (!!cssFlags) {
-        this._cssFlags = this._cssFlags.concat(audio.toCssFlags());
+        this._cssFlags = this._cssFlags.concat(features.toCssFlags(), video.toCssFlags(), audio.toCssFlags());
       }
     } catch (e) {
       throw e;
     }
 
-    return audio.toFlags();
+    return features.toFlags().merge({
+      video: video.toFlags(),
+      audio: audio.toFlags(),
+    });
   }
 
   getPlatform(cssFlags = false) {
@@ -306,6 +300,14 @@ export default class Detector {
   }
 
   setCssFlags() {
-    document.documentElement.className += this._cssFlagsPrefix + this._cssFlags.join(' ' + this._cssFlagsPrefix).trim();
+    const cssFlagsPrefixed = this._cssFlags.map(cssFlag => this._cssFlagsPrefix + cssFlag);
+
+    if (!!document.documentElement.classList) {
+      document.documentElement.classList.add(...cssFlagsPrefixed);
+    } else {
+      cssFlagsPrefixed.forEach(cssFlag => document.documentElement.className.replace(cssFlag, ''));
+
+      document.documentElement.className += this._cssFlags.join(' ').trim();
+    }
   }
 }
