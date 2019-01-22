@@ -13,7 +13,7 @@ export default class FlagsClass {
     return Object.getOwnPropertyNames(proto).filter((prop) => {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
     }).reduce((acc, item) => {
-      acc[item.toLowerCase()] = this[item];
+      acc[item] = this[item];
       return acc;
     }, {});
   }
@@ -25,7 +25,7 @@ export default class FlagsClass {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
     }).reduce((acc, item) => {
       if(!!this[item]) {
-        acc.push((this._cssFlagsPrefix + '-' + item.toLowerCase()));
+        acc.push((this._cssFlagsPrefix + '-' + item));
       }
       return acc;
     }, []);

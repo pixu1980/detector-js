@@ -1,4 +1,4 @@
-import FlagsClass from './FlagsClass';
+import FlagsClass from '../Core/FlagsClass';
 
 export default class Features extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'feature') {
