@@ -1,42 +1,56 @@
 /*jshint expr: true */
 
 // import Platform from './Platform/Platform';
-import Features from './Features';
-import Engines from './Engines';
+import Features from './Features/Features';
+import VideoFeature from './Features/VideoFeature';
+import AudioFeature from './Features/AudioFeature';
 
-import { merge } from './Utils/Utils';
-
-// import release from './release.json';
-
-const { navigator } = window;
+import Engines from './Engines/Engines';
+import OS from './OS/OS';
+import CPUVendor from './Hardware/CPUVendor';
 
 export default class Detector {
   constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
     this._ua = ua;
+    this._navigator = window.navigator;
+    this._document = window.document;
+    this._window = window;
 
     if (!!cssFlags) {
       this._cssFlags = [];
       this._cssFlagsPrefix = cssFlagsPrefix;
     }
 
-    this.engines = this.getEngines(cssFlags);
-    this.features = this.getFeatures(cssFlags);
+    this.engines = this.getEngines(this._cssFlags);
+    this.features = this.getFeatures(this._cssFlags);
+    this.audio = this.getAudio(this._cssFlags);
+    this.video = this.getVideo(this._cssFlags);
 
-    this.platform = this.getPlatform(cssFlags);
-    this.os = this.getOS(cssFlags);
-    this.browser = this.getBrowser(cssFlags);
-    this.audio = this.getAudio(cssFlags);
-    this.video = this.getVideo(cssFlags);
+    this.cpu = this.getCPU(this._cssFlags);
 
-    if (!!cssFlags) {
+    this.platform = this.getPlatform(this._cssFlags);
+    this.os = this.getOS(this._cssFlags);
+    this.browser = this.getBrowser(this._cssFlags);
+
+    if (!!this._cssFlags) {
       this.setCssFlags();
     }
 
-    // const detectorJSStatus = merge(release.version, {
-    //   initialized: true,
-    // });
+    console.warn('DetectorJS initialized', this);
+  }
 
-    // console.log('DetectorJS initialized', detectorJSStatus);
+  getOS(cssFlags = false) {
+    const os = new OS(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(os.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return os.toFlags();
   }
 
   getEngines(cssFlags = false) {
@@ -67,23 +81,65 @@ export default class Detector {
     return features.toFlags();
   }
 
+  getVideo(cssFlags = false) {
+    const video = new VideoFeature(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(video.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return video.toFlags();
+  }
+
+  getAudio(cssFlags = false) {
+    const audio = new AudioFeature(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(audio.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return audio.toFlags();
+  }
+
+  getCPU(cssFlags = false) {
+    const cpu = new CPUVendor(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return cpu.toFlags();
+  }
+
   getPlatform(cssFlags = false) {
-    let p = {};
+    const p = {};
 
     try {
       // see https://github.com/bestiejs/platform.js/blob/master/doc/README.md#readme
-      p = merge(p, {
-        // description: platform.description,
-        // manufacturer: platform.manufacturer, // eg. 'Apple', 'Archos', 'Amazon', 'Asus', 'Barnes & Noble', 'BlackBerry', 'Google', 'HP', 'HTC', 'LG', 'Microsoft', 'Motorola', 'Nintendo', 'Nokia', 'Samsung' and 'Sony'
-        // desktop: !userAgent.mobile && !userAgent.tablet,
-        // phone: userAgent.mobile,
-        // tablet: userAgent.tablet,
-        // desktop: false,
-        // pc: false,
-        // mac: false,
-        // iPhone: false,
-        // iPad: false,
-      });
+      // p = merge(p, {
+      // description: platform.description,
+      // manufacturer: platform.manufacturer, // eg. 'Apple', 'Archos', 'Amazon', 'Asus', 'Barnes & Noble', 'BlackBerry', 'Google', 'HP', 'HTC', 'LG', 'Microsoft', 'Motorola', 'Nintendo', 'Nokia', 'Samsung' and 'Sony'
+      // desktop: !userAgent.mobile && !userAgent.tablet,
+      // phone: userAgent.mobile,
+      // tablet: userAgent.tablet,
+      // desktop: false,
+      // pc: false,
+      // mac: false,
+      // iPhone: false,
+      // iPad: false,
+      // });
 
       if (!!cssFlags) {
         // !!p.desktop && this._cssFlags.push('desktop');
@@ -97,94 +153,94 @@ export default class Detector {
     return p;
   }
 
-  getOS(cssFlags = false) {
-    let o = {};
+  // getOS(cssFlags = false) {
+  //   const o = {};
 
-    try {
-      o = merge(o, {
-        // architecture: platform.os.architecture === 32 ? 'x86' : 'x64',
-        // name: platform.os.family,
-        // version: platform.os.version || userAgent.osversion,
-        // android: userAgent.android, //&& platform.os.family === 'Android',
-        // bada: userAgent.bada,
-        // blackberry: userAgent.blackberry,
-        // chromeOS: userAgent.chromeos,
-        // firefoxOS: userAgent.firefoxos,
-        // iOS: userAgent.ios, // && platform.os.family === 'iOS',
-        // linux: userAgent.linux, //&& ['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'].includes(platform.os.family),
-        // macOS: /Mac OS/.test(navigator.UserAgent), // && userAgent.mac && ['OS X', 'macOS'].includes(platform.os.family),
-        // sailfish: userAgent.sailfish,
-        // tizen: userAgent.tizen,
-        // windows: userAgent.windows, // && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].includes(platform.os.family),
-        // windowsPhone: userAgent.windowsphone, // && platform.os.family === 'Windows Phone',
-      });
+  //   try {
+  //     // o = merge(o, {
+  //     // architecture: platform.os.architecture === 32 ? 'x86' : 'x64',
+  //     // name: platform.os.family,
+  //     // version: platform.os.version || userAgent.osversion,
+  //     // android: userAgent.android, //&& platform.os.family === 'Android',
+  //     // bada: userAgent.bada,
+  //     // blackberry: userAgent.blackberry,
+  //     // chromeOS: userAgent.chromeos,
+  //     // firefoxOS: userAgent.firefoxos,
+  //     // iOS: userAgent.ios, // && platform.os.family === 'iOS',
+  //     // linux: userAgent.linux, //&& ['Ubuntu', 'Debian', 'Fedora', 'Red Hat', 'SuSE'].includes(platform.os.family),
+  //     // macOS: /Mac OS/.test(navigator.UserAgent), // && userAgent.mac && ['OS X', 'macOS'].includes(platform.os.family),
+  //     // sailfish: userAgent.sailfish,
+  //     // tizen: userAgent.tizen,
+  //     // windows: userAgent.windows, // && ['Windows', 'Windows Server 2008 R2 / 7', 'Windows Server 2008 / Vista', 'Windows XP'].includes(platform.os.family),
+  //     // windowsPhone: userAgent.windowsphone, // && platform.os.family === 'Windows Phone',
+  //     // });
 
-      if (!!cssFlags) {
-        // !!o.android && this._cssFlags.push('os-android');
-        // !!o.bada && this._cssFlags.push('os-bada');
-        // !!o.blackberry && this._cssFlags.push('os-blackberry');
-        // !!o.chromeOS && this._cssFlags.push('os-chromeos');
-        // !!o.firefoxOS && this._cssFlags.push('os-firefoxos');
-        // !!o.iOS && this._cssFlags.push('os-ios');
-        // !!o.linux && this._cssFlags.push('os-linux');
-        // !!o.macOS && this._cssFlags.push('os-macos');
-        // !!o.sailfish && this._cssFlags.push('os-sailfish');
-        // !!o.tizen && this._cssFlags.push('os-tizen');
-        // !!o.windows && this._cssFlags.push('os-windows');
-        // !!o.windowsPhone && this._cssFlags.push('os-windowsphone');
-        // !!o.version && this._cssFlags.push('os-version-' + o.version);
-      }
-    } catch (e) {
-      throw e;
-    }
+  //     if (!!cssFlags) {
+  //       // !!o.android && this._cssFlags.push('os-android');
+  //       // !!o.bada && this._cssFlags.push('os-bada');
+  //       // !!o.blackberry && this._cssFlags.push('os-blackberry');
+  //       // !!o.chromeOS && this._cssFlags.push('os-chromeos');
+  //       // !!o.firefoxOS && this._cssFlags.push('os-firefoxos');
+  //       // !!o.iOS && this._cssFlags.push('os-ios');
+  //       // !!o.linux && this._cssFlags.push('os-linux');
+  //       // !!o.macOS && this._cssFlags.push('os-macos');
+  //       // !!o.sailfish && this._cssFlags.push('os-sailfish');
+  //       // !!o.tizen && this._cssFlags.push('os-tizen');
+  //       // !!o.windows && this._cssFlags.push('os-windows');
+  //       // !!o.windowsPhone && this._cssFlags.push('os-windowsphone');
+  //       // !!o.version && this._cssFlags.push('os-version-' + o.version);
+  //     }
+  //   } catch (e) {
+  //     throw e;
+  //   }
 
-    return o;
-  }
+  //   return o;
+  // }
 
   getBrowser(cssFlags = false) {
-    let b = {};
+    const b = {};
 
     try {
-      b = merge(b, {
-        // name: userAgent.name, // || platform.name,
-        // version: userAgent.version,
-        // // WebApp mode in iOS
-        // webApp: navigator.standalone,
-        // engine: {
-        //   blink: userAgent.blink, // && platform.layout === 'Blink',
-        //   gecko: userAgent.gecko, // && platform.layout === 'Gecko',
-        //   trident: userAgent.msie, // && platform.layout === 'Trident',
-        //   edgeHTML: userAgent.msedge, // && platform.layout === 'EdgeHTML',
-        //   webkit: userAgent.webkit, // && platform.layout === 'WebKit',
-        // },
-        // android: userAgent.android, // native android browser
-        // arora: /Arora/.test(navigator.UserAgent),
-        // bada: userAgent.bada, // native bada browser
-        // blackberry: userAgent.blackberry, // native blackberry browser
-        // chrome: userAgent.chrome, // && platform.name.includes('Chrome'),
-        // chromeMobile: userAgent.chrome && userAgent.mobile, // && platform.name === 'Chrome Mobile',
-        // cocoonJS: navigator.isCocoonJS,
-        // edge: userAgent.msedge, // && platform.name === 'Microsoft Edge',
-        // ejecta: typeof window.ejecta !== 'undefined',
-        // // electron: platform.name === 'Electron',
-        // epiphany: /Epiphany/.test(navigator.UserAgent),
-        // firefox: userAgent.firefox, // && platform.name.includes('Firefox'),
-        // firefoxMobile: userAgent.firefox, // && ['Firefox for iOS', 'Firefox Mobile'].includes(platform.name),
-        // ie: userAgent.msie, // && platform.name.includes('IE'),
-        // ieMobile: userAgent.msie && userAgent.mobile, // && platform.name === 'IE Mobile',
-        // midori: /Midori/.test(navigator.UserAgent),
-        // opera: userAgent.opera, // && platform.name.includes('Opera'),
-        // operaMobile: userAgent.opera && userAgent.mobile, // && ['Opera Mini', 'Opera Mobile'].includes(platform.name),
-        // phantom: userAgent.phantom, // && platform.name === 'PhantomJS',
-        // safari: userAgent.safari, // && platform.name.includes('Safari'),
-        // safariMobile: /Mobile Safari/.test(navigator.UserAgent) && userAgent.safari && userAgent.ios && userAgent.mobile, // && platform.name.includes('Safari'),
-        // sailfish: userAgent.sailfish,
-        // seamonkey: userAgent.seamonkey, // && platform.name === 'SeaMonkey',
-        // samsung: userAgent.samsungBrowser, // native samsung browser
-        // silk: userAgent.silk, // && platform.name === 'Silk', // native amazon kindle browser
-        // tizen: userAgent.tizen, //- native browser
-        // webOS: userAgent.webos, //- native browser
-      });
+      // b = merge(b, {
+      // name: userAgent.name, // || platform.name,
+      // version: userAgent.version,
+      // // WebApp mode in iOS
+      // webApp: navigator.standalone,
+      // engine: {
+      //   blink: userAgent.blink, // && platform.layout === 'Blink',
+      //   gecko: userAgent.gecko, // && platform.layout === 'Gecko',
+      //   trident: userAgent.msie, // && platform.layout === 'Trident',
+      //   edgeHTML: userAgent.msedge, // && platform.layout === 'EdgeHTML',
+      //   webkit: userAgent.webkit, // && platform.layout === 'WebKit',
+      // },
+      // android: userAgent.android, // native android browser
+      // arora: /Arora/.test(navigator.UserAgent),
+      // bada: userAgent.bada, // native bada browser
+      // blackberry: userAgent.blackberry, // native blackberry browser
+      // chrome: userAgent.chrome, // && platform.name.includes('Chrome'),
+      // chromeMobile: userAgent.chrome && userAgent.mobile, // && platform.name === 'Chrome Mobile',
+      // cocoonJS: navigator.isCocoonJS,
+      // edge: userAgent.msedge, // && platform.name === 'Microsoft Edge',
+      // ejecta: typeof window.ejecta !== 'undefined',
+      // // electron: platform.name === 'Electron',
+      // epiphany: /Epiphany/.test(navigator.UserAgent),
+      // firefox: userAgent.firefox, // && platform.name.includes('Firefox'),
+      // firefoxMobile: userAgent.firefox, // && ['Firefox for iOS', 'Firefox Mobile'].includes(platform.name),
+      // ie: userAgent.msie, // && platform.name.includes('IE'),
+      // ieMobile: userAgent.msie && userAgent.mobile, // && platform.name === 'IE Mobile',
+      // midori: /Midori/.test(navigator.UserAgent),
+      // opera: userAgent.opera, // && platform.name.includes('Opera'),
+      // operaMobile: userAgent.opera && userAgent.mobile, // && ['Opera Mini', 'Opera Mobile'].includes(platform.name),
+      // phantom: userAgent.phantom, // && platform.name === 'PhantomJS',
+      // safari: userAgent.safari, // && platform.name.includes('Safari'),
+      // safariMobile: /Mobile Safari/.test(navigator.UserAgent) && userAgent.safari && userAgent.ios && userAgent.mobile, // && platform.name.includes('Safari'),
+      // sailfish: userAgent.sailfish,
+      // seamonkey: userAgent.seamonkey, // && platform.name === 'SeaMonkey',
+      // samsung: userAgent.samsungBrowser, // native samsung browser
+      // silk: userAgent.silk, // && platform.name === 'Silk', // native amazon kindle browser
+      // tizen: userAgent.tizen, //- native browser
+      // webOS: userAgent.webos, //- native browser
+      // });
 
       if (!!cssFlags) {
         // !!b.engine.blink && this._cssFlags.push('engine-blink');
@@ -230,71 +286,7 @@ export default class Detector {
     return b;
   }
 
-  getAudio(cssFlags = false) {
-    let a = {
-      audioData: !!(window.Audio),
-      webAudio: !!(window.webkitAudioContext || window.AudioContext),
-    };
-
-    try {
-      const audioElement = document.createElement('audio');
-
-      if (!!audioElement.canPlayType) {
-        a = merge(a, {
-          ogg: audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
-          opus: audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
-          mp3: audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
-          // Mimetypes accepted:
-          //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
-          //   bit.ly/iphoneoscodecs
-          wav: audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
-          m4a: (audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '',
-          webm: audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '',
-        });
-
-        if (!!cssFlags) {
-          !!a.ogg && this._cssFlags.push('audio-ogg');
-          !!a.opus && this._cssFlags.push('audio-opus');
-          !!a.mp3 && this._cssFlags.push('audio-mp3');
-          !!a.wav && this._cssFlags.push('audio-wav');
-          !!a.m4a && this._cssFlags.push('audio-m4a');
-          !!a.webm && this._cssFlags.push('audio-webm');
-        }
-      }
-    } catch (e) {
-      throw e;
-    }
-
-    return a;
-  }
-
-  getVideo(cssFlags = false) {
-    let v = {};
-
-    try {
-      const videoElement = document.createElement('video');
-
-      if (!!videoElement.canPlayType) {
-        v = merge(v, {
-          mp4: videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
-          ogv: videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
-          webm: videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '',
-        });
-
-        if (!!cssFlags) {
-          !!v.mp4 && this._cssFlags.push('video-mp4');
-          !!v.ogv && this._cssFlags.push('video-ogv');
-          !!v.webm && this._cssFlags.push('video-webm');
-        }
-      }
-    } catch (e) {
-      throw e;
-    }
-
-    return v;
-  }
-
   setCssFlags() {
-    document.documentElement.className += this._cssFlags.join(' ' + this._cssFlagsPrefix + '-').trim();
+    document.documentElement.className += this._cssFlagsPrefix + '-' + this._cssFlags.join(' ' + this._cssFlagsPrefix + '-').trim();
   }
 }
