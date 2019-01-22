@@ -11,11 +11,13 @@ export default class FlagsClass {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
     }).reduce((acc, prop) => {
       acc[prop] = this[prop];
+
       return acc;
     }, {}).merge(Object.getOwnPropertyNames(this).filter((prop) => {
       return !prop.startsWith('_') && !Object.getOwnPropertyDescriptor(this, prop).get;
     }).reduce((acc, prop) => {
       acc[prop] = this[prop];
+
       return acc;
     }, {}));
   }
@@ -27,8 +29,9 @@ export default class FlagsClass {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
     }).reduce((acc, item) => {
       if(!!this[item]) {
-        acc.push((this._cssFlagsPrefix + '--' + item.toLowerCase()));
+        acc.push(this._cssFlagsPrefix + '--' + item.toLowerCase() + (typeof this[item] !== 'boolean' ? '--' + this[item] : ''));
       }
+
       return acc;
     }, []);
   }

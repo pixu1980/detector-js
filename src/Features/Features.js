@@ -1,5 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
-import Asserts from '../Utils/Asserts';
+import Asserts from '../Core/Asserts';
 
 export default class Features extends FlagsClass {
   isOldBrowser() {
@@ -288,8 +288,7 @@ export default class Features extends FlagsClass {
 
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
   get touch() {
-    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) &&
-    (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
+    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) && (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
   }
 
   // Test if img srcset attribute is supported

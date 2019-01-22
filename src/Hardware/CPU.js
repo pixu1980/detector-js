@@ -1,5 +1,5 @@
 import FlagsClass from '../Core/FlagsClass';
-import Asserts from '../Utils/Asserts';
+import Asserts from '../Core/Asserts';
 
 export default class CPU extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'cpu') {
