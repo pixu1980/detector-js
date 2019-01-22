@@ -2,6 +2,53 @@
 /* eslint-disable prefer-rest-params */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-bitwise */
+if (!Object.assign) {
+  Object.defineProperty(Object, 'assign', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value(target, firstSource) {
+      if (target === undefined || target === null) {
+        throw new TypeError('Cannot convert first argument to object');
+      }
+
+      const to = Object(target);
+      for (let i = 1; i < arguments.length; i++) {
+        let nextSource = arguments[i];
+        if (nextSource === undefined || nextSource === null) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+        nextSource = Object(nextSource);
+
+        const keysArray = Object.keys(Object(nextSource));
+        for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+          const nextKey = keysArray[nextIndex];
+          const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+          if (desc !== undefined && desc.enumerable) {
+            to[nextKey] = nextSource[nextKey];
+          }
+        }
+      }
+      return to;
+    },
+  });
+}
+
+if(!Object.prototype.merge) {
+  Object.defineProperty(Object.prototype, 'merge', {
+    value(...objs) {
+      const mergeObj = [this, ...objs].reduce((acc, obj) => Object.keys(obj).reduce((a, k) => {
+        acc[k] = acc.hasOwnProperty(k) && acc[k] instanceof Array ? [].concat(acc[k]).concat(obj[k]) : obj[k];
+
+        return acc;
+      }, {}), {});
+
+      return Object.assign(this, mergeObj);
+    },
+  });
+}
+
 if(!Array.prototype.map) {
   Object.defineProperty(Array.prototype, 'map', {
     value(arr, iterator) {

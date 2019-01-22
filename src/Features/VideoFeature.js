@@ -5,19 +5,25 @@ export default class VideoFeature extends FlagsClass {
     super(ua, cssFlagsPrefix);
 
     this._videoElement = document.createElement('video');
+
+    this.formats = {
+      mp4: this.getMp4(),
+      ogv: this.getOgv(),
+      webm: this.getWebm(),
+    };
   }
 
   get supported() {
     const asserts = [
       !!this._videoElement,
-      this._videoElement instanceof this._window.HTMLVideoElement && this._videoElement instanceof this._window.HTMLMediaElement,
+      this._videoElement instanceof window.HTMLVideoElement && this._videoElement instanceof window.HTMLMediaElement,
       !!this._videoElement.canPlayType,
     ];
 
     return asserts.every(assert => !!assert);
   }
 
-  get mp4() {
+  getMp4() {
     if(this.supported) {
       return this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '';
     }
@@ -25,7 +31,7 @@ export default class VideoFeature extends FlagsClass {
     return false;
   }
 
-  get ogv() {
+  getOgv() {
     if(this.supported) {
       return this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '';
     }
@@ -33,7 +39,7 @@ export default class VideoFeature extends FlagsClass {
     return false;
   }
 
-  get webm() {
+  getWebm() {
     if(this.supported) {
       return this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '';
     }

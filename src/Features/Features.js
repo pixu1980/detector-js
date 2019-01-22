@@ -3,6 +3,15 @@ import FlagsClass from '../Core/FlagsClass';
 export default class Features extends FlagsClass {
   constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'feature') {
     super(ua, cssFlagsPrefix);
+
+    this.file = this.getFile();
+    this.fileSystem = this.getFileSystem();
+
+    // var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+
+    // for (var value in performance) {
+    //   console.log(value);
+    // }
   }
 
   isOldBrowser() {
@@ -10,7 +19,7 @@ export default class Features extends FlagsClass {
   }
 
   prefixes(prop) {
-    const { style } = this._document.createElement('dummy');
+    const { style } = document.createElement('dummy');
     const prefixes = ['Webkit', 'Moz', 'O', 'ms'];
 
     const ucProp = prop.charAt(0).toUpperCase() + prop.substr(1);
@@ -25,18 +34,18 @@ export default class Features extends FlagsClass {
     });
   }
 
-  get file() {
-    return !!this._window.File && !!this._window.FileReader && !!this._window.FileList && !!this._window.Blob;
+  getFile() {
+    return !!window.File && !!window.FileReader && !!window.FileList && !!window.Blob;
   }
 
-  get fileSystem() {
-    return !!this._window.requestFileSystem;
+  getFileSystem() {
+    return !!window.requestFileSystem;
   }
 
   get getUserMedia() {
-    this._navigator.getUserMedia = this._navigator.getUserMedia || this._navigator.webkitGetUserMedia || this._navigator.mozGetUserMedia || this._navigator.msGetUserMedia;
+    window.navigator.getUserMedia = window.navigator.getUserMedia || window.navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || window.navigator.msGetUserMedia;
 
-    return !!this._navigator.getUserMedia;
+    return !!window.navigator.getUserMedia;
   }
 
   get littleEndian() {
@@ -44,19 +53,19 @@ export default class Features extends FlagsClass {
   }
 
   get mspointer() {
-    return this._navigator.msPointerEnabled || this._navigator.pointerEnabled;
+    return window.navigator.msPointerEnabled || window.navigator.pointerEnabled || false;
   }
 
   get pixelRatio() {
-    return this._window.devicePixelRatio || 1;
+    return window.devicePixelRatio || 1;
   }
 
   get pointerLock() {
-    return 'pointerLockElement' in this._document || 'mozPointerLockElement' in this._document || 'webkitPointerLockElement' in this._document;
+    return 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
   }
 
   get quirksMode() {
-    return this._document.compatMode !== 'CSS1Compat';
+    return document.compatMode !== 'CSS1Compat';
   }
 
   get typedArray() {
@@ -64,30 +73,30 @@ export default class Features extends FlagsClass {
   }
 
   get vibration() {
-    this._navigator.vibrate = this._navigator.vibrate || this._navigator.webkitVibrate || this._navigator.mozVibrate || this._navigator.msVibrate;
+    window.navigator.vibrate = window.navigator.vibrate || window.navigator.webkitVibrate || window.navigator.mozVibrate || window.navigator.msVibrate || false;
 
-    return this._navigator.vibrate;
+    return window.navigator.vibrate;
   }
 
   get worker() {
-    return !!this._window.Worker;
+    return !!window.Worker;
   }
 
   get css3D() {
-    const el = this._document.createElement('p');
+    const el = document.createElement('p');
     let hasCSS3D = false;
 
     // Add it to the body to get the computed style.
-    this._document.body.insertBefore(el, null);
+    document.body.insertBefore(el, null);
 
     ['-webkit-transform', '-o-transform', '-ms-transform', '-moz-transform', 'transform'].forEach((t) => {
       if (!!el.style[t]) {
         el.style[t] = 'translate3d(1px,1px,1px)';
-        hasCSS3D = this._window.getComputedStyle(el).getPropertyValue(t);
+        hasCSS3D = window.getComputedStyle(el).getPropertyValue(t);
       }
     });
 
-    this._document.body.removeChild(el);
+    document.body.removeChild(el);
 
     return (!!hasCSS3D && hasCSS3D.length > 0 && hasCSS3D !== 'none');
   }
@@ -109,46 +118,46 @@ export default class Features extends FlagsClass {
 
   // Test if addEventListener is supported
   get addEventListener() {
-    return !!this._window.addEventListener;
+    return !!window.addEventListener;
   }
 
   // Test if querySelectorAll is supported
   get querySelectorAll() {
-    return !!this._document.querySelectorAll;
+    return !!document.querySelectorAll;
   }
 
   // Test if matchMedia is supported
   get matchMedia() {
-    return !!this._window.matchMedia;
+    return !!window.matchMedia;
   }
 
   get battery() {
-    return !!this._navigator.battery;
+    return !!window.navigator.battery;
   }
 
   // Test if Device Motion is supported
   get deviceMotion() {
-    return ('DeviceMotionEvent' in this._window);
+    return ('DeviceMotionEvent' in window);
   }
 
   // Test if Device Orientation is supported
   get deviceOrientation() {
-    return ('DeviceOrientationEvent' in this._window);
+    return ('DeviceOrientationEvent' in window);
   }
 
   // Test if Context Menu is supported
   get contextMenu() {
-    return ('contextMenu' in this._document && 'HTMLMenuItemElement' in this._window);
+    return ('contextMenu' in document && 'HTMLMenuItemElement' in window);
   }
 
   // Test if classList API is supported
   get classList() {
-    return ('classList' in this._document);
+    return ('classList' in document);
   }
 
   // Test if placeholder attribute is supported
   get placeholder() {
-    return ('placeholder' in this._document.createElement('input'));
+    return ('placeholder' in document.createElement('input'));
   }
 
   // Test if localStorage is supported
@@ -156,8 +165,8 @@ export default class Features extends FlagsClass {
     const test = 'x';
 
     try {
-      this._window.localStorage.setItem(test, test);
-      this._window.localStorage.removeItem(test);
+      window.localStorage.setItem(test, test);
+      window.localStorage.removeItem(test);
       return true;
     } catch (err) {
       return false;
@@ -166,17 +175,17 @@ export default class Features extends FlagsClass {
 
   // Test if History API is supported
   get historyAPI() {
-    return (this._window.history && 'pushState' in this._window.history);
+    return (window.history && 'pushState' in window.history);
   }
 
   // Test if ServiceWorkers are supported
   get serviceWorker() {
-    return ('serviceWorker' in this._navigator);
+    return ('serviceWorker' in window.navigator);
   }
 
   // Test if viewport units are supported
   get viewportUnit() {
-    const el = this._document.createElement('dummy');
+    const el = document.createElement('dummy');
     try {
       el.style.width = '1vw';
       const test = el.style.width !== '';
@@ -188,7 +197,7 @@ export default class Features extends FlagsClass {
 
   // Test if REM units are supported
   get remUnit() {
-    const el = this._document.createElement('dummy');
+    const el = document.createElement('dummy');
 
     try {
       el.style.width = '1rem';
@@ -201,22 +210,22 @@ export default class Features extends FlagsClass {
 
   // Test if Canvas is supported
   get canvas() {
-    const el = this._document.createElement('canvas');
+    const el = document.createElement('canvas');
 
     return !!(el.getContext && el.getContext('2d'));
   }
 
   // Test if SVG is supported
   get svg() {
-    return !!this._document.createElementNS && !!this._document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
+    return !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
   }
 
   // Test if WebGL is supported
   get webGL() {
-    const el = this._document.createElement('canvas');
+    const el = document.createElement('canvas');
 
     try {
-      return !!(this._window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl')));
+      return !!(window.WebGLRenderingContext && (el.getContext('webgl') || el.getContext('experimental-webgl')));
     } catch (err) {
       return false;
     }
@@ -224,55 +233,60 @@ export default class Features extends FlagsClass {
 
   // Test if WebVR is supported
   get webVR() {
-    return !!('getVRDisplays' in this._navigator);
+    return !!('getVRDisplays' in window.navigator);
   }
 
   // Test if cors is supported
   get cors() {
-    return ('XMLHttpRequest' in this._window && 'withCredentials' in new this._window.XMLHttpRequest());
+    return ('XMLHttpRequest' in window && 'withCredentials' in new window.XMLHttpRequest());
   }
 
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
   get touch() {
-    return ('ontouchstart' in this._document.documentElement || (this._navigator.maxTouchPoints && this._navigator.maxTouchPoints > 1)) && (!!(('ontouchstart' in this._window) || this._navigator && this._navigator.msPointerEnabled && this._window.MSGesture || this._window.DocumentTouch && this._document instanceof this._window.DocumentTouch));
+    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) && (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
   }
 
   // Test if async attribute is supported
   get async() {
-    return ('async' in this._document.createElement('script'));
+    return ('async' in document.createElement('script'));
   }
 
   // Test if defer attribute is supported
   get defer() {
-    return ('defer' in this._document.createElement('script'));
+    return ('defer' in document.createElement('script'));
   }
 
   // Test if Geolocation is supported
   get geolocation() {
-    return ('geolocation' in this._navigator);
+    return ('geolocation' in window.navigator);
   }
 
   // Test if img srcset attribute is supported
   get srcset() {
-    return ('srcset' in this._document.createElement('img'));
+    return ('srcset' in document.createElement('img'));
   }
 
   // Test if img sizes attribute is supported
   get sizes() {
-    return ('sizes' in this._document.createElement('img'));
+    return ('sizes' in document.createElement('img'));
   }
 
   // Test if Picture element is supported
   get pictureElement() {
-    return ('HTMLPictureElement' in this._window);
+    return 'HTMLPictureElement' in window;
+  }
+
+  // Test if Picture element is supported
+  get dialogElement() {
+    return 'HTMLDialogElement' in window;
   }
 
   get fullscreen() {
-    const el = this._document.createElement('canvas');
+    const el = document.createElement('canvas');
     return !!el.requestFullscreen || !!el.webkitRequestFullscreen || !!el.msRequestFullscreen || !!el.mozRequestFullScreen;
   }
 
   get fullscreenKeyboard() {
-    return this._window.Element && 'ALLOW_KEYBOARD_INPUT' in this._window.Element;
+    return window.Element && 'ALLOW_KEYBOARD_INPUT' in window.Element;
   }
 }
