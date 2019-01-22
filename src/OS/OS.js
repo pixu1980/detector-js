@@ -7,24 +7,24 @@ export default class OS extends FlagsClass {
 
   //! Desktop OSs
   get windows() {
-    return this._navigator.appVersion.includes('Win');
+    return window.navigator.appVersion.includes('Win');
   }
 
   get macOS() {
-    return this._navigator.appVersion.includes('Mac');
+    return window.navigator.appVersion.includes('Mac');
   }
 
   get unix() {
-    return this._navigator.appVersion.includes('X11');
+    return window.navigator.appVersion.includes('X11');
   }
 
   get linux() {
-    return this._navigator.appVersion.includes('Linux');
+    return window.navigator.appVersion.includes('Linux');
   }
 
   //! Mobile OSs
   get iOS() {
-    return /iPad|iPhone|iPod/i.test(this._ua) && !this._window.MSStream;
+    return /iPad|iPhone|iPod/i.test(this._ua) && !window.MSStream;
   }
 
   get Android() {

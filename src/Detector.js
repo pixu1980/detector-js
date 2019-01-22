@@ -1,42 +1,75 @@
 /*jshint expr: true */
 
 // import Platform from './Platform/Platform';
+
+import CPU from './Hardware/CPU';
+import OS from './OS/OS';
+import Engines from './Engines/Engines';
 import Features from './Features/Features';
 import VideoFeature from './Features/VideoFeature';
 import AudioFeature from './Features/AudioFeature';
-
-import Engines from './Engines/Engines';
-import OS from './OS/OS';
-import CPUVendor from './Hardware/CPUVendor';
+import GPU from './Hardware/GPU';
 
 export default class Detector {
   constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
     this._ua = ua;
-    this._navigator = window.navigator;
-    this._document = window.document;
-    this._window = window;
 
     if (!!cssFlags) {
       this._cssFlags = [];
-      this._cssFlagsPrefix = cssFlagsPrefix;
+      this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
     }
 
-    this.engines = this.getEngines(this._cssFlags);
-    this.features = this.getFeatures(this._cssFlags);
-    this.audio = this.getAudio(this._cssFlags);
-    this.video = this.getVideo(this._cssFlags);
+    //! Hardware
+    this.hardware = {
+      cpu: this.getCPU(cssFlags),
+      gpu: this.getGPU(cssFlags),
+    };
 
-    this.cpu = this.getCPU(this._cssFlags);
+    //! Software
+    this.os = this.getOS(cssFlags);
+    this.platform = this.getPlatform(cssFlags);
 
-    this.platform = this.getPlatform(this._cssFlags);
-    this.os = this.getOS(this._cssFlags);
-    this.browser = this.getBrowser(this._cssFlags);
+    this.engines = this.getEngines(cssFlags);
+    this.features = this.getFeatures(cssFlags);
+    this.audio = this.getAudio(cssFlags);
+    this.video = this.getVideo(cssFlags);
 
-    if (!!this._cssFlags) {
+
+    this.browser = this.getBrowser(cssFlags);
+
+    if (!!cssFlags) {
       this.setCssFlags();
     }
 
     console.warn('DetectorJS initialized', this);
+  }
+
+  getCPU(cssFlags = false) {
+    const cpu = new CPU(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return cpu.toFlags();
+  }
+
+  getGPU(cssFlags = false) {
+    const gpu = new GPU(this._ua);
+
+    try {
+      if (!!cssFlags) {
+        this._cssFlags = this._cssFlags.concat(gpu.toCssFlags());
+      }
+    } catch (e) {
+      throw e;
+    }
+
+    return gpu.toFlags();
   }
 
   getOS(cssFlags = false) {
@@ -107,20 +140,6 @@ export default class Detector {
     }
 
     return audio.toFlags();
-  }
-
-  getCPU(cssFlags = false) {
-    const cpu = new CPUVendor(this._ua);
-
-    try {
-      if (!!cssFlags) {
-        this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
-      }
-    } catch (e) {
-      throw e;
-    }
-
-    return cpu.toFlags();
   }
 
   getPlatform(cssFlags = false) {
@@ -287,6 +306,6 @@ export default class Detector {
   }
 
   setCssFlags() {
-    document.documentElement.className += this._cssFlagsPrefix + '-' + this._cssFlags.join(' ' + this._cssFlagsPrefix + '-').trim();
+    document.documentElement.className += this._cssFlagsPrefix + this._cssFlags.join(' ' + this._cssFlagsPrefix).trim();
   }
 }
