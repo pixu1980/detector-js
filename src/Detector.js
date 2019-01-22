@@ -122,10 +122,6 @@ export default class Detector {
     const video = new VideoFeature(this._ua);
     const audio = new AudioFeature(this._ua);
 
-    features.audio = {
-      emiliano: true,
-    };
-
     try {
       if (!!cssFlags) {
         this._cssFlags = this._cssFlags.concat(features.toCssFlags(), video.toCssFlags(), audio.toCssFlags());
