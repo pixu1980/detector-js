@@ -1,36 +1,4 @@
-[{
-  "regex": "Edge[ /](\\d+[\\.\\d]+)",
-  "name": "Microsoft Edge",
-  "version": "$1",
-  "engine": {
-    "default": "Edge"
-  }
-}, {
-  "regex": "EdgiOS[ /](\\d+[\\.\\d]+)",
-  "name": "Microsoft Edge",
-  "version": "$1",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
-  "regex": "EdgA[ /](\\d+[\\.\\d]+)",
-  "name": "Microsoft Edge",
-  "version": "$1",
-  "engine": {
-    "default": "Blink"
-  }
-}, {
-  "regex": "QIHU 360[ES]E",
-  "name": "360 Browser",
-  "version": ""
-}, {
-  "regex": "360 Aphone Browser(?: \\((\\d+[\\.\\d]+)(?:beta)?\\))?",
-  "name": "360 Phone Browser",
-  "version": "$1",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
+{
   "regex": "SailfishBrowser(?:/(\\d+[\\.\\d]+))?",
   "name": "Sailfish Browser",
   "version": "$1",
@@ -1065,43 +1033,4 @@
   "regex": "qutebrowser(?:/(\\d+[\\.\\d]+))?",
   "name": "Qutebrowser",
   "version": "$1"
-}, {
-  "regex": "(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)/(\\d+[\\.\\d]+)",
-  "name": "Mobile Safari",
-  "version": "$1",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
-  "regex": "(?:Version/(\\d+[\\.\\d]+).*)?Mobile.*Safari/",
-  "name": "Mobile Safari",
-  "version": "$1",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
-  "regex": "(?:iPod|iPhone|iPad)",
-  "name": "Mobile Safari",
-  "version": "",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
-  "regex": "Version/(\\d+[\\.\\d]+).*Safari/|Safari/\\d+",
-  "name": "Safari",
-  "version": "$1",
-  "engine": {
-    "default": "WebKit"
-  }
-}, {
-  "regex": "Dorado WAP-Browser[/ ](\\d+[\\.\\d]+)",
-  "name": "Dorado",
-  "version": "$1"
-}, {
-  "regex": "NetSurf(?:/(\\d+[\\.\\d]+))?",
-  "name": "NetSurf",
-  "version": "$1",
-  "engine": {
-    "default": "NetSurf"
-  }
 }]

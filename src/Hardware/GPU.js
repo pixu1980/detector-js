@@ -15,11 +15,11 @@ export default class GPU extends FlagsClass {
 
   getInfo() {
     const info = {
-      webGLVendor: 'unknown',
-      webGLRenderer: 'unknown',
-      vendor: 'unknown',
-      model: 'unknown',
-      renderer: 'unknown',
+      webGLVendor: 'u/a',
+      webGLRenderer: 'u/a',
+      vendor: 'u/a',
+      model: 'u/a',
+      renderer: 'u/a',
     };
 
     try {

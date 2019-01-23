@@ -29,7 +29,7 @@ export default class FlagsClass {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
     }).reduce((acc, item) => {
       if(!!this[item]) {
-        acc.push(this._cssFlagsPrefix + '--' + item.toLowerCase() + (typeof this[item] !== 'boolean' ? '--' + this[item] : ''));
+        acc.push((this._cssFlagsPrefix + '--' + item + (typeof this[item] !== 'boolean' ? '--' + this[item] : '')).toLowerCase());
       }
 
       return acc;
