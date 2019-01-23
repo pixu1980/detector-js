@@ -327,10 +327,6 @@
   "name": "iOS",
   "version": "3.1"
 }, {
-  "regex": "(?:CPU OS|iPh(?:one)?[ _]OS|iOS)[ _/](\\d+(?:[_\\.]\\d+)*)",
-  "name": "iOS",
-  "version": "$1"
-}, {
   "regex": "(?:Apple-)?(?:iPhone|iPad|iPod)(?:.*Mac OS X.*Version/(\\d+\\.\\d+)|; Opera)?",
   "name": "iOS",
   "version": "$1"
@@ -386,14 +382,6 @@
   "regex": "CFNetwork/1\\.1",
   "name": "Mac",
   "version": "10.2"
-}, {
-  "regex": "Mac[ +]OS[ +]X(?:[ /](?:Version )?(\\d+(?:[_\\.]\\d+)+))?",
-  "name": "Mac",
-  "version": "$1"
-}, {
-  "regex": "Mac (\\d+(?:[_\\.]\\d+)+)",
-  "name": "Mac",
-  "version": "$1"
 }, {
   "regex": "Darwin|Macintosh|Mac_PowerPC|PPC|Mac PowerPC|iMac|MacBook",
   "name": "Mac",
