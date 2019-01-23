@@ -47,4 +47,33 @@ export default class OS extends FlagsClass {
       /Android/i.test(this._ua),
     ]);
   }
+
+  get Bada() {
+    return Asserts.all([
+      /bada/i.test(this._ua),
+      /dolfin\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]);
+  }
+
+  get Blackberry() {
+    return Asserts.one([
+      /blackberry|\bbb\d+/i.test(this._ua),
+      /rim\stablet/i.test(this._ua),
+    ]) && Asserts.all([
+      /blackberry[\d]+\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]);
+  }
+
+  //! TV OSs
+  get Tizen() {
+    return Asserts.one([
+    ]);
+  }
+
+  get WebOS() {
+    return Asserts.one([
+      /(web|hpw)[o0]s/i.test(this._ua),
+      /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]);
+  }
 }
