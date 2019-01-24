@@ -99,19 +99,51 @@ export default class OS extends FlagsClass {
     ]), null, this._getMacOSVersionName);
   }
 
+  _getUnixDistroName(version = RegExp.$1 || null) {
+    return this._getVersionNames({
+      'FreeBSD': /\s(freebsd)\s?([\w\.]*)/i.test(version),
+      'NetBSD': /\s(netbsd|dragonfly)\s?([\w\.]*)/i.test(version),
+      'OpenBSD': /\s(openbsd|dragonfly)\s?([\w\.]*)/i.test(version),
+      'PC-BSD': /\s(pc-bsd|dragonfly)\s?([\w\.]*)/i.test(version),
+      'DragonFly': /\s(dragonfly)\s?([\w\.]*)/i.test(version),
+    }, version);
+  }
+
   get Unix() {
     return this._checkAssertsResult(Asserts.all([
       /X11/i.test(this._ua),
     ]) && Asserts.one([
       /(unix)\s?([\w\.]*)/i.test(this._ua),
-    ]));
+    ]), null, this._getUnixDistroName);
+  }
+
+  _getLinuxDistroName(version = RegExp.$1 || null) {
+    return this._getVersionNames({
+      'Mint': /(mint)[\/\s\(]?(\w*)/i.test(version),
+      'Mageia': /(mageia)[;\s]/i.test(version),
+      'VectorLinux': /(vectorlinux)[;\s]/i.test(version),
+      'Joli': /(joli)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Ubuntu': /([kxln]?ubuntu)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Debian': /(debian)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'SuSE': /(suse|opensuse)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Gentoo': /(gentoo)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Arch': /((?=\s)arch)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Slackware': /(slackware)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Fedora': /(fedora)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Mandriva': /(mandriva)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'CentOS': /(centos)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'PCLinuxOS': /(pclinuxos)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'RedHat': /(redhat)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Zenwalk': /(zenwalk)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+      'Linpus': /(linpus)[\/\s-]?(?!chrom)([\w\.-]*)/i.test(version),
+    }, version);
   }
 
   get Linux() {
-    return Asserts.all([
+    return this._checkAssertsResult(Asserts.all([
       !this.Android,
       /Linux/i.test(this._ua),
-    ]);
+    ]), null, this._getLinuxDistroName);
   }
 
   get ChromiumOS() {
@@ -229,6 +261,7 @@ export default class OS extends FlagsClass {
 
   get Bada() {
     return this._checkAssertsResult(Asserts.one([
+      /(bada)[\/\s-]?([\w\.]*)/i.test(this._ua),
       /bada\/(\d+(\.\d+)*)/i.test(this._ua),
     ]));
   }
@@ -246,6 +279,47 @@ export default class OS extends FlagsClass {
     ]));
   }
 
+  get Contiki() {
+    return this._checkAssertsResult(Asserts.one([
+      /(contiki)[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  get MeeGo() {
+    return this._checkAssertsResult(Asserts.one([
+      /(meego)[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  get RIM() {
+    return this._checkAssertsResult(Asserts.one([
+      /(rim\stablet\sos)[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  get QNX() {
+    return this._checkAssertsResult(Asserts.one([
+      /(qnx)[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  get Palm() {
+    return this._checkAssertsResult(Asserts.one([
+      /(palm\sos)[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  get WebOS() {
+    return this._checkAssertsResult(Asserts.all([
+      /(web|hpw)[o0]s/i.test(this._ua),
+    ]) && Asserts.one([
+      /(webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
+      /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i.test(this._ua),
+      /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
+
+
   get Symbian() {
     return this._checkAssertsResult(Asserts.one([
       /(symbian\s?os|symbos|s60(?=;))[\/\s-]?([\w\.]*)/i.test(this._ua),
@@ -257,15 +331,6 @@ export default class OS extends FlagsClass {
     return this._checkAssertsResult(Asserts.one([
       /tizen[/\s](\d+(\.\d+)*)/i.test(this._ua),
       /(tizen)[\/\s]([\w\.]+)/i.test(this._ua),
-    ]));
-  }
-
-  get WebOS() {
-    return this._checkAssertsResult(Asserts.all([
-      /(web|hpw)[o0]s/i.test(this._ua),
-    ]) && Asserts.one([
-      /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i.test(this._ua),
-      /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 

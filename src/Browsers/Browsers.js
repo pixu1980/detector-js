@@ -98,9 +98,10 @@ export default class Browsers extends FlagsClass {
       !this.AndroidBrowser,
       !this.ChromeMobile,
     ]) && Asserts.one([
-      /(?:chrome)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
       /(chrome)\/v?([\w\.]+)/i.test(this._ua),
       /headlesschrome(?:\/([\w\.]+)|\s)/i.test(this._ua),
+    ]) && Asserts.one([
+      /(?:chrome)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 
