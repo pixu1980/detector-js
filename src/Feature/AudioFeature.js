@@ -1,9 +1,9 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class AudioFeature extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'audio') {
-    super(ua, cssFlagsPrefix);
+export default class AudioFeature extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'audio') {
+    super(ua, flags, cssFlagsPrefix);
 
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     this._audioElement = document.createElement('audio');
@@ -22,6 +22,9 @@ export default class AudioFeature extends FlagsClass {
       wav: this.getWav(),
       m4a: this.getM4a(),
     };
+
+    // remove unnecessary memory usage
+    delete this._flags;
   }
 
   get supported() {

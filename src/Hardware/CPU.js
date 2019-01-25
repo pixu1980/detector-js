@@ -1,9 +1,9 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class CPU extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'cpu') {
-    super(ua, cssFlagsPrefix);
+export default class CPU extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'cpu') {
+    super(ua, flags, cssFlagsPrefix);
 
     this.platform = this.getPlatform();
     this.cores = this.getCores();
@@ -33,7 +33,7 @@ export default class CPU extends FlagsClass {
   getArchitecture() {
     window.navigator.cpuClass = window.navigator.cpuClass || 'x86';
 
-    if(Asserts.one([
+    if (Asserts.one([
       window.navigator.cpuClass === 'x64',
       ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(window.navigator.platform),
       /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua),

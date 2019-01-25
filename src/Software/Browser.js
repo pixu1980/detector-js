@@ -1,10 +1,10 @@
 /* eslint-disable prefer-destructuring */
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class Browsers extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'browser') {
-    super(ua, cssFlagsPrefix);
+export default class Browser extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'browser') {
+    super(ua, flags, cssFlagsPrefix);
 
     this._versionDefaultRegEx = /version\/(\d+(\.?_?\d+)+)/i;
 
@@ -696,15 +696,11 @@ export default class Browsers extends FlagsClass {
 
   setVersion(version = null, inverted = false) {
     if (inverted) {
-      version = version || this._version || RegExp.$1 || 'u/a';
+      version = version || this.version || RegExp.$1 || 'u/a';
     } else {
-      version = version || RegExp.$1 || this._version || 'u/a';
+      version = version || RegExp.$1 || this.version || 'u/a';
     }
 
-    this._version = version;
-  }
-
-  get version() {
-    return this._version.replace(/_/ig, '.');
+    this.version = version.replace(/_/ig, '.');
   }
 }
