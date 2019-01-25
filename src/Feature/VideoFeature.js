@@ -1,9 +1,9 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class VideoFeature extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'video') {
-    super(ua, cssFlagsPrefix);
+export default class VideoFeature extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'video') {
+    super(ua, flags, cssFlagsPrefix);
 
     this._videoElement = document.createElement('video');
 
@@ -12,6 +12,9 @@ export default class VideoFeature extends FlagsClass {
       ogv: this.getOgv(),
       webm: this.getWebm(),
     };
+
+    // remove unnecessary memory usage
+    delete this._flags;
   }
 
   get supported() {

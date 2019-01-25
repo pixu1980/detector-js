@@ -1,9 +1,11 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class Engines extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'engine') {
-    super(ua, cssFlagsPrefix);
+export default class Engine extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'engine') {
+    super(ua, flags, cssFlagsPrefix);
+
+    this.version = 'u/a';
   }
 
   get Amaya() {
@@ -104,7 +106,7 @@ export default class Engines extends FlagsClass {
   }
 
   get WebKit() {
-    return this._checkAssertsResult(Asserts.all([
+    return this._checkAssertsResult(Asserts.one([
       typeof window.webkitConvertPointFromNodeToPage === 'function',
       /webkit\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /(?:apple)?webkit\/([\w\.]+)/i.test(this._ua),
     ]));
@@ -121,10 +123,6 @@ export default class Engines extends FlagsClass {
   }
 
   setVersion(version = null) {
-    this._version = version || RegExp.$1 || 'u/a';
-  }
-
-  get version() {
-    return this._version.replace(/_/ig, '.');
+    this.version = version || RegExp.$1 || 'u/a';
   }
 }

@@ -1,7 +1,7 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class Features extends FlagsClass {
+export default class Feature extends CssFlagsClass {
   isOldBrowser() {
     return !!(/(Android\s(1.|2.))|(Silk\/1.)/i.test(this._ua));
   }
@@ -22,8 +22,12 @@ export default class Features extends FlagsClass {
     });
   }
 
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'feature') {
-    super(ua, cssFlagsPrefix);
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'feature') {
+    super(ua, flags, cssFlagsPrefix);
+
+    this._performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+
+    console.log(this._performance);
 
     this.addEventListener = this.getAddEventListener();
     this.asyncScript = this.getAsyncScript();
@@ -52,6 +56,10 @@ export default class Features extends FlagsClass {
     // for (var value in performance) {
     //   console.log(value);
     // }
+
+    // remove unnecessary memory usage
+    delete this._performance;
+    delete this._flags;
   }
 
   getAddEventListener() {
@@ -282,26 +290,38 @@ export default class Features extends FlagsClass {
   // Test if WebVR is supported
   get webVR() {
     return Asserts.all([
-      !!('getVRDisplays' in window.navigator),
+      'getVRDisplays' in window.navigator,
     ]);
   }
 
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
   get touch() {
-    return ('ontouchstart' in document.documentElement || (window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1)) && (!!(('ontouchstart' in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof window.DocumentTouch)) || false;
+    return Asserts.one([
+      'ontouchstart' in window,
+      'ontouchstart' in document.documentElement,
+      window.DocumentTouch && document instanceof window.DocumentTouch,
+      window.navigator && window.navigator.msPointerEnabled && window.MSGesture,
+      window.navigator.maxTouchPoints && window.navigator.maxTouchPoints > 1,
+    ], true);
+  }
+
+  get forceTouch() {
+    return Asserts.one([
+      window.MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN && window.MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN,
+    ], true);
   }
 
   // Test if img srcset attribute is supported
   get srcset() {
     return Asserts.all([
-      ('srcset' in document.createElement('img')),
+      'srcset' in document.createElement('img'),
     ]);
   }
 
   // Test if img sizes attribute is supported
   get sizes() {
     return Asserts.all([
-      ('sizes' in document.createElement('img')),
+      'sizes' in document.createElement('img'),
     ]);
   }
 

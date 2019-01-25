@@ -1,8 +1,8 @@
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 
-export default class GPU extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'gpu') {
-    super(ua, cssFlagsPrefix);
+export default class GPU extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'gpu') {
+    super(ua, flags, cssFlagsPrefix);
 
     this._info = this.getInfo();
 

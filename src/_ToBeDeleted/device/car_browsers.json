@@ -1,7 +1,1 @@
-{
-  "Tesla": {
-    "regex": "QtCarBrowser",
-    "device": "car browser",
-    "model": "Model S"
-  }
-}
+{"Tesla":{"regex":"QtCarBrowser","device":"car browser","model":"Model S"}}

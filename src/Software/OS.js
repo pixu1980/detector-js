@@ -2,12 +2,15 @@
 /* eslint-disable no-else-return */
 /* eslint-disable radix */
 /* eslint-disable indent */
-import FlagsClass from '../Core/FlagsClass';
+import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
-export default class OS extends FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'os') {
-    super(ua, cssFlagsPrefix);
+export default class OS extends CssFlagsClass {
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'os') {
+    super(ua, flags, cssFlagsPrefix);
+
+    this.version = 'u/a';
+    this.versionName = 'u/a';
   }
 
   _getVersionNames(versionNames = {}, version = null) {
@@ -337,10 +340,7 @@ export default class OS extends FlagsClass {
   _checkAssertsResult(assertsResult = false, version = null, versionNameFn = null) {
     if (assertsResult) {
       this.setVersion(version);
-
-      if (versionNameFn instanceof Function) {
-        this._versionName = versionNameFn.call(this, this.version);
-      }
+      this.setVersionName(versionNameFn);
 
       return true;
     }
@@ -349,14 +349,12 @@ export default class OS extends FlagsClass {
   }
 
   setVersion(version = null) {
-    this._version = version || RegExp.$1 || 'u/a';
+    this.version = (version || RegExp.$1 || 'u/a').replace(/_/ig, '.');
   }
 
-  get version() {
-    return this._version.replace(/_/ig, '.');
-  }
-
-  get versionName() {
-    return this._versionName;
+  setVersionName(versionNameFn = null) {
+    if (versionNameFn instanceof Function) {
+      this.versionName = versionNameFn.call(this, this.version);
+    }
   }
 }

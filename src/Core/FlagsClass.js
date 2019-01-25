@@ -1,7 +1,6 @@
 export default class FlagsClass {
-  constructor(ua = window.navigator.userAgent, cssFlagsPrefix = 'flags') {
+  constructor(ua = window.navigator.userAgent) {
     this._ua = ua;
-    this._cssFlagsPrefix = cssFlagsPrefix;
   }
 
   toFlags() {
@@ -20,19 +19,5 @@ export default class FlagsClass {
 
       return acc;
     }, {}));
-  }
-
-  toCssFlags() {
-    const proto = Object.getPrototypeOf(this);
-
-    return Object.getOwnPropertyNames(proto).filter((prop) => {
-      return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
-    }).reduce((acc, item) => {
-      if(!!this[item]) {
-        acc.push((this._cssFlagsPrefix + '--' + item + (typeof this[item] !== 'boolean' ? '--' + this[item] : '')).toLowerCase());
-      }
-
-      return acc;
-    }, []);
   }
 }
