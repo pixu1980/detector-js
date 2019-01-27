@@ -1,6 +1,21 @@
 import CssFlagsClass from '../Core/CssFlagsClass';
 
+/**
+ *
+ *
+ * @export
+ * @class GPU
+ * @extends {CssFlagsClass}
+ */
 export default class GPU extends CssFlagsClass {
+  /**
+   * Creates an instance of GPU.
+   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [flags={}]
+   * @param {string} [cssFlagsPrefix='gpu']
+   *
+   * @memberOf GPU
+   */
   constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'gpu') {
     super(ua, flags, cssFlagsPrefix);
 
@@ -13,6 +28,13 @@ export default class GPU extends CssFlagsClass {
     this.renderer = this._info.renderer;
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf GPU
+   */
   getInfo() {
     const info = {
       webGLVendor: 'u/a',

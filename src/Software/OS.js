@@ -5,7 +5,22 @@
 import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
+/**
+ *
+ *
+ * @export
+ * @class OS
+ * @extends {CssFlagsClass}
+ */
 export default class OS extends CssFlagsClass {
+  /**
+   * Creates an instance of OS.
+   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [flags={}]
+   * @param {string} [cssFlagsPrefix='os']
+   *
+   * @memberOf OS
+   */
   constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'os') {
     super(ua, flags, cssFlagsPrefix);
 
@@ -13,6 +28,15 @@ export default class OS extends CssFlagsClass {
     this.versionName = 'u/a';
   }
 
+  /**
+   *
+   *
+   * @param {any} [versionNames={}]
+   * @param {any} [version=null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getVersionNames(versionNames = {}, version = null) {
     if (!!version) {
       version = version.replace(/_/ig, '.');
@@ -24,6 +48,14 @@ export default class OS extends CssFlagsClass {
   }
 
   //! Desktop OSs
+  /**
+   *
+   *
+   * @param {any} [version=RegExp.$1 || null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getWindowsVersionName(version = RegExp.$1 || null) {
     return this._getVersionNames({
       'CE': /CE/i.test(version),
@@ -42,6 +74,13 @@ export default class OS extends CssFlagsClass {
     }, version);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Windows() {
     return this._checkAssertsResult(Asserts.all([
       /Win/i.test(this._ua),
@@ -54,6 +93,14 @@ export default class OS extends CssFlagsClass {
     ]), null, this._getWindowsVersionName);
   }
 
+  /**
+   *
+   *
+   * @param {any} [version=RegExp.$1 || null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getMacOSVersionName(version = RegExp.$1 || null) {
     return this._getVersionNames({
       // source https://en.wikipedia.org/wiki/Mac_OS_8
@@ -86,6 +133,13 @@ export default class OS extends CssFlagsClass {
     }, version);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get macOS() {
     return this._checkAssertsResult(Asserts.all([
       !this.iOS,
@@ -102,6 +156,14 @@ export default class OS extends CssFlagsClass {
     ]), null, this._getMacOSVersionName);
   }
 
+  /**
+   *
+   *
+   * @param {any} [version=RegExp.$1 || null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getUnixDistroName(version = RegExp.$1 || null) {
     return this._getVersionNames({
       'FreeBSD': /\s(freebsd)\s?([\w\.]*)/i.test(version),
@@ -112,6 +174,13 @@ export default class OS extends CssFlagsClass {
     }, version);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Unix() {
     return this._checkAssertsResult(Asserts.all([
       /X11/i.test(this._ua),
@@ -120,6 +189,14 @@ export default class OS extends CssFlagsClass {
     ]), null, this._getUnixDistroName);
   }
 
+  /**
+   *
+   *
+   * @param {any} [version=RegExp.$1 || null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getLinuxDistroName(version = RegExp.$1 || null) {
     return this._getVersionNames({
       'Mint': /(mint)[\/\s\(]?(\w*)/i.test(version),
@@ -142,6 +219,13 @@ export default class OS extends CssFlagsClass {
     }, version);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Linux() {
     return this._checkAssertsResult(Asserts.all([
       !this.Android,
@@ -149,12 +233,26 @@ export default class OS extends CssFlagsClass {
     ]), null, this._getLinuxDistroName);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get ChromiumOS() {
     return this._checkAssertsResult(Asserts.one([
       /(cros)\s[\w]+\s([\w\.]+\w)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Solaris() {
     return this._checkAssertsResult(Asserts.one([
       /(sunos)\s?([\w\.\d]*)/i.test(this._ua),
@@ -162,6 +260,13 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Plan9() {
     return this._checkAssertsResult(Asserts.one([
       /(plan\s9)/i.test(this._ua),
@@ -174,42 +279,91 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get BeOS() {
     return this._checkAssertsResult(Asserts.one([
       /(beos)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get OS2() {
     return this._checkAssertsResult(Asserts.one([
       /(os\/2)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get AmigaOS() {
     return this._checkAssertsResult(Asserts.one([
       /(amigaos)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get MorphOS() {
     return this._checkAssertsResult(Asserts.one([
       /(morphos)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get RISCOS() {
     return this._checkAssertsResult(Asserts.one([
       /(risc\sos)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get OpenVMS() {
     return this._checkAssertsResult(Asserts.one([
       /(openvms)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Fuchsia() {
     return this._checkAssertsResult(Asserts.one([
       /(fuchsia)/i.test(this._ua),
@@ -217,7 +371,14 @@ export default class OS extends CssFlagsClass {
   }
 
   //! Mobile OSs
-  get WindowMobile() { // a.k.a. WindowsPhone
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
+  get WindowsPhone() { // a.k.a. Windows Mobile
     return this._checkAssertsResult(Asserts.one([
       /(windows\sphone(?:\sos)*)[\s\/]?([\d\.\s\w]*)/i.test(this._ua),
       /(windows\smobile|windows)[\s\/]?([ntce\d\.\s]+\w)/i.test(this._ua),
@@ -225,6 +386,13 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get iOS() {
     return this._checkAssertsResult(Asserts.all([
       !window.MSStream,
@@ -236,6 +404,14 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @param {any} [version=RegExp.$1 || null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _getAndroidVersionName(version = RegExp.$1 || null) {
     return this._getVersionNames({
       '1.0': /^1\.[01234]$/i.test(version),
@@ -256,12 +432,26 @@ export default class OS extends CssFlagsClass {
     }, version);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Android() {
     return this._checkAssertsResult(Asserts.one([
       /android[\s/-](\d+(\.\d+)*)/i.test(this._ua),
     ]), null, this._getAndroidVersionName);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Bada() {
     return this._checkAssertsResult(Asserts.one([
       /(bada)[\/\s-]?([\w\.]*)/i.test(this._ua),
@@ -269,6 +459,13 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Blackberry() {
     return this._checkAssertsResult(Asserts.one([
       /blackberry|\bbb\d+/i.test(this._ua),
@@ -282,36 +479,92 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Contiki() {
     return this._checkAssertsResult(Asserts.one([
       /(contiki)[\/\s-]?([\w\.]*)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get MeeGo() {
     return this._checkAssertsResult(Asserts.one([
       /(meego)[\/\s-]?([\w\.]*)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get RIM() {
     return this._checkAssertsResult(Asserts.one([
       /(rim\stablet\sos)[\/\s-]?([\w\.]*)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get QNX() {
     return this._checkAssertsResult(Asserts.one([
       /(qnx)[\/\s-]?([\w\.]*)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Palm() {
     return this._checkAssertsResult(Asserts.one([
       /(palm\sos)[\/\s-]?([\w\.]*)/i.test(this._ua),
     ]));
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
+  get Symbian() {
+    return this._checkAssertsResult(Asserts.one([
+      /(symbian\s?os|symbos|s60(?=;))[\/\s-]?([\w\.]*)/i.test(this._ua),
+    ]));
+  }
+
+  //! TV OSs
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get WebOS() {
     return this._checkAssertsResult(Asserts.all([
       /(web|hpw)[o0]s/i.test(this._ua),
@@ -323,13 +576,13 @@ export default class OS extends CssFlagsClass {
   }
 
 
-  get Symbian() {
-    return this._checkAssertsResult(Asserts.one([
-      /(symbian\s?os|symbos|s60(?=;))[\/\s-]?([\w\.]*)/i.test(this._ua),
-    ]));
-  }
-
-  //! TV OSs
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Tizen() {
     return this._checkAssertsResult(Asserts.one([
       /tizen[/\s](\d+(\.\d+)*)/i.test(this._ua),
@@ -337,6 +590,16 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [assertsResult=false]
+   * @param {any} [version=null]
+   * @param {any} [versionNameFn=null]
+   * @returns
+   *
+   * @memberOf OS
+   */
   _checkAssertsResult(assertsResult = false, version = null, versionNameFn = null) {
     if (assertsResult) {
       this.setVersion(version);
@@ -348,10 +611,24 @@ export default class OS extends CssFlagsClass {
     return false;
   }
 
+  /**
+   *
+   *
+   * @param {any} [version=null]
+   *
+   * @memberOf OS
+   */
   setVersion(version = null) {
     this.version = (version || RegExp.$1 || 'u/a').replace(/_/ig, '.');
   }
 
+  /**
+   *
+   *
+   * @param {any} [versionNameFn=null]
+   *
+   * @memberOf OS
+   */
   setVersionName(versionNameFn = null) {
     if (versionNameFn instanceof Function) {
       this.versionName = versionNameFn.call(this, this.version);
