@@ -17,7 +17,22 @@ import OS from './Software/OS';
 import Browser from './Software/Browser';
 import Engine from './Software/Engine';
 
+/**
+ *
+ *
+ * @export
+ * @class Detector
+ * @extends {FlagsClass}
+ */
 export default class Detector extends FlagsClass {
+  /**
+   * Creates an instance of Detector.
+   * @param {boolean} [cssFlags=false]
+   * @param {string} [cssFlagsPrefix='djs']
+   * @param {any} [ua=window.navigator.userAgent]
+   *
+   * @memberOf Detector
+   */
   constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
     super(ua);
 
@@ -53,7 +68,12 @@ export default class Detector extends FlagsClass {
     console.warn('DetectorJS initialized', this);
   }
 
-  //! Features
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   * @memberof Detector
+   */
   checkFeature(cssFlags = false) {
     const feature = new Feature(this._ua);
     const audio = new AudioFeature(this._ua);
@@ -70,6 +90,13 @@ export default class Detector extends FlagsClass {
   }
 
   //! Software
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkEngine(cssFlags = false) {
     const engine = new Engine(this._ua, this.toFlags());
 
@@ -80,6 +107,13 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkBrowser(cssFlags = false) {
     const browser = new Browser(this._ua, this.toFlags());
 
@@ -90,6 +124,13 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkOS(cssFlags = false) {
     const os = new OS(this._ua, this.toFlags());
 
@@ -101,6 +142,13 @@ export default class Detector extends FlagsClass {
   }
 
   //! Hardware
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkPlatform(cssFlags = false) {
     const platform = new Platform(this._ua, this.toFlags());
 
@@ -111,6 +159,13 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkDevice(cssFlags = false) {
     const device = new Device(this._ua, this.toFlags());
 
@@ -121,6 +176,13 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkCPU(cssFlags = false) {
     const cpu = new CPU(this._ua, this.toFlags());
 
@@ -131,6 +193,13 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [cssFlags=false]
+   *
+   * @memberOf Detector
+   */
   checkGPU(cssFlags = false) {
     const gpu = new GPU(this._ua, this.toFlags());
 
@@ -141,6 +210,12 @@ export default class Detector extends FlagsClass {
     }
   }
 
+  /**
+   *
+   *
+   *
+   * @memberOf Detector
+   */
   setCssFlags() {
     const cssFlagsPrefixed = this._cssFlags.map(cssFlag => this._cssFlagsPrefix + cssFlag);
 

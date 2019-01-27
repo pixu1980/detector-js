@@ -1,6 +1,21 @@
 import FlagsClass from './FlagsClass';
 
+/**
+ *
+ *
+ * @export
+ * @class CssFlagsClass
+ * @extends {FlagsClass}
+ */
 export default class CssFlagsClass extends FlagsClass {
+  /**
+   * Creates an instance of CssFlagsClass.
+   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [flags={}]
+   * @param {string} [cssFlagsPrefix='flags']
+   *
+   * @memberOf CssFlagsClass
+   */
   constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'flags') {
     super(ua);
 
@@ -8,6 +23,13 @@ export default class CssFlagsClass extends FlagsClass {
     this._cssFlagsPrefix = cssFlagsPrefix;
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CssFlagsClass
+   */
   toCssFlags() {
     const proto = Object.getPrototypeOf(this);
 

@@ -1,8 +1,27 @@
+/**
+ *
+ *
+ * @export
+ * @class FlagsClass
+ */
 export default class FlagsClass {
+  /**
+   * Creates an instance of FlagsClass.
+   * @param {any} [ua=window.navigator.userAgent]
+   *
+   * @memberOf FlagsClass
+   */
   constructor(ua = window.navigator.userAgent) {
     this._ua = ua;
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf FlagsClass
+   */
   toFlags() {
     const proto = Object.getPrototypeOf(this);
 

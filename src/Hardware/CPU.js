@@ -22,14 +22,35 @@ export default class CPU extends CssFlagsClass {
     };
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getCores() {
     return window.navigator.hardwareConcurrency || 1;
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getPlatform() {
     return window.navigator.platform || 'Win32';
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getArchitecture() {
     window.navigator.cpuClass = window.navigator.cpuClass || 'x86';
 
@@ -44,6 +65,13 @@ export default class CPU extends CssFlagsClass {
     return window.navigator.cpuClass;
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getSparc() {
     return Asserts.one([
       /(sun4\w)[;\)]/i.test(this._ua),
@@ -51,30 +79,65 @@ export default class CPU extends CssFlagsClass {
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getIrix() {
     return Asserts.all([
       /irix(?:64)?(?=;);/i.test(this._ua),
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getMips() {
     return Asserts.all([
       /mips(?:64)?(?=;);/i.test(this._ua),
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getRisc() {
     return Asserts.all([
       /pa-risc(?:64)?(?=;);/i.test(this._ua),
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getAvr() {
     return Asserts.all([
       /(?=atmel\s)avr/i.test(this._ua),
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getArm() {
     return Asserts.one([
       /windows\s(ce|mobile);\sppc;/i.test(this._ua),
@@ -82,6 +145,13 @@ export default class CPU extends CssFlagsClass {
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getPowerPC() {
     return Asserts.one([
       /((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua),
@@ -89,6 +159,13 @@ export default class CPU extends CssFlagsClass {
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getAmd() {
     return Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
@@ -100,6 +177,13 @@ export default class CPU extends CssFlagsClass {
     ]);
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf CPU
+   */
   getIntel() {
     return Asserts.one([
       /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
