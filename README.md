@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.2.0
+v0.2.1
 
 ## Badges
 
@@ -20,7 +20,7 @@ v0.2.0
 Check out the [Latest Documentation](https://blackmirror1980.github.io/detector-js/docs/index.html) here
 
 ## Description
-DetectorJS, a zero-dependency platform detector written in ES6
+DetectorJS, a runtime zero-dependency platform detector written in ES6
 
 ## Example
 Check out this [Codepen]() example
@@ -52,7 +52,7 @@ None
 - [eslint-plugin-import](https://ghub.io/eslint-plugin-import): Import with sanity.
 - [eslint-plugin-jsx-a11y](https://ghub.io/eslint-plugin-jsx-a11y): Static AST checker for accessibility rules on JSX elements.
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
-- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, a zero-dependency platform detector written in ES6
+- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, a runtime zero-dependency platform detector written in ES6
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
 - [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
@@ -60,9 +60,9 @@ None
 - [rollup-plugin-babel](https://ghub.io/rollup-plugin-babel): Seamless integration between Rollup and Babel.
 - [rollup-plugin-commonjs](https://ghub.io/rollup-plugin-commonjs): Convert CommonJS modules to ES2015
 - [rollup-plugin-eslint](https://ghub.io/rollup-plugin-eslint): Verify entry point and all imported files with ESLint
-- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, a zero-dependency platform detector written in ES6
+- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, a runtime zero-dependency platform detector written in ES6
 - [rollup-plugin-node-resolve](https://ghub.io/rollup-plugin-node-resolve): Bundle third-party dependencies in node_modules
-- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, a zero-dependency platform detector written in ES6
+- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, a runtime zero-dependency platform detector written in ES6
 - [rollup-plugin-uglify](https://ghub.io/rollup-plugin-uglify): Rollup plugin to minify generated bundle
 
 ## Tests
