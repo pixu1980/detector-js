@@ -12,13 +12,13 @@ import Asserts from '../Core/Asserts';
 export default class Feature extends CssFlagsClass {
   /**
    * Creates an instance of Feature.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='feature']
    *
    * @memberOf Feature
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'feature') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'feature') {
     super(ua, flags, cssFlagsPrefix);
 
     this._cssPrefixes = ['spec', 'webkit', 'moz', 'ms', 'o'];
@@ -59,7 +59,7 @@ export default class Feature extends CssFlagsClass {
 
     const prefixedProps = prefixes.map(item => (item === 'spec' ? '' : '-' + item + '-') + prop);
 
-    // if ('CSS' in window && 'supports' in window.CSS) {
+    // if ('CSS' in this._root && 'supports' in this._root.CSS) {
     //   return window.CSS.supports(prefixedProps.map(item => '(' + item + ': inherit)').join(' or '));
     // }
 
@@ -80,13 +80,13 @@ export default class Feature extends CssFlagsClass {
     const prefixedProp = this._getCssPrefixedProp(prop);
 
     if (prefixedProp) {
-      document.body.insertBefore(this._div, null);
+      this._document.body.insertBefore(this._div, null);
 
       this._div.style[prefixedProp] = value;
 
-      const computedStylePropValue = window.getComputedStyle(this._div).getPropertyValue(prefixedProp);
+      const computedStylePropValue = this._root.getComputedStyle(this._div).getPropertyValue(prefixedProp);
 
-      document.body.removeChild(this._div);
+      this._document.body.removeChild(this._div);
 
       if (!!computedStylePropValue && typeof computedStylePropValue === 'string') {
         return computedStylePropValue;
@@ -110,12 +110,12 @@ export default class Feature extends CssFlagsClass {
    * @memberof Feature
    */
   _createTestElements() {
-    this._script = document.createElement('script');
-    this._canvas = document.createElement('canvas');
-    this._div = document.createElement('div');
-    this._input = document.createElement('input');
-    this._img = document.createElement('img');
-    this._xmlHttpRequest = new window.XMLHttpRequest();
+    this._script = this._document.createElement('script');
+    this._canvas = this._document.createElement('canvas');
+    this._div = this._document.createElement('div');
+    this._input = this._document.createElement('input');
+    this._img = this._document.createElement('img');
+    this._xmlHttpRequest = new this._root.XMLHttpRequest();
   }
 
   /**
@@ -140,7 +140,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getAddEventListener() {
-    return 'addEventListener' in window;
+    return 'addEventListener' in this._root;
   }
 
   /**
@@ -162,7 +162,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getBattery() {
-    return 'battery' in window.navigator;
+    return 'battery' in this._navigator;
   }
 
   /**
@@ -173,7 +173,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getCors() {
-    return 'XMLHttpRequest' in window && 'withCredentials' in this._xmlHttpRequest;
+    return 'XMLHttpRequest' in this._root && 'withCredentials' in this._xmlHttpRequest;
   }
 
   /**
@@ -196,10 +196,10 @@ export default class Feature extends CssFlagsClass {
    */
   getFile() {
     return Asserts.all([
-      'File' in window,
-      'FileReader' in window,
-      'FileList' in window,
-      'Blob' in window,
+      'File' in this._root,
+      'FileReader' in this._root,
+      'FileList' in this._root,
+      'Blob' in this._root,
     ]);
   }
 
@@ -211,7 +211,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFileSystem() {
-    return 'requestFileSystem' in window;
+    return 'requestFileSystem' in this._root;
   }
 
   /**
@@ -239,7 +239,7 @@ export default class Feature extends CssFlagsClass {
    */
   getFullscreenKeyboard() {
     return Asserts.all([
-      () => 'Element' in window && 'ALLOW_KEYBOARD_INPUT' in window.Element,
+      () => 'Element' in this._root && 'ALLOW_KEYBOARD_INPUT' in this._root.Element,
     ]);
   }
 
@@ -251,7 +251,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getGeolocation() {
-    return 'geolocation' in window.navigator;
+    return 'geolocation' in this._navigator;
   }
 
   /**
@@ -263,7 +263,7 @@ export default class Feature extends CssFlagsClass {
    */
   getHistoryAPI() {
     return Asserts.all([
-      () => 'history' in window && 'pushState' in window.history,
+      () => 'history' in this._root && 'pushState' in this._root.history,
     ]);
   }
 
@@ -277,7 +277,7 @@ export default class Feature extends CssFlagsClass {
   getLittleEndian() {
     return Asserts.all([
       this.getTypedArray,
-      () => new Int8Array(new Int16Array([1]).buffer)[0] > 0,
+      () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0,
     ], true);
   }
 
@@ -290,12 +290,12 @@ export default class Feature extends CssFlagsClass {
    */
   getLocalStorage() {
     return Asserts.one([
-      () => 'localStorage' in window,
+      () => 'localStorage' in this._root,
     ], true) && Asserts.one([
       () => {
         const test = 'x';
-        window.localStorage.setItem(test, test);
-        window.localStorage.removeItem(test);
+        this._root.localStorage.setItem(test, test);
+        this._root.localStorage.removeItem(test);
 
         return true;
       },
@@ -310,7 +310,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getMatchMedia() {
-    return 'matchMedia' in window;
+    return 'matchMedia' in this._root;
   }
 
   /**
@@ -321,7 +321,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getQuerySelector() {
-    return 'querySelector' in document;
+    return 'querySelector' in this._document;
   }
 
   /**
@@ -332,7 +332,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getQuerySelectorAll() {
-    return 'querySelectorAll' in document;
+    return 'querySelectorAll' in this._document;
   }
 
   /**
@@ -343,7 +343,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getServiceWorker() {
-    return 'serviceWorker' in window.navigator;
+    return 'serviceWorker' in this._navigator;
   }
 
   /**
@@ -355,7 +355,7 @@ export default class Feature extends CssFlagsClass {
    */
   getTypedArray() {
     return Asserts.all([
-      () => 'Int8Array' in window && typeof Int8Array !== 'undefined',
+      () => 'Int8Array' in this._root && typeof this._root.Int8Array !== 'undefined',
     ], true);
   }
 
@@ -368,10 +368,10 @@ export default class Feature extends CssFlagsClass {
    */
   getUserMedia() {
     return Asserts.one([
-      'getUserMedia' in window.navigator,
-      'webkitGetUserMedia' in window.navigator,
-      'mozGetUserMedia' in window.navigator,
-      'msGetUserMedia' in window.navigator,
+      'getUserMedia' in this._navigator,
+      'webkitGetUserMedia' in this._navigator,
+      'mozGetUserMedia' in this._navigator,
+      'msGetUserMedia' in this._navigator,
     ]);
   }
 
@@ -384,10 +384,10 @@ export default class Feature extends CssFlagsClass {
    */
   getVibration() {
     return Asserts.one([
-      'vibrate' in window.navigator,
-      'webkitVibrate' in window.navigator,
-      'mozVibrate' in window.navigator,
-      'msVibrate' in window.navigator,
+      'vibrate' in this._navigator,
+      'webkitVibrate' in this._navigator,
+      'mozVibrate' in this._navigator,
+      'msVibrate' in this._navigator,
     ]);
   }
 
@@ -399,7 +399,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWorker() {
-    return 'Worker' in window;
+    return 'Worker' in this._root;
   }
 
   /**
@@ -411,8 +411,8 @@ export default class Feature extends CssFlagsClass {
    */
   get pointerEnabled() {
     return Asserts.one([
-      'pointerEnabled' in window.navigator,
-      'msPointerEnabled' in window.navigator,
+      'pointerEnabled' in this._navigator,
+      'msPointerEnabled' in this._navigator,
     ]);
   }
 
@@ -424,7 +424,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pixelRatio() {
-    return window.devicePixelRatio || 1;
+    return this._root.devicePixelRatio || 1;
   }
 
   /**
@@ -436,9 +436,9 @@ export default class Feature extends CssFlagsClass {
    */
   get pointerLock() {
     return Asserts.one([
-      'pointerLockElement' in document,
-      'webkitPointerLockElement' in document,
-      'mozPointerLockElement' in document,
+      'pointerLockElement' in this._document,
+      'webkitPointerLockElement' in this._document,
+      'mozPointerLockElement' in this._document,
     ]);
   }
 
@@ -450,7 +450,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get quirksMode() {
-    return document.compatMode !== 'CSS1Compat';
+    return this._document.compatMode !== 'CSS1Compat';
   }
 
   /**
@@ -504,7 +504,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get deviceMotion() {
-    return 'DeviceMotionEvent' in window;
+    return 'DeviceMotionEvent' in this._root;
   }
 
   // Test if Device Orientation is supported
@@ -516,7 +516,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get deviceOrientation() {
-    return 'DeviceOrientationEvent' in window;
+    return 'DeviceOrientationEvent' in this._root;
   }
 
   // Test if Context Menu is supported
@@ -529,8 +529,8 @@ export default class Feature extends CssFlagsClass {
    */
   get contextMenu() {
     return Asserts.all([
-      'contextMenu' in document,
-      'HTMLMenuItemElement' in window,
+      'contextMenu' in this._document,
+      'HTMLMenuItemElement' in this._root,
     ]);
   }
 
@@ -543,7 +543,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get classList() {
-    return 'classList' in document;
+    return 'classList' in this._document;
   }
 
   // Test if placeholder attribute is supported
@@ -610,7 +610,7 @@ export default class Feature extends CssFlagsClass {
    */
   get svg() {
     return Asserts.all([
-      () => 'createElementNS' in document && 'createSVGRect' in document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+      () => 'createElementNS' in this._document && 'createSVGRect' in this._document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
     ]);
   }
 
@@ -624,8 +624,8 @@ export default class Feature extends CssFlagsClass {
    */
   get webGL() {
     return Asserts.one([
-      () => this.canvas && 'WebGL2RenderingContext' in window && this._canvas.getContext('webgl2'),
-      () => this.canvas && 'WebGLRenderingContext' in window && (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')),
+      () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2'),
+      () => this.canvas && 'WebGLRenderingContext' in this._root && (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')),
     ], true);
   }
 
@@ -639,7 +639,7 @@ export default class Feature extends CssFlagsClass {
    */
   get webVR() {
     return Asserts.all([
-      'getVRDisplays' in window.navigator,
+      'getVRDisplays' in this._navigator,
     ]);
   }
 
@@ -653,12 +653,12 @@ export default class Feature extends CssFlagsClass {
    */
   get touch() {
     return Asserts.one([
-      'ontouchstart' in window,
-      'ontouchstart' in document.documentElement,
+      'ontouchstart' in this._root,
+      'ontouchstart' in this._document.documentElement,
     ]) && Asserts.one([
-      () => 'DocumentTouch' in window && document instanceof window.DocumentTouch,
-      () => this.pointerEnabled() && 'MSGesture' in window,
-      () => 'maxTouchPoints' in window.navigator && window.navigator.maxTouchPoints > 1,
+      () => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch,
+      () => this.pointerEnabled() && 'MSGesture' in this._root,
+      () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1,
     ], true);
   }
 
@@ -671,7 +671,7 @@ export default class Feature extends CssFlagsClass {
    */
   get forceTouch() {
     return Asserts.all([
-      () => 'MouseEvent' in window && 'WEBKIT_FORCE_AT_MOUSE_DOWN' in window.MouseEvent && 'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in window.MouseEvent,
+      () => 'MouseEvent' in this._root && 'WEBKIT_FORCE_AT_MOUSE_DOWN' in this._root.MouseEvent && 'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in this._root.MouseEvent,
     ], true);
   }
 
@@ -708,7 +708,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pictureElement() {
-    return 'HTMLPictureElement' in window;
+    return 'HTMLPictureElement' in this._root;
   }
 
   // Test if Picture element is supported
@@ -720,6 +720,6 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get dialogElement() {
-    return 'HTMLDialogElement' in window;
+    return 'HTMLDialogElement' in this._root;
   }
 }

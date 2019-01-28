@@ -10,13 +10,13 @@ import FlagsClass from './FlagsClass';
 export default class CssFlagsClass extends FlagsClass {
   /**
    * Creates an instance of CssFlagsClass.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='flags']
    *
    * @memberOf CssFlagsClass
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'flags') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'flags') {
     super(ua);
 
     this._flags = flags;

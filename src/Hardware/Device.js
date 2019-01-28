@@ -11,13 +11,13 @@ import Asserts from '../Core/Asserts';
 export default class Device extends CssFlagsClass {
   /**
    * Creates an instance of Device.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='device']
    *
    * @memberOf Device
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'device') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'device') {
     super(ua, flags, cssFlagsPrefix);
 
     // remove unnecessary memory usage

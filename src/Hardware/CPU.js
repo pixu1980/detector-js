@@ -2,7 +2,7 @@ import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
 export default class CPU extends CssFlagsClass {
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'cpu') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'cpu') {
     super(ua, flags, cssFlagsPrefix);
 
     this.platform = this.getPlatform();
@@ -30,7 +30,7 @@ export default class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getCores() {
-    return window.navigator.hardwareConcurrency || 1;
+    return this._navigator.hardwareConcurrency || 1;
   }
 
   /**
@@ -41,7 +41,7 @@ export default class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getPlatform() {
-    return window.navigator.platform || 'Win32';
+    return this._navigator.platform || 'Win32';
   }
 
   /**
@@ -52,17 +52,17 @@ export default class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getArchitecture() {
-    window.navigator.cpuClass = window.navigator.cpuClass || 'x86';
+    this._navigator.cpuClass = this._navigator.cpuClass || 'x86';
 
     if (Asserts.one([
-      window.navigator.cpuClass === 'x64',
-      ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(window.navigator.platform),
+      this._navigator.cpuClass === 'x64',
+      ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(this._navigator.platform),
       /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua),
     ])) {
-      window.navigator.cpuClass = 'x64';
+      this._navigator.cpuClass = 'x64';
     }
 
-    return window.navigator.cpuClass;
+    return this._navigator.cpuClass;
   }
 
   /**
@@ -155,7 +155,7 @@ export default class CPU extends CssFlagsClass {
   getPowerPC() {
     return Asserts.one([
       /((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua),
-      window.navigator.platform === 'MacPPC',
+      this._navigator.platform === 'MacPPC',
     ]);
   }
 
@@ -169,11 +169,11 @@ export default class CPU extends CssFlagsClass {
   getAmd() {
     return Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
-      window.navigator.cpuClass === 'x64' || window.navigator.platform === 'Linux x86_64',
+      this._navigator.cpuClass === 'x64' || this._navigator.platform === 'Linux x86_64',
     ]) || Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
-      window.navigator.cpuClass === 'x86',
+      this._navigator.cpuClass === 'x86',
     ]);
   }
 
@@ -188,12 +188,12 @@ export default class CPU extends CssFlagsClass {
     return Asserts.one([
       /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
-      window.navigator.cpuClass === 'x64' || window.navigator.platform === 'MacIntel' || window.navigator.platform === 'Linux x86_64',
+      this._navigator.cpuClass === 'x64' || this._navigator.platform === 'MacIntel' || this._navigator.platform === 'Linux x86_64',
     ]) || Asserts.one([
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /(ia32(?=;))/i.test(this._ua),
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
-      window.navigator.cpuClass === 'x86',
+      this._navigator.cpuClass === 'x86',
     ]);
   }
 }

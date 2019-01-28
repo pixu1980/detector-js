@@ -18,13 +18,13 @@ import Asserts from '../Core/Asserts';
 export default class Platform extends CssFlagsClass {
   /**
    * Creates an instance of Platform.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='platform']
    *
    * @memberOf Platform
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'platform') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'platform') {
     super(ua, flags, cssFlagsPrefix);
   }
 

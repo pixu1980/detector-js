@@ -15,17 +15,17 @@ import Asserts from '../Core/Asserts';
 export default class OS extends CssFlagsClass {
   /**
    * Creates an instance of OS.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='os']
    *
    * @memberOf OS
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'os') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'os') {
     super(ua, flags, cssFlagsPrefix);
 
-    this.version = 'u/a';
-    this.versionName = 'u/a';
+    this.version = 'n/a';
+    this.versionName = 'n/a';
   }
 
   /**
@@ -41,10 +41,10 @@ export default class OS extends CssFlagsClass {
     if (!!version) {
       version = version.replace(/_/ig, '.');
 
-      return Object.getOwnPropertyNames(versionNames).filter(versionName => !!versionNames[versionName])[0] || 'u/a';
+      return Object.getOwnPropertyNames(versionNames).filter(versionName => !!versionNames[versionName])[0] || 'n/a';
     }
 
-    return 'u/a';
+    return 'n/a';
   }
 
   //! Desktop OSs
@@ -636,7 +636,7 @@ export default class OS extends CssFlagsClass {
    * @memberOf OS
    */
   setVersion(version = null) {
-    this.version = (version || RegExp.$1 || 'u/a').replace(/_/ig, '.');
+    this.version = (version || RegExp.$1 || 'n/a').replace(/_/ig, '.');
   }
 
   /**

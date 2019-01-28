@@ -29,11 +29,11 @@ export default class Detector extends FlagsClass {
    * Creates an instance of Detector.
    * @param {boolean} [cssFlags=false]
    * @param {string} [cssFlagsPrefix='djs']
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    *
    * @memberOf Detector
    */
-  constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
+  constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = null) {
     super(ua);
 
     this._cssFlags = !!cssFlags ? [] : null;
@@ -58,9 +58,13 @@ export default class Detector extends FlagsClass {
     // remove unnecessary memory usage
     delete this._cssFlags;
     delete this._cssFlagsPrefix;
+    delete this._root;
+    delete this._process;
+    delete this._navigator;
+    delete this._document;
     delete this._ua;
 
-    console.warn('DetectorJS initialized', this);
+    console.warn('DetectorJS initialized', this.toFlags());
   }
 
   //! Feature
