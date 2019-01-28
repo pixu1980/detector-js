@@ -1,3 +1,16 @@
+## [Version 0.2.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.2.0) (2019-1-28)
+
+### Breaking changes
+
+- refactoring: [`b851b66`](https://github.com/:blackmirror1980/detector-js/commit/b851b66)
+
+### Bug fixes
+
+- added asserts class: [`9f35718`](https://github.com/:blackmirror1980/detector-js/commit/9f35718)
+- first refactoring completed: [`eb45021`](https://github.com/:blackmirror1980/detector-js/commit/eb45021)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v0.1.8...v0.2.0)
+
 ## [Version 0.1.8](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.1.8) (2019-1-15)
 
 ### Bug fixes
