@@ -45,10 +45,10 @@ export default class Engine extends CssFlagsClass {
    */
   get Blink() {
     return this._checkAssertsResult(Asserts.all([
-      (!!window.Intl && !!Intl.v8BreakIterator),
+      () => 'Intl' in window && 'v8BreakIterator' in window.Intl,
       'CSS' in window,
       /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua),
-    ]));
+    ]), true);
   }
 
   /**
@@ -60,9 +60,10 @@ export default class Engine extends CssFlagsClass {
    */
   get EdgeHTML() {
     return this._checkAssertsResult(Asserts.all([
-      !!window.StyleMedia,
+      'StyleMedia' in window,
       !this.Trident,
-      /edge\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /windows.+\sedge\/([\w\.]+)/i.test(this._ua),
+    ]) && Asserts.one([
+      /edge\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 
@@ -75,9 +76,11 @@ export default class Engine extends CssFlagsClass {
    */
   get Gecko() {
     return this._checkAssertsResult(Asserts.all([
-      typeof InstallTrigger !== 'undefined',
+      'InstallTrigger' in window,
       !/like gecko/i.test(this._ua),
-      /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua),
+    ]) && Asserts.one([
+      /rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua),
+      /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 
@@ -180,8 +183,9 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Presto() {
-    return this._checkAssertsResult(Asserts.all([
-      /presto\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /(presto)\/([\w\.]+)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.one([
+      /(presto)\/([\w\.]+)/i.test(this._ua),
+      /presto\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 
@@ -208,7 +212,8 @@ export default class Engine extends CssFlagsClass {
   get Trident() {
     return this._checkAssertsResult(Asserts.all([
       /*@cc_on!@*/false || !!document.documentMode,
-      /trident\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /(trident)[\/\s]\(?([\w\.]+)/i.test(this._ua) || /(trident)\/([\w\.]+)/i.test(this._ua),
+    ]) && Asserts.one([
+      /trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 
@@ -221,7 +226,7 @@ export default class Engine extends CssFlagsClass {
    */
   get w3m() {
     return this._checkAssertsResult(Asserts.all([
-      /(w3m)\/([\w\.]+)/i.test(this._ua),
+      /w3m[\/\s]([\w\.]+)/i.test(this._ua),
     ]));
   }
 
@@ -233,9 +238,10 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get WebKit() {
-    return this._checkAssertsResult(Asserts.one([
-      typeof window.webkitConvertPointFromNodeToPage === 'function',
-      /webkit\/(\d+(\.?_?\d+)+)/i.test(this._ua) || /(?:apple)?webkit\/([\w\.]+)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.all([
+      'webkitConvertPointFromNodeToPage' in window,
+    ]) && Asserts.one([
+      /((?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 

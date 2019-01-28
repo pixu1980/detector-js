@@ -1,7 +1,7 @@
 {
   "name": "detector-js",
   "version": "0.1.8",
-  "description": "DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js & feature.js)",
+  "description": "DetectorJS, a zero-dependency platform detector written in ES6",
   "main": "dist/detector.min.js",
   "scripts": {
     "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",

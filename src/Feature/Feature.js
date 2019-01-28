@@ -23,10 +23,6 @@ export default class Feature extends CssFlagsClass {
 
     this._cssPrefixes = ['spec', 'webkit', 'moz', 'ms', 'o'];
 
-    this._performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
-
-    console.log(this._performance);
-
     this._createTestElements();
 
     this.addEventListener = this.getAddEventListener();

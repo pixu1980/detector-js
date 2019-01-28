@@ -143,9 +143,9 @@ export default class OS extends CssFlagsClass {
   get macOS() {
     return this._checkAssertsResult(Asserts.all([
       !this.iOS,
-      !/Mobile\//i.test(this._ua),
-      /Mac/i.test(this._ua),
-      !/like Mac/i.test(this._ua),
+      !/mobile\//i.test(this._ua),
+      /mac/i.test(this._ua),
+      !/like mac/i.test(this._ua),
     ]) && Asserts.one([
       /(macintosh|mac(?=_powerpc)\s)/i.test(this._ua),
       /(mac\sos\sx)\s?([\w\s\.]*)/i.test(this._ua),
@@ -381,7 +381,7 @@ export default class OS extends CssFlagsClass {
   get WindowsPhone() { // a.k.a. Windows Mobile
     return this._checkAssertsResult(Asserts.one([
       /(windows\sphone(?:\sos)*)[\s\/]?([\d\.\s\w]*)/i.test(this._ua),
-      /(windows\smobile|windows)[\s\/]?([ntce\d\.\s]+\w)/i.test(this._ua),
+      /(windows\smobile)[\s\/]?([ntce\d\.\s]+\w)/i.test(this._ua),
       /windows phone (?:os)?\s?(\d+(\.\d+)*)/i.test(this._ua),
     ]));
 
@@ -411,11 +411,9 @@ export default class OS extends CssFlagsClass {
   get iOS() {
     return this._checkAssertsResult(Asserts.all([
       !window.MSStream,
-      /iPad|iPhone|iPod/i.test(this._ua),
+      /iP(?:ad|hone|od)/.test(this._ua),
     ]) && Asserts.one([
-      /(?:CPU OS|iP(?:ad|hone|od)?[ _]OS|iOS)[ _/](\d+(?:[_\.]\d+)*)/i.test(this._ua),
-      /ip[honead]{2,4}(?:.*os\s([\w]+)\slike\smac|;\sopera)/i.test(this._ua),
-      /os (\d+([_\s]\d+)*) like mac os x/i.test(this._ua),
+      /os\s((\d+([_\s]\d+)*)|(\d+(?:[_\.]\d+)*)) like mac os x/i.test(this._ua),
     ]));
   }
 
@@ -581,9 +579,7 @@ export default class OS extends CssFlagsClass {
    * @memberOf OS
    */
   get WebOS() {
-    return this._checkAssertsResult(Asserts.all([
-      /(web|hpw)[o0]s/i.test(this._ua),
-    ]) && Asserts.one([
+    return this._checkAssertsResult(Asserts.one([
       /(webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
       /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i.test(this._ua),
       /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua),
@@ -600,8 +596,7 @@ export default class OS extends CssFlagsClass {
    */
   get Tizen() {
     return this._checkAssertsResult(Asserts.one([
-      /tizen[/\s](\d+(\.\d+)*)/i.test(this._ua),
-      /(tizen)[\/\s]([\w\.]+)/i.test(this._ua),
+      /(tizen)[/\s](\d+(\.\d+)*)/i.test(this._ua),
     ]));
   }
 

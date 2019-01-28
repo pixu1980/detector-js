@@ -5,6 +5,10 @@
  * @class Asserts
  */
 export default class Asserts {
+  static _checkAssert(assert) {
+    return !!assert && assert instanceof Function ? assert() : assert;
+  }
+
   /**
    *
    *
@@ -18,13 +22,13 @@ export default class Asserts {
   static all(asserts = [], safe = false) {
     if (!!safe) {
       try {
-        return asserts.every(assert => (!!assert && assert instanceof Function ? assert() : assert));
+        return asserts.every(Asserts._checkAssert);
       } catch (e) {
         return false;
       }
     }
 
-    return asserts.every(assert => (!!assert && assert instanceof Function ? assert() : assert));
+    return asserts.every(Asserts._checkAssert);
   }
 
   /**
@@ -40,12 +44,12 @@ export default class Asserts {
   static one(asserts = [], safe = false) {
     if (!!safe) {
       try {
-        return asserts.some(assert => (!!assert && assert instanceof Function ? assert() : assert));
+        return asserts.some(Asserts._checkAssert);
       } catch (e) {
         return false;
       }
     }
 
-    return asserts.some(assert => (!!assert && assert instanceof Function ? assert() : assert));
+    return asserts.some(Asserts._checkAssert);
   }
 }
