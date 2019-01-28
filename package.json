@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "DetectorJS, a runtime zero-dependency platform detector written in ES6",
   "main": "dist/detector.min.js",
   "scripts": {

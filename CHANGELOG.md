@@ -1,3 +1,11 @@
+## [Version 0.2.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.2.1) (2019-1-28)
+
+### Bug fixes
+
+- fixed docs returns: [`4fabd3e`](https://github.com/:blackmirror1980/detector-js/commit/4fabd3e)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v0.2.0...v0.2.1)
+
 ## [Version 0.2.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.2.0) (2019-1-28)
 
 ### Breaking changes
