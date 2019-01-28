@@ -33,7 +33,7 @@ export default class OS extends CssFlagsClass {
    *
    * @param {any} [versionNames={}]
    * @param {any} [version=null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -52,7 +52,7 @@ export default class OS extends CssFlagsClass {
    *
    *
    * @param {any} [version=RegExp.$1 || null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -97,7 +97,7 @@ export default class OS extends CssFlagsClass {
    *
    *
    * @param {any} [version=RegExp.$1 || null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -160,7 +160,7 @@ export default class OS extends CssFlagsClass {
    *
    *
    * @param {any} [version=RegExp.$1 || null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -193,7 +193,7 @@ export default class OS extends CssFlagsClass {
    *
    *
    * @param {any} [version=RegExp.$1 || null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -421,7 +421,7 @@ export default class OS extends CssFlagsClass {
    *
    *
    * @param {any} [version=RegExp.$1 || null]
-   * @returns
+   * @returns string
    *
    * @memberOf OS
    */
@@ -613,7 +613,7 @@ export default class OS extends CssFlagsClass {
    * @param {boolean} [assertsResult=false]
    * @param {any} [version=null]
    * @param {any} [versionNameFn=null]
-   * @returns
+   * @returns boolean
    *
    * @memberOf OS
    */

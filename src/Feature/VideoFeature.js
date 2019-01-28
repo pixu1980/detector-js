@@ -68,7 +68,7 @@ export default class VideoFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf VideoFeature
    */
@@ -81,7 +81,7 @@ export default class VideoFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf VideoFeature
    */
@@ -94,7 +94,7 @@ export default class VideoFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf VideoFeature
    */

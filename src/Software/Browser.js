@@ -1398,7 +1398,7 @@ export default class Browser extends CssFlagsClass {
    * @param {boolean} [assertsResult=false]
    * @param {boolean} [inverted=false]
    * @param {any} [version=null]
-   * @returns
+   * @returns boolean
    *
    * @memberOf Browser
    */

@@ -10,12 +10,12 @@ export default class Asserts {
   }
 
   /**
-   *
+   * Check for every assert to be true
    *
    * @static
-   * @param {any} [asserts=[]]
-   * @param {boolean} [safe=false]
-   * @returns
+   * @param {any} [asserts=[]] - array of asserts (can be boolean, strings, functions, whatever you want ;-)
+   * @param {boolean} [safe=false] - executes asserts in a safe mode (try/catch)
+   * @returns boolean
    *
    * @memberOf Asserts
    */
@@ -32,12 +32,12 @@ export default class Asserts {
   }
 
   /**
-   *
+   * Check for at least one assert to be true
    *
    * @static
-   * @param {any} [asserts=[]]
-   * @param {boolean} [safe=false]
-   * @returns
+   * @param {any} [asserts=[]] - array of asserts (can be boolean, strings, functions, whatever you want ;-)
+   * @param {boolean} [safe=false] - executes asserts in a safe mode (try/catch)
+   * @returns boolean
    *
    * @memberOf Asserts
    */

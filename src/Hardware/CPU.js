@@ -25,7 +25,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns number
    *
    * @memberOf CPU
    */
@@ -36,7 +36,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns string
    *
    * @memberOf CPU
    */
@@ -47,7 +47,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns string
    *
    * @memberOf CPU
    */
@@ -68,7 +68,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -82,7 +82,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -95,7 +95,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -108,7 +108,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -121,7 +121,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -134,7 +134,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -148,7 +148,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -162,7 +162,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */
@@ -180,7 +180,7 @@ export default class CPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf CPU
    */

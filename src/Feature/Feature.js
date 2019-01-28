@@ -135,7 +135,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -146,7 +146,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -157,7 +157,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -168,7 +168,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -179,7 +179,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -190,7 +190,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -206,7 +206,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -217,7 +217,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -233,7 +233,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -246,7 +246,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -257,7 +257,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -270,7 +270,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -284,7 +284,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -305,7 +305,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -316,7 +316,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -327,7 +327,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -338,7 +338,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -349,7 +349,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -362,7 +362,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -378,7 +378,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */
@@ -394,7 +394,7 @@ export default class Feature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf Feature
    */

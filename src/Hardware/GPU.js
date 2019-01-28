@@ -31,7 +31,7 @@ export default class GPU extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns object
    *
    * @memberOf GPU
    */

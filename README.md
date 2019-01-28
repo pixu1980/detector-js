@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.1.8
+v0.2.0
 
 ## Badges
 
@@ -20,7 +20,7 @@ v0.1.8
 Check out the [Latest Documentation](https://blackmirror1980.github.io/detector-js/docs/index.html) here
 
 ## Description
-DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js &amp; feature.js)
+DetectorJS, a zero-dependency platform detector written in ES6
 
 ## Example
 Check out this [Codepen]() example
@@ -40,10 +40,7 @@ npm install detector-js --save
 
 ## Dependencies
 
-- [bowser](https://ghub.io/bowser): Lightweight browser detector
-- [feature-js](https://ghub.io/feature-js): FeatureJS is a fast, simple and lightweight browser feature detection library in 1kb.
-- [lodash](https://ghub.io/lodash): Lodash modular utilities.
-- [platform](https://ghub.io/platform): A platform detection library that works on nearly all JavaScript platforms.
+None
 
 ## Dev Dependencies
 
@@ -55,7 +52,7 @@ npm install detector-js --save
 - [eslint-plugin-import](https://ghub.io/eslint-plugin-import): Import with sanity.
 - [eslint-plugin-jsx-a11y](https://ghub.io/eslint-plugin-jsx-a11y): Static AST checker for accessibility rules on JSX elements.
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
-- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js &amp; feature.js)
+- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, a zero-dependency platform detector written in ES6
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
 - [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
@@ -63,9 +60,9 @@ npm install detector-js --save
 - [rollup-plugin-babel](https://ghub.io/rollup-plugin-babel): Seamless integration between Rollup and Babel.
 - [rollup-plugin-commonjs](https://ghub.io/rollup-plugin-commonjs): Convert CommonJS modules to ES2015
 - [rollup-plugin-eslint](https://ghub.io/rollup-plugin-eslint): Verify entry point and all imported files with ESLint
-- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js &amp; feature.js)
+- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, a zero-dependency platform detector written in ES6
 - [rollup-plugin-node-resolve](https://ghub.io/rollup-plugin-node-resolve): Bundle third-party dependencies in node_modules
-- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, A platform, environment, features detector written in ES6 (based on platform.js &amp; feature.js)
+- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, a zero-dependency platform detector written in ES6
 - [rollup-plugin-uglify](https://ghub.io/rollup-plugin-uglify): Rollup plugin to minify generated bundle
 
 ## Tests
