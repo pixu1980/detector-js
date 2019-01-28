@@ -36,29 +36,24 @@ export default class Detector extends FlagsClass {
   constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = window.navigator.userAgent) {
     super(ua);
 
-    if (!!cssFlags) {
-      this._cssFlags = [];
-      this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
-    }
+    this._cssFlags = !!cssFlags ? [] : null;
+    this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
 
     //! Features
-    this.checkFeature(cssFlags);
+    this.checkFeature();
 
     //! Software
-    this.checkEngine(cssFlags);
-    this.checkBrowser(cssFlags);
-    this.checkOS(cssFlags);
+    this.checkEngine();
+    this.checkBrowser();
+    this.checkOS();
 
     //! Hardware
-    this.checkPlatform(cssFlags);
-    this.checkDevice(cssFlags);
-    this.checkCPU(cssFlags);
-    this.checkGPU(cssFlags);
+    this.checkDevice();
+    this.checkCPU();
+    this.checkGPU();
+    this.checkPlatform();
 
-    if (!!cssFlags) {
-      this.setCssFlags();
-    }
-
+    this.setCssFlags();
 
     // remove unnecessary memory usage
     delete this._cssFlags;
@@ -68,13 +63,14 @@ export default class Detector extends FlagsClass {
     console.warn('DetectorJS initialized', this);
   }
 
+  //! Feature
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
-   * @memberof Detector
+   *
+   * @memberOf Detector
    */
-  checkFeature(cssFlags = false) {
+  checkFeature() {
     const feature = new Feature(this._ua);
     const audio = new AudioFeature(this._ua);
     const video = new VideoFeature(this._ua);
@@ -84,7 +80,7 @@ export default class Detector extends FlagsClass {
       video: video.toFlags(),
     });
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(feature.toCssFlags(), audio.toCssFlags(), video.toCssFlags());
     }
   }
@@ -93,16 +89,15 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkEngine(cssFlags = false) {
+  checkEngine() {
     const engine = new Engine(this._ua, this.toFlags());
 
     this.engine = engine.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(engine.toCssFlags());
     }
   }
@@ -110,16 +105,15 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkBrowser(cssFlags = false) {
+  checkBrowser() {
     const browser = new Browser(this._ua, this.toFlags());
 
     this.browser = browser.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(browser.toCssFlags());
     }
   }
@@ -127,16 +121,15 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkOS(cssFlags = false) {
+  checkOS() {
     const os = new OS(this._ua, this.toFlags());
 
     this.os = os.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(os.toCssFlags());
     }
   }
@@ -145,33 +138,15 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkPlatform(cssFlags = false) {
-    const platform = new Platform(this._ua, this.toFlags());
-
-    this.platform = platform.toFlags();
-
-    if (!!cssFlags) {
-      this._cssFlags = this._cssFlags.concat(platform.toCssFlags());
-    }
-  }
-
-  /**
-   *
-   *
-   * @param {boolean} [cssFlags=false]
-   *
-   * @memberOf Detector
-   */
-  checkDevice(cssFlags = false) {
+  checkDevice() {
     const device = new Device(this._ua, this.toFlags());
 
     this.device = device.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(device.toCssFlags());
     }
   }
@@ -179,16 +154,15 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkCPU(cssFlags = false) {
+  checkCPU() {
     const cpu = new CPU(this._ua, this.toFlags());
 
     this.cpu = cpu.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
     }
   }
@@ -196,20 +170,36 @@ export default class Detector extends FlagsClass {
   /**
    *
    *
-   * @param {boolean} [cssFlags=false]
    *
    * @memberOf Detector
    */
-  checkGPU(cssFlags = false) {
+  checkGPU() {
     const gpu = new GPU(this._ua, this.toFlags());
 
     this.gpu = gpu.toFlags();
 
-    if (!!cssFlags) {
+    if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(gpu.toCssFlags());
     }
   }
 
+  /**
+   *
+   *
+   *
+   * @memberOf Detector
+   */
+  checkPlatform() {
+    const platform = new Platform(this._ua, this.toFlags());
+
+    this.platform = platform.toFlags();
+
+    if (!!this._cssFlags) {
+      this._cssFlags = this._cssFlags.concat(platform.toCssFlags());
+    }
+  }
+
+  //! CSS Flags
   /**
    *
    *

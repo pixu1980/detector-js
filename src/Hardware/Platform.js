@@ -60,20 +60,17 @@ export default class Platform extends CssFlagsClass {
       this._flags.os.Palm,
       this._flags.os.Symbian,
       this._flags.os.WebOS,
+      this._flags.browser.ChromeMobile,
+      this._flags.browser.EdgeMobile,
+      this._flags.browser.IEMobile,
+      this._flags.browser.FirefoxMobile,
+      this._flags.browser.MaxthonMobile,
+      this._flags.browser.OperaCoast,
+      this._flags.browser.OperaMini,
+      this._flags.browser.OperaMobile,
+      this._flags.browser.OperaTouch,
+      this._flags.browser.SafariMobile,
     ]));
-
-    // Asserts.one([
-    //   this._flags.browser.ChromeMobile,
-    //   this._flags.browser.EdgeMobile,
-    //   this._flags.browser.IEMobile,
-    //   this._flags.browser.FirefoxMobile,
-    //   this._flags.browser.MaxthonMobile,
-    //   this._flags.browser.OperaCoast,
-    //   this._flags.browser.OperaMini,
-    //   this._flags.browser.OperaMobile,
-    //   this._flags.browser.OperaTouch,
-    //   this._flags.browser.SafariMobile,
-    // ]);
   }
 
   /**
@@ -100,7 +97,7 @@ export default class Platform extends CssFlagsClass {
   get tablet() {
     return Asserts.all([
       this.mobile,
-      /(ipad|tab(?:let)|kindle|playbook)/i.test(this._ua),
+      /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua),
     ]);
   }
 
@@ -110,32 +107,31 @@ export default class Platform extends CssFlagsClass {
    * @readonly
    * @memberof Platform
    */
-  get smartTV() {
-    return Asserts.one([
-      /(?:google|smart|internet\.|net|apple|pov\_|hbb)tv/i.test(this._ua),
-      /(?:viera|netcast|boxee|kylo|dlnadoc|ce-html)/i.test(this._ua),
-    ]) && Asserts.all([
-      !this.mobile,
-      this._flags.feature.fullscreenKeyboard,
-    ]) && Asserts.one([
-      this._flags.os.Android,
-      this._flags.os.Tizen,
-      this._flags.os.WebOS,
+  get console() {
+    return Asserts.all([
+      /(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua),
+      !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua),
     ]);
   }
-
 
   /**
    *
    *
    * @readonly
-   * @memberOf Platform
+   * @memberof Platform
    */
-  get desktop() {
-    return Asserts.all([
+  get tv() {
+    return Asserts.one([
+      /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
+      /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua),
+    ]) && Asserts.one([
       !this.mobile,
       !this.bot,
-      !this.tv,
+      this._flags.feature.fullscreenKeyboard,
+    ]) && Asserts.one([
+      this._flags.os.Android,
+      this._flags.os.Tizen,
+      this._flags.os.WebOS,
     ]);
   }
 
@@ -148,6 +144,21 @@ export default class Platform extends CssFlagsClass {
   get bot() {
     return Asserts.one([
       /googlebot/i.test(this._ua),
+    ]);
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   * @memberOf Platform
+   */
+  get desktop() {
+    return Asserts.all([
+      !this.bot,
+      !this.console,
+      !this.mobile,
+      !this.tv,
     ]);
   }
 }

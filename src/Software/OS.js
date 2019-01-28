@@ -384,6 +384,21 @@ export default class OS extends CssFlagsClass {
       /(windows\smobile|windows)[\s\/]?([ntce\d\.\s]+\w)/i.test(this._ua),
       /windows phone (?:os)?\s?(\d+(\.\d+)*)/i.test(this._ua),
     ]));
+
+    // // Detect Windows Phone 7 desktop mode.
+    // if (name == 'IE' && (data = (/; *(?:XBLWP|ZuneWP)(\d+)/i.exec(ua) || 0)[1])) {
+    //   name += ' Mobile';
+    //   os = 'Windows Phone ' + (/\+$/.test(data) ? data : data + '.x');
+    //   description.unshift('desktop mode');
+    // }
+
+    // // Detect Windows Phone 8.x desktop mode.
+    // if (/\bWPDesktop\b/i.test(ua)) {
+    //   name = 'IE Mobile';
+    //   os = 'Windows Phone 8.x';
+    //   description.unshift('desktop mode');
+    //   version || (version = (/\brv:([\d.]+)/.exec(ua) || 0)[1]);
+    // }
   }
 
   /**
@@ -587,6 +602,13 @@ export default class OS extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.one([
       /tizen[/\s](\d+(\.\d+)*)/i.test(this._ua),
       /(tizen)[\/\s]([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  //! Other OSs
+  get Raspbian() {
+    return this._checkAssertsResult(Asserts.one([
+      /raspbian[/\s](\d+(\.\d+)*)/i.test(this._ua),
     ]));
   }
 
