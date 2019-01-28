@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>Software/Engine.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,71 +31,303 @@
 
 <div id="main">
     
+    <h1 class="page-title">Software/Engine.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import CssFlagsClass from '../Core/CssFlagsClass';
+import Asserts from '../Core/Asserts';
 
+/**
+ *
+ *
+ * @export
+ * @class Engine
+ * @extends {CssFlagsClass}
+ */
+export default class Engine extends CssFlagsClass {
+  /**
+   * Creates an instance of Engine.
+   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [flags={}]
+   * @param {string} [cssFlagsPrefix='engine']
+   *
+   * @memberOf Engine
+   */
+  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'engine') {
+    super(ua, flags, cssFlagsPrefix);
 
+    this.version = 'u/a';
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Amaya() {
+    return this._checkAssertsResult(Asserts.all([
+      /(amaya)\/([\w\.]+)/i.test(this._ua),
+    ]));
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Blink() {
+    return this._checkAssertsResult(Asserts.all([
+      () => 'Intl' in window &amp;&amp; 'v8BreakIterator' in window.Intl,
+      'CSS' in window,
+      /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua),
+    ]), true);
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get EdgeHTML() {
+    return this._checkAssertsResult(Asserts.all([
+      'StyleMedia' in window,
+      !this.Trident,
+    ]) &amp;&amp; Asserts.one([
+      /edge\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Gecko() {
+    return this._checkAssertsResult(Asserts.all([
+      'InstallTrigger' in window,
+      !/like gecko/i.test(this._ua),
+    ]) &amp;&amp; Asserts.one([
+      /rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua),
+      /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Goanna() {
+    return this._checkAssertsResult(Asserts.all([
+      /(goanna)\/([\w\.]+)/i.test(this._ua),
+    ]));
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get iCab() {
+    return this._checkAssertsResult(Asserts.all([
+      /(icab)[\/\s]([23]\.[\d\.]+)/i.test(this._ua),
+    ]));
+  }
 
-    
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get KHTML() {
+    return this._checkAssertsResult(Asserts.all([
+      /(khtml)[\/\s]\(?([\w\.]+)/i.test(this._ua),
+    ]));
+  }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Links() {
+    return this._checkAssertsResult(Asserts.all([
+      /(links)[\/\s]\(?([\w\.]+)/i.test(this._ua),
+    ]));
+  }
 
-    <section class="readme">
-        <article><h1>detector-js</h1><h2>Author</h2><p>Black Mirror</p>
-<h2>Version</h2><p>v0.2.0</p>
-<h2>Badges</h2><p><a href="https://nodei.co/npm/detector-js/"><img src="https://nodei.co/npm/detector-js.png" alt="NPM"></a></p>
-<p><a href="hhttps://img.shields.io/npm/dm/detector-js.svg"><img src="https://img.shields.io/npm/dm/detector-js.svg" alt="NPM downloads/month"></a></p>
-<p><a href="https://github.com/blackmirror1980/detector-js/stargazers"><img src="https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub stars"></a> <a href="https://github.com/blackmirror1980/detector-js/network"><img src="https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub forks"></a> <a href="https://github.com/blackmirror1980/detector-js/issues"><img src="https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub issues"></a> <a href="https://github.com/blackmirror1980/detector-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub license"></a> </p>
-<p><a href="https://travis-ci.org/blackmirror1980/detector-js"><img src="https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/blackmirror1980/detector-js?branch=master"><img src="https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<h2>Documentation</h2><p>Check out the <a href="https://blackmirror1980.github.io/detector-js/docs/index.html">Latest Documentation</a> here</p>
-<h2>Description</h2><p>DetectorJS, a zero-dependency platform detector written in ES6</p>
-<h2>Example</h2><p>Check out this <a href="">Codepen</a> example</p>
-<h2>Installation</h2><p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the 
-<a href="https://www.npmjs.com/">npm registry</a>. It can be installed using the 
-<a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a>
-or 
-<a href="https://yarnpkg.com/en/"><code>yarn</code></a>
-command line tools.</p>
-<pre class="prettyprint source lang-sh"><code>npm install detector-js --save</code></pre><h2>Dependencies</h2><p>None</p>
-<h2>Dev Dependencies</h2><ul>
-<li><a href="https://ghub.io/@babel/core">@babel/core</a>: Babel compiler core.</li>
-<li><a href="https://ghub.io/@babel/preset-env">@babel/preset-env</a>: A Babel preset for each environment.</li>
-<li><a href="https://ghub.io/docdash">docdash</a>: A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami</li>
-<li><a href="https://ghub.io/eslint">eslint</a>: An AST-based pattern checker for JavaScript.</li>
-<li><a href="https://ghub.io/eslint-config-airbnb">eslint-config-airbnb</a>: Airbnb's ESLint config, following our styleguide</li>
-<li><a href="https://ghub.io/eslint-plugin-import">eslint-plugin-import</a>: Import with sanity.</li>
-<li><a href="https://ghub.io/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a>: Static AST checker for accessibility rules on JSX elements.</li>
-<li><a href="https://ghub.io/eslint-plugin-react">eslint-plugin-react</a>: React specific linting rules for ESLint</li>
-<li><a href="https://ghub.io/ink-docstrap">ink-docstrap</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/jsdoc">jsdoc</a>: An API documentation generator for JavaScript.</li>
-<li><a href="https://ghub.io/jshint">jshint</a>: Static analysis tool for JavaScript</li>
-<li><a href="https://ghub.io/rollup">rollup</a>: Next-generation ES module bundler</li>
-<li><a href="https://ghub.io/rollup-plugin-auto-external">rollup-plugin-auto-external</a>: Rollup plugin to automatically exclude package.json dependencies and peerDependencies from your bundle</li>
-<li><a href="https://ghub.io/rollup-plugin-babel">rollup-plugin-babel</a>: Seamless integration between Rollup and Babel.</li>
-<li><a href="https://ghub.io/rollup-plugin-commonjs">rollup-plugin-commonjs</a>: Convert CommonJS modules to ES2015</li>
-<li><a href="https://ghub.io/rollup-plugin-eslint">rollup-plugin-eslint</a>: Verify entry point and all imported files with ESLint</li>
-<li><a href="https://ghub.io/rollup-plugin-json">rollup-plugin-json</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-node-resolve">rollup-plugin-node-resolve</a>: Bundle third-party dependencies in node_modules</li>
-<li><a href="https://ghub.io/rollup-plugin-replace">rollup-plugin-replace</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-uglify">rollup-plugin-uglify</a>: Rollup plugin to minify generated bundle</li>
-</ul>
-<h2>Tests</h2><pre class="prettyprint source lang-sh"><code>npm install
-npm test</code></pre><h2>License</h2><p>MIT</p>
-<h2>Powered By</h2><p><a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-<img src="http://logo.js.org/dark_horz.png" width="102" alt="JS.ORG Logo"/></a>
-<!-- alternatives [bright|dark]_[horz|vert|tiny].png (width[horz:102,vert:50,tiny:77]) --></p></article>
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Linx() {
+    return this._checkAssertsResult(Asserts.all([
+      /(lynx)\/([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get NetFront() {
+    return this._checkAssertsResult(Asserts.all([
+      /(netfront)\/([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get NetSurf() {
+    return this._checkAssertsResult(Asserts.all([
+      /(netsurf)\/([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Presto() {
+    return this._checkAssertsResult(Asserts.one([
+      /(presto)\/([\w\.]+)/i.test(this._ua),
+      /presto\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Tasman() {
+    return this._checkAssertsResult(Asserts.all([
+      /(tasman)[\/\s]\(?([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get Trident() {
+    return this._checkAssertsResult(Asserts.all([
+      /*@cc_on!@*/false || !!document.documentMode,
+    ]) &amp;&amp; Asserts.one([
+      /trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get w3m() {
+    return this._checkAssertsResult(Asserts.all([
+      /w3m[\/\s]([\w\.]+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Engine
+   */
+  get WebKit() {
+    return this._checkAssertsResult(Asserts.all([
+      'webkitConvertPointFromNodeToPage' in window,
+    ]) &amp;&amp; Asserts.one([
+      /((?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @param {boolean} [assertsResult=false]
+   * @param {any} [version=null]
+   * @returns boolean
+   *
+   * @memberOf Engine
+   */
+  _checkAssertsResult(assertsResult = false, version = null) {
+    if (assertsResult) {
+      this.setVersion(version);
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   *
+   *
+   * @param {any} [version=null]
+   *
+   * @memberOf Engine
+   */
+  /**
+   *
+   *
+   * @param {any} [version=null]
+   *
+   * @memberOf Engine
+   */
+  setVersion(version = null) {
+    this.version = version || RegExp.$1 || 'u/a';
+  }
+}
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

@@ -1,4 +1,47 @@
-/* eslint-disable prefer-destructuring */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Software/Browser.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Asserts.html">Asserts</a><ul class='methods'><li data-type='method'><a href="Asserts.html#.all">all</a></li><li data-type='method'><a href="Asserts.html#.one">one</a></li></ul></li><li><a href="AudioFeature.html">AudioFeature</a><ul class='methods'><li data-type='method'><a href="AudioFeature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="AudioFeature.html#._destroyTestElements">_destroyTestElements</a></li><li data-type='method'><a href="AudioFeature.html#.getContext">getContext</a></li><li data-type='method'><a href="AudioFeature.html#.getM4a">getM4a</a></li><li data-type='method'><a href="AudioFeature.html#.getMp3">getMp3</a></li><li data-type='method'><a href="AudioFeature.html#.getOgg">getOgg</a></li><li data-type='method'><a href="AudioFeature.html#.getOpus">getOpus</a></li><li data-type='method'><a href="AudioFeature.html#.getWav">getWav</a></li><li data-type='method'><a href="AudioFeature.html#.getWebm">getWebm</a></li></ul></li><li><a href="AudioFeature.module.exports.html">module.exports</a></li><li><a href="Browser.html">Browser</a><ul class='methods'><li data-type='method'><a href="Browser.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="Browser.html#.setVersion">setVersion</a></li></ul></li><li><a href="Browser.module.exports.html">module.exports</a></li><li><a href="CssFlagsClass.html">CssFlagsClass</a><ul class='methods'><li data-type='method'><a href="CssFlagsClass.html#.toCssFlags">toCssFlags</a></li></ul></li><li><a href="CssFlagsClass.module.exports.html">module.exports</a></li><li><a href="Detector.html">Detector</a><ul class='methods'><li data-type='method'><a href="Detector.html#.checkBrowser">checkBrowser</a></li><li data-type='method'><a href="Detector.html#.checkCPU">checkCPU</a></li><li data-type='method'><a href="Detector.html#.checkDevice">checkDevice</a></li><li data-type='method'><a href="Detector.html#.checkEngine">checkEngine</a></li><li data-type='method'><a href="Detector.html#.checkFeature">checkFeature</a></li><li data-type='method'><a href="Detector.html#.checkGPU">checkGPU</a></li><li data-type='method'><a href="Detector.html#.checkOS">checkOS</a></li><li data-type='method'><a href="Detector.html#.checkPlatform">checkPlatform</a></li><li data-type='method'><a href="Detector.html#.setCssFlags">setCssFlags</a></li></ul></li><li><a href="Detector.module.exports.html">module.exports</a></li><li><a href="Device.html">Device</a></li><li><a href="Device.module.exports.html">module.exports</a></li><li><a href="Engine.html">Engine</a><ul class='methods'><li data-type='method'><a href="Engine.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="Engine.html#.setVersion">setVersion</a></li></ul></li><li><a href="Engine.module.exports.html">module.exports</a></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method'><a href="Feature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="Feature.html#._destroyTestElements">_destroyTestElements</a></li><li data-type='method'><a href="Feature.html#.getAddEventListener">getAddEventListener</a></li><li data-type='method'><a href="Feature.html#.getAsyncScript">getAsyncScript</a></li><li data-type='method'><a href="Feature.html#.getBattery">getBattery</a></li><li data-type='method'><a href="Feature.html#.getCors">getCors</a></li><li data-type='method'><a href="Feature.html#.getDeferScript">getDeferScript</a></li><li data-type='method'><a href="Feature.html#.getFile">getFile</a></li><li data-type='method'><a href="Feature.html#.getFileSystem">getFileSystem</a></li><li data-type='method'><a href="Feature.html#.getFullscreen">getFullscreen</a></li><li data-type='method'><a href="Feature.html#.getFullscreenKeyboard">getFullscreenKeyboard</a></li><li data-type='method'><a href="Feature.html#.getGeolocation">getGeolocation</a></li><li data-type='method'><a href="Feature.html#.getHistoryAPI">getHistoryAPI</a></li><li data-type='method'><a href="Feature.html#.getLittleEndian">getLittleEndian</a></li><li data-type='method'><a href="Feature.html#.getLocalStorage">getLocalStorage</a></li><li data-type='method'><a href="Feature.html#.getMatchMedia">getMatchMedia</a></li><li data-type='method'><a href="Feature.html#.getQuerySelector">getQuerySelector</a></li><li data-type='method'><a href="Feature.html#.getQuerySelectorAll">getQuerySelectorAll</a></li><li data-type='method'><a href="Feature.html#.getServiceWorker">getServiceWorker</a></li><li data-type='method'><a href="Feature.html#.getTypedArray">getTypedArray</a></li><li data-type='method'><a href="Feature.html#.getUserMedia">getUserMedia</a></li><li data-type='method'><a href="Feature.html#.getVibration">getVibration</a></li><li data-type='method'><a href="Feature.html#.getWorker">getWorker</a></li></ul></li><li><a href="Feature.module.exports.html">module.exports</a></li><li><a href="FlagsClass.html">FlagsClass</a><ul class='methods'><li data-type='method'><a href="FlagsClass.html#.toFlags">toFlags</a></li></ul></li><li><a href="FlagsClass.module.exports.html">module.exports</a></li><li><a href="GPU.html">GPU</a><ul class='methods'><li data-type='method'><a href="GPU.html#.getInfo">getInfo</a></li></ul></li><li><a href="GPU.module.exports.html">module.exports</a></li><li><a href="OS.html">OS</a><ul class='methods'><li data-type='method'><a href="OS.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="OS.html#._getAndroidVersionName">_getAndroidVersionName</a></li><li data-type='method'><a href="OS.html#._getLinuxDistroName">_getLinuxDistroName</a></li><li data-type='method'><a href="OS.html#._getMacOSVersionName">_getMacOSVersionName</a></li><li data-type='method'><a href="OS.html#._getUnixDistroName">_getUnixDistroName</a></li><li data-type='method'><a href="OS.html#._getVersionNames">_getVersionNames</a></li><li data-type='method'><a href="OS.html#._getWindowsVersionName">_getWindowsVersionName</a></li><li data-type='method'><a href="OS.html#.setVersion">setVersion</a></li><li data-type='method'><a href="OS.html#.setVersionName">setVersionName</a></li></ul></li><li><a href="OS.module.exports.html">module.exports</a></li><li><a href="Platform.html">Platform</a></li><li></li><li><a href="Platform.module.exports.html">module.exports</a></li><li><a href="VideoFeature.html">VideoFeature</a><ul class='methods'><li data-type='method'><a href="VideoFeature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="VideoFeature.html#._destroyTestElements">_destroyTestElements</a></li><li data-type='method'><a href="VideoFeature.html#.getMp4">getMp4</a></li><li data-type='method'><a href="VideoFeature.html#.getOgv">getOgv</a></li><li data-type='method'><a href="VideoFeature.html#.getWebm">getWebm</a></li></ul></li><li><a href="VideoFeature.module.exports.html">module.exports</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Software/Browser.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable prefer-destructuring */
 import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
 
@@ -78,7 +121,7 @@ export default class Browser extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.all([
       !/like android/i.test(this._ua),
       /android/i.test(this._ua),
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
       /android.+version\/([\w\.]+)\s+(?:mobile\s?safari|safari)*/i.test(this._ua),
     ]));
@@ -122,7 +165,7 @@ export default class Browser extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.one([
       /blackberry|\bbb\d+/i.test(this._ua),
       /rim\stablet/i.test(this._ua),
-    ]) && Asserts.all([
+    ]) &amp;&amp; Asserts.all([
       /blackberry[\d]+\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]), true);
   }
@@ -203,10 +246,10 @@ export default class Browser extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.all([
       !this.AndroidBrowser,
       !this.ChromeMobile,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /(chrome)\/v?([\w\.]+)/i.test(this._ua),
       /headlesschrome(?:\/([\w\.]+)|\s)/i.test(this._ua),
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /(?:chrome)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
@@ -327,7 +370,7 @@ export default class Browser extends CssFlagsClass {
   get Edge() {
     return this._checkAssertsResult(Asserts.all([
       !this.IE,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /edg([ea])\/(\d+(\.?_?\d+)+)/i.test(this._ua),
       /edg([ea])\/((\d+)?[\w\.]+)/i.test(this._ua),
       /edg([ea])[ /](\d+[\.\d]+)/i.test(this._ua),
@@ -344,7 +387,7 @@ export default class Browser extends CssFlagsClass {
   get EdgeMobile() {
     return this._checkAssertsResult(Asserts.all([
       !this.Edge,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /edgios\/(\d+(\.?_?\d+)+)/i.test(this._ua),
       /edgios\/((\d+)?[\w\.]+)/i.test(this._ua),
       /EdgiOS[ /](\d+[\.\d]+)/i.test(this._ua),
@@ -360,9 +403,9 @@ export default class Browser extends CssFlagsClass {
    */
   get Electron() {
     return this._checkAssertsResult(Asserts.one([
-      typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer', // Renderer process
-      typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron, // Main process
-      typeof window.navigator === 'object' && typeof this._ua === 'string' && this._ua.indexOf('Electron') >= 0, // Detect the user agent when the `nodeIntegration` option is set to true
+      typeof window !== 'undefined' &amp;&amp; typeof window.process === 'object' &amp;&amp; window.process.type === 'renderer', // Renderer process
+      typeof process !== 'undefined' &amp;&amp; typeof process.versions === 'object' &amp;&amp; !!process.versions.electron, // Main process
+      typeof window.navigator === 'object' &amp;&amp; typeof this._ua === 'string' &amp;&amp; this._ua.indexOf('Electron') >= 0, // Detect the user agent when the `nodeIntegration` option is set to true
     ]), false, process.versions.electron);
   }
 
@@ -589,7 +632,7 @@ export default class Browser extends CssFlagsClass {
   get IE() {
     return this._checkAssertsResult(Asserts.all([
       /(msie|trident)/i.test(this._ua),
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /(?:ms|\()(ie)\s([\w\.]+)/i.test(this._ua),
       /(?:msie |rv:)(\d+(\.?_?\d+)+)/i.test(this._ua),
       /(trident).+rv[:\s]([\w\.]+).+like\sgecko/i.test(this._ua),
@@ -606,7 +649,7 @@ export default class Browser extends CssFlagsClass {
   get IEMobile() {
     return this._checkAssertsResult(Asserts.all([
       !this.IE,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /(iemobile)(?:browser)?[\/\s]?([\w\.]*)/i.test(this._ua),
     ]));
   }
@@ -1124,7 +1167,7 @@ export default class Browser extends CssFlagsClass {
       !this.SafariMobile,
       !this.Chrome,
       !this.PhantomJS,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /Version\/(\d+[\.\d]+).*Safari\/|Safari\/\d+/i.test(this._ua),
     ]));
   }
@@ -1142,7 +1185,7 @@ export default class Browser extends CssFlagsClass {
       !this.AndroidBrowser,
       !this.Chrome,
       !this.PhantomJS,
-    ]) && Asserts.one([
+    ]) &amp;&amp; Asserts.one([
       /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
       /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
       /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua),
@@ -1430,3 +1473,26 @@ export default class Browser extends CssFlagsClass {
     this.version = version.replace(/_/ig, '.');
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jan 28 2019 13:25:35 GMT+0100 (GMT+01:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+
+</body>
+</html>

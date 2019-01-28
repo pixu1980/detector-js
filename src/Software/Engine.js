@@ -245,6 +245,15 @@ export default class Engine extends CssFlagsClass {
     ]));
   }
 
+  /**
+   *
+   *
+   * @param {boolean} [assertsResult=false]
+   * @param {any} [version=null]
+   * @returns boolean
+   *
+   * @memberOf Engine
+   */
   _checkAssertsResult(assertsResult = false, version = null) {
     if (assertsResult) {
       this.setVersion(version);

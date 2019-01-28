@@ -1,7 +1,7 @@
 {
   "name": "detector-js",
   "version": "0.2.0",
-  "description": "DetectorJS, a zero-dependency platform detector written in ES6",
+  "description": "DetectorJS, a runtime zero-dependency platform detector written in ES6",
   "main": "dist/detector.min.js",
   "scripts": {
     "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",

@@ -66,7 +66,7 @@ export default class FlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns object
    *
    * @memberOf FlagsClass
    */

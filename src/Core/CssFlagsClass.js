@@ -26,7 +26,7 @@ export default class CssFlagsClass extends FlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns object
    *
    * @memberOf CssFlagsClass
    */

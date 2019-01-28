@@ -78,7 +78,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -92,7 +92,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -105,7 +105,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -118,7 +118,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -131,7 +131,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -144,7 +144,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */
@@ -157,7 +157,7 @@ export default class AudioFeature extends CssFlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns boolean
    *
    * @memberOf AudioFeature
    */

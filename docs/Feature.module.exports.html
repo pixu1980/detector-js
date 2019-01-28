@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>module.exports - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,71 +31,285 @@
 
 <div id="main">
     
+    <h1 class="page-title">module.exports</h1>
+    
 
     
 
 
 
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="Feature.html">Feature</a>.</span>
+        
+        module.exports
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+
+    <h4 class="name" id="module.exports"><span class="type-signature"></span>new module.exports<span class="signature">(ua<span class="signature-attributes">opt</span>, flags<span class="signature-attributes">opt</span>, cssFlagsPrefix<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
     
 
 
 
 
+<dl class="details">
 
-
-
-
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Feature_Feature.js.html">Feature/Feature.js</a>, <a href="Feature_Feature.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
 
     
 
+    
 
-    <section class="readme">
-        <article><h1>detector-js</h1><h2>Author</h2><p>Black Mirror</p>
-<h2>Version</h2><p>v0.2.0</p>
-<h2>Badges</h2><p><a href="https://nodei.co/npm/detector-js/"><img src="https://nodei.co/npm/detector-js.png" alt="NPM"></a></p>
-<p><a href="hhttps://img.shields.io/npm/dm/detector-js.svg"><img src="https://img.shields.io/npm/dm/detector-js.svg" alt="NPM downloads/month"></a></p>
-<p><a href="https://github.com/blackmirror1980/detector-js/stargazers"><img src="https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub stars"></a> <a href="https://github.com/blackmirror1980/detector-js/network"><img src="https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub forks"></a> <a href="https://github.com/blackmirror1980/detector-js/issues"><img src="https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub issues"></a> <a href="https://github.com/blackmirror1980/detector-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic" alt="GitHub license"></a> </p>
-<p><a href="https://travis-ci.org/blackmirror1980/detector-js"><img src="https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/blackmirror1980/detector-js?branch=master"><img src="https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<h2>Documentation</h2><p>Check out the <a href="https://blackmirror1980.github.io/detector-js/docs/index.html">Latest Documentation</a> here</p>
-<h2>Description</h2><p>DetectorJS, a zero-dependency platform detector written in ES6</p>
-<h2>Example</h2><p>Check out this <a href="">Codepen</a> example</p>
-<h2>Installation</h2><p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the 
-<a href="https://www.npmjs.com/">npm registry</a>. It can be installed using the 
-<a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a>
-or 
-<a href="https://yarnpkg.com/en/"><code>yarn</code></a>
-command line tools.</p>
-<pre class="prettyprint source lang-sh"><code>npm install detector-js --save</code></pre><h2>Dependencies</h2><p>None</p>
-<h2>Dev Dependencies</h2><ul>
-<li><a href="https://ghub.io/@babel/core">@babel/core</a>: Babel compiler core.</li>
-<li><a href="https://ghub.io/@babel/preset-env">@babel/preset-env</a>: A Babel preset for each environment.</li>
-<li><a href="https://ghub.io/docdash">docdash</a>: A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami</li>
-<li><a href="https://ghub.io/eslint">eslint</a>: An AST-based pattern checker for JavaScript.</li>
-<li><a href="https://ghub.io/eslint-config-airbnb">eslint-config-airbnb</a>: Airbnb's ESLint config, following our styleguide</li>
-<li><a href="https://ghub.io/eslint-plugin-import">eslint-plugin-import</a>: Import with sanity.</li>
-<li><a href="https://ghub.io/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a>: Static AST checker for accessibility rules on JSX elements.</li>
-<li><a href="https://ghub.io/eslint-plugin-react">eslint-plugin-react</a>: React specific linting rules for ESLint</li>
-<li><a href="https://ghub.io/ink-docstrap">ink-docstrap</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/jsdoc">jsdoc</a>: An API documentation generator for JavaScript.</li>
-<li><a href="https://ghub.io/jshint">jshint</a>: Static analysis tool for JavaScript</li>
-<li><a href="https://ghub.io/rollup">rollup</a>: Next-generation ES module bundler</li>
-<li><a href="https://ghub.io/rollup-plugin-auto-external">rollup-plugin-auto-external</a>: Rollup plugin to automatically exclude package.json dependencies and peerDependencies from your bundle</li>
-<li><a href="https://ghub.io/rollup-plugin-babel">rollup-plugin-babel</a>: Seamless integration between Rollup and Babel.</li>
-<li><a href="https://ghub.io/rollup-plugin-commonjs">rollup-plugin-commonjs</a>: Convert CommonJS modules to ES2015</li>
-<li><a href="https://ghub.io/rollup-plugin-eslint">rollup-plugin-eslint</a>: Verify entry point and all imported files with ESLint</li>
-<li><a href="https://ghub.io/rollup-plugin-json">rollup-plugin-json</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-node-resolve">rollup-plugin-node-resolve</a>: Bundle third-party dependencies in node_modules</li>
-<li><a href="https://ghub.io/rollup-plugin-replace">rollup-plugin-replace</a>: DetectorJS, a zero-dependency platform detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-uglify">rollup-plugin-uglify</a>: Rollup plugin to minify generated bundle</li>
-</ul>
-<h2>Tests</h2><pre class="prettyprint source lang-sh"><code>npm install
-npm test</code></pre><h2>License</h2><p>MIT</p>
-<h2>Powered By</h2><p><a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-<img src="http://logo.js.org/dark_horz.png" width="102" alt="JS.ORG Logo"/></a>
-<!-- alternatives [bright|dark]_[horz|vert|tiny].png (width[horz:102,vert:50,tiny:77]) --></p></article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
+
+
+
+<div class="description">
+    Creates an instance of Feature.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ua</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>window.navigator.userAgent</code>
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>flags</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cssFlagsPrefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'feature'</code>
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
