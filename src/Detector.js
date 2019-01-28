@@ -208,13 +208,15 @@ export default class Detector extends FlagsClass {
    */
   setCssFlags() {
     const cssFlagsPrefixed = this._cssFlags.map(cssFlag => this._cssFlagsPrefix + cssFlag);
+    const htmlElement = document.documentElement || document.querySelector('html');
 
-    if (!!document.documentElement.classList) {
-      document.documentElement.classList.add(...cssFlagsPrefixed);
+
+    if ('classList' in htmlElement) {
+      htmlElement.classList.add(...cssFlagsPrefixed);
     } else {
-      cssFlagsPrefixed.forEach(cssFlag => document.documentElement.className.replace(cssFlag, ''));
+      cssFlagsPrefixed.forEach(cssFlag => htmlElement.className.replace(cssFlag, ''));
 
-      document.documentElement.className += this._cssFlags.join(' ').trim();
+      htmlElement.className += this._cssFlags.join(' ').trim();
     }
   }
 }
