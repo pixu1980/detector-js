@@ -10,14 +10,16 @@ import CssFlagsClass from '../Core/CssFlagsClass';
 export default class GPU extends CssFlagsClass {
   /**
    * Creates an instance of GPU.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='gpu']
    *
    * @memberOf GPU
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'gpu') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'gpu') {
     super(ua, flags, cssFlagsPrefix);
+
+    this._createTestElements();
 
     this._info = this.getInfo();
 
@@ -31,22 +33,41 @@ export default class GPU extends CssFlagsClass {
   /**
    *
    *
+   *
+   * @memberOf GPU
+   */
+  _createTestElements() {
+    this._canvas = this._document.createElement('canvas');
+  }
+
+  /**
+   *
+   *
+   *
+   * @memberOf GPU
+   */
+  _destroyTestElements() {
+    this._canvas = null;
+  }
+
+  /**
+   *
+   *
    * @returns object
    *
    * @memberOf GPU
    */
   getInfo() {
     const info = {
-      webGLVendor: 'u/a',
-      webGLRenderer: 'u/a',
-      vendor: 'u/a',
-      model: 'u/a',
-      renderer: 'u/a',
+      webGLVendor: 'n/a',
+      webGLRenderer: 'n/a',
+      vendor: 'n/a',
+      model: 'n/a',
+      renderer: 'n/a',
     };
 
     try {
-      const canvas = document.createElement('canvas');
-      const webGLContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const webGLContext = this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl');
 
       if (webGLContext) {
         const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');

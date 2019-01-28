@@ -11,16 +11,16 @@ import Asserts from '../Core/Asserts';
 export default class Engine extends CssFlagsClass {
   /**
    * Creates an instance of Engine.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='engine']
    *
    * @memberOf Engine
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'engine') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'engine') {
     super(ua, flags, cssFlagsPrefix);
 
-    this.version = 'u/a';
+    this.version = 'n/a';
   }
 
   /**
@@ -45,8 +45,8 @@ export default class Engine extends CssFlagsClass {
    */
   get Blink() {
     return this._checkAssertsResult(Asserts.all([
-      () => 'Intl' in window && 'v8BreakIterator' in window.Intl,
-      'CSS' in window,
+      () => 'Intl' in this._root && 'v8BreakIterator' in this._root.Intl,
+      'CSS' in this._root,
       /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua),
     ]), true);
   }
@@ -60,7 +60,7 @@ export default class Engine extends CssFlagsClass {
    */
   get EdgeHTML() {
     return this._checkAssertsResult(Asserts.all([
-      'StyleMedia' in window,
+      'StyleMedia' in this._root,
       !this.Trident,
     ]) && Asserts.one([
       /edge\/(\d+(\.?_?\d+)+)/i.test(this._ua),
@@ -76,7 +76,7 @@ export default class Engine extends CssFlagsClass {
    */
   get Gecko() {
     return this._checkAssertsResult(Asserts.all([
-      'InstallTrigger' in window,
+      'InstallTrigger' in this._root,
       !/like gecko/i.test(this._ua),
     ]) && Asserts.one([
       /rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua),
@@ -239,7 +239,7 @@ export default class Engine extends CssFlagsClass {
    */
   get WebKit() {
     return this._checkAssertsResult(Asserts.all([
-      'webkitConvertPointFromNodeToPage' in window,
+      'webkitConvertPointFromNodeToPage' in this._root,
     ]) && Asserts.one([
       /((?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
@@ -279,6 +279,6 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   setVersion(version = null) {
-    this.version = version || RegExp.$1 || 'u/a';
+    this.version = version || RegExp.$1 || 'n/a';
   }
 }

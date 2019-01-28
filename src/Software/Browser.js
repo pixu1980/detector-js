@@ -12,16 +12,17 @@ import Asserts from '../Core/Asserts';
 export default class Browser extends CssFlagsClass {
   /**
    * Creates an instance of Browser.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='browser']
    *
    * @memberOf Browser
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'browser') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'browser') {
     super(ua, flags, cssFlagsPrefix);
 
-    this._versionDefaultRegEx = /version\/(\d+(\.?_?\d+)+)/i;
+    this._spaceAndVersionDefaultRegExString = '(?:\\s|\\/)?(\\w+(?:(?:[._])\\w+)+)?';
+    this._versionDefaultRegEx = new RegExp('(?:version)' + this._spaceAndVersionDefaultRegExString, 'i');
 
     this._ua.match(this._versionDefaultRegEx);
 
@@ -37,7 +38,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Amaya() {
     return this._checkAssertsResult(Asserts.all([
-      /(amaya)[\/\s]?([\w\.]+)/i.test(this._ua),
+      new RegExp('(?:amaya)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
     ]));
   }
 
@@ -50,7 +51,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Arora() {
     return this._checkAssertsResult(Asserts.all([
-      /(arora)\/v?([\w\.]+)/i.test(this._ua),
+      new RegExp('(?:arora)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
     ]));
   }
 
@@ -62,8 +63,8 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get Avant() {
-    return this._checkAssertsResult(Asserts.all([
-      /(avant\s)(?:browser)?[\/\s]?([\w\.]*)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.one([
+      new RegExp('(?:avant(?:\sbrowser))' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
     ]));
   }
 
@@ -93,8 +94,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Baidu() {
     return this._checkAssertsResult(Asserts.one([
-      /(baidu)(?:browser)?[\/\s]?([\w\.]*)/i.test(this._ua),
-      /(BIDUBrowser)[\/\s]?([\w\.]+)/i.test(this._ua),
+      new RegExp('(?:b(?:ai)?d(?:u)(?:browser|hd)(?:_i18n)?)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
     ]));
   }
 
@@ -360,10 +360,10 @@ export default class Browser extends CssFlagsClass {
    */
   get Electron() {
     return this._checkAssertsResult(Asserts.one([
-      typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer', // Renderer process
-      typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron, // Main process
-      typeof window.navigator === 'object' && typeof this._ua === 'string' && this._ua.indexOf('Electron') >= 0, // Detect the user agent when the `nodeIntegration` option is set to true
-    ]), false, process.versions.electron);
+      () => !!this._process && this._process.type === 'renderer', // Renderer process
+      () => !!this._process && this._process.versions === 'object' && !!this._process.versions.electron, // Main process
+      () => !!this._navigator && /electron/i.test(this._ua), // Detect the user agent when the `nodeIntegration` option is set to true
+    ]), true, this._process.versions.electron);
   }
 
   /**
@@ -753,7 +753,7 @@ export default class Browser extends CssFlagsClass {
   get MaxthonMobile() {
     return this._checkAssertsResult(Asserts.one([
       /(?:mxios)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]), true);
+    ]));
   }
 
   /**
@@ -1375,7 +1375,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Whale() {
     return this._checkAssertsResult(Asserts.all([
-      /(?:whale)[\s/](\d+(?:\.\d+)+)/i.test(this._ua),
+      /(whale)(?:\s|\/)(\d+(?:(?:\.|\_)\d+)+)/i.test(this._ua),
     ]), true);
   }
 
@@ -1388,7 +1388,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Yandex() {
     return Asserts.one([
-      /(?:yabrowser)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
+      /(?:ya(?:browser|ndex))(?:\s|\/)(\d+(?:(?:\.|\_)\d+)+)/i.test(this._ua),
     ]);
   }
 
@@ -1422,9 +1422,9 @@ export default class Browser extends CssFlagsClass {
    */
   setVersion(version = null, inverted = false) {
     if (inverted) {
-      version = version || this.version || RegExp.$1 || 'u/a';
+      version = version || this.version || RegExp.$1 || 'n/a';
     } else {
-      version = version || RegExp.$1 || this.version || 'u/a';
+      version = version || RegExp.$1 || this.version || 'n/a';
     }
 
     this.version = version.replace(/_/ig, '.');

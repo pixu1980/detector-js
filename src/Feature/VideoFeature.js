@@ -11,13 +11,13 @@ import Asserts from '../Core/Asserts';
 export default class VideoFeature extends CssFlagsClass {
   /**
    * Creates an instance of VideoFeature.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='video']
    *
    * @memberOf VideoFeature
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'video') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'video') {
     super(ua, flags, cssFlagsPrefix);
 
     this._createTestElements();
@@ -38,7 +38,7 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberof VideoFeature
    */
   _createTestElements() {
-    this._videoElement = document.createElement('video');
+    this._videoElement = this._document.createElement('video');
   }
 
   /**
@@ -59,9 +59,9 @@ export default class VideoFeature extends CssFlagsClass {
    */
   get supported() {
     return Asserts.all([
-      'HTMLVideoElement' in window,
-      'HTMLMediaElement' in window,
-      () => !!this._videoElement && 'canPlayType' in this._videoElement && this._videoElement instanceof window.HTMLVideoElement && this._videoElement instanceof window.HTMLMediaElement,
+      'HTMLVideoElement' in this._root,
+      'HTMLMediaElement' in this._root,
+      () => !!this._videoElement && 'canPlayType' in this._videoElement && this._videoElement instanceof this._root.HTMLVideoElement && this._videoElement instanceof this._root.HTMLMediaElement,
     ]);
   }
 

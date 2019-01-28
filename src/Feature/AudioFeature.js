@@ -11,13 +11,13 @@ import Asserts from '../Core/Asserts';
 export default class AudioFeature extends CssFlagsClass {
   /**
    * Creates an instance of AudioFeature.
-   * @param {any} [ua=window.navigator.userAgent]
+   * @param {any} [ua=null]
    * @param {any} [flags={}]
    * @param {string} [cssFlagsPrefix='audio']
    *
    * @memberOf AudioFeature
    */
-  constructor(ua = window.navigator.userAgent, flags = {}, cssFlagsPrefix = 'audio') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = 'audio') {
     super(ua, flags, cssFlagsPrefix);
 
     // Mimetypes accepted:
@@ -47,7 +47,7 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberof AudioFeature
    */
   _createTestElements() {
-    this._audioElement = document.createElement('audio');
+    this._audioElement = this._document.createElement('audio');
   }
 
   /**
@@ -68,10 +68,10 @@ export default class AudioFeature extends CssFlagsClass {
    */
   get supported() {
     return Asserts.all([
-      'Audio' in window,
-      'HTMLAudioElement' in window,
-      'HTMLMediaElement' in window,
-      () => !!this._audioElement && 'canPlayType' in this._audioElement && this._audioElement instanceof window.HTMLAudioElement && this._audioElement instanceof window.HTMLMediaElement,
+      'Audio' in this._root,
+      'HTMLAudioElement' in this._root,
+      'HTMLMediaElement' in this._root,
+      () => !!this._audioElement && 'canPlayType' in this._audioElement && this._audioElement instanceof this._root.HTMLAudioElement && this._audioElement instanceof this._root.HTMLMediaElement,
     ], true);
   }
 
@@ -84,8 +84,8 @@ export default class AudioFeature extends CssFlagsClass {
    */
   getContext() {
     return Asserts.one([
-      'AudioContext' in window,
-      'webkitAudioContext' in window,
+      'AudioContext' in this._root,
+      'webkitAudioContext' in this._root,
     ]);
   }
 
