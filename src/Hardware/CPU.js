@@ -169,7 +169,8 @@ export default class CPU extends CssFlagsClass {
   getAmd() {
     return Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
-      this._navigator.cpuClass === 'x64' || this._navigator.platform === 'Linux x86_64',
+      this._navigator.cpuClass === 'x64',
+      this._navigator.platform === 'Linux x86_64',
     ]) || Asserts.one([
       /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
@@ -188,7 +189,9 @@ export default class CPU extends CssFlagsClass {
     return Asserts.one([
       /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
-      this._navigator.cpuClass === 'x64' || this._navigator.platform === 'MacIntel' || this._navigator.platform === 'Linux x86_64',
+      this._navigator.cpuClass === 'x64',
+      this._navigator.platform === 'MacIntel',
+      this._navigator.platform === 'Linux x86_64',
     ]) || Asserts.one([
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       /(ia32(?=;))/i.test(this._ua),

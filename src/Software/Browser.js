@@ -40,24 +40,24 @@ export default class Browser extends CssFlagsClass {
     this._ua.match(this._reVer);
   }
 
-  /**
-   *
-   *
-   *
-   * @memberOf Browser
-   */
-  _destroyTestElements() {
-    this._reStrVerNum = null;
-    this._reStrVer = null;
-    this._reVer = null;
+  // /**
+  //  *
+  //  *
+  //  *
+  //  * @memberOf Browser
+  //  */
+  // _destroyTestElements() {
+  //   this._reStrVerNum = null;
+  //   this._reStrVer = null;
+  //   this._reVer = null;
 
-    delete this._reStrVerNum;
-    delete this._reStrVer;
-    delete this._reVer;
-  }
+  //   delete this._reStrVerNum;
+  //   delete this._reStrVer;
+  //   delete this._reVer;
+  // }
 
   _reTest(reStr = this._reStrVer) {
-    return new RegExp(reStr);
+    return new RegExp(reStr, 'i').test(this._ua);
   }
 
   /**
@@ -109,7 +109,7 @@ export default class Browser extends CssFlagsClass {
   get AndroidBrowser() {
     return this._checkAssertsResult(Asserts.all([
       !/like android/i.test(this._ua),
-      this._reTest('(?:android.*)?' + this._reStrVer),
+      this._reTest('(?:android.*)' + this._reStrVer),
     ]));
   }
 
@@ -122,7 +122,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Baidu() {
     return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:b(?:ai)?d(?:u)(?:browser|hd)(?:_i18n)?)' + this._reStrVerNum),
+      this._reTest('(?:(?:b(?:(?:a)?idu)?(?:d)?)(?:browser)(?:\\_i18n)?)' + this._reStrVerNum),
     ]));
   }
 

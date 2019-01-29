@@ -24,21 +24,21 @@ const createRollupFormat = function (bundle, format) {
         ]
       }),
       // autoExternal(),
-      // resolve({
-      //   // pass custom options to the resolve plugin
-      //   customResolveOptions: {
-      //     moduleDirectory: 'node_modules'
-      //   }
-      // }), // so Rollup can find dependencies
-      // commonjs({
-      //   include: 'node_modules/**'
-      // }), // so Rollup can convert dependencies to an ES module
+      resolve({
+        // pass custom options to the resolve plugin
+        customResolveOptions: {
+          moduleDirectory: 'node_modules'
+        }
+      }), // so Rollup can find dependencies
+      commonjs({
+        include: 'node_modules/**'
+      }), // so Rollup can convert dependencies to an ES module
       babel({
         exclude: 'node_modules/**',
       }),
-      // replace({
-      //   ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-      // }),
+      replace({
+        ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      }),
       (process.env.NODE_ENV === 'production' && uglify({
         mangle: true,
         compress: {
@@ -46,10 +46,11 @@ const createRollupFormat = function (bundle, format) {
           dead_code: true,
           conditionals: true,
           booleans: true,
+          hoist_vars: true,
           unused: true,
           if_return: true,
           join_vars: true,
-          drop_console: true
+          drop_console: true,
         }
       })),
       filesize(),
@@ -59,6 +60,6 @@ const createRollupFormat = function (bundle, format) {
 
 export default [
   createRollupFormat('main', 'umd'),
-  createRollupFormat('browser', 'iife'),
-  createRollupFormat('module', 'cjs'),
+  // createRollupFormat('browser', 'iife'),
+  // createRollupFormat('module', 'cjs'),
 ];

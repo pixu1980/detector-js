@@ -38,16 +38,16 @@ export default class VideoFeature extends CssFlagsClass {
     this._videoElement = this._document.createElement('video');
   }
 
-  /**
-   *
-   *
-   * @memberof VideoFeature
-   */
-  _destroyTestElements() {
-    this._viewElement = null;
+  // /**
+  //  *
+  //  *
+  //  * @memberof VideoFeature
+  //  */
+  // _destroyTestElements() {
+  //   this._viewElement = null;
 
-    delete this._videoElement;
-  }
+  //   delete this._videoElement;
+  // }
 
   /**
    *

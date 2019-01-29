@@ -148,30 +148,30 @@ export default class Feature extends CssFlagsClass {
     this._xmlHttpRequest = new this._root.XMLHttpRequest();
   }
 
-  /**
-   *
-   *
-   * @memberof Feature
-   */
-  _destroyTestElements() {
-    this._cssPrefixes = null;
+  // /**
+  //  *
+  //  *
+  //  * @memberof Feature
+  //  */
+  // _destroyTestElements() {
+  //   this._cssPrefixes = null;
 
-    this._script = null;
-    this._canvas = null;
-    this._div = null;
-    this._input = null;
-    this._img = null;
-    this._xmlHttpRequest = null;
+  //   this._script = null;
+  //   this._canvas = null;
+  //   this._div = null;
+  //   this._input = null;
+  //   this._img = null;
+  //   this._xmlHttpRequest = null;
 
-    delete this._cssPrefixes;
+  //   delete this._cssPrefixes;
 
-    delete this._script;
-    delete this._canvas;
-    delete this._div;
-    delete this._input;
-    delete this._img;
-    delete this._xmlHttpRequest;
-  }
+  //   delete this._script;
+  //   delete this._canvas;
+  //   delete this._div;
+  //   delete this._input;
+  //   delete this._img;
+  //   delete this._xmlHttpRequest;
+  // }
 
   /**
    *
@@ -637,7 +637,7 @@ export default class Feature extends CssFlagsClass {
    */
   get canvas() {
     return Asserts.all([
-      () => 'getContext' in this._canvas && this._canvas.getContext('2d'),
+      () => 'getContext' in this._canvas && !!this._canvas.getContext('2d'),
     ]);
   }
 
@@ -665,8 +665,8 @@ export default class Feature extends CssFlagsClass {
    */
   get webGL() {
     return Asserts.one([
-      () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2'),
       () => this.canvas && 'WebGLRenderingContext' in this._root && (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')),
+      () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2'),
     ], true);
   }
 

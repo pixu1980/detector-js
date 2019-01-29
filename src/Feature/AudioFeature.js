@@ -43,16 +43,16 @@ export default class AudioFeature extends CssFlagsClass {
     this._audioElement = this._document.createElement('audio');
   }
 
-  /**
-   *
-   *
-   * @memberof AudioFeature
-   */
-  _destroyTestElements() {
-    this._audioElement = null;
+  // /**
+  //  *
+  //  *
+  //  * @memberof AudioFeature
+  //  */
+  // _destroyTestElements() {
+  //   this._audioElement = null;
 
-    delete this._audioElement;
-  }
+  //   delete this._audioElement;
+  // }
 
   /**
    *
