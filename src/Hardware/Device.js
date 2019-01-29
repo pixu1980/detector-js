@@ -19,8 +19,5 @@ export default class Device extends CssFlagsClass {
    */
   constructor(ua = null, flags = {}, cssFlagsPrefix = 'device') {
     super(ua, flags, cssFlagsPrefix);
-
-    // remove unnecessary memory usage
-    delete this._flags;
   }
 }

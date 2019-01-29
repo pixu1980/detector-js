@@ -44,12 +44,6 @@ export default class Feature extends CssFlagsClass {
     this.userMedia = this.getUserMedia();
     this.vibration = this.getVibration();
     this.worker = this.getWorker();
-
-    // remove unnecessary memory usage
-    // this._destroyTestElements();
-
-    // delete this._performance;
-    // delete this._flags;
   }
 
   /**
@@ -160,12 +154,23 @@ export default class Feature extends CssFlagsClass {
    * @memberof Feature
    */
   _destroyTestElements() {
+    this._cssPrefixes = null;
+
     this._script = null;
     this._canvas = null;
     this._div = null;
     this._input = null;
     this._img = null;
     this._xmlHttpRequest = null;
+
+    delete this._cssPrefixes;
+
+    delete this._script;
+    delete this._canvas;
+    delete this._div;
+    delete this._input;
+    delete this._img;
+    delete this._xmlHttpRequest;
   }
 
   /**

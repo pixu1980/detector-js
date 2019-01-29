@@ -27,9 +27,6 @@ export default class VideoFeature extends CssFlagsClass {
       ogv: this.getOgv(),
       webm: this.getWebm(),
     };
-
-    // remove unnecessary memory usage
-    delete this._flags;
   }
 
   /**
@@ -47,7 +44,9 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberof VideoFeature
    */
   _destroyTestElements() {
-    this._videoElement = null;
+    this._viewElement = null;
+
+    delete this._videoElement;
   }
 
   /**

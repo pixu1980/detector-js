@@ -20,10 +20,6 @@ export default class AudioFeature extends CssFlagsClass {
   constructor(ua = null, flags = {}, cssFlagsPrefix = 'audio') {
     super(ua, flags, cssFlagsPrefix);
 
-    // Mimetypes accepted:
-    //   developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
-    //   bit.ly/iphoneoscodecs
-
     this._createTestElements();
 
     this.context = this.getContext();
@@ -54,6 +50,8 @@ export default class AudioFeature extends CssFlagsClass {
    */
   _destroyTestElements() {
     this._audioElement = null;
+
+    delete this._audioElement;
   }
 
   /**

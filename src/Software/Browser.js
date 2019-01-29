@@ -21,12 +21,43 @@ export default class Browser extends CssFlagsClass {
   constructor(ua = null, flags = {}, cssFlagsPrefix = 'browser') {
     super(ua, flags, cssFlagsPrefix);
 
-    this._spaceAndVersionDefaultRegExString = '(?:\\s|\\/)?(\\w+(?:(?:[._])\\w+)+)?';
-    this._versionDefaultRegEx = new RegExp('(?:version)' + this._spaceAndVersionDefaultRegExString, 'i');
-
-    this._ua.match(this._versionDefaultRegEx);
+    this._createTestElements();
 
     this.setVersion();
+  }
+
+  /**
+   *
+   *
+   *
+   * @memberOf Browser
+   */
+  _createTestElements() {
+    this._reStrVerNum = '(?:\\:|\\s|\\/)?(?:(\\w+(?:(?:\\.|\\_)\\w+)+)|\\d+)?';
+    this._reStrVer = '(?:version)' + this._reStrVerNum;
+    this._reVer = new RegExp(this._reStrVer, 'i');
+
+    this._ua.match(this._reVer);
+  }
+
+  /**
+   *
+   *
+   *
+   * @memberOf Browser
+   */
+  _destroyTestElements() {
+    this._reStrVerNum = null;
+    this._reStrVer = null;
+    this._reVer = null;
+
+    delete this._reStrVerNum;
+    delete this._reStrVer;
+    delete this._reVer;
+  }
+
+  _reTest(reStr = this._reStrVer) {
+    return new RegExp(reStr);
   }
 
   /**
@@ -38,7 +69,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Amaya() {
     return this._checkAssertsResult(Asserts.all([
-      new RegExp('(?:amaya)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
+      this._reTest('(?:amaya)' + this._reStrVerNum),
     ]));
   }
 
@@ -51,7 +82,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Arora() {
     return this._checkAssertsResult(Asserts.all([
-      new RegExp('(?:arora)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
+      this._reTest('(?:arora)' + this._reStrVerNum),
     ]));
   }
 
@@ -64,7 +95,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Avant() {
     return this._checkAssertsResult(Asserts.one([
-      new RegExp('(?:avant(?:\sbrowser))' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
+      this._reTest('(?:avant(?:\sbrowser))' + this._reStrVerNum),
     ]));
   }
 
@@ -78,10 +109,7 @@ export default class Browser extends CssFlagsClass {
   get AndroidBrowser() {
     return this._checkAssertsResult(Asserts.all([
       !/like android/i.test(this._ua),
-      /android/i.test(this._ua),
-    ]) && Asserts.one([
-      /(?:chrome|crios|crmo)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /android.+version\/([\w\.]+)\s+(?:mobile\s?safari|safari)*/i.test(this._ua),
+      this._reTest('(?:android.*)?' + this._reStrVer),
     ]));
   }
 
@@ -94,7 +122,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Baidu() {
     return this._checkAssertsResult(Asserts.one([
-      new RegExp('(?:b(?:ai)?d(?:u)(?:browser|hd)(?:_i18n)?)' + this._spaceAndVersionDefaultRegExString, 'i').test(this._ua),
+      this._reTest('(?:b(?:ai)?d(?:u)(?:browser|hd)(?:_i18n)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -107,7 +135,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Basilisk() {
     return this._checkAssertsResult(Asserts.one([
-      /(basilisk)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:basilisk)' + this._reStrVer),
     ]));
   }
 
@@ -119,12 +147,9 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get BlackBerry() {
-    return this._checkAssertsResult(Asserts.one([
-      /blackberry|\bbb\d+/i.test(this._ua),
-      /rim\stablet/i.test(this._ua),
-    ]) && Asserts.all([
-      /blackberry[\d]+\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]), true);
+    return this._checkAssertsResult(Asserts.all([
+      this._reTest('(?:blackberry|bb.*;.*\\)\\s)' + this._reStrVer),
+    ]));
   }
 
   /**
@@ -136,7 +161,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Blazer() {
     return this._checkAssertsResult(Asserts.one([
-      /(blazer)[\/\s]?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:blazer)' + this._reStrVerNum),
     ]));
   }
 
@@ -149,7 +174,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Bolt() {
     return this._checkAssertsResult(Asserts.one([
-      /(bolt)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:bolt)' + this._reStrVerNum),
     ]));
   }
 
@@ -162,7 +187,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Brave() {
     return this._checkAssertsResult(Asserts.one([
-      /(brave)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:brave)' + this._reStrVerNum),
     ]));
   }
 
@@ -175,7 +200,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Camino() {
     return this._checkAssertsResult(Asserts.one([
-      /(camino)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:camino)' + this._reStrVerNum),
     ]));
   }
 
@@ -188,7 +213,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Chimera() {
     return this._checkAssertsResult(Asserts.one([
-      /(chimera)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:chimera)' + this._reStrVerNum),
     ]));
   }
 
@@ -201,13 +226,11 @@ export default class Browser extends CssFlagsClass {
    */
   get Chrome() {
     return this._checkAssertsResult(Asserts.all([
-      !this.AndroidBrowser,
+      !this.Chromium,
       !this.ChromeMobile,
-    ]) && Asserts.one([
-      /(chrome)\/v?([\w\.]+)/i.test(this._ua),
-      /headlesschrome(?:\/([\w\.]+)|\s)/i.test(this._ua),
-    ]) && Asserts.one([
-      /(?:chrome)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+      !this.AndroidBrowser,
+      !this._reTest('like chrome'),
+      this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum),
     ]));
   }
 
@@ -219,8 +242,9 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get ChromeMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      /((?:android.+)crmo|crios)\/([\w\.]+)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.all([
+      !this._reTest('like chrome'),
+      this._reTest('((?:android.+)crmo|crios)' + this._reStrVerNum),
     ]));
   }
 
@@ -233,10 +257,9 @@ export default class Browser extends CssFlagsClass {
    */
   get Chromium() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:chromium)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
+      this._reTest('(?:chromium)' + this._reStrVerNum),
     ]));
   }
-
 
   /**
    *
@@ -247,7 +270,7 @@ export default class Browser extends CssFlagsClass {
    */
   get ComodoDragon() {
     return this._checkAssertsResult(Asserts.one([
-      /(comodo_dragon)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:comodo(?:\\_|\\s)dragon)' + this._reStrVerNum),
     ]));
   }
 
@@ -260,7 +283,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Conkeror() {
     return this._checkAssertsResult(Asserts.one([
-      /(conkeror)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:conkeror)' + this._reStrVerNum),
     ]));
   }
 
@@ -273,7 +296,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Dillo() {
     return this._checkAssertsResult(Asserts.all([
-      /(dillo)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:dillo)' + this._reStrVerNum),
     ]));
   }
 
@@ -286,9 +309,8 @@ export default class Browser extends CssFlagsClass {
    */
   get Dolphin() {
     return this._checkAssertsResult(Asserts.one([
-      /dolfin\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(dolfin)\/([\w\.]+)/i.test(this._ua),
-    ]), true);
+      this._reTest('(?:dolfin)' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -300,7 +322,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Dorado() {
     return this._checkAssertsResult(Asserts.one([
-      /Dorado WAP-Browser[/ ](\d+[\.\d]+)/i.test(this._ua),
+      this._reTest('(?:dorado.+ser)' + this._reStrVerNum),
     ]));
   }
 
@@ -313,7 +335,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Doris() {
     return this._checkAssertsResult(Asserts.all([
-      /(doris)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:doris)' + this._reStrVerNum),
     ]));
   }
 
@@ -327,10 +349,7 @@ export default class Browser extends CssFlagsClass {
   get Edge() {
     return this._checkAssertsResult(Asserts.all([
       !this.IE,
-    ]) && Asserts.one([
-      /edg([ea])\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /edg([ea])\/((\d+)?[\w\.]+)/i.test(this._ua),
-      /edg([ea])[ /](\d+[\.\d]+)/i.test(this._ua),
+      this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum),
     ]));
   }
 
@@ -342,12 +361,8 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get EdgeMobile() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.Edge,
-    ]) && Asserts.one([
-      /edgios\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /edgios\/((\d+)?[\w\.]+)/i.test(this._ua),
-      /EdgiOS[ /](\d+[\.\d]+)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:edg(?:ios|a))' + this._reStrVerNum),
     ]));
   }
 
@@ -375,8 +390,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Epiphany() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:epiphany)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(epiphany)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:epiphany)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -389,7 +403,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Falkon() {
     return this._checkAssertsResult(Asserts.one([
-      /(falkon)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:falkon)' + this._reStrVerNum),
     ]));
   }
 
@@ -402,7 +416,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Fennec() {
     return this._checkAssertsResult(Asserts.one([
-      /(fennec)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:fennec)' + this._reStrVerNum),
     ]));
   }
 
@@ -415,7 +429,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Firebird() {
     return this._checkAssertsResult(Asserts.one([
-      /(firebird)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:firebird)' + this._reStrVerNum),
     ]));
   }
 
@@ -428,8 +442,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Firefox() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:firefox|iceweasel)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(firefox)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:firefox|iceweasel)' + this._reStrVerNum),
     ]));
   }
 
@@ -442,8 +455,7 @@ export default class Browser extends CssFlagsClass {
    */
   get FirefoxFocus() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:focus)[\s/](\d+(?:\.\d+)+)/i.test(this._ua),
-      /(focus)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:focus)' + this._reStrVerNum),
     ]));
   }
 
@@ -457,8 +469,7 @@ export default class Browser extends CssFlagsClass {
   get FirefoxMobile() {
     return this._checkAssertsResult(Asserts.one([
       this.FirefoxFocus,
-      /(?:fxios)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /fxios\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:fxios)' + this._reStrVerNum),
     ]));
   }
 
@@ -471,7 +482,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Flock() {
     return this._checkAssertsResult(Asserts.one([
-      /(flock)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:flock)' + this._reStrVerNum),
     ]));
   }
 
@@ -484,7 +495,7 @@ export default class Browser extends CssFlagsClass {
    */
   get GoBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(gobrowser)\/?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:gobrowser)' + this._reStrVerNum),
     ]));
   }
 
@@ -497,7 +508,7 @@ export default class Browser extends CssFlagsClass {
    */
   get GoogleBot() {
     return this._checkAssertsResult(Asserts.one([
-      /googlebot\/(\d+(\.\d+))/i.test(this._ua),
+      this._reTest('(?:googlebot)' + this._reStrVerNum),
     ]));
   }
 
@@ -510,7 +521,7 @@ export default class Browser extends CssFlagsClass {
    */
   get iCab() {
     return this._checkAssertsResult(Asserts.all([
-      /(icab)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:icab)' + this._reStrVerNum),
     ]));
   }
 
@@ -523,7 +534,7 @@ export default class Browser extends CssFlagsClass {
    */
   get IceApe() {
     return this._checkAssertsResult(Asserts.one([
-      /(iceape)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:iceape)' + this._reStrVerNum),
     ]));
   }
 
@@ -536,7 +547,7 @@ export default class Browser extends CssFlagsClass {
    */
   get IceBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(ice\s?browser)\/v?([\w\._]+)/i.test(this._ua),
+      this._reTest('(?:ice\s?browser)' + this._reStrVerNum),
     ]));
   }
 
@@ -549,7 +560,7 @@ export default class Browser extends CssFlagsClass {
    */
   get IceCat() {
     return this._checkAssertsResult(Asserts.one([
-      /(icecat)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:icecat)' + this._reStrVerNum),
     ]));
   }
 
@@ -562,20 +573,7 @@ export default class Browser extends CssFlagsClass {
    */
   get IceDragon() {
     return this._checkAssertsResult(Asserts.one([
-      /(icedragon)[\/\s]?([\w\.\+]+)/i.test(this._ua),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get Iceweasel() {
-    return this._checkAssertsResult(Asserts.one([
-      /(iceweasel)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:icedragon)' + this._reStrVerNum),
     ]));
   }
 
@@ -588,11 +586,8 @@ export default class Browser extends CssFlagsClass {
    */
   get IE() {
     return this._checkAssertsResult(Asserts.all([
-      /(msie|trident)/i.test(this._ua),
-    ]) && Asserts.one([
-      /(?:ms|\()(ie)\s([\w\.]+)/i.test(this._ua),
-      /(?:msie |rv:)(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(trident).+rv[:\s]([\w\.]+).+like\sgecko/i.test(this._ua),
+      !this.IEMobile,
+      this._reTest('(?:(?:msie|trident\/[\w\d\.]+;\srv))' + this._reStrVerNum),
     ]));
   }
 
@@ -604,10 +599,8 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get IEMobile() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.IE,
-    ]) && Asserts.one([
-      /(iemobile)(?:browser)?[\/\s]?([\w\.]*)/i.test(this._ua),
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:iemobile)' + this._reStrVerNum),
     ]));
   }
 
@@ -620,7 +613,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Iridium() {
     return this._checkAssertsResult(Asserts.one([
-      /(iridium)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:iridium)' + this._reStrVerNum),
     ]));
   }
 
@@ -633,7 +626,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Iron() {
     return this._checkAssertsResult(Asserts.one([
-      /(iron)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:iron)' + this._reStrVerNum),
     ]));
   }
 
@@ -646,7 +639,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Jasmine() {
     return this._checkAssertsResult(Asserts.one([
-      /(jasmine)[\/\s]?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:jasmine)' + this._reStrVerNum),
     ]));
   }
 
@@ -659,8 +652,8 @@ export default class Browser extends CssFlagsClass {
    */
   get Konqueror() {
     return this._checkAssertsResult(Asserts.one([
-      /(konqueror)\/([\w\.]+)/i.test(this._ua),
-    ]), true);
+      this._reTest('(?:konqueror)' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -672,9 +665,8 @@ export default class Browser extends CssFlagsClass {
    */
   get KMeleon() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:k-meleon)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(k-meleon)\/([\w\.-]+)$/i.test(this._ua),
-    ]), true);
+      this._reTest('(?:k-meleon)' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -686,7 +678,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Links() {
     return this._checkAssertsResult(Asserts.one([
-      /(links)\s\(([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:links)' + this._reStrVerNum),
     ]));
   }
 
@@ -699,7 +691,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Linx() {
     return this._checkAssertsResult(Asserts.one([
-      /(lynx)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:lynx)' + this._reStrVerNum),
     ]));
   }
 
@@ -712,7 +704,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Lunascape() {
     return this._checkAssertsResult(Asserts.one([
-      /(lunascape)[\/\s]?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:lunascape)' + this._reStrVerNum),
     ]));
   }
 
@@ -725,7 +717,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Maemo() {
     return this._checkAssertsResult(Asserts.one([
-      /(maemo\sbrowser)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:maemo\sbrowser)' + this._reStrVerNum),
     ]));
   }
 
@@ -737,10 +729,10 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get Maxthon() {
-    return this._checkAssertsResult(Asserts.one([
-      /(?:Maxthon)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(maxthon)[\/\s]?([\w\.]*)/i.test(this._ua),
-    ]), true);
+    return this._checkAssertsResult(Asserts.all([
+      !this.MaxthonMobile,
+      this._reTest('(?:maxthon|mxnitro)' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -752,7 +744,7 @@ export default class Browser extends CssFlagsClass {
    */
   get MaxthonMobile() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:mxios)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
+      this._reTest('(?:mxios)' + this._reStrVerNum),
     ]));
   }
 
@@ -765,7 +757,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Midori() {
     return this._checkAssertsResult(Asserts.one([
-      /(midori)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:midori)' + this._reStrVerNum),
     ]));
   }
 
@@ -778,7 +770,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Minimo() {
     return this._checkAssertsResult(Asserts.one([
-      /(minimo)[\/\s]?([\w\.\+]+)/i.test(this._ua),
+      this._reTest('(?:minimo)' + this._reStrVerNum),
     ]));
   }
 
@@ -791,7 +783,7 @@ export default class Browser extends CssFlagsClass {
    */
   get MIUIBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /xiaomi\/miuibrowser\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:xiaomi\\/miuibrowser)' + this._reStrVerNum),
     ]));
   }
 
@@ -804,7 +796,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Mosaic() {
     return this._checkAssertsResult(Asserts.one([
-      /(mosaic)[\/\s]([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:mosaic)' + this._reStrVerNum),
     ]));
   }
 
@@ -817,7 +809,7 @@ export default class Browser extends CssFlagsClass {
    */
   get MZBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:MZBrowser)[\s/](\d+(?:\.\d+)+)/i.test(this._ua),
+      this._reTest('(?:MZBrowser)' + this._reStrVerNum),
     ]));
   }
 
@@ -830,7 +822,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Netfront() {
     return this._checkAssertsResult(Asserts.one([
-      /(netfront)[\/\s]?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:netfront)' + this._reStrVerNum),
     ]));
   }
 
@@ -843,7 +835,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Netscape() {
     return this._checkAssertsResult(Asserts.one([
-      /(navigator|netscape)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:navigator|netscape)' + this._reStrVerNum),
     ]));
   }
 
@@ -856,8 +848,7 @@ export default class Browser extends CssFlagsClass {
    */
   get NetSurf() {
     return this._checkAssertsResult(Asserts.one([
-      /NetSurf(?:\/(\d+[\.\d]+))?/i.test(this._ua),
-      /(netsurf)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:netsurf)' + this._reStrVerNum),
     ]));
   }
 
@@ -870,7 +861,7 @@ export default class Browser extends CssFlagsClass {
    */
   get NokiaBrowser() {
     return this._checkAssertsResult(Asserts.all([
-      /(nokia\s?browser)\/v?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:nokia\s?browser)' + this._reStrVerNum),
     ]));
   }
 
@@ -883,7 +874,7 @@ export default class Browser extends CssFlagsClass {
    */
   get OmniWeb() {
     return this._checkAssertsResult(Asserts.all([
-      /(omniweb)\/v?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:omniweb)' + this._reStrVerNum),
     ]));
   }
 
@@ -896,11 +887,12 @@ export default class Browser extends CssFlagsClass {
    */
   get Opera() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:opera)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(opera).+version\/([\w\.]+)/i.test(this._ua),
-      /(opera)[\/\s]+([\w\.]+)/i.test(this._ua),
-      /(?:opr)[\s/](\S+)/i.test(this._ua),
-      /\s(opr)\/([\w\.]+)/i.test(this._ua),
+      !!this._root.opera,
+      !!this._root.opr,
+    ]) && Asserts.all([
+      !this.OperaMobile,
+    ]) && Asserts.one([
+      this._reTest('(?:op(?:era|r)|mms)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -913,7 +905,7 @@ export default class Browser extends CssFlagsClass {
    */
   get OperaMini() {
     return this._checkAssertsResult(Asserts.one([
-      /(opera\smini)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:opera\smini)' + this._reStrVerNum),
     ]));
   }
 
@@ -926,7 +918,7 @@ export default class Browser extends CssFlagsClass {
    */
   get OperaTouch() {
     return this._checkAssertsResult(Asserts.one([
-      /(opt)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:opt)' + this._reStrVerNum),
     ]));
   }
 
@@ -939,8 +931,7 @@ export default class Browser extends CssFlagsClass {
    */
   get OperaCoast() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:coast)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(coast)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:coast)' + this._reStrVerNum),
     ]));
   }
 
@@ -951,13 +942,15 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get OperaMobile() { // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch
+  get OperaMobile() { // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch || Opera iOS
     return this._checkAssertsResult(Asserts.one([
+      !!this._root.opera,
+      !!this._root.opr,
+    ]) && Asserts.one([
       this.OperaMini,
       this.OperaCoast,
-      /(?:opios)[\s/](\S+)/i.test(this._ua),
-      /(opios)[\/\s]+([\w\.]+)/i.test(this._ua),
-      /(opera\s[mobiletab]+).+version\/([\w\.-]+)/i.test(this._ua),
+      this.OperaTouch,
+      this._reTest('(?:op(?:r|ios))' + this._reStrVerNum),
     ]));
   }
 
@@ -970,7 +963,7 @@ export default class Browser extends CssFlagsClass {
    */
   get OviBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(ovibrowser)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:ovibrowser)' + this._reStrVerNum),
     ]));
   }
 
@@ -983,7 +976,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Palemoon() {
     return this._checkAssertsResult(Asserts.one([
-      /(palemoon)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:palemoon)' + this._reStrVerNum),
     ]));
   }
 
@@ -996,7 +989,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Phoenix() {
     return this._checkAssertsResult(Asserts.one([
-      /(phoenix)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:phoenix)' + this._reStrVerNum),
     ]));
   }
 
@@ -1009,9 +1002,7 @@ export default class Browser extends CssFlagsClass {
    */
   get PhantomJS() {
     return this._checkAssertsResult(Asserts.one([
-      /phantom/i.test(this._ua),
-      /phantomjs\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(phantomjs)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:phantomjs)' + this._reStrVerNum),
     ]));
   }
 
@@ -1024,7 +1015,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Polaris() {
     return this._checkAssertsResult(Asserts.one([
-      /(polaris)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:polaris)' + this._reStrVerNum),
     ]));
   }
 
@@ -1037,8 +1028,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Puffin() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:puffin)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(puffin)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:puffin)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -1050,10 +1040,22 @@ export default class Browser extends CssFlagsClass {
    * @memberOf Browser
    */
   get QQBrowser() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.QQBrowserMobile,
+      this._reTest('(?:qq(?:browser)?(?:lite)?)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get QQBrowserMobile() {
     return this._checkAssertsResult(Asserts.one([
-      /(qqbrowserlite)\/([\w\.]+)/i.test(this._ua),
-      /(QQ)\/([\d\.]+)/i.test(this._ua),
-      /m?(qqbrowser)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:mqq(?:browser)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -1066,7 +1068,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Quark() {
     return this._checkAssertsResult(Asserts.one([
-      /(quark)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:quark)' + this._reStrVerNum),
     ]));
   }
 
@@ -1079,8 +1081,7 @@ export default class Browser extends CssFlagsClass {
    */
   get QupZilla() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:qupzilla)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(qupzilla)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:qupzilla)' + this._reStrVerNum),
     ]));
   }
 
@@ -1093,7 +1094,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Reconq() {
     return this._checkAssertsResult(Asserts.one([
-      /(rekonq)\/([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:rekonq)' + this._reStrVerNum),
     ]));
   }
 
@@ -1106,7 +1107,7 @@ export default class Browser extends CssFlagsClass {
    */
   get RockMelt() {
     return this._checkAssertsResult(Asserts.one([
-      /(rockmelt)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:rockmelt)' + this._reStrVerNum),
     ]));
   }
 
@@ -1159,8 +1160,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Sailfish() {
     return this._checkAssertsResult(Asserts.one([
-      /sailfish\s?browser\/(\d+(\.\d+)?)/i.test(this._ua),
-      /SailfishBrowser(?:\/(\d+[\.\d]+))?/i.test(this._ua),
+      this._reTest('(?:sailfish(?:\s?browser))' + this._reStrVerNum),
     ]));
   }
 
@@ -1173,8 +1173,8 @@ export default class Browser extends CssFlagsClass {
    */
   get SamsungBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:SamsungBrowser)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]), true);
+      this._reTest('(?:samsungbrowser)' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -1186,8 +1186,7 @@ export default class Browser extends CssFlagsClass {
    */
   get SeaMonkey() {
     return this._checkAssertsResult(Asserts.one([
-      /seamonkey\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(seamonkey)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:seamonkey)' + this._reStrVerNum),
     ]));
   }
 
@@ -1200,9 +1199,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Silk() {
     return this._checkAssertsResult(Asserts.one([
-      /silk\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(silk)\/([\w\.-]+)/i.test(this._ua),
-      /(kindle)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:silk)' + this._reStrVerNum),
     ]));
   }
 
@@ -1215,7 +1212,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Skyfire() {
     return this._checkAssertsResult(Asserts.one([
-      /(skyfire)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:skyfire)' + this._reStrVerNum),
     ]));
   }
 
@@ -1228,8 +1225,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Sleipnir() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:sleipnir)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(sleipnir)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:sleipnir)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -1242,7 +1238,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Slim() {
     return this._checkAssertsResult(Asserts.all([
-      /(slim)(?:browser)?[\/\s]?([\w\.]*)/i.test(this._ua),
+      this._reTest('(?:slim(?:browser)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -1255,7 +1251,7 @@ export default class Browser extends CssFlagsClass {
    */
   get SlimerJS() {
     return this._checkAssertsResult(Asserts.one([
-      /slimerjs\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+      this._reTest('(?:slimerjs)' + this._reStrVerNum),
     ]));
   }
 
@@ -1268,7 +1264,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Swing() {
     return this._checkAssertsResult(Asserts.all([
-      /(?:swing)[\s/](\d+(?:\.\d+)+)/i.test(this._ua),
+      this._reTest('(?:swing)' + this._reStrVerNum),
     ]));
   }
 
@@ -1281,7 +1277,7 @@ export default class Browser extends CssFlagsClass {
    */
   get TizenBrowser() {
     return this._checkAssertsResult(Asserts.all([
-      /(tizen\s?browser)\/v?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:tizen(?:browser)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -1292,11 +1288,10 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get UCBrowser() {
+  get UCBrowser() { // a.k.a. UCBrowserMobile || UCBrowserMini
     return this._checkAssertsResult(Asserts.all([
-      /(?:ucbrowser)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /((?:[\s\/])uc?\s?browser|(?:juc.+)ucweb)[\/\s]?([\w\.]+)/i.test(this._ua),
-    ]), true);
+      this._reTest('(?:uc(?:mini|browser))' + this._reStrVerNum),
+    ]));
   }
 
   /**
@@ -1308,8 +1303,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Vivaldi() {
     return this._checkAssertsResult(Asserts.all([
-      /vivaldi\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(vivaldi)\/([\w\.-]+)/i.test(this._ua),
+      this._reTest('(?:vivaldi)' + this._reStrVerNum),
     ]));
   }
 
@@ -1322,7 +1316,7 @@ export default class Browser extends CssFlagsClass {
    */
   get w3m() {
     return this._checkAssertsResult(Asserts.all([
-      /(w3m)[\/\s]?([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:w3m)' + this._reStrVerNum),
     ]));
   }
 
@@ -1335,7 +1329,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Waterfox() {
     return this._checkAssertsResult(Asserts.one([
-      /(waterfox)\/([\w\.-]+)$/i.test(this._ua),
+      this._reTest('(?:waterfox)' + this._reStrVerNum),
     ]));
   }
 
@@ -1348,8 +1342,7 @@ export default class Browser extends CssFlagsClass {
    */
   get WebOSBrowser() {
     return this._checkAssertsResult(Asserts.one([
-      /(web|hpw)[o0]s/i.test(this._ua),
-      /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+      this._reTest('(?:w(?:eb)?osbrowser)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -1362,8 +1355,7 @@ export default class Browser extends CssFlagsClass {
    */
   get WeChat() {
     return this._checkAssertsResult(Asserts.one([
-      /(?:micromessenger)[\s/](\d+(\.?_?\d+)+)/i.test(this._ua),
-      /(micromessenger)\/([\w\.]+)/i.test(this._ua),
+      this._reTest('(?:micromessenger)' + this._reStrVerNum),
     ]));
   }
 
@@ -1376,7 +1368,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Whale() {
     return this._checkAssertsResult(Asserts.all([
-      /(whale)(?:\s|\/)(\d+(?:(?:\.|\_)\d+)+)/i.test(this._ua),
+      this._reTest('(?:whale)' + this._reStrVerNum),
     ]), true);
   }
 
@@ -1389,7 +1381,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Yandex() {
     return Asserts.one([
-      /(?:ya(?:browser|ndex))(?:\s|\/)(\d+(?:(?:\.|\_)\d+)+)/i.test(this._ua),
+      this._reTest('(?:ya(?:browser|ndex))' + this._reStrVerNum),
     ]);
   }
 
