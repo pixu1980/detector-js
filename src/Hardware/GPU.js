@@ -21,8 +21,6 @@ export default class GPU extends CssFlagsClass {
 
     this._createTestElements();
 
-    this._info = this.getInfo();
-
     this.webGLVendor = this._info.webGLVendor;
     this.webGLRenderer = this._info.webGLRenderer;
     this.vendor = this._info.vendor;
@@ -38,6 +36,7 @@ export default class GPU extends CssFlagsClass {
    */
   _createTestElements() {
     this._canvas = this._document.createElement('canvas');
+    this._info = this.getInfo();
   }
 
   /**
@@ -48,6 +47,10 @@ export default class GPU extends CssFlagsClass {
    */
   _destroyTestElements() {
     this._canvas = null;
+    this._info = null;
+
+    delete this._canvas;
+    delete this._info;
   }
 
   /**
