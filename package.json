@@ -3,6 +3,8 @@
   "version": "0.2.1",
   "description": "DetectorJS, a runtime zero-dependency platform detector written in ES6",
   "main": "dist/detector.min.js",
+  "browser": "dist/detector.browser.min.js",
+  "module": "dist/detector.module.min.js",
   "scripts": {
     "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",

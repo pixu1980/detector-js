@@ -33,10 +33,10 @@ export default class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(flags = false, cssFlags = false, cssFlagsPrefix = 'djs', ua = null) {
+  constructor(values = true, cssFlags = true, cssFlagsPrefix = 'djs', ua = null) {
     super(ua);
 
-    this._flags = flags;
+    this._values = values;
     this._cssFlags = !!cssFlags ? [] : null;
     this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
 
@@ -49,7 +49,7 @@ export default class Detector extends FlagsClass {
     this.checkOS();
 
     //! Hardware
-    this.checkDevice();
+    // this.checkDevice();
     this.checkCPU();
     this.checkGPU();
     this.checkPlatform();
@@ -100,10 +100,10 @@ export default class Detector extends FlagsClass {
   checkEngine() {
     const engine = new Engine(this._ua, this.toFlags());
 
-    if(this._flags) {
-      this.engine = engine.toFlags();
-    } else {
+    if(this._values) {
       this.engine = engine.toValues();
+    } else {
+      this.engine = engine.toFlags();
     }
 
     if (!!this._cssFlags) {
@@ -120,10 +120,10 @@ export default class Detector extends FlagsClass {
   checkBrowser() {
     const browser = new Browser(this._ua, this.toFlags());
 
-    if(this._flags) {
-      this.browser = browser.toFlags();
-    } else {
+    if(this._values) {
       this.browser = browser.toValues();
+    } else {
+      this.browser = browser.toFlags();
     }
 
     if (!!this._cssFlags) {
@@ -140,10 +140,10 @@ export default class Detector extends FlagsClass {
   checkOS() {
     const os = new OS(this._ua, this.toFlags());
 
-    if(this._flags) {
-      this.os = os.toFlags();
-    } else {
+    if(this._values) {
       this.os = os.toValues();
+    } else {
+      this.os = os.toFlags();
     }
 
     if (!!this._cssFlags) {
@@ -177,10 +177,10 @@ export default class Detector extends FlagsClass {
   checkCPU() {
     const cpu = new CPU(this._ua, this.toFlags());
 
-    if(this._flags) {
-      this.cpu = cpu.toFlags();
-    } else {
+    if(this._values) {
       this.cpu = cpu.toValues();
+    } else {
+      this.cpu = cpu.toFlags();
     }
 
     if (!!this._cssFlags) {
@@ -213,10 +213,10 @@ export default class Detector extends FlagsClass {
   checkPlatform() {
     const platform = new Platform(this._ua, this.toFlags());
 
-    if(this._flags) {
-      this.platform = platform.toFlags();
-    } else {
+    if(this._values) {
       this.platform = platform.toValues();
+    } else {
+      this.platform = platform.toFlags();
     }
 
     if (!!this._cssFlags) {

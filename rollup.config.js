@@ -7,12 +7,12 @@ import replace from 'rollup-plugin-replace';
 import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
-const createRollupFormat = function (format) {
+const createRollupFormat = function (bundle, format) {
   return {
     input: 'src/index.js',
     output: {
       name: 'Detector',
-      file: pkg.main,
+      file: pkg[bundle],
       format: format,
     },
     plugins: [
@@ -43,6 +43,7 @@ const createRollupFormat = function (format) {
 };
 
 export default [
-  // createRollupFormat('iife'),
-  createRollupFormat('umd')
+  createRollupFormat('main', 'umd'),
+  createRollupFormat('browser', 'iife'),
+  createRollupFormat('module', 'cjs'),
 ];

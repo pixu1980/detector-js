@@ -1125,7 +1125,7 @@ export default class Browser extends CssFlagsClass {
       !this.Chrome,
       !this.PhantomJS,
     ]) && Asserts.one([
-      /Version\/(\d+[\.\d]+).*Safari\/|Safari\/\d+/i.test(this._ua),
+      /(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua),
     ]));
   }
 
@@ -1146,6 +1146,7 @@ export default class Browser extends CssFlagsClass {
       /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
       /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
       /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua),
+      /(?:applewebkit\/\d+.*)(?:.*mobile\/(?:\d+)?)(?:.*safari\/(?:\d+)?)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?/i.test(this._ua),
     ]));
   }
 
