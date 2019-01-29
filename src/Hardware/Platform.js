@@ -65,10 +65,7 @@ export default class Platform extends CssFlagsClass {
       this._flags.browser.IEMobile,
       this._flags.browser.FirefoxMobile,
       this._flags.browser.MaxthonMobile,
-      this._flags.browser.OperaCoast,
-      this._flags.browser.OperaMini,
       this._flags.browser.OperaMobile,
-      this._flags.browser.OperaTouch,
       this._flags.browser.SafariMobile,
     ]));
   }

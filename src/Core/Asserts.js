@@ -5,8 +5,20 @@
  * @class Asserts
  */
 export default class Asserts {
-  static _checkAssert(assert) {
-    return !!assert && assert instanceof Function ? assert() : assert;
+  static _checkAssert(assert, safe = false) {
+    if (!!assert) {
+      if (assert instanceof Function && safe) {
+        try {
+          return assert();
+        } catch (e) {
+          return false;
+        }
+      }
+
+      return assert;
+    }
+
+    return false;
   }
 
   /**
@@ -20,15 +32,7 @@ export default class Asserts {
    * @memberOf Asserts
    */
   static all(asserts = [], safe = false) {
-    if (!!safe) {
-      try {
-        return asserts.every(Asserts._checkAssert);
-      } catch (e) {
-        return false;
-      }
-    }
-
-    return asserts.every(Asserts._checkAssert);
+    return asserts.every(assert => Asserts._checkAssert(assert, safe));
   }
 
   /**
@@ -42,14 +46,6 @@ export default class Asserts {
    * @memberOf Asserts
    */
   static one(asserts = [], safe = false) {
-    if (!!safe) {
-      try {
-        return asserts.some(Asserts._checkAssert);
-      } catch (e) {
-        return false;
-      }
-    }
-
-    return asserts.some(Asserts._checkAssert);
+    return asserts.some(assert => Asserts._checkAssert(assert, safe));
   }
 }

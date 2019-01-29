@@ -39,19 +39,19 @@ export default class GPU extends CssFlagsClass {
     this._info = this.getInfo();
   }
 
-  /**
-   *
-   *
-   *
-   * @memberOf GPU
-   */
-  _destroyTestElements() {
-    this._canvas = null;
-    this._info = null;
+  // /**
+  //  *
+  //  *
+  //  *
+  //  * @memberOf GPU
+  //  */
+  // _destroyTestElements() {
+  //   this._canvas = null;
+  //   this._info = null;
 
-    delete this._canvas;
-    delete this._info;
-  }
+  //   delete this._canvas;
+  //   delete this._info;
+  // }
 
   /**
    *
