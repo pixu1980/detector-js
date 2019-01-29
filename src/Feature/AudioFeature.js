@@ -36,9 +36,6 @@ export default class AudioFeature extends CssFlagsClass {
       wav: this.getWav(),
       m4a: this.getM4a(),
     };
-
-    // remove unnecessary memory usage
-    // delete this._flags;
   }
 
   /**

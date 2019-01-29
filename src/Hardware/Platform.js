@@ -161,4 +161,14 @@ export default class Platform extends CssFlagsClass {
       !this.tv,
     ]);
   }
+
+  toValues() {
+    const proto = Object.getPrototypeOf(this);
+
+    const protoProperties = Object.getOwnPropertyNames(proto).filter((prop) => {
+      return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!this[prop];
+    });
+
+    return protoProperties[0] || 'n/a';
+  }
 }

@@ -5,21 +5,21 @@ export default class CPU extends CssFlagsClass {
   constructor(ua = null, flags = {}, cssFlagsPrefix = 'cpu') {
     super(ua, flags, cssFlagsPrefix);
 
+    this._booleanFlagsValuePropertyName = 'vendor';
+
     this.platform = this.getPlatform();
     this.cores = this.getCores();
     this.architecture = this.getArchitecture();
 
-    this.vendor = {
-      sparc: this.getSparc(),
-      irix: this.getIrix(),
-      mips: this.getMips(),
-      risc: this.getRisc(),
-      avr: this.getAvr(),
-      arm: this.getArm(),
-      powerPC: this.getPowerPC(),
-      amd: this.getAmd(),
-      intel: this.getIntel(),
-    };
+    this.sparc = this.getSparc();
+    this.irix = this.getIrix();
+    this.mips = this.getMips();
+    this.risc = this.getRisc();
+    this.avr = this.getAvr();
+    this.arm = this.getArm();
+    this.powerPC = this.getPowerPC();
+    this.amd = this.getAmd();
+    this.intel = this.getIntel();
   }
 
   /**

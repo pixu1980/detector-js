@@ -241,7 +241,7 @@ export default class Engine extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.all([
       'webkitConvertPointFromNodeToPage' in this._root,
     ]) && Asserts.one([
-      /((?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
+      /(?:(?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));
   }
 

@@ -21,8 +21,6 @@ export default class Feature extends CssFlagsClass {
   constructor(ua = null, flags = {}, cssFlagsPrefix = 'feature') {
     super(ua, flags, cssFlagsPrefix);
 
-    this._cssPrefixes = ['spec', 'webkit', 'moz', 'ms', 'o'];
-
     this._createTestElements();
 
     this.addEventListener = this.getAddEventListener();
@@ -54,13 +52,22 @@ export default class Feature extends CssFlagsClass {
     // delete this._flags;
   }
 
+  /**
+   *
+   *
+   * @param {any} prop
+   * @param {any} [prefixes=this._cssPrefixes]
+   * @returns
+   *
+   * @memberOf Feature
+   */
   _getCssPrefixedProp(prop, prefixes = this._cssPrefixes) {
     prop = prop.toCamelCase();
 
     const prefixedProps = prefixes.map(item => (item === 'spec' ? '' : '-' + item + '-') + prop);
 
     // if ('CSS' in this._root && 'supports' in this._root.CSS) {
-    //   return window.CSS.supports(prefixedProps.map(item => '(' + item + ': inherit)').join(' or '));
+    //   return this._root.CSS.supports(prefixedProps.map(item => '(' + item + ': inherit)').join(' or '));
     // }
 
     const prefixedPropsFound = prefixedProps.filter(item => item in this._div.style);
@@ -72,10 +79,28 @@ export default class Feature extends CssFlagsClass {
     return null;
   }
 
+  /**
+   *
+   *
+   * @param {any} prop
+   * @param {any} [prefixes=this._cssPrefixes]
+   * @returns
+   *
+   * @memberOf Feature
+   */
   _checkCssPrefixedProp(prop, prefixes = this._cssPrefixes) {
     return !!this._getCssPrefixedProp(prop, prefixes);
   }
 
+  /**
+   *
+   *
+   * @param {any} prop
+   * @param {any} value
+   * @returns
+   *
+   * @memberOf Feature
+   */
   _getCssPrefixedPropValue(prop, value) {
     const prefixedProp = this._getCssPrefixedProp(prop);
 
@@ -98,6 +123,15 @@ export default class Feature extends CssFlagsClass {
     return null;
   }
 
+  /**
+   *
+   *
+   * @param {any} prop
+   * @param {any} value
+   * @returns
+   *
+   * @memberOf Feature
+   */
   _checkCssPrefixedPropValue(prop, value) {
     const prefixedPropValue = this._getCssPrefixedPropValue(prop, value);
 
@@ -110,6 +144,8 @@ export default class Feature extends CssFlagsClass {
    * @memberof Feature
    */
   _createTestElements() {
+    this._cssPrefixes = ['spec', 'webkit', 'moz', 'ms', 'o'];
+
     this._script = this._document.createElement('script');
     this._canvas = this._document.createElement('canvas');
     this._div = this._document.createElement('div');

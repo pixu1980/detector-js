@@ -35,9 +35,9 @@ export default class CssFlagsClass extends FlagsClass {
 
     return Object.getOwnPropertyNames(proto).filter((prop) => {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
-    }).reduce((acc, item) => {
-      if(!!this[item]) {
-        acc.push((this._cssFlagsPrefix + '--' + item + (typeof this[item] !== 'boolean' ? '--' + this[item] : '')).toLowerCase());
+    }).reduce((acc, prop) => {
+      if(!!this[prop]) {
+        acc.push((this._cssFlagsPrefix + '--' + prop + (typeof this[prop] !== 'boolean' ? '--' + this[prop] : '')).toLowerCase());
       }
 
       return acc;

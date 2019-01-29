@@ -33,9 +33,10 @@ export default class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(cssFlags = false, cssFlagsPrefix = 'djs', ua = null) {
+  constructor(flags = false, cssFlags = false, cssFlagsPrefix = 'djs', ua = null) {
     super(ua);
 
+    this._flags = flags;
     this._cssFlags = !!cssFlags ? [] : null;
     this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
 
@@ -99,7 +100,11 @@ export default class Detector extends FlagsClass {
   checkEngine() {
     const engine = new Engine(this._ua, this.toFlags());
 
-    this.engine = engine.toFlags();
+    if(this._flags) {
+      this.engine = engine.toFlags();
+    } else {
+      this.engine = engine.toValues();
+    }
 
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(engine.toCssFlags());
@@ -115,7 +120,11 @@ export default class Detector extends FlagsClass {
   checkBrowser() {
     const browser = new Browser(this._ua, this.toFlags());
 
-    this.browser = browser.toFlags();
+    if(this._flags) {
+      this.browser = browser.toFlags();
+    } else {
+      this.browser = browser.toValues();
+    }
 
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(browser.toCssFlags());
@@ -131,7 +140,11 @@ export default class Detector extends FlagsClass {
   checkOS() {
     const os = new OS(this._ua, this.toFlags());
 
-    this.os = os.toFlags();
+    if(this._flags) {
+      this.os = os.toFlags();
+    } else {
+      this.os = os.toValues();
+    }
 
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(os.toCssFlags());
@@ -164,7 +177,11 @@ export default class Detector extends FlagsClass {
   checkCPU() {
     const cpu = new CPU(this._ua, this.toFlags());
 
-    this.cpu = cpu.toFlags();
+    if(this._flags) {
+      this.cpu = cpu.toFlags();
+    } else {
+      this.cpu = cpu.toValues();
+    }
 
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
@@ -196,7 +213,11 @@ export default class Detector extends FlagsClass {
   checkPlatform() {
     const platform = new Platform(this._ua, this.toFlags());
 
-    this.platform = platform.toFlags();
+    if(this._flags) {
+      this.platform = platform.toFlags();
+    } else {
+      this.platform = platform.toValues();
+    }
 
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(platform.toCssFlags());
