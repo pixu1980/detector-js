@@ -1,3 +1,12 @@
+## [Version 1.0.2](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.2) (2019-1-30)
+
+### Bug fixes
+
+- fix electron detection: [`66ab6b8`](https://github.com/:blackmirror1980/detector-js/commit/66ab6b8)
+- fix electron detection: [`3772d4f`](https://github.com/:blackmirror1980/detector-js/commit/3772d4f)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.1...v1.0.2)
+
 ## [Version 1.0.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.1) (2019-1-30)
 
 ### Bug fixes
