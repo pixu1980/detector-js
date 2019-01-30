@@ -1,3 +1,11 @@
+## [Version 1.0.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.1) (2019-1-30)
+
+### Bug fixes
+
+- fix process variable: [`881a0d0`](https://github.com/:blackmirror1980/detector-js/commit/881a0d0)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.0...v1.0.1)
+
 ## [Version 1.0.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.0) (2019-1-30)
 
 ### Bug fixes
