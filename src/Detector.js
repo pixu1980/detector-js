@@ -33,7 +33,7 @@ export default class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(values = true, cssFlags = true, cssFlagsPrefix = 'djs', ua = null) {
+  constructor(ua = null, values = true, cssFlags = true, cssFlagsPrefix = 'djs') {
     super(ua);
 
     this._values = values;
@@ -57,6 +57,8 @@ export default class Detector extends FlagsClass {
     this.setCssFlags();
 
     // remove unnecessary memory usage
+    delete this._booleanFlagsValuePropertyName;
+    delete this._values;
     delete this._cssFlags;
     delete this._cssFlagsPrefix;
     delete this._root;
