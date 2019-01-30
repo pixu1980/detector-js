@@ -14,7 +14,7 @@ export default class FlagsClass {
   constructor(ua = null) {
     this._booleanFlagsValuePropertyName = 'name';
     this._root = window || global || {};
-    this._process = this._root.process || process || {};
+    this._process = this._root.process || {};
     this._navigator = this._root.navigator || {};
     this._document = this._root.document || null;
     this._ua = ua || this._navigator.userAgent || 'n/a';
