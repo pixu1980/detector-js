@@ -1,3 +1,16 @@
+## [Version 1.0.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.0) (2019-1-30)
+
+### Bug fixes
+
+- reworking regexes for browsers: [`640185a`](https://github.com/:blackmirror1980/detector-js/commit/640185a)
+- added toValues support: [`2e4d851`](https://github.com/:blackmirror1980/detector-js/commit/2e4d851)
+- preparing first release: [`4805f1f`](https://github.com/:blackmirror1980/detector-js/commit/4805f1f)
+- optimizations & regex rewriting: [`ac053e7`](https://github.com/:blackmirror1980/detector-js/commit/ac053e7)
+- fix asserts flags & all browsers regex failure: [`14d2dc2`](https://github.com/:blackmirror1980/detector-js/commit/14d2dc2)
+- preparing release 1.0: [`5b64cde`](https://github.com/:blackmirror1980/detector-js/commit/5b64cde)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v0.2.1...v1.0.0)
+
 ## [Version 0.2.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v0.2.1) (2019-1-28)
 
 ### Bug fixes
