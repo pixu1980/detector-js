@@ -45,6 +45,7 @@
   },
   "homepage": "https://github.com/blackmirror1980/detector-js#readme",
   "documentation": "https://blackmirror1980.github.io/detector-js/docs/index.html",
+  "todo": "https://github.com/blackmirror1980/detector-js#todo",
   "files": [
     "dist"
   ],

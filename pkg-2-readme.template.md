@@ -4,10 +4,12 @@ v{{version}}
 ## Description
 {{description}}
 
+Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
+
 {{#author}}
 ## Author
 {{author_name}}
- {{/author}}
+{{/author}}
 
 {{#badges}}
 ## Badges
@@ -26,7 +28,8 @@ Check out this [Codepen]({{example}}) example
 
 ## Installation
 This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/). 
-It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) command line tools.
+
+It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) package managers.
 
 ```sh
 npm i {{name}}
@@ -47,7 +50,34 @@ console.log(detector);
 
 ```json
 {
-  feature: {
+  engine:{
+    name:'WebKit',
+    version:'605.1.15'
+  },
+  browser:{
+    name:'Safari',
+    version:'12.0.3'
+  },
+  os:{
+    name:'macOS',
+    version:'10.14.3',
+    versionName:'Mojave'
+  },
+  cpu:{
+    platform:'MacIntel',
+    cores:1,
+    architecture:'x64',
+    vendor:'intel'
+  },
+  gpu:{
+    webGLVendor:'WebKit',
+    webGLRenderer:'WebKit WebGL',
+    vendor:'Intel Inc.',
+    model:'Intel Iris',
+    renderer:'Intel Iris OpenGL Engine'
+  },
+  platform:'desktop',
+    feature: {
     pointerEnabled:false,
     pixelRatio:1,
     pointerLock:true,
@@ -113,36 +143,15 @@ console.log(detector);
         webm:false
       }
     }
-  },
-  engine:{
-    name:'WebKit',
-    version:'605.1.15'
-  },
-  browser:{
-    name:'Safari',
-    version:'12.0.3'
-  },
-  os:{
-    name:'macOS',
-    version:'10.14.3',
-    versionName:'Mojave'
-  },
-  cpu:{
-    platform:'MacIntel',
-    cores:1,
-    architecture:'x64',
-    vendor:'intel'
-  },
-  gpu:{
-    webGLVendor:'WebKit',
-    webGLRenderer:'WebKit WebGL',
-    vendor:'Intel Inc.',
-    model:'Intel Iris',
-    renderer:'Intel Iris OpenGL Engine'
-  },
-  platform:'desktop'
+  }
 }
 ```
+
+## Todo
+- refine browsers regexes
+- refine documentation
+- implement modular custom build feature
+- decide to implement or not device infos detection
 
 ## Dependencies
 {{#depDetails}}
