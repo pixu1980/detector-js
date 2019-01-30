@@ -39,20 +39,7 @@ const createRollupFormat = function (bundle, format) {
       replace({
         ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
       }),
-      (process.env.NODE_ENV === 'production' && uglify({
-        mangle: true,
-        compress: {
-          sequences: true,
-          dead_code: true,
-          conditionals: true,
-          booleans: true,
-          hoist_vars: true,
-          unused: true,
-          if_return: true,
-          join_vars: true,
-          drop_console: true,
-        }
-      })),
+      (process.env.NODE_ENV === 'production' && uglify()),
       filesize(),
     ],
   };

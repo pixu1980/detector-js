@@ -51,7 +51,7 @@ export default class Feature extends CssFlagsClass {
    *
    * @param {any} prop
    * @param {any} [prefixes=this._cssPrefixes]
-   * @returns
+   * @returns {string}
    *
    * @memberOf Feature
    */
@@ -78,7 +78,7 @@ export default class Feature extends CssFlagsClass {
    *
    * @param {any} prop
    * @param {any} [prefixes=this._cssPrefixes]
-   * @returns
+   * @returns {string}
    *
    * @memberOf Feature
    */
@@ -91,7 +91,7 @@ export default class Feature extends CssFlagsClass {
    *
    * @param {any} prop
    * @param {any} value
-   * @returns
+   * @returns {any}
    *
    * @memberOf Feature
    */
@@ -122,7 +122,7 @@ export default class Feature extends CssFlagsClass {
    *
    * @param {any} prop
    * @param {any} value
-   * @returns
+   * @returns {any}
    *
    * @memberOf Feature
    */
@@ -698,7 +698,7 @@ export default class Feature extends CssFlagsClass {
       'ontouchstart' in this._document.documentElement,
     ]) && Asserts.one([
       () => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch,
-      () => this.pointerEnabled() && 'MSGesture' in this._root,
+      () => this.pointerEnabled && 'MSGesture' in this._root,
       () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1,
     ], true);
   }

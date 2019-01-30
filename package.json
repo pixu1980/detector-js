@@ -1,7 +1,7 @@
 {
   "name": "detector-js",
   "version": "0.2.1",
-  "description": "DetectorJS, a runtime zero-dependency platform detector written in ES6",
+  "description": "DetectorJS, zero-dependency platform/environment detector written in ES6",
   "main": "dist/detector.min.js",
   "scripts": {
     "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
@@ -18,13 +18,25 @@
     "url": "git+https://github.com/blackmirror1980/detector-js.git"
   },
   "keywords": [
-    "javascript",
     "detector",
-    "feature",
-    "npm",
+    "detector-js",
+    "detection",
+    "feature-detection",
+    "platform-detection",
+    "cpu-detection",
+    "gpu-detection",
+    "browser-detection",
+    "layout-engine-detection",
+    "engine-detection",
+    "os-detection",
+    "useragent-parser",
+    "zero-dependency",
+    "es6",
+    "javascript",
     "module",
-    "library",
-    "es6"
+    "npm",
+    "yarn",
+    "rollup-js"
   ],
   "author": "Black Mirror",
   "license": "MIT",

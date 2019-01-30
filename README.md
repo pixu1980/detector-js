@@ -1,49 +1,145 @@
 # detector-js
+v0.2.1
+
+## Description
+DetectorJS, zero-dependency platform/environment detector written in ES6
 
 ## Author
 Black Mirror
 
-## Version
-v0.2.1
-
 ## Badges
-
 [![NPM](https://nodei.co/npm/detector-js.png)](https://nodei.co/npm/detector-js/)
 
-[![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](hhttps://img.shields.io/npm/dm/detector-js.svg)
-
-[![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/blob/master/LICENSE) 
-
-[![Build Status](https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master)](https://travis-ci.org/blackmirror1980/detector-js) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/detector-js?branch=master)
+[![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](https://img.shields.io/npm/dm/detector-js.svg) [![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/detector-js.svg?style=plastic)](https://github.com/blackmirror1980/detector-js/blob/master/LICENSE) [![Build Status](https://travis-ci.org/blackmirror1980/detector-js.svg?branch=master)](https://travis-ci.org/blackmirror1980/detector-js) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/detector-js?branch=master)
 
 ## Documentation
 Check out the [Latest Documentation](https://blackmirror1980.github.io/detector-js/docs/index.html) here
 
-## Description
-DetectorJS, a runtime zero-dependency platform detector written in ES6
-
-## Example
-Check out this [Codepen]() example
 
 ## Installation
-
-This is a [Node.js](https://nodejs.org/) module available through the 
-[npm registry](https://www.npmjs.com/). It can be installed using the 
-[`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally)
-or 
-[`yarn`](https://yarnpkg.com/en/)
-command line tools.
+This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/). 
+It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) command line tools.
 
 ```sh
-npm install detector-js --save
+npm i detector-js
+```
+
+```sh
+yarn add detector-js
+```
+
+## Usage
+```js
+import Detector from 'detector-js';
+
+const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
+
+console.log(detector);
+```
+
+```json
+{
+  feature: {
+    pointerEnabled:false,
+    pixelRatio:1,
+    pointerLock:true,
+    quirksMode:false,
+    css3D:true,
+    cssTransform:true,
+    cssTransition:true,
+    deviceMotion:false,
+    deviceOrientation:false,
+    contextMenu:false,
+    classList:false,
+    placeholder:true,
+    viewportUnit:true,
+    remUnit:true,
+    canvas:true,
+    svg:true,
+    webGL:true,
+    webVR:false,
+    touch:false,
+    forceTouch:true,
+    srcset:true,
+    sizes:true,
+    pictureElement:true,
+    dialogElement:false,
+    addEventListener:true,
+    asyncScript:true,
+    battery:false,
+    cors:true,
+    deferScript:true,
+    file:true,
+    fileSystem:false,
+    fullscreen:true,
+    fullscreenKeyboard:true,
+    geolocation:true,
+    historyAPI:true,
+    littleEndian:false,
+    localStorage:true,
+    matchMedia:true,
+    querySelector:true,
+    querySelectorAll:true,
+    serviceWorker:true,
+    typedArray:true,
+    userMedia:false,
+    vibration:false,
+    worker:true,
+    audio:{
+      supported:true,
+      context:true,
+      formats:{
+        mp3:true,
+        webm:false,
+        ogg:false,
+        opus:false,
+        wav:true,
+        m4a:true
+      }
+    },
+    video:{
+      supported:true,
+      formats:{
+        mp4:true,
+        ogv:false,
+        webm:false
+      }
+    }
+  },
+  engine:{
+    name:'WebKit',
+    version:'605.1.15'
+  },
+  browser:{
+    name:'Safari',
+    version:'12.0.3'
+  },
+  os:{
+    name:'macOS',
+    version:'10.14.3',
+    versionName:'Mojave'
+  },
+  cpu:{
+    platform:'MacIntel',
+    cores:1,
+    architecture:'x64',
+    vendor:'intel'
+  },
+  gpu:{
+    webGLVendor:'WebKit',
+    webGLRenderer:'WebKit WebGL',
+    vendor:'Intel Inc.',
+    model:'Intel Iris',
+    renderer:'Intel Iris OpenGL Engine'
+  },
+  platform:'desktop'
+}
 ```
 
 ## Dependencies
-
 None
 
 ## Dev Dependencies
-
 - [@babel/core](https://ghub.io/@babel/core): Babel compiler core.
 - [@babel/preset-env](https://ghub.io/@babel/preset-env): A Babel preset for each environment.
 - [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
@@ -52,7 +148,7 @@ None
 - [eslint-plugin-import](https://ghub.io/eslint-plugin-import): Import with sanity.
 - [eslint-plugin-jsx-a11y](https://ghub.io/eslint-plugin-jsx-a11y): Static AST checker for accessibility rules on JSX elements.
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
-- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, a runtime zero-dependency platform detector written in ES6
+- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, zero-dependency platform/environment detector written in ES6
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
 - [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
@@ -60,13 +156,13 @@ None
 - [rollup-plugin-babel](https://ghub.io/rollup-plugin-babel): Seamless integration between Rollup and Babel.
 - [rollup-plugin-commonjs](https://ghub.io/rollup-plugin-commonjs): Convert CommonJS modules to ES2015
 - [rollup-plugin-eslint](https://ghub.io/rollup-plugin-eslint): Verify entry point and all imported files with ESLint
-- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, a runtime zero-dependency platform detector written in ES6
+- [rollup-plugin-filesize](https://ghub.io/rollup-plugin-filesize): A rollup plugin to show filesize in the cli
+- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, zero-dependency platform/environment detector written in ES6
 - [rollup-plugin-node-resolve](https://ghub.io/rollup-plugin-node-resolve): Bundle third-party dependencies in node_modules
-- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, a runtime zero-dependency platform detector written in ES6
+- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, zero-dependency platform/environment detector written in ES6
 - [rollup-plugin-uglify](https://ghub.io/rollup-plugin-uglify): Rollup plugin to minify generated bundle
 
 ## Tests
-
 ```sh
 npm install
 npm test
@@ -74,7 +170,6 @@ npm test
 
 
 ## License
-
 MIT
 
 ## Powered By

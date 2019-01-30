@@ -23,7 +23,7 @@ export default class FlagsClass {
   /**
    *
    *
-   * @returns
+   * @returns {object}
    *
    * @memberOf FlagsClass
    */
@@ -54,7 +54,7 @@ export default class FlagsClass {
   /**
    *
    *
-   * @returns object
+   * @returns {object}
    *
    * @memberOf FlagsClass
    */
