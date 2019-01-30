@@ -46,105 +46,102 @@ import Detector from 'detector-js';
 const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
 
 console.log(detector);
-```
-
-```json
-{
-  engine:{
-    name:'WebKit',
-    version:'605.1.15'
-  },
-  browser:{
-    name:'Safari',
-    version:'12.0.3'
-  },
-  os:{
-    name:'macOS',
-    version:'10.14.3',
-    versionName:'Mojave'
-  },
-  cpu:{
-    platform:'MacIntel',
-    cores:1,
-    architecture:'x64',
-    vendor:'intel'
-  },
-  gpu:{
-    webGLVendor:'WebKit',
-    webGLRenderer:'WebKit WebGL',
-    vendor:'Intel Inc.',
-    model:'Intel Iris',
-    renderer:'Intel Iris OpenGL Engine'
-  },
-  platform:'desktop',
-    feature: {
-    pointerEnabled:false,
-    pixelRatio:1,
-    pointerLock:true,
-    quirksMode:false,
-    css3D:true,
-    cssTransform:true,
-    cssTransition:true,
-    deviceMotion:false,
-    deviceOrientation:false,
-    contextMenu:false,
-    classList:false,
-    placeholder:true,
-    viewportUnit:true,
-    remUnit:true,
-    canvas:true,
-    svg:true,
-    webGL:true,
-    webVR:false,
-    touch:false,
-    forceTouch:true,
-    srcset:true,
-    sizes:true,
-    pictureElement:true,
-    dialogElement:false,
-    addEventListener:true,
-    asyncScript:true,
-    battery:false,
-    cors:true,
-    deferScript:true,
-    file:true,
-    fileSystem:false,
-    fullscreen:true,
-    fullscreenKeyboard:true,
-    geolocation:true,
-    historyAPI:true,
-    littleEndian:false,
-    localStorage:true,
-    matchMedia:true,
-    querySelector:true,
-    querySelectorAll:true,
-    serviceWorker:true,
-    typedArray:true,
-    userMedia:false,
-    vibration:false,
-    worker:true,
-    audio:{
-      supported:true,
-      context:true,
-      formats:{
-        mp3:true,
-        webm:false,
-        ogg:false,
-        opus:false,
-        wav:true,
-        m4a:true
-      }
-    },
-    video:{
-      supported:true,
-      formats:{
-        mp4:true,
-        ogv:false,
-        webm:false
-      }
-    }
-  }
-}
+// {
+//   engine:{
+//     name:'WebKit',
+//     version:'605.1.15'
+//   },
+//   browser:{
+//     name:'Safari',
+//     version:'12.0.3'
+//   },
+//   os:{
+//     name:'macOS',
+//     version:'10.14.3',
+//     versionName:'Mojave'
+//   },
+//   cpu:{
+//     platform:'MacIntel',
+//     cores:1,
+//     architecture:'x64',
+//     vendor:'intel'
+//   },
+//   gpu:{
+//     webGLVendor:'WebKit',
+//     webGLRenderer:'WebKit WebGL',
+//     vendor:'Intel Inc.',
+//     model:'Intel Iris',
+//     renderer:'Intel Iris OpenGL Engine'
+//   },
+//   platform:'desktop',
+//     feature: {
+//     pointerEnabled:false,
+//     pixelRatio:1,
+//     pointerLock:true,
+//     quirksMode:false,
+//     css3D:true,
+//     cssTransform:true,
+//     cssTransition:true,
+//     deviceMotion:false,
+//     deviceOrientation:false,
+//     contextMenu:false,
+//     classList:false,
+//     placeholder:true,
+//     viewportUnit:true,
+//     remUnit:true,
+//     canvas:true,
+//     svg:true,
+//     webGL:true,
+//     webVR:false,
+//     touch:false,
+//     forceTouch:true,
+//     srcset:true,
+//     sizes:true,
+//     pictureElement:true,
+//     dialogElement:false,
+//     addEventListener:true,
+//     asyncScript:true,
+//     battery:false,
+//     cors:true,
+//     deferScript:true,
+//     file:true,
+//     fileSystem:false,
+//     fullscreen:true,
+//     fullscreenKeyboard:true,
+//     geolocation:true,
+//     historyAPI:true,
+//     littleEndian:false,
+//     localStorage:true,
+//     matchMedia:true,
+//     querySelector:true,
+//     querySelectorAll:true,
+//     serviceWorker:true,
+//     typedArray:true,
+//     userMedia:false,
+//     vibration:false,
+//     worker:true,
+//     audio:{
+//       supported:true,
+//       context:true,
+//       formats:{
+//         mp3:true,
+//         webm:false,
+//         ogg:false,
+//         opus:false,
+//         wav:true,
+//         m4a:true
+//       }
+//     },
+//     video:{
+//       supported:true,
+//       formats:{
+//         mp4:true,
+//         ogv:false,
+//         webm:false
+//       }
+//     }
+//   }
+// }
 ```
 
 ## Todo
