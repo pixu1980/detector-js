@@ -366,6 +366,14 @@ export default class Browser extends CssFlagsClass {
     ]));
   }
 
+  _getElectronVersion() {
+    try {
+      return this._process.versions.electron;
+    } catch (e) {
+      return 'n/a';
+    }
+  }
+
   /**
    *
    *
@@ -375,10 +383,10 @@ export default class Browser extends CssFlagsClass {
    */
   get Electron() {
     return this._checkAssertsResult(Asserts.one([
-      () => !!this._process && this._process.type === 'renderer', // Renderer process
-      () => !!this._process && typeof this._process.versions === 'object' && !!this._process.versions.electron, // Main process
+      () => this._process.type === 'renderer', // Renderer process
+      () => !!this._process.versions.electron, // Main process
       () => !!this._navigator && /electron/i.test(this._ua), // Detect the user agent when the `nodeIntegration` option is set to true
-    ]), true);
+    ]), true, this._getElectronVersion());
   }
 
   /**
