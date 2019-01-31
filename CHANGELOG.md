@@ -1,3 +1,14 @@
+## [Version 1.0.3](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.3) (2019-1-31)
+
+### Bug fixes
+
+- updated electron version detection with a safe try catch: [`0cf7161`](https://github.com/:blackmirror1980/detector-js/commit/0cf7161)
+- testing uglify compression options: [`75bda1b`](https://github.com/:blackmirror1980/detector-js/commit/75bda1b)
+- implemented main (UMD), browser (IIFE) and module (CJS) builds: [`37745a4`](https://github.com/:blackmirror1980/detector-js/commit/37745a4)
+- implemented normal and minified builds: [`dc57920`](https://github.com/:blackmirror1980/detector-js/commit/dc57920)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.2...v1.0.3)
+
 ## [Version 1.0.2](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.2) (2019-1-30)
 
 ### Bug fixes
