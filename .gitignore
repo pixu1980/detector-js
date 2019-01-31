@@ -1,3 +1,6 @@
+# Project specifid ignores
+uglifyjs-cache.json
+
 # Numerous always-ignore extensions
 *.diff
 *.err
