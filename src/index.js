@@ -2,6 +2,6 @@ import './Core/Polyfills';
 
 import Detector from './Detector';
 
-if(module) {
+if(typeof module !== 'undefined') {
   module.exports = Detector;
 }
