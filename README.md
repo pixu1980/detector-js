@@ -1,5 +1,5 @@
 # detector-js
-v1.0.3
+v1.0.4
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -158,13 +158,10 @@ None
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
 - [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
-- [rollup-plugin-auto-external](https://ghub.io/rollup-plugin-auto-external): Rollup plugin to automatically exclude package.json dependencies and peerDependencies from your bundle
 - [rollup-plugin-babel](https://ghub.io/rollup-plugin-babel): Seamless integration between Rollup and Babel.
-- [rollup-plugin-commonjs](https://ghub.io/rollup-plugin-commonjs): Convert CommonJS modules to ES2015
 - [rollup-plugin-eslint](https://ghub.io/rollup-plugin-eslint): Verify entry point and all imported files with ESLint
 - [rollup-plugin-filesize](https://ghub.io/rollup-plugin-filesize): A rollup plugin to show filesize in the cli
 - [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [rollup-plugin-node-resolve](https://ghub.io/rollup-plugin-node-resolve): Bundle third-party dependencies in node_modules
 - [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, zero-dependency platform/environment detector written in ES6
 - [rollup-plugin-uglify](https://ghub.io/rollup-plugin-uglify): Rollup plugin to minify generated bundle
 
