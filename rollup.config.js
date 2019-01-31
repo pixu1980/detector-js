@@ -14,12 +14,30 @@ const uglifyOptions = {
 };
 export default [{
   // normal builds
-  input: 'src/index.js',
+  input: 'src/index.es.js',
   output: [{
     name: 'Detector',
     file: pkg.main.replace(/\.min\.js/ig, '.js'),
     format: 'umd',
-  }, {
+  }],
+  plugins: [
+    eslint({
+      exclude: [
+        'src/styles/**',
+      ]
+    }),
+    babel({
+      exclude: 'node_modules/**',
+    }),
+    replace({
+      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+    }),
+    filesize(),
+  ],
+}, {
+  // normal builds
+  input: 'src/index.js',
+  output: [{
     name: 'default',
     file: pkg.browser.replace(/\.min\.js/ig, '.js'),
     format: 'iife',
@@ -45,7 +63,7 @@ export default [{
   ],
 }, {
   // main minified build
-  input: 'src/index.js',
+  input: 'src/index.es.js',
   output: [{
     name: 'Detector',
     file: pkg.main,
