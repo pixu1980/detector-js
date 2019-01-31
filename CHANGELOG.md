@@ -1,3 +1,11 @@
+## [Version 1.0.4](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.4) (2019-1-31)
+
+### Bug fixes
+
+- disabled minified mangling: [`924256d`](https://github.com/:blackmirror1980/detector-js/commit/924256d)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.3...v1.0.4)
+
 ## [Version 1.0.3](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.3) (2019-1-31)
 
 ### Bug fixes
