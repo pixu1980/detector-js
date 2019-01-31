@@ -1,3 +1,11 @@
+## [Version 1.0.5](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.5) (2019-1-31)
+
+### Bug fixes
+
+- builds with module check: [`f3815cb`](https://github.com/:blackmirror1980/detector-js/commit/f3815cb)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.4...v1.0.5)
+
 ## [Version 1.0.4](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.4) (2019-1-31)
 
 ### Bug fixes
