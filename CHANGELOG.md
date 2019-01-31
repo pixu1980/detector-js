@@ -1,3 +1,11 @@
+## [Version 1.0.6](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.6) (2019-1-31)
+
+### Bug fixes
+
+- separated indexes per build mode: [`fcf591a`](https://github.com/:blackmirror1980/detector-js/commit/fcf591a)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.5...v1.0.6)
+
 ## [Version 1.0.5](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.5) (2019-1-31)
 
 ### Bug fixes
