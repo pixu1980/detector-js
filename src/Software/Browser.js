@@ -595,7 +595,7 @@ export default class Browser extends CssFlagsClass {
   get IE() {
     return this._checkAssertsResult(Asserts.all([
       !this.IEMobile,
-      this._reTest('(?:(?:msie|trident\/[\w\d\.]+;\srv))' + this._reStrVerNum),
+      /(?:msie|ie|trident).*(?:;\srv:(?:(\w+(?:(?:\.|\_)\w+)+)|\d+))/i.test(this._ua),
     ]));
   }
 
