@@ -1,3 +1,11 @@
+## [Version 1.0.9](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.9) (2019-2-4)
+
+### Bug fixes
+
+- fixed polyfills and added polyfill for IE getOwnPropertyDescriptors: [`d44f484`](https://github.com/:blackmirror1980/detector-js/commit/d44f484)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.8...v1.0.9)
+
 ## [Version 1.0.8](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.8) (2019-2-4)
 
 ### Bug fixes
