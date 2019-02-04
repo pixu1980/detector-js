@@ -48,7 +48,7 @@ export default class Engine extends CssFlagsClass {
       () => 'Intl' in this._root && 'v8BreakIterator' in this._root.Intl,
       'CSS' in this._root,
       /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua),
-    ]), true);
+    ], true));
   }
 
   /**
