@@ -237,13 +237,7 @@ export default class Detector extends FlagsClass {
     const cssFlagsPrefixed = this._cssFlags.map(cssFlag => this._cssFlagsPrefix + cssFlag);
     const htmlElement = document.documentElement || document.querySelector('html');
 
-
-    if ('classList' in htmlElement) {
-      htmlElement.classList.add(...cssFlagsPrefixed);
-    } else {
-      cssFlagsPrefixed.forEach(cssFlag => htmlElement.className.replace(cssFlag, ''));
-
-      htmlElement.className += this._cssFlags.join(' ').trim();
-    }
+    cssFlagsPrefixed.forEach(cssFlag => htmlElement.className.replace(cssFlag, ''));
+    htmlElement.className += cssFlagsPrefixed.join(' ').trim();
   }
 }
