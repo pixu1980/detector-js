@@ -1,5 +1,5 @@
 # detector-js
-v1.0.6
+v1.0.7
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
