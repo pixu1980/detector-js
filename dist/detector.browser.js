@@ -490,12 +490,16 @@
         var safe = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
         if (!!assert) {
-          if (assert instanceof Function && safe) {
-            try {
-              return assert();
-            } catch (e) {
-              return false;
+          if (assert instanceof Function) {
+            if (!!safe) {
+              try {
+                return assert();
+              } catch (e) {
+                return false;
+              }
             }
+
+            return assert();
           }
 
           return assert;
@@ -862,7 +866,7 @@
 
         return Asserts.all([function () {
           return 'Element' in _this3._root && 'ALLOW_KEYBOARD_INPUT' in _this3._root.Element;
-        }]);
+        }], true);
       }
       /**
        *
@@ -892,7 +896,7 @@
 
         return Asserts.all([function () {
           return 'history' in _this4._root && 'pushState' in _this4._root.history;
-        }]);
+        }], true);
       }
       /**
        *
@@ -1223,7 +1227,7 @@
 
         return Asserts.all([function () {
           return _this8._img.style.width = _this8._img.style.width !== '';
-        }]);
+        }], true);
       } // Test if REM units are supported
 
       /**
@@ -1241,7 +1245,7 @@
 
         return Asserts.all([function () {
           return _this9._img.style.width = _this9._img.style.width !== '';
-        }]);
+        }], true);
       } // Test if Canvas is supported
 
       /**
@@ -1259,7 +1263,7 @@
 
         return Asserts.all([function () {
           return 'getContext' in _this10._canvas && !!_this10._canvas.getContext('2d');
-        }]);
+        }], true);
       } // Test if SVG is supported
 
       /**
@@ -1277,7 +1281,7 @@
 
         return Asserts.all([function () {
           return 'createElementNS' in _this11._document && 'createSVGRect' in _this11._document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        }]);
+        }], true);
       } // Test if WebGL is supported
 
       /**
@@ -1327,7 +1331,11 @@
       get: function get() {
         var _this13 = this;
 
-        return Asserts.one(['ontouchstart' in this._root, 'ontouchstart' in this._document.documentElement]) && Asserts.one([function () {
+        return Asserts.one([function () {
+          return 'ontouchstart' in _this13._root;
+        }, function () {
+          return 'ontouchstart' in _this13._document.documentElement;
+        }], true) && Asserts.one([function () {
           return 'DocumentTouch' in _this13._root && _this13._document instanceof _this13._root.DocumentTouch;
         }, function () {
           return _this13.pointerEnabled && 'MSGesture' in _this13._root;
@@ -1541,7 +1549,7 @@
 
         return Asserts.all(['HTMLVideoElement' in this._root, 'HTMLMediaElement' in this._root, function () {
           return !!_this5._videoElement && 'canPlayType' in _this5._videoElement && _this5._videoElement instanceof _this5._root.HTMLVideoElement && _this5._videoElement instanceof _this5._root.HTMLMediaElement;
-        }]);
+        }], true);
       }
     }]);
 
@@ -3089,7 +3097,7 @@
     }, {
       key: "AndroidBrowser",
       get: function get() {
-        return this._checkAssertsResult(Asserts.all([!/like android/i.test(this._ua), this._reTest('(?:android.*)' + this._reStrVer)]));
+        return this._checkAssertsResult(Asserts.all([!this._reTest('like android'), this._reTest('(?:android.*)' + this._reStrVer)]));
       }
       /**
        *
@@ -3350,8 +3358,8 @@
           return !!_this2._process.versions.electron;
         }, // Main process
         function () {
-          return !!_this2._navigator && /electron/i.test(_this2._ua);
-        }]), true, this._getElectronVersion());
+          return !!_this2._navigator && _this2._reTest('electron');
+        }], true), false, this._getElectronVersion());
       }
       /**
        *
@@ -3364,7 +3372,7 @@
     }, {
       key: "Epiphany",
       get: function get() {
-        return this._checkAssertsResult(Asserts.one([this._reTest('(?:epiphany)' + this._reStrVerNum)]), true);
+        return this._checkAssertsResult(Asserts.one([this._reTest('(?:epiphany)' + this._reStrVerNum)]));
       }
       /**
        *
@@ -4443,7 +4451,7 @@
 
         return this._checkAssertsResult(Asserts.all([function () {
           return 'Intl' in _this2._root && 'v8BreakIterator' in _this2._root.Intl;
-        }, 'CSS' in this._root, /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua)]), true);
+        }, 'CSS' in this._root, /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua)], true));
       }
       /**
        *

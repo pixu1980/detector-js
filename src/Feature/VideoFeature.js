@@ -61,7 +61,7 @@ export default class VideoFeature extends CssFlagsClass {
       'HTMLVideoElement' in this._root,
       'HTMLMediaElement' in this._root,
       () => !!this._videoElement && 'canPlayType' in this._videoElement && this._videoElement instanceof this._root.HTMLVideoElement && this._videoElement instanceof this._root.HTMLMediaElement,
-    ]);
+    ], true);
   }
 
   /**

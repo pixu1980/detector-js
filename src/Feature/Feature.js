@@ -281,7 +281,7 @@ export default class Feature extends CssFlagsClass {
   getFullscreenKeyboard() {
     return Asserts.all([
       () => 'Element' in this._root && 'ALLOW_KEYBOARD_INPUT' in this._root.Element,
-    ]);
+    ], true);
   }
 
   /**
@@ -305,7 +305,7 @@ export default class Feature extends CssFlagsClass {
   getHistoryAPI() {
     return Asserts.all([
       () => 'history' in this._root && 'pushState' in this._root.history,
-    ]);
+    ], true);
   }
 
   /**
@@ -610,7 +610,7 @@ export default class Feature extends CssFlagsClass {
   get viewportUnit() {
     return Asserts.all([
       () => this._img.style.width = '1vw' && this._img.style.width !== '',
-    ]);
+    ], true);
   }
 
   // Test if REM units are supported
@@ -624,7 +624,7 @@ export default class Feature extends CssFlagsClass {
   get remUnit() {
     return Asserts.all([
       () => this._img.style.width = '1rem' && this._img.style.width !== '',
-    ]);
+    ], true);
   }
 
   // Test if Canvas is supported
@@ -638,7 +638,7 @@ export default class Feature extends CssFlagsClass {
   get canvas() {
     return Asserts.all([
       () => 'getContext' in this._canvas && !!this._canvas.getContext('2d'),
-    ]);
+    ], true);
   }
 
   // Test if SVG is supported
@@ -652,7 +652,7 @@ export default class Feature extends CssFlagsClass {
   get svg() {
     return Asserts.all([
       () => 'createElementNS' in this._document && 'createSVGRect' in this._document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-    ]);
+    ], true);
   }
 
   // Test if WebGL is supported
@@ -694,9 +694,9 @@ export default class Feature extends CssFlagsClass {
    */
   get touch() {
     return Asserts.one([
-      'ontouchstart' in this._root,
-      'ontouchstart' in this._document.documentElement,
-    ]) && Asserts.one([
+      () => 'ontouchstart' in this._root,
+      () => 'ontouchstart' in this._document.documentElement,
+    ], true) && Asserts.one([
       () => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch,
       () => this.pointerEnabled && 'MSGesture' in this._root,
       () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1,

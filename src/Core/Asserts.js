@@ -7,12 +7,16 @@
 export default class Asserts {
   static _checkAssert(assert, safe = false) {
     if (!!assert) {
-      if (assert instanceof Function && safe) {
-        try {
-          return assert();
-        } catch (e) {
-          return false;
+      if (assert instanceof Function) {
+        if(!!safe) {
+          try {
+            return assert();
+          } catch (e) {
+            return false;
+          }
         }
+
+        return assert();
       }
 
       return assert;

@@ -108,7 +108,7 @@ export default class Browser extends CssFlagsClass {
    */
   get AndroidBrowser() {
     return this._checkAssertsResult(Asserts.all([
-      !/like android/i.test(this._ua),
+      !this._reTest('like android'),
       this._reTest('(?:android.*)' + this._reStrVer),
     ]));
   }
@@ -385,8 +385,8 @@ export default class Browser extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.one([
       () => this._process.type === 'renderer', // Renderer process
       () => !!this._process.versions.electron, // Main process
-      () => !!this._navigator && /electron/i.test(this._ua), // Detect the user agent when the `nodeIntegration` option is set to true
-    ]), true, this._getElectronVersion());
+      () => !!this._navigator && this._reTest('electron'), // Detect the user agent when the `nodeIntegration` option is set to true
+    ], true), false, this._getElectronVersion());
   }
 
   /**
@@ -399,7 +399,7 @@ export default class Browser extends CssFlagsClass {
   get Epiphany() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:epiphany)' + this._reStrVerNum),
-    ]), true);
+    ]));
   }
 
   /**
