@@ -2,14 +2,20 @@
 /* eslint-disable prefer-rest-params */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-bitwise */
-if (!String.prototype.toCamelCase) {
-  Object.defineProperty(String.prototype, 'toCamelCase', {
-    enumerable: false,
+if (!Object.hasOwnProperty('getOwnPropertyDescriptors')) {
+  Object.defineProperty(Object, 'getOwnPropertyDescriptors', {
     configurable: true,
+    enumerable: true,
     writable: true,
-    value() {
-      const s = this && this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(x => x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase()).join('');
-      return s.slice(0, 1).toLowerCase() + s.slice(1);
+    value(object) {
+      return Reflect.ownKeys(object).reduce((descriptors, key) => {
+        return Object.defineProperty(descriptors, key, {
+          configurable: true,
+          enumerable: true,
+          writable: true,
+          value: Object.getOwnPropertyDescriptor(object, key),
+        });
+      }, {});
     },
   });
 }
@@ -76,6 +82,9 @@ if (!Object.prototype.merge) {
 
 if (!Array.prototype.map) {
   Object.defineProperty(Array.prototype, 'map', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
     value(arr, iterator) {
       const result = [];
 
@@ -90,6 +99,9 @@ if (!Array.prototype.map) {
 
 if (!Array.prototype.includes) {
   Object.defineProperty(Array.prototype, 'includes', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
     value(valueToFind, fromIndex) {
       if (this == null) {
         throw new TypeError('"this" is null or not defined');
@@ -143,6 +155,9 @@ if (!Array.prototype.includes) {
 // https://tc39.github.io/ecma262/#sec-array.prototype.reduce
 if (!Array.prototype.reduce) {
   Object.defineProperty(Array.prototype, 'reduce', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
     value(callback /*, initialValue*/) {
       if (this === null) {
         throw new TypeError('Array.prototype.reduce called on null or undefined');
@@ -198,6 +213,9 @@ if (!Array.prototype.reduce) {
 
 if (!String.prototype.includes) {
   Object.defineProperty(String.prototype, 'includes', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
     value(search, start) {
       start = (typeof start !== 'number') ? 0 : start;
 
@@ -206,6 +224,18 @@ if (!String.prototype.includes) {
       }
 
       return this.indexOf(search, start) !== -1;
+    },
+  });
+}
+
+if (!String.prototype.toCamelCase) {
+  Object.defineProperty(String.prototype, 'toCamelCase', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value() {
+      const s = this && this.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g).map(x => x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase()).join('');
+      return s.slice(0, 1).toLowerCase() + s.slice(1);
     },
   });
 }
