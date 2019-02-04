@@ -1,3 +1,11 @@
+## [Version 1.1.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.1) (2019-2-4)
+
+### Bug fixes
+
+- fixed html css flags on IE: [`8b81bd8`](https://github.com/:blackmirror1980/detector-js/commit/8b81bd8)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.0...v1.1.1)
+
 ## [Version 1.1.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.0) (2019-2-4)
 
 ### New features
