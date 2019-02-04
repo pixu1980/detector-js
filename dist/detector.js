@@ -65,6 +65,9 @@
 
   if (!Object.prototype.merge) {
     Object.defineProperty(Object.prototype, 'merge', {
+      enumerable: false,
+      configurable: true,
+      writable: true,
       value: function value() {
         for (var _len = arguments.length, objs = new Array(_len), _key = 0; _key < _len; _key++) {
           objs[_key] = arguments[_key];
