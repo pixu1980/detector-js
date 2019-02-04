@@ -52,17 +52,17 @@ export default class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getArchitecture() {
-    this._navigator.cpuClass = this._navigator.cpuClass || 'x86';
+    let cpuClass = this._navigator.cpuClass || 'x86';
 
     if (Asserts.one([
-      this._navigator.cpuClass === 'x64',
+      cpuClass === 'x64',
       ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(this._navigator.platform),
       /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua),
     ])) {
-      this._navigator.cpuClass = 'x64';
+      cpuClass = 'x64';
     }
 
-    return this._navigator.cpuClass;
+    return cpuClass;
   }
 
   /**
