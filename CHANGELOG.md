@@ -1,3 +1,11 @@
+## [Version 1.0.8](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.8) (2019-2-4)
+
+### Bug fixes
+
+- fix polyfills object.prototype.merge: [`d2cf93e`](https://github.com/:blackmirror1980/detector-js/commit/d2cf93e)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.7...v1.0.8)
+
 ## [Version 1.0.7](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.7) (2019-2-4)
 
 ### Bug fixes
