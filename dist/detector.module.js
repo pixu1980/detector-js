@@ -326,26 +326,6 @@ function _possibleConstructorReturn(self, call) {
   return _assertThisInitialized(self);
 }
 
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
 /**
  *
  *
@@ -4930,17 +4910,10 @@ function (_FlagsClass) {
       });
 
       var htmlElement = document.documentElement || document.querySelector('html');
-
-      if ('classList' in htmlElement) {
-        var _htmlElement$classLis;
-
-        (_htmlElement$classLis = htmlElement.classList).add.apply(_htmlElement$classLis, _toConsumableArray(cssFlagsPrefixed));
-      } else {
-        cssFlagsPrefixed.forEach(function (cssFlag) {
-          return htmlElement.className.replace(cssFlag, '');
-        });
-        htmlElement.className += this._cssFlags.join(' ').trim();
-      }
+      cssFlagsPrefixed.forEach(function (cssFlag) {
+        return htmlElement.className.replace(cssFlag, '');
+      });
+      htmlElement.className += cssFlagsPrefixed.join(' ').trim();
     }
   }]);
 
