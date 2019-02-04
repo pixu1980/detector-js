@@ -1,3 +1,15 @@
+## [Version 2.0.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v2.0.0) (2019-2-4)
+
+### Breaking changes
+
+- fix IE regex: [`885ccd4`](https://github.com/:blackmirror1980/detector-js/commit/885ccd4)
+
+### Bug fixes
+
+- fix cpuClass on IE: [`106c03c`](https://github.com/:blackmirror1980/detector-js/commit/106c03c)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.9...v2.0.0)
+
 ## [Version 1.0.9](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.9) (2019-2-4)
 
 ### Bug fixes
