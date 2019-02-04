@@ -1,3 +1,11 @@
+## [Version 1.0.7](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.7) (2019-2-4)
+
+### Bug fixes
+
+- - updated safe env Assert checking - fixed Electron detection bug on windows: [`bd2c025`](https://github.com/:blackmirror1980/detector-js/commit/bd2c025)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.0.6...v1.0.7)
+
 ## [Version 1.0.6](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.0.6) (2019-1-31)
 
 ### Bug fixes
