@@ -4926,4 +4926,3 @@
   }
 
 }());
-//# sourceMappingURL=detector.browser.js.map

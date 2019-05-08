@@ -4923,4 +4923,3 @@ function (_FlagsClass) {
 if (typeof module !== 'undefined') {
   module.exports = Detector;
 }
-//# sourceMappingURL=detector.module.js.map

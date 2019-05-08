@@ -62,7 +62,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "ink-docstrap": "^1.3.2",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.1",
     "jshint": "^2.10.2",
     "rollup": "^1.9.3",
     "rollup-plugin-babel": "^4.3.2",

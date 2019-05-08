@@ -4927,4 +4927,3 @@
   return Detector;
 
 }));
-//# sourceMappingURL=detector.js.map
