@@ -41,7 +41,9 @@ export default class OS extends CssFlagsClass {
     if (!!version) {
       version = version.replace(/_/ig, '.');
 
-      return Object.getOwnPropertyNames(versionNames).filter(versionName => !!versionNames[versionName])[0] || 'n/a';
+      return Object.getOwnPropertyNames(versionNames).filter((versionName) => {
+        return !!versionNames[versionName];
+      })[0] || 'n/a';
     }
 
     return 'n/a';

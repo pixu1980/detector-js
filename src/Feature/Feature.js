@@ -58,13 +58,17 @@ export default class Feature extends CssFlagsClass {
   _getCssPrefixedProp(prop, prefixes = this._cssPrefixes) {
     prop = prop.toCamelCase();
 
-    const prefixedProps = prefixes.map(item => (item === 'spec' ? '' : '-' + item + '-') + prop);
+    const prefixedProps = prefixes.map((item) => {
+      return (item === 'spec' ? '' : '-' + item + '-') + prop;
+    });
 
     // if ('CSS' in this._root && 'supports' in this._root.CSS) {
     //   return this._root.CSS.supports(prefixedProps.map(item => '(' + item + ': inherit)').join(' or '));
     // }
 
-    const prefixedPropsFound = prefixedProps.filter(item => item in this._div.style);
+    const prefixedPropsFound = prefixedProps.filter((item) => {
+      return item in this._div.style;
+    });
 
     if (prefixedPropsFound.length > 0) {
       return prefixedPropsFound[0];

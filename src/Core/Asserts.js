@@ -8,7 +8,7 @@ export default class Asserts {
   static _checkAssert(assert, safe = false) {
     if (!!assert) {
       if (assert instanceof Function) {
-        if(!!safe) {
+        if (!!safe) {
           try {
             return assert();
           } catch (e) {
@@ -36,7 +36,9 @@ export default class Asserts {
    * @memberOf Asserts
    */
   static all(asserts = [], safe = false) {
-    return asserts.every(assert => Asserts._checkAssert(assert, safe));
+    return asserts.every((assert) => {
+      return Asserts._checkAssert(assert, safe);
+    });
   }
 
   /**
@@ -50,6 +52,8 @@ export default class Asserts {
    * @memberOf Asserts
    */
   static one(asserts = [], safe = false) {
-    return asserts.some(assert => Asserts._checkAssert(assert, safe));
+    return asserts.some((assert) => {
+      return Asserts._checkAssert(assert, safe);
+    });
   }
 }

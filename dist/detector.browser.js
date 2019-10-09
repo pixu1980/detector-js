@@ -1239,7 +1239,7 @@
         var _this8 = this;
 
         return Asserts.all([function () {
-          return _this8._img.style.width = _this8._img.style.width !== '';
+          return _this8._img.style.width =  _this8._img.style.width !== '';
         }], true);
       } // Test if REM units are supported
 
@@ -1257,7 +1257,7 @@
         var _this9 = this;
 
         return Asserts.all([function () {
-          return _this9._img.style.width = _this9._img.style.width !== '';
+          return _this9._img.style.width =  _this9._img.style.width !== '';
         }], true);
       } // Test if Canvas is supported
 
@@ -2581,7 +2581,11 @@
     }, {
       key: "Windows",
       get: function get() {
-        return this._checkAssertsResult(Asserts.all([/Win/i.test(this._ua)]) && Asserts.one([/Windows ((NT|XP)( \d\d?.\d)?)/i.test(this._ua)]), null, this._getWindowsVersionName);
+        return this._checkAssertsResult(Asserts.all([/Win/i.test(this._ua)]) && Asserts.one([/Windows ((NT|XP)( \d\d?.\d)?)/i.test(this._ua) //       /(windows)\snt\s6\.2;\s(arm)/i, // Windows RT
+        // // ], [NAME, [VERSION, mapper.str, maps.os.windows.version]], [
+        // /(win(?=3|9|n)|win\s9x\s)([nt\d\.]+)/i,
+        // // ], [[NAME, 'Windows'], [VERSION, mapper.str, maps.os.windows.version]], [
+        ]), null, this._getWindowsVersionName);
       }
     }, {
       key: "macOS",
@@ -3372,7 +3376,8 @@
         }, // Main process
         function () {
           return !!_this2._navigator && _this2._reTest('electron');
-        }], true), false, this._getElectronVersion());
+        } // Detect the user agent when the `nodeIntegration` option is set to true
+        ], true), false, this._getElectronVersion());
       }
       /**
        *
@@ -4622,7 +4627,7 @@
       get: function get() {
         return this._checkAssertsResult(Asserts.all([
         /*@cc_on!@*/
-        !!document.documentMode]) && Asserts.one([/trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua)]));
+         !!document.documentMode]) && Asserts.one([/trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua)]));
       }
       /**
        *
