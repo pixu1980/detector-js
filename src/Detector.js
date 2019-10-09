@@ -102,7 +102,7 @@ export default class Detector extends FlagsClass {
   checkEngine() {
     const engine = new Engine(this._ua, this.toFlags());
 
-    if(this._values) {
+    if (this._values) {
       this.engine = engine.toValues();
     } else {
       this.engine = engine.toFlags();
@@ -122,7 +122,7 @@ export default class Detector extends FlagsClass {
   checkBrowser() {
     const browser = new Browser(this._ua, this.toFlags());
 
-    if(this._values) {
+    if (this._values) {
       this.browser = browser.toValues();
     } else {
       this.browser = browser.toFlags();
@@ -142,7 +142,7 @@ export default class Detector extends FlagsClass {
   checkOS() {
     const os = new OS(this._ua, this.toFlags());
 
-    if(this._values) {
+    if (this._values) {
       this.os = os.toValues();
     } else {
       this.os = os.toFlags();
@@ -179,7 +179,7 @@ export default class Detector extends FlagsClass {
   checkCPU() {
     const cpu = new CPU(this._ua, this.toFlags());
 
-    if(this._values) {
+    if (this._values) {
       this.cpu = cpu.toValues();
     } else {
       this.cpu = cpu.toFlags();
@@ -215,7 +215,7 @@ export default class Detector extends FlagsClass {
   checkPlatform() {
     const platform = new Platform(this._ua, this.toFlags());
 
-    if(this._values) {
+    if (this._values) {
       this.platform = platform.toValues();
     } else {
       this.platform = platform.toFlags();
@@ -234,10 +234,16 @@ export default class Detector extends FlagsClass {
    * @memberOf Detector
    */
   setCssFlags() {
-    const cssFlagsPrefixed = this._cssFlags.map(cssFlag => this._cssFlagsPrefix + cssFlag);
+    const cssFlagsPrefixed = this._cssFlags.map((cssFlag) => {
+      return this._cssFlagsPrefix + cssFlag;
+    });
+
     const htmlElement = document.documentElement || document.querySelector('html');
 
-    cssFlagsPrefixed.forEach(cssFlag => htmlElement.className.replace(cssFlag, ''));
+    cssFlagsPrefixed.forEach((cssFlag) => {
+      return htmlElement.className.replace(cssFlag, '');
+    });
+
     htmlElement.className += cssFlagsPrefixed.join(' ').trim();
   }
 }
