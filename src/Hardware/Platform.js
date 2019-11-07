@@ -1,13 +1,11 @@
 import CssFlagsClass from '../Core/CssFlagsClass';
 import Asserts from '../Core/Asserts';
+import OS from '../Software/OS';
+import Browser from '../Software/Browser';
 
-/**
- *
- *
- * @export
- * @class Platform
- * @extends {CssFlagsClass}
- */
+const os = new OS(this._ua, this.toFlags()).toValues();
+const browser = new Browser(this._ua, this.toFlags().toValues());
+
 /**
  *
  *
@@ -43,31 +41,30 @@ export default class Platform extends CssFlagsClass {
     ]) && Asserts.one([
       this._flags.feature.touch,
       this._flags.feature.forceTouch,
-    ]) && (Asserts.one([
+    ]) && Asserts.one([
       this._flags.feature.vibration,
       this._flags.feature.battery,
       this._flags.feature.fullscreenKeyboard,
-    ]) || Asserts.one([
-      this._flags.os.Android,
-      this._flags.os.iOS,
-      this._flags.os.WindowsPhone,
-      this._flags.os.Bada,
-      this._flags.os.Blackberry,
-      this._flags.os.Contiki,
-      this._flags.os.MeeGo,
-      this._flags.os.RIM,
-      this._flags.os.QNX,
-      this._flags.os.Palm,
-      this._flags.os.Symbian,
-      this._flags.os.WebOS,
-      this._flags.browser.ChromeMobile,
-      this._flags.browser.EdgeMobile,
-      this._flags.browser.IEMobile,
-      this._flags.browser.FirefoxMobile,
-      this._flags.browser.MaxthonMobile,
-      this._flags.browser.OperaMobile,
-      this._flags.browser.SafariMobile,
-    ]));
+      os.Android,
+      os.iOS,
+      os.WindowsPhone,
+      os.Bada,
+      os.Blackberry,
+      os.Contiki,
+      os.MeeGo,
+      os.RIM,
+      os.QNX,
+      os.Palm,
+      os.Symbian,
+      os.WebOS,
+      browser.ChromeMobile,
+      browser.EdgeMobile,
+      browser.IEMobile,
+      browser.FirefoxMobile,
+      browser.MaxthonMobile,
+      browser.OperaMobile,
+      browser.SafariMobile,
+    ]);
   }
 
   /**
