@@ -31,9 +31,6 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get mobile() {
-    const os = new OS(this._ua, this.toFlags()).toValues();
-    const browser = new Browser(this._ua, this.toFlags().toValues());
-
     return Asserts.one([
       this._flags.feature.deviceMotion,
       this._flags.feature.deviceOrientation,
@@ -45,25 +42,8 @@ export default class Platform extends CssFlagsClass {
       this._flags.feature.vibration,
       this._flags.feature.battery,
       this._flags.feature.fullscreenKeyboard,
-      os.Android,
-      os.iOS,
-      os.WindowsPhone,
-      os.Bada,
-      os.Blackberry,
-      os.Contiki,
-      os.MeeGo,
-      os.RIM,
-      os.QNX,
-      os.Palm,
-      os.Symbian,
-      os.WebOS,
-      browser.ChromeMobile,
-      browser.EdgeMobile,
-      browser.IEMobile,
-      browser.FirefoxMobile,
-      browser.MaxthonMobile,
-      browser.OperaMobile,
-      browser.SafariMobile,
+      ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
+      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
     ]);
   }
 
