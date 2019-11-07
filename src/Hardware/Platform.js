@@ -105,17 +105,18 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get mobile() {
-    return Asserts.one([
+    return (Asserts.one([
       this._flags.feature.deviceMotion,
       this._flags.feature.deviceOrientation,
       this._flags.feature.pixelRatio > 1,
     ]) && Asserts.one([
       this._flags.feature.touch,
       this._flags.feature.forceTouch,
+      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
     ]) && Asserts.all([
       !this._flags.feature.pointerEvents,
       this._flags.feature.file,
-    ]) && Asserts.one([
+    ])) || Asserts.all([
       ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
       ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
     ]);
