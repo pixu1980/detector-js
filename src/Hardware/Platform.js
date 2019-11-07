@@ -3,9 +3,6 @@ import Asserts from '../Core/Asserts';
 import OS from '../Software/OS';
 import Browser from '../Software/Browser';
 
-const os = new OS(this._ua, this.toFlags()).toValues();
-const browser = new Browser(this._ua, this.toFlags().toValues());
-
 /**
  *
  *
@@ -34,6 +31,9 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get mobile() {
+    const os = new OS(this._ua, this.toFlags()).toValues();
+    const browser = new Browser(this._ua, this.toFlags().toValues());
+
     return Asserts.one([
       this._flags.feature.deviceMotion,
       this._flags.feature.deviceOrientation,

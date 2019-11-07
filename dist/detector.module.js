@@ -1776,496 +1776,6 @@
    *
    *
    * @export
-   * @class Platform
-   * @extends {CssFlagsClass}
-   */
-
-  /**
-   *
-   *
-   * @export
-   * @class Platform
-   * @extends {CssFlagsClass}
-   */
-
-  var Platform =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
-    _inherits(Platform, _CssFlagsClass);
-
-    /**
-     * Creates an instance of Platform.
-     * @param {any} [ua=null]
-     * @param {any} [flags={}]
-     * @param {string} [cssFlagsPrefix='platform']
-     *
-     * @memberOf Platform
-     */
-    function Platform() {
-      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'platform';
-
-      _classCallCheck(this, Platform);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(Platform).call(this, ua, flags, cssFlagsPrefix));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Platform
-     */
-
-
-    _createClass(Platform, [{
-      key: "toValues",
-      value: function toValues() {
-        var _this = this;
-
-        var proto = Object.getPrototypeOf(this);
-        var protoProperties = Object.getOwnPropertyNames(proto).filter(function (prop) {
-          return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!_this[prop];
-        });
-        return protoProperties[0] || 'n/a';
-      }
-    }, {
-      key: "mobile",
-      get: function get() {
-        return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && (Asserts.one([this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard]) || Asserts.one([this._flags.os.Android, this._flags.os.iOS, this._flags.os.WindowsPhone, this._flags.os.Bada, this._flags.os.Blackberry, this._flags.os.Contiki, this._flags.os.MeeGo, this._flags.os.RIM, this._flags.os.QNX, this._flags.os.Palm, this._flags.os.Symbian, this._flags.os.WebOS, this._flags.browser.ChromeMobile, this._flags.browser.EdgeMobile, this._flags.browser.IEMobile, this._flags.browser.FirefoxMobile, this._flags.browser.MaxthonMobile, this._flags.browser.OperaMobile, this._flags.browser.SafariMobile]));
-      }
-      /**
-       *
-       *
-       * @readonly
-       *
-       * @memberOf Platform
-       */
-
-    }, {
-      key: "smartphone",
-      get: function get() {
-        return Asserts.all([this.mobile, !this.tablet]);
-      }
-      /**
-       *
-       *
-       * @readonly
-       *
-       * @memberOf Platform
-       */
-
-    }, {
-      key: "tablet",
-      get: function get() {
-        return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @readonly
-       * @memberof Platform
-       */
-
-    }, {
-      key: "console",
-      get: function get() {
-        return Asserts.all([/(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua), !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @readonly
-       * @memberof Platform
-       */
-
-    }, {
-      key: "tv",
-      get: function get() {
-        return Asserts.one([/(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua), /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua)]) && Asserts.one([!this.mobile, !this.bot, this._flags.feature.fullscreenKeyboard]) && Asserts.one([this._flags.os.Android, this._flags.os.Tizen, this._flags.os.WebOS]);
-      }
-      /**
-       *
-       *
-       * @readonly
-       * @memberOf Platform
-       */
-
-    }, {
-      key: "bot",
-      get: function get() {
-        return Asserts.one([/googlebot/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @readonly
-       * @memberOf Platform
-       */
-
-    }, {
-      key: "desktop",
-      get: function get() {
-        return Asserts.all([!this.bot, !this.console, !this.mobile, !this.tv]);
-      }
-    }]);
-
-    return Platform;
-  }(CssFlagsClass);
-
-  /**
-   *
-   *
-   * @export
-   * @class Device
-   * @extends {CssFlagsClass}
-   */
-
-  var Device =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
-    _inherits(Device, _CssFlagsClass);
-
-    /**
-     * Creates an instance of Device.
-     * @param {any} [ua=null]
-     * @param {any} [flags={}]
-     * @param {string} [cssFlagsPrefix='device']
-     *
-     * @memberOf Device
-     */
-    function Device() {
-      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'device';
-
-      _classCallCheck(this, Device);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(Device).call(this, ua, flags, cssFlagsPrefix));
-    }
-
-    return Device;
-  }(CssFlagsClass);
-
-  var CPU =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
-    _inherits(CPU, _CssFlagsClass);
-
-    function CPU() {
-      var _this;
-
-      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'cpu';
-
-      _classCallCheck(this, CPU);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CPU).call(this, ua, flags, cssFlagsPrefix));
-      _this._booleanFlagsValuePropertyName = 'vendor';
-      _this.platform = _this.getPlatform();
-      _this.cores = _this.getCores();
-      _this.architecture = _this.getArchitecture();
-      _this.sparc = _this.getSparc();
-      _this.irix = _this.getIrix();
-      _this.mips = _this.getMips();
-      _this.risc = _this.getRisc();
-      _this.avr = _this.getAvr();
-      _this.arm = _this.getArm();
-      _this.powerPC = _this.getPowerPC();
-      _this.amd = _this.getAmd();
-      _this.intel = _this.getIntel();
-      return _this;
-    }
-    /**
-     *
-     *
-     * @returns number
-     *
-     * @memberOf CPU
-     */
-
-
-    _createClass(CPU, [{
-      key: "getCores",
-      value: function getCores() {
-        return this._navigator.hardwareConcurrency || 1;
-      }
-      /**
-       *
-       *
-       * @returns string
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getPlatform",
-      value: function getPlatform() {
-        return this._navigator.platform || 'Win32';
-      }
-      /**
-       *
-       *
-       * @returns string
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getArchitecture",
-      value: function getArchitecture() {
-        var cpuClass = this._navigator.cpuClass || 'x86';
-
-        if (Asserts.one([cpuClass === 'x64', ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(this._navigator.platform), /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)])) {
-          cpuClass = 'x64';
-        }
-
-        return cpuClass;
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getSparc",
-      value: function getSparc() {
-        return Asserts.one([/(sun4\w)[;\)]/i.test(this._ua), /sparc(?:64)?(?=;);/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getIrix",
-      value: function getIrix() {
-        return Asserts.all([/irix(?:64)?(?=;);/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getMips",
-      value: function getMips() {
-        return Asserts.all([/mips(?:64)?(?=;);/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getRisc",
-      value: function getRisc() {
-        return Asserts.all([/pa-risc(?:64)?(?=;);/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getAvr",
-      value: function getAvr() {
-        return Asserts.all([/(?=atmel\s)avr/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getArm",
-      value: function getArm() {
-        return Asserts.one([/windows\s(ce|mobile);\sppc;/i.test(this._ua), /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)]);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getPowerPC",
-      value: function getPowerPC() {
-        return Asserts.one([/((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua), this._navigator.platform === 'MacPPC']);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getAmd",
-      value: function getAmd() {
-        return Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
-      }
-      /**
-       *
-       *
-       * @returns boolean
-       *
-       * @memberOf CPU
-       */
-
-    }, {
-      key: "getIntel",
-      value: function getIntel() {
-        return Asserts.one([/(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua), /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'MacIntel', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /(ia32(?=;))/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
-      }
-    }]);
-
-    return CPU;
-  }(CssFlagsClass);
-
-  /**
-   *
-   *
-   * @export
-   * @class GPU
-   * @extends {CssFlagsClass}
-   */
-
-  var GPU =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
-    _inherits(GPU, _CssFlagsClass);
-
-    /**
-     * Creates an instance of GPU.
-     * @param {any} [ua=null]
-     * @param {any} [flags={}]
-     * @param {string} [cssFlagsPrefix='gpu']
-     *
-     * @memberOf GPU
-     */
-    function GPU() {
-      var _this;
-
-      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'gpu';
-
-      _classCallCheck(this, GPU);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(GPU).call(this, ua, flags, cssFlagsPrefix));
-
-      _this._createTestElements();
-
-      _this.webGLVendor = _this._info.webGLVendor;
-      _this.webGLRenderer = _this._info.webGLRenderer;
-      _this.vendor = _this._info.vendor;
-      _this.model = _this._info.model;
-      _this.renderer = _this._info.renderer;
-      return _this;
-    }
-    /**
-     *
-     *
-     *
-     * @memberOf GPU
-     */
-
-
-    _createClass(GPU, [{
-      key: "_createTestElements",
-      value: function _createTestElements() {
-        this._canvas = this._document.createElement('canvas');
-        this._info = this.getInfo();
-      } // /**
-      //  *
-      //  *
-      //  *
-      //  * @memberOf GPU
-      //  */
-      // _destroyTestElements() {
-      //   this._canvas = null;
-      //   this._info = null;
-      //   delete this._canvas;
-      //   delete this._info;
-      // }
-
-      /**
-       *
-       *
-       * @returns object
-       *
-       * @memberOf GPU
-       */
-
-    }, {
-      key: "getInfo",
-      value: function getInfo() {
-        var info = {
-          webGLVendor: 'n/a',
-          webGLRenderer: 'n/a',
-          vendor: 'n/a',
-          model: 'n/a',
-          renderer: 'n/a'
-        };
-
-        try {
-          var webGLContext = this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl');
-
-          if (webGLContext) {
-            var dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
-
-            if (dbgRenderInfo != null) {
-              info.merge({
-                vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
-                model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
-                renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL)
-              });
-            }
-
-            info.merge({
-              webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
-              webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER)
-            });
-          }
-        } catch (e) {
-          console.warn('webGL is not supported', e.message);
-        }
-
-        return info;
-      }
-    }]);
-
-    return GPU;
-  }(CssFlagsClass);
-
-  /**
-   *
-   *
-   * @export
    * @class OS
    * @extends {CssFlagsClass}
    */
@@ -4359,6 +3869,490 @@
     }]);
 
     return Browser;
+  }(CssFlagsClass);
+
+  /**
+   *
+   *
+   * @export
+   * @class Platform
+   * @extends {CssFlagsClass}
+   */
+
+  var Platform =
+  /*#__PURE__*/
+  function (_CssFlagsClass) {
+    _inherits(Platform, _CssFlagsClass);
+
+    /**
+     * Creates an instance of Platform.
+     * @param {any} [ua=null]
+     * @param {any} [flags={}]
+     * @param {string} [cssFlagsPrefix='platform']
+     *
+     * @memberOf Platform
+     */
+    function Platform() {
+      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'platform';
+
+      _classCallCheck(this, Platform);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(Platform).call(this, ua, flags, cssFlagsPrefix));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Platform
+     */
+
+
+    _createClass(Platform, [{
+      key: "toValues",
+      value: function toValues() {
+        var _this = this;
+
+        var proto = Object.getPrototypeOf(this);
+        var protoProperties = Object.getOwnPropertyNames(proto).filter(function (prop) {
+          return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!_this[prop];
+        });
+        return protoProperties[0] || 'n/a';
+      }
+    }, {
+      key: "mobile",
+      get: function get() {
+        var os = new OS(this._ua, this.toFlags()).toValues();
+        var browser = new Browser(this._ua, this.toFlags().toValues());
+        return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && Asserts.one([this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard, os.Android, os.iOS, os.WindowsPhone, os.Bada, os.Blackberry, os.Contiki, os.MeeGo, os.RIM, os.QNX, os.Palm, os.Symbian, os.WebOS, browser.ChromeMobile, browser.EdgeMobile, browser.IEMobile, browser.FirefoxMobile, browser.MaxthonMobile, browser.OperaMobile, browser.SafariMobile]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       *
+       * @memberOf Platform
+       */
+
+    }, {
+      key: "smartphone",
+      get: function get() {
+        return Asserts.all([this.mobile, !this.tablet]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       *
+       * @memberOf Platform
+       */
+
+    }, {
+      key: "tablet",
+      get: function get() {
+        return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       * @memberof Platform
+       */
+
+    }, {
+      key: "console",
+      get: function get() {
+        return Asserts.all([/(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua), !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       * @memberof Platform
+       */
+
+    }, {
+      key: "tv",
+      get: function get() {
+        return Asserts.one([/(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua), /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua)]) && Asserts.one([!this.mobile, !this.bot, this._flags.feature.fullscreenKeyboard]) && Asserts.one([this._flags.os.Android, this._flags.os.Tizen, this._flags.os.WebOS]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       * @memberOf Platform
+       */
+
+    }, {
+      key: "bot",
+      get: function get() {
+        return Asserts.one([/googlebot/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @readonly
+       * @memberOf Platform
+       */
+
+    }, {
+      key: "desktop",
+      get: function get() {
+        return Asserts.all([!this.bot, !this.console, !this.mobile, !this.tv]);
+      }
+    }]);
+
+    return Platform;
+  }(CssFlagsClass);
+
+  /**
+   *
+   *
+   * @export
+   * @class Device
+   * @extends {CssFlagsClass}
+   */
+
+  var Device =
+  /*#__PURE__*/
+  function (_CssFlagsClass) {
+    _inherits(Device, _CssFlagsClass);
+
+    /**
+     * Creates an instance of Device.
+     * @param {any} [ua=null]
+     * @param {any} [flags={}]
+     * @param {string} [cssFlagsPrefix='device']
+     *
+     * @memberOf Device
+     */
+    function Device() {
+      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'device';
+
+      _classCallCheck(this, Device);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(Device).call(this, ua, flags, cssFlagsPrefix));
+    }
+
+    return Device;
+  }(CssFlagsClass);
+
+  var CPU =
+  /*#__PURE__*/
+  function (_CssFlagsClass) {
+    _inherits(CPU, _CssFlagsClass);
+
+    function CPU() {
+      var _this;
+
+      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'cpu';
+
+      _classCallCheck(this, CPU);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(CPU).call(this, ua, flags, cssFlagsPrefix));
+      _this._booleanFlagsValuePropertyName = 'vendor';
+      _this.platform = _this.getPlatform();
+      _this.cores = _this.getCores();
+      _this.architecture = _this.getArchitecture();
+      _this.sparc = _this.getSparc();
+      _this.irix = _this.getIrix();
+      _this.mips = _this.getMips();
+      _this.risc = _this.getRisc();
+      _this.avr = _this.getAvr();
+      _this.arm = _this.getArm();
+      _this.powerPC = _this.getPowerPC();
+      _this.amd = _this.getAmd();
+      _this.intel = _this.getIntel();
+      return _this;
+    }
+    /**
+     *
+     *
+     * @returns number
+     *
+     * @memberOf CPU
+     */
+
+
+    _createClass(CPU, [{
+      key: "getCores",
+      value: function getCores() {
+        return this._navigator.hardwareConcurrency || 1;
+      }
+      /**
+       *
+       *
+       * @returns string
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getPlatform",
+      value: function getPlatform() {
+        return this._navigator.platform || 'Win32';
+      }
+      /**
+       *
+       *
+       * @returns string
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getArchitecture",
+      value: function getArchitecture() {
+        var cpuClass = this._navigator.cpuClass || 'x86';
+
+        if (Asserts.one([cpuClass === 'x64', ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(this._navigator.platform), /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)])) {
+          cpuClass = 'x64';
+        }
+
+        return cpuClass;
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getSparc",
+      value: function getSparc() {
+        return Asserts.one([/(sun4\w)[;\)]/i.test(this._ua), /sparc(?:64)?(?=;);/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getIrix",
+      value: function getIrix() {
+        return Asserts.all([/irix(?:64)?(?=;);/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getMips",
+      value: function getMips() {
+        return Asserts.all([/mips(?:64)?(?=;);/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getRisc",
+      value: function getRisc() {
+        return Asserts.all([/pa-risc(?:64)?(?=;);/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getAvr",
+      value: function getAvr() {
+        return Asserts.all([/(?=atmel\s)avr/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getArm",
+      value: function getArm() {
+        return Asserts.one([/windows\s(ce|mobile);\sppc;/i.test(this._ua), /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)]);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getPowerPC",
+      value: function getPowerPC() {
+        return Asserts.one([/((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua), this._navigator.platform === 'MacPPC']);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getAmd",
+      value: function getAmd() {
+        return Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
+      }
+      /**
+       *
+       *
+       * @returns boolean
+       *
+       * @memberOf CPU
+       */
+
+    }, {
+      key: "getIntel",
+      value: function getIntel() {
+        return Asserts.one([/(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua), /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'MacIntel', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /(ia32(?=;))/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
+      }
+    }]);
+
+    return CPU;
+  }(CssFlagsClass);
+
+  /**
+   *
+   *
+   * @export
+   * @class GPU
+   * @extends {CssFlagsClass}
+   */
+
+  var GPU =
+  /*#__PURE__*/
+  function (_CssFlagsClass) {
+    _inherits(GPU, _CssFlagsClass);
+
+    /**
+     * Creates an instance of GPU.
+     * @param {any} [ua=null]
+     * @param {any} [flags={}]
+     * @param {string} [cssFlagsPrefix='gpu']
+     *
+     * @memberOf GPU
+     */
+    function GPU() {
+      var _this;
+
+      var ua = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var flags = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var cssFlagsPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'gpu';
+
+      _classCallCheck(this, GPU);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(GPU).call(this, ua, flags, cssFlagsPrefix));
+
+      _this._createTestElements();
+
+      _this.webGLVendor = _this._info.webGLVendor;
+      _this.webGLRenderer = _this._info.webGLRenderer;
+      _this.vendor = _this._info.vendor;
+      _this.model = _this._info.model;
+      _this.renderer = _this._info.renderer;
+      return _this;
+    }
+    /**
+     *
+     *
+     *
+     * @memberOf GPU
+     */
+
+
+    _createClass(GPU, [{
+      key: "_createTestElements",
+      value: function _createTestElements() {
+        this._canvas = this._document.createElement('canvas');
+        this._info = this.getInfo();
+      } // /**
+      //  *
+      //  *
+      //  *
+      //  * @memberOf GPU
+      //  */
+      // _destroyTestElements() {
+      //   this._canvas = null;
+      //   this._info = null;
+      //   delete this._canvas;
+      //   delete this._info;
+      // }
+
+      /**
+       *
+       *
+       * @returns object
+       *
+       * @memberOf GPU
+       */
+
+    }, {
+      key: "getInfo",
+      value: function getInfo() {
+        var info = {
+          webGLVendor: 'n/a',
+          webGLRenderer: 'n/a',
+          vendor: 'n/a',
+          model: 'n/a',
+          renderer: 'n/a'
+        };
+
+        try {
+          var webGLContext = this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl');
+
+          if (webGLContext) {
+            var dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
+
+            if (dbgRenderInfo != null) {
+              info.merge({
+                vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
+                model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
+                renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL)
+              });
+            }
+
+            info.merge({
+              webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
+              webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER)
+            });
+          }
+        } catch (e) {
+          console.warn('webGL is not supported', e.message);
+        }
+
+        return info;
+      }
+    }]);
+
+    return GPU;
   }(CssFlagsClass);
 
   /**
