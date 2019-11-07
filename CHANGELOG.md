@@ -1,3 +1,12 @@
+## [Version 1.1.6](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.6) (2019-11-7)
+
+### Bug fixes
+
+- fix for platform detection: [`f2fe3f2`](https://github.com/:blackmirror1980/detector-js/commit/f2fe3f2)
+- build v.1.1.6: [`2f1512d`](https://github.com/:blackmirror1980/detector-js/commit/2f1512d)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.5...v1.1.6)
+
 ## [Version 1.1.5](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.5) (2019-11-7)
 
 ### Bug fixes
