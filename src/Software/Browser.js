@@ -60,6 +60,7 @@ export default class Browser extends CssFlagsClass {
     return new RegExp(reStr, 'i').test(this._ua);
   }
 
+  //#region Un-Common/Rare/Mythic Browsers
   /**
    *
    *
@@ -96,20 +97,6 @@ export default class Browser extends CssFlagsClass {
   get Avant() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:avant(?:\sbrowser))' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get AndroidBrowser() {
-    return this._checkAssertsResult(Asserts.all([
-      !this._reTest('like android'),
-      this._reTest('(?:android.*)' + this._reStrVer),
     ]));
   }
 
@@ -224,50 +211,6 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get Chrome() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.Chromium,
-      !this.ChromeMobile,
-      !this.AndroidBrowser,
-      !this._reTest('like chrome'),
-      this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get ChromeMobile() {
-    return this._checkAssertsResult(Asserts.all([
-      !this._reTest('like chrome'),
-      this._reTest('((?:android.+)crmo|crios)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get Chromium() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:chromium)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
   get ComodoDragon() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:comodo(?:\\_|\\s)dragon)' + this._reStrVerNum),
@@ -336,33 +279,6 @@ export default class Browser extends CssFlagsClass {
   get Doris() {
     return this._checkAssertsResult(Asserts.all([
       this._reTest('(?:doris)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get Edge() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.IE,
-      this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get EdgeMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:edg(?:ios|a))' + this._reStrVerNum),
     ]));
   }
 
@@ -438,46 +354,6 @@ export default class Browser extends CssFlagsClass {
   get Firebird() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:firebird)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get Firefox() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:firefox|iceweasel)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get FirefoxFocus() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:focus)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get FirefoxMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      this.FirefoxFocus,
-      this._reTest('(?:fxios)' + this._reStrVerNum),
     ]));
   }
 
@@ -582,33 +458,6 @@ export default class Browser extends CssFlagsClass {
   get IceDragon() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:icedragon)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get IE() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.IEMobile,
-      /(?:msie|ie|trident).*(?:;\srv:(?:(\w+(?:(?:\.|\_)\w+)+)|\d+))/i.test(this._ua),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get IEMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:iemobile)' + this._reStrVerNum),
     ]));
   }
 
@@ -736,10 +585,9 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get Maxthon() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.MaxthonMobile,
-      this._reTest('(?:maxthon|mxnitro)' + this._reStrVerNum),
+  get MaxthonMobile() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:mxios)' + this._reStrVerNum),
     ]));
   }
 
@@ -750,9 +598,10 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get MaxthonMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:mxios)' + this._reStrVerNum),
+  get Maxthon() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.MaxthonMobile,
+      this._reTest('(?:maxthon|mxnitro)' + this._reStrVerNum),
     ]));
   }
 
@@ -893,82 +742,6 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get Opera() {
-    return this._checkAssertsResult(Asserts.one([
-      !!this._root.opera,
-      !!this._root.opr,
-    ]) && Asserts.all([
-      !this.OperaMobile,
-    ]) && Asserts.one([
-      this._reTest('(?:op(?:era|r)|mms)' + this._reStrVerNum),
-    ]), true);
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get OperaMini() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:opera\smini)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get OperaTouch() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:opt)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get OperaCoast() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:coast)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get OperaMobile() { // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch || Opera iOS
-    return this._checkAssertsResult(Asserts.one([
-      !!this._root.opera,
-      !!this._root.opr,
-    ]) && Asserts.one([
-      this.OperaMini,
-      this.OperaCoast,
-      this.OperaTouch,
-      this._reTest('(?:op(?:r|ios))' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
   get OviBrowser() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:ovibrowser)' + this._reStrVerNum),
@@ -1047,10 +820,9 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get QQBrowser() {
-    return this._checkAssertsResult(Asserts.all([
-      !this.QQBrowserMobile,
-      this._reTest('(?:qq(?:browser)?(?:lite)?)' + this._reStrVerNum),
+  get QQBrowserMobile() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:mqq(?:browser)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -1061,9 +833,10 @@ export default class Browser extends CssFlagsClass {
    *
    * @memberOf Browser
    */
-  get QQBrowserMobile() {
-    return this._checkAssertsResult(Asserts.one([
-      this._reTest('(?:mqq(?:browser)?)' + this._reStrVerNum),
+  get QQBrowser() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.QQBrowserMobile,
+      this._reTest('(?:qq(?:browser)?(?:lite)?)' + this._reStrVerNum),
     ]));
   }
 
@@ -1116,46 +889,6 @@ export default class Browser extends CssFlagsClass {
   get RockMelt() {
     return this._checkAssertsResult(Asserts.one([
       this._reTest('(?:rockmelt)' + this._reStrVerNum),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get Safari() {
-    return this._checkAssertsResult(Asserts.all([
-      /safari|applewebkit/i.test(this._ua),
-      !this.AndroidBrowser,
-      !this.SafariMobile,
-      !this.Chrome,
-      !this.PhantomJS,
-    ]) && Asserts.one([
-      /(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua),
-    ]));
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Browser
-   */
-  get SafariMobile() {
-    return this._checkAssertsResult(Asserts.all([
-      /iphone|ipad|ipod/i.test(this._ua),
-      !this.AndroidBrowser,
-      !this.Chrome,
-      !this.PhantomJS,
-    ]) && Asserts.one([
-      /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
-      /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
-      /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua),
-      /(?:applewebkit\/\d+.*)(?:.*mobile\/(?:\d+)?)(?:.*safari\/(?:\d+)?)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?/i.test(this._ua),
     ]));
   }
 
@@ -1392,6 +1125,278 @@ export default class Browser extends CssFlagsClass {
       this._reTest('(?:ya(?:browser|ndex))' + this._reStrVerNum),
     ]);
   }
+  //#endregion
+
+  //#region Common Browsers
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get AndroidBrowser() {
+    return this._checkAssertsResult(Asserts.all([
+      !this._reTest('like android'),
+      this._reTest('(?:android.*)' + this._reStrVer),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get ChromeMobile() {
+    return this._checkAssertsResult(Asserts.all([
+      !this._reTest('like chrome'),
+      this._reTest('((?:android.+)crmo|crios)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Chrome() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.Chromium,
+      !this.ChromeMobile,
+      !this.AndroidBrowser,
+      !this._reTest('like chrome'),
+      this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Chromium() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:chromium)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get EdgeMobile() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:edg(?:ios|a))' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Edge() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.IE,
+      this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get FirefoxFocus() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:focus)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get FirefoxMobile() {
+    return this._checkAssertsResult(Asserts.one([
+      this.FirefoxFocus,
+      this._reTest('(?:fxios)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Firefox() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:firefox|iceweasel)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get IEMobile() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:iemobile)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get IE() {
+    return this._checkAssertsResult(Asserts.all([
+      !this.IEMobile,
+      /(?:msie|ie|trident).*(?:;\srv:(?:(\w+(?:(?:\.|\_)\w+)+)|\d+))/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get OperaMini() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:opera\smini)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get OperaTouch() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:opt)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get OperaCoast() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:coast)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get OperaMobile() { // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch || Opera iOS
+    return this._checkAssertsResult(Asserts.one([
+      !!this._root.opera,
+      !!this._root.opr,
+    ]) && Asserts.one([
+      this.OperaMini,
+      this.OperaCoast,
+      this.OperaTouch,
+      this._reTest('(?:op(?:r|ios))' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Opera() {
+    return this._checkAssertsResult(Asserts.one([
+      !!this._root.opera,
+      !!this._root.opr,
+    ]) && Asserts.all([
+      !this.OperaMobile,
+    ]) && Asserts.one([
+      this._reTest('(?:op(?:era|r)|mms)' + this._reStrVerNum),
+    ]), true);
+  }
+
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get SafariMobile() {
+    return this._checkAssertsResult(Asserts.all([
+      /iphone|ipad|ipod/i.test(this._ua),
+      !this.AndroidBrowser,
+      !this.Chrome,
+      !this.PhantomJS,
+    ]) && Asserts.one([
+      /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
+      /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
+      /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua),
+      /(?:applewebkit\/\d+.*)(?:.*mobile\/(?:\d+)?)(?:.*safari\/(?:\d+)?)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?/i.test(this._ua),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Safari() {
+    return this._checkAssertsResult(Asserts.all([
+      /safari|applewebkit/i.test(this._ua),
+      !this.AndroidBrowser,
+      !this.SafariMobile,
+      !this.Chrome,
+      !this.PhantomJS,
+    ]) && Asserts.one([
+      /(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua),
+    ]));
+  }
+  //#endregion
 
   /**
    *

@@ -1371,6 +1371,19 @@ function (_CssFlagsClass) {
       return Asserts.all([function () {
         return 'MouseEvent' in _this14._root && 'WEBKIT_FORCE_AT_MOUSE_DOWN' in _this14._root.MouseEvent && 'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in _this14._root.MouseEvent;
       }], true);
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Feature
+     */
+
+  }, {
+    key: "pointerEvents",
+    get: function get() {
+      return Asserts.all([this._root.PointerEvent], true);
     } // Test if img srcset attribute is supported
 
     /**
@@ -2507,7 +2520,8 @@ function (_CssFlagsClass) {
     value: function _reTest() {
       var reStr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._reStrVer;
       return new RegExp(reStr, 'i').test(this._ua);
-    }
+    } //#region Un-Common/Rare/Mythic Browsers
+
     /**
      *
      *
@@ -2535,6 +2549,7 @@ function (_CssFlagsClass) {
 
   }, {
     key: "_checkAssertsResult",
+    //#endregion
 
     /**
      *
@@ -2611,19 +2626,6 @@ function (_CssFlagsClass) {
     key: "Avant",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:avant(?:\sbrowser))' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "AndroidBrowser",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this._reTest('like android'), this._reTest('(?:android.*)' + this._reStrVer)]));
     }
     /**
      *
@@ -2738,45 +2740,6 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "Chrome",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.Chromium, !this.ChromeMobile, !this.AndroidBrowser, !this._reTest('like chrome'), this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "ChromeMobile",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this._reTest('like chrome'), this._reTest('((?:android.+)crmo|crios)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "Chromium",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:chromium)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
     key: "ComodoDragon",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:comodo(?:\\_|\\s)dragon)' + this._reStrVerNum)]));
@@ -2846,32 +2809,6 @@ function (_CssFlagsClass) {
     get: function get() {
       return this._checkAssertsResult(Asserts.all([this._reTest('(?:doris)' + this._reStrVerNum)]));
     }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "Edge",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.IE, this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "EdgeMobile",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:edg(?:ios|a))' + this._reStrVerNum)]));
-    }
   }, {
     key: "Electron",
     get: function get() {
@@ -2939,45 +2876,6 @@ function (_CssFlagsClass) {
     key: "Firebird",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:firebird)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "Firefox",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:firefox|iceweasel)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "FirefoxFocus",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:focus)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "FirefoxMobile",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this.FirefoxFocus, this._reTest('(?:fxios)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3082,32 +2980,6 @@ function (_CssFlagsClass) {
     key: "IceDragon",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:icedragon)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "IE",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.IEMobile, /(?:msie|ie|trident).*(?:;\srv:(?:(\w+(?:(?:\.|\_)\w+)+)|\d+))/i.test(this._ua)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "IEMobile",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:iemobile)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3235,9 +3107,9 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "Maxthon",
+    key: "MaxthonMobile",
     get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.MaxthonMobile, this._reTest('(?:maxthon|mxnitro)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:mxios)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3248,9 +3120,9 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "MaxthonMobile",
+    key: "Maxthon",
     get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:mxios)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.all([!this.MaxthonMobile, this._reTest('(?:maxthon|mxnitro)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3391,72 +3263,6 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "Opera",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([!!this._root.opera, !!this._root.opr]) && Asserts.all([!this.OperaMobile]) && Asserts.one([this._reTest('(?:op(?:era|r)|mms)' + this._reStrVerNum)]), true);
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "OperaMini",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:opera\smini)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "OperaTouch",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:opt)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "OperaCoast",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:coast)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "OperaMobile",
-    get: function get() {
-      // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch || Opera iOS
-      return this._checkAssertsResult(Asserts.one([!!this._root.opera, !!this._root.opr]) && Asserts.one([this.OperaMini, this.OperaCoast, this.OperaTouch, this._reTest('(?:op(?:r|ios))' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
     key: "OviBrowser",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:ovibrowser)' + this._reStrVerNum)]));
@@ -3535,9 +3341,9 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "QQBrowser",
+    key: "QQBrowserMobile",
     get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.QQBrowserMobile, this._reTest('(?:qq(?:browser)?(?:lite)?)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:mqq(?:browser)?)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3548,9 +3354,9 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "QQBrowserMobile",
+    key: "QQBrowser",
     get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:mqq(?:browser)?)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.all([!this.QQBrowserMobile, this._reTest('(?:qq(?:browser)?(?:lite)?)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -3603,32 +3409,6 @@ function (_CssFlagsClass) {
     key: "RockMelt",
     get: function get() {
       return this._checkAssertsResult(Asserts.one([this._reTest('(?:rockmelt)' + this._reStrVerNum)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "Safari",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([/safari|applewebkit/i.test(this._ua), !this.AndroidBrowser, !this.SafariMobile, !this.Chrome, !this.PhantomJS]) && Asserts.one([/(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "SafariMobile",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([/iphone|ipad|ipod/i.test(this._ua), !this.AndroidBrowser, !this.Chrome, !this.PhantomJS]) && Asserts.one([/version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua), /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua), /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua), /(?:applewebkit\/\d+.*)(?:.*mobile\/(?:\d+)?)(?:.*safari\/(?:\d+)?)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?/i.test(this._ua)]));
     }
     /**
      *
@@ -3864,6 +3644,243 @@ function (_CssFlagsClass) {
     key: "Yandex",
     get: function get() {
       return Asserts.one([this._reTest('(?:ya(?:browser|ndex))' + this._reStrVerNum)]);
+    } //#endregion
+    //#region Common Browsers
+
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "AndroidBrowser",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this._reTest('like android'), this._reTest('(?:android.*)' + this._reStrVer)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "ChromeMobile",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this._reTest('like chrome'), this._reTest('((?:android.+)crmo|crios)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Chrome",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this.Chromium, !this.ChromeMobile, !this.AndroidBrowser, !this._reTest('like chrome'), this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Chromium",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:chromium)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "EdgeMobile",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:edg(?:ios|a))' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Edge",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this.IE, this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "FirefoxFocus",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:focus)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "FirefoxMobile",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this.FirefoxFocus, this._reTest('(?:fxios)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Firefox",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:firefox|iceweasel)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "IEMobile",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:iemobile)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "IE",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this.IEMobile, /(?:msie|ie|trident).*(?:;\srv:(?:(\w+(?:(?:\.|\_)\w+)+)|\d+))/i.test(this._ua)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "OperaMini",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:opera\smini)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "OperaTouch",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:opt)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "OperaCoast",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([this._reTest('(?:coast)' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "OperaMobile",
+    get: function get() {
+      // a.k.a. Opera Mobile || Opera Coast || Opera Mini || Opera Touch || Opera iOS
+      return this._checkAssertsResult(Asserts.one([!!this._root.opera, !!this._root.opr]) && Asserts.one([this.OperaMini, this.OperaCoast, this.OperaTouch, this._reTest('(?:op(?:r|ios))' + this._reStrVerNum)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Opera",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.one([!!this._root.opera, !!this._root.opr]) && Asserts.all([!this.OperaMobile]) && Asserts.one([this._reTest('(?:op(?:era|r)|mms)' + this._reStrVerNum)]), true);
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "SafariMobile",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([/iphone|ipad|ipod/i.test(this._ua), !this.AndroidBrowser, !this.Chrome, !this.PhantomJS]) && Asserts.one([/version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua), /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua), /(?:(?:iPod|iPad|iPhone).+Version|MobileSafari)\/(\d+[\.\d]+)/i.test(this._ua), /(?:applewebkit\/\d+.*)(?:.*mobile\/(?:\d+)?)(?:.*safari\/(?:\d+)?)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?/i.test(this._ua)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "Safari",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([/safari|applewebkit/i.test(this._ua), !this.AndroidBrowser, !this.SafariMobile, !this.Chrome, !this.PhantomJS]) && Asserts.one([/(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua)]));
     }
   }]);
 
@@ -3904,7 +3921,6 @@ function (_CssFlagsClass) {
    *
    *
    * @readonly
-   *
    * @memberOf Platform
    */
 
@@ -3921,35 +3937,9 @@ function (_CssFlagsClass) {
       return protoProperties[0] || 'n/a';
     }
   }, {
-    key: "mobile",
+    key: "bot",
     get: function get() {
-      return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && Asserts.one([this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard, ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name), ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name)]);
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Platform
-     */
-
-  }, {
-    key: "smartphone",
-    get: function get() {
-      return Asserts.all([this.mobile, !this.tablet]);
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Platform
-     */
-
-  }, {
-    key: "tablet",
-    get: function get() {
-      return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
+      return Asserts.one([/googlebot/i.test(this._ua)]);
     }
     /**
      *
@@ -3979,13 +3969,40 @@ function (_CssFlagsClass) {
      *
      *
      * @readonly
+     *
      * @memberOf Platform
      */
 
   }, {
-    key: "bot",
+    key: "tablet",
     get: function get() {
-      return Asserts.one([/googlebot/i.test(this._ua)]);
+      return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Platform
+     */
+
+  }, {
+    key: "smartphone",
+    get: function get() {
+      return Asserts.all([this.mobile, !this.tablet]);
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Platform
+     */
+
+  }, {
+    key: "mobile",
+    get: function get() {
+      return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && Asserts.one([!this._flags.feature.pointerEvents]) && Asserts.one([this._flags.feature.file, this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard, ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name), ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name)]);
     }
     /**
      *
@@ -4385,7 +4402,8 @@ function (_CssFlagsClass) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Engine).call(this, ua, flags, cssFlagsPrefix));
     _this.version = 'n/a';
     return _this;
-  }
+  } //#region Un-Common/Rare/Mythic Engines
+
   /**
    *
    *
@@ -4397,6 +4415,7 @@ function (_CssFlagsClass) {
 
   _createClass(Engine, [{
     key: "_checkAssertsResult",
+    //#endregion
 
     /**
      *
@@ -4444,49 +4463,6 @@ function (_CssFlagsClass) {
     key: "Amaya",
     get: function get() {
       return this._checkAssertsResult(Asserts.all([/(amaya)\/([\w\.]+)/i.test(this._ua)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Engine
-     */
-
-  }, {
-    key: "Blink",
-    get: function get() {
-      var _this2 = this;
-
-      return this._checkAssertsResult(Asserts.all([function () {
-        return 'Intl' in _this2._root && 'v8BreakIterator' in _this2._root.Intl;
-      }, 'CSS' in this._root, /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua)], true));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Engine
-     */
-
-  }, {
-    key: "EdgeHTML",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all(['StyleMedia' in this._root, !this.Trident]) && Asserts.one([/edge\/(\d+(\.?_?\d+)+)/i.test(this._ua)]));
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Engine
-     */
-
-  }, {
-    key: "Gecko",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all(['InstallTrigger' in this._root, !/like gecko/i.test(this._ua)]) && Asserts.one([/rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua), /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua)]));
     }
     /**
      *
@@ -4614,6 +4590,21 @@ function (_CssFlagsClass) {
      */
 
   }, {
+    key: "w3m",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([/w3m[\/\s]([\w\.]+)/i.test(this._ua)]));
+    } //#endregion
+    //#region Common Engines
+
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Engine
+     */
+
+  }, {
     key: "Trident",
     get: function get() {
       return this._checkAssertsResult(Asserts.all([
@@ -4629,9 +4620,39 @@ function (_CssFlagsClass) {
      */
 
   }, {
-    key: "w3m",
+    key: "Blink",
     get: function get() {
-      return this._checkAssertsResult(Asserts.all([/w3m[\/\s]([\w\.]+)/i.test(this._ua)]));
+      var _this2 = this;
+
+      return this._checkAssertsResult(Asserts.all([function () {
+        return 'Intl' in _this2._root && 'v8BreakIterator' in _this2._root.Intl;
+      }, 'CSS' in this._root, /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua)], true));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Engine
+     */
+
+  }, {
+    key: "EdgeHTML",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all(['StyleMedia' in this._root, !this.Trident]) && Asserts.one([/edge\/(\d+(\.?_?\d+)+)/i.test(this._ua)]));
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Engine
+     */
+
+  }, {
+    key: "Gecko",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all(['InstallTrigger' in this._root, !/like gecko/i.test(this._ua)]) && Asserts.one([/rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua), /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua)]));
     }
     /**
      *
