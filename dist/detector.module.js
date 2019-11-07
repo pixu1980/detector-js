@@ -4929,6 +4929,7 @@
   }(FlagsClass);
 
   if (typeof module !== 'undefined') {
+    // module export
     module.exports = Detector;
   }
 
