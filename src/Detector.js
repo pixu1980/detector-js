@@ -234,16 +234,18 @@ export default class Detector extends FlagsClass {
    * @memberOf Detector
    */
   setCssFlags() {
-    const cssFlagsPrefixed = this._cssFlags.map((cssFlag) => {
-      return this._cssFlagsPrefix + cssFlag;
-    });
+    if (!!this._cssFlags) {
+      const cssFlagsPrefixed = this._cssFlags.map((cssFlag) => {
+        return this._cssFlagsPrefix + cssFlag;
+      });
 
-    const htmlElement = document.documentElement || document.querySelector('html');
+      const htmlElement = document.documentElement || document.querySelector('html');
 
-    cssFlagsPrefixed.forEach((cssFlag) => {
-      return htmlElement.className.replace(cssFlag, '');
-    });
+      cssFlagsPrefixed.forEach((cssFlag) => {
+        return htmlElement.className.replace(cssFlag, '');
+      });
 
-    htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+      htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+    }
   }
 }
