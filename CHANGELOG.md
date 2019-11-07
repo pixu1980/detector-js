@@ -1,3 +1,12 @@
+## [Version 1.1.3](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.3) (2019-11-7)
+
+### Bug fixes
+
+- dumped dependencies: [`f4557bf`](https://github.com/:blackmirror1980/detector-js/commit/f4557bf)
+- fix for no css flags: [`310441e`](https://github.com/:blackmirror1980/detector-js/commit/310441e)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.2...v1.1.3)
+
 ## [Version 1.1.2](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.2) (2019-8-28)
 
 ### Bug fixes
