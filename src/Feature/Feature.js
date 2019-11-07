@@ -720,6 +720,19 @@ export default class Feature extends CssFlagsClass {
     ], true);
   }
 
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Feature
+   */
+  get pointerEvents() {
+    return Asserts.all([
+      this._root.PointerEvent,
+    ], true);
+  }
+
   // Test if img srcset attribute is supported
   /**
    *

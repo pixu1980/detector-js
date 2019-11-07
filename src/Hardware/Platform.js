@@ -27,51 +27,11 @@ export default class Platform extends CssFlagsClass {
    *
    *
    * @readonly
-   *
    * @memberOf Platform
    */
-  get mobile() {
+  get bot() {
     return Asserts.one([
-      this._flags.feature.deviceMotion,
-      this._flags.feature.deviceOrientation,
-      this._flags.feature.pixelRatio > 1,
-    ]) && Asserts.one([
-      this._flags.feature.touch,
-      this._flags.feature.forceTouch,
-    ]) && Asserts.one([
-      this._flags.feature.vibration,
-      this._flags.feature.battery,
-      this._flags.feature.fullscreenKeyboard,
-      ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
-      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
-    ]);
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Platform
-   */
-  get smartphone() {
-    return Asserts.all([
-      this.mobile,
-      !this.tablet,
-    ]);
-  }
-
-  /**
-   *
-   *
-   * @readonly
-   *
-   * @memberOf Platform
-   */
-  get tablet() {
-    return Asserts.all([
-      this.mobile,
-      /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua),
+      /googlebot/i.test(this._ua),
     ]);
   }
 
@@ -113,11 +73,54 @@ export default class Platform extends CssFlagsClass {
    *
    *
    * @readonly
+   *
    * @memberOf Platform
    */
-  get bot() {
+  get tablet() {
+    return Asserts.all([
+      this.mobile,
+      /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua),
+    ]);
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Platform
+   */
+  get smartphone() {
+    return Asserts.all([
+      this.mobile,
+      !this.tablet,
+    ]);
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Platform
+   */
+  get mobile() {
     return Asserts.one([
-      /googlebot/i.test(this._ua),
+      this._flags.feature.deviceMotion,
+      this._flags.feature.deviceOrientation,
+      this._flags.feature.pixelRatio > 1,
+    ]) && Asserts.one([
+      this._flags.feature.touch,
+      this._flags.feature.forceTouch,
+    ]) && Asserts.one([
+      !this._flags.feature.pointerEvents,
+    ]) && Asserts.one([
+      this._flags.feature.file,
+      this._flags.feature.vibration,
+      this._flags.feature.battery,
+      this._flags.feature.fullscreenKeyboard,
+      ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
+      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
     ]);
   }
 
