@@ -4928,6 +4928,7 @@ function (_FlagsClass) {
 }(FlagsClass);
 
 if (typeof module !== 'undefined') {
+  // module export
   module.exports = Detector;
 }
 //# sourceMappingURL=detector.browser.js.map
