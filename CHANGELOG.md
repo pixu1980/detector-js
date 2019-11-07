@@ -1,3 +1,11 @@
+## [Version 1.1.7](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.7) (2019-11-7)
+
+### Bug fixes
+
+- implementing proper feedback ordering: [`ef959c5`](https://github.com/:blackmirror1980/detector-js/commit/ef959c5)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.6...v1.1.7)
+
 ## [Version 1.1.6](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.6) (2019-11-7)
 
 ### Bug fixes
