@@ -3927,9 +3927,7 @@
     }, {
       key: "mobile",
       get: function get() {
-        var os = new OS(this._ua, this.toFlags()).toValues();
-        var browser = new Browser(this._ua, this.toFlags().toValues());
-        return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && Asserts.one([this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard, os.Android, os.iOS, os.WindowsPhone, os.Bada, os.Blackberry, os.Contiki, os.MeeGo, os.RIM, os.QNX, os.Palm, os.Symbian, os.WebOS, browser.ChromeMobile, browser.EdgeMobile, browser.IEMobile, browser.FirefoxMobile, browser.MaxthonMobile, browser.OperaMobile, browser.SafariMobile]);
+        return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch]) && Asserts.one([this._flags.feature.vibration, this._flags.feature.battery, this._flags.feature.fullscreenKeyboard, ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name), ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name)]);
       }
       /**
        *
