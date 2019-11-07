@@ -1,3 +1,12 @@
+## [Version 1.1.4](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.4) (2019-11-7)
+
+### Bug fixes
+
+- hotfix module export: [`7e573d0`](https://github.com/:blackmirror1980/detector-js/commit/7e573d0)
+- build v1.1.4: [`afca080`](https://github.com/:blackmirror1980/detector-js/commit/afca080)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.3...v1.1.4)
+
 ## [Version 1.1.3](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.3) (2019-11-7)
 
 ### Bug fixes
