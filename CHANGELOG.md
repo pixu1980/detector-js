@@ -1,3 +1,11 @@
+## [Version 1.1.9](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.9) (2019-11-7)
+
+### Bug fixes
+
+- fix tablet platform: [`a39f611`](https://github.com/:blackmirror1980/detector-js/commit/a39f611)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.8...v1.1.9)
+
 ## [Version 1.1.8](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.8) (2019-11-7)
 
 ### Bug fixes
