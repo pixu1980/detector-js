@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.Detector = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   /* eslint-disable prefer-destructuring */
 
@@ -4914,15 +4914,17 @@
       value: function setCssFlags() {
         var _this2 = this;
 
-        var cssFlagsPrefixed = this._cssFlags.map(function (cssFlag) {
-          return _this2._cssFlagsPrefix + cssFlag;
-        });
+        if (!!this._cssFlags) {
+          var cssFlagsPrefixed = this._cssFlags.map(function (cssFlag) {
+            return _this2._cssFlagsPrefix + cssFlag;
+          });
 
-        var htmlElement = document.documentElement || document.querySelector('html');
-        cssFlagsPrefixed.forEach(function (cssFlag) {
-          return htmlElement.className.replace(cssFlag, '');
-        });
-        htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+          var htmlElement = document.documentElement || document.querySelector('html');
+          cssFlagsPrefixed.forEach(function (cssFlag) {
+            return htmlElement.className.replace(cssFlag, '');
+          });
+          htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+        }
       }
     }]);
 
@@ -4931,4 +4933,5 @@
 
   return Detector;
 
-}));
+})));
+//# sourceMappingURL=detector.js.map

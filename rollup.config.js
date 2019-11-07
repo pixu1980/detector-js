@@ -39,12 +39,12 @@ export default [{
   input: 'src/index.js',
   output: [{
     name: 'default',
-    file: pkg.browser.replace(/\.min\.js/ig, '.js'),
+    file: pkg.module.replace(/\.min\.js/ig, '.js'),
     format: 'iife',
     extend: true,
   }, {
     name: 'Detector',
-    file: pkg.module.replace(/\.min\.js/ig, '.js'),
+    file: pkg.browser.replace(/\.min\.js/ig, '.js'),
     format: 'cjs',
   }],
   plugins: [
@@ -85,11 +85,11 @@ export default [{
     filesize(),
   ],
 }, {
-  // browser minified build
+  // module minified build
   input: 'src/index.js',
   output: [{
     name: 'default',
-    file: pkg.browser,
+    file: pkg.module,
     format: 'iife',
     extend: true,
   }],
@@ -109,11 +109,11 @@ export default [{
     filesize(),
   ],
 }, {
-  // module minified build
+  // browser minified build
   input: 'src/index.js',
   output: [{
     name: 'Detector',
-    file: pkg.module,
+    file: pkg.browser,
     format: 'cjs',
   }],
   plugins: [
