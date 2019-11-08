@@ -855,14 +855,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@rollup/plugin-replace@^2.2.0":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.2.1.tgz#94af20cb3d70cccdcec991d1f97dd373936ec544"
-  integrity sha512-dgq5ijT8fK18KTb1inenZ61ivTayV7pvbz2+ivT+VN20BOgJVM1fqoBETqGHKgFVm/J9BhR82mQyAtxfpPv1lQ==
-  dependencies:
-    magic-string "^0.25.2"
-    rollup-pluginutils "^2.6.0"
-
 "@types/estree@*":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
@@ -3150,6 +3142,14 @@ rollup-plugin-json@^4.0.0:
   integrity sha512-hgb8N7Cgfw5SZAkb3jf0QXii6QX/FOkiIq2M7BAQIEydjHvTyxXHQiIzZaTFgx1GK0cRCHOCBHIyEkkLdWKxow==
   dependencies:
     rollup-pluginutils "^2.5.0"
+
+rollup-plugin-replace@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-replace/-/rollup-plugin-replace-2.2.0.tgz#f41ae5372e11e7a217cde349c8b5d5fd115e70e3"
+  integrity sha512-/5bxtUPkDHyBJAKketb4NfaeZjL5yLZdeUihSfbF2PQMz+rSTEb8ARKoOl3UBT4m7/X+QOXJo3sLTcq+yMMYTA==
+  dependencies:
+    magic-string "^0.25.2"
+    rollup-pluginutils "^2.6.0"
 
 rollup-plugin-uglify@^6.0.3:
   version "6.0.3"
