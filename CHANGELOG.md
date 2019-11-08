@@ -1,3 +1,11 @@
+## [Version 1.1.11](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.11) (2019-11-8)
+
+### Bug fixes
+
+- removed sourcemaps from min builds: [`6256341`](https://github.com/:blackmirror1980/detector-js/commit/6256341)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.10...v1.1.11)
+
 ## [Version 1.1.10](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.10) (2019-11-7)
 
 ### Bug fixes
