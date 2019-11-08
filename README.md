@@ -1,5 +1,5 @@
 # detector-js
-v1.1.10
+v1.1.11
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -143,11 +143,12 @@ console.log(detector);
 - decide to implement or not device infos detection
 
 ## Dependencies
-None
+- [rollup-plugin-strip](https://ghub.io/rollup-plugin-strip): Remove debugger statements and functions like assert.equal and console.log from your code.
 
 ## Dev Dependencies
 - [@babel/core](https://ghub.io/@babel/core): Babel compiler core.
 - [@babel/preset-env](https://ghub.io/@babel/preset-env): A Babel preset for each environment.
+- [@rollup/plugin-strip](https://ghub.io/@rollup/plugin-strip): Remove debugger statements and functions like assert.equal and console.log from your code.
 - [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
 - [eslint](https://ghub.io/eslint): An AST-based pattern checker for JavaScript.
 - [eslint-config-airbnb](https://ghub.io/eslint-config-airbnb): Airbnb&#39;s ESLint config, following our styleguide
@@ -155,6 +156,7 @@ None
 - [eslint-plugin-jsx-a11y](https://ghub.io/eslint-plugin-jsx-a11y): Static AST checker for accessibility rules on JSX elements.
 - [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
 - [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, zero-dependency platform/environment detector written in ES6
+- [install](https://ghub.io/install): Minimal JavaScript module loader
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
 - [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
 - [rollup](https://ghub.io/rollup): Next-generation ES module bundler
