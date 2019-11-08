@@ -1,5 +1,5 @@
 # detector-js
-v1.1.11
+v1.1.12
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -143,12 +143,11 @@ console.log(detector);
 - decide to implement or not device infos detection
 
 ## Dependencies
-- [rollup-plugin-strip](https://ghub.io/rollup-plugin-strip): Remove debugger statements and functions like assert.equal and console.log from your code.
+None
 
 ## Dev Dependencies
 - [@babel/core](https://ghub.io/@babel/core): Babel compiler core.
 - [@babel/preset-env](https://ghub.io/@babel/preset-env): A Babel preset for each environment.
-- [@rollup/plugin-strip](https://ghub.io/@rollup/plugin-strip): Remove debugger statements and functions like assert.equal and console.log from your code.
 - [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
 - [eslint](https://ghub.io/eslint): An AST-based pattern checker for JavaScript.
 - [eslint-config-airbnb](https://ghub.io/eslint-config-airbnb): Airbnb&#39;s ESLint config, following our styleguide
