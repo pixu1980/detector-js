@@ -1,4 +1,4 @@
-import './Core/Polyfills';
+import './Polyfills/index';
 
 import Detector from './Detector';
 
