@@ -1,3 +1,11 @@
+## [Version 1.2.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.0) (2020-2-6)
+
+### New features
+
+- - bumped dependencies - reworked polyfills - fixed IE 9+ bug for Reflect.ownKeys: [`c39650e`](https://github.com/:blackmirror1980/detector-js/commit/c39650e)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.1.12...v1.2.0)
+
 ## [Version 1.1.12](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.1.12) (2019-11-8)
 
 ### Bug fixes
