@@ -1,3 +1,11 @@
+## [Version 1.2.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.1) (2020-9-7)
+
+### Bug fixes
+
+- - added prettierrc configuration - bumped devDependencies to latest versions - linting fixes: [`b0fffa2`](https://github.com/:blackmirror1980/detector-js/commit/b0fffa2)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.2.0...v1.2.1)
+
 ## [Version 1.2.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.0) (2020-2-6)
 
 ### New features
