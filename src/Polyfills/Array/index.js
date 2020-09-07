@@ -6,7 +6,6 @@ import './includes';
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-bitwise */
 
-
 if (!String.prototype.includes) {
   Object.defineProperty(String.prototype, 'includes', {
     enumerable: false,
