@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.Detector = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Detector = factory());
 }(this, (function () { 'use strict';
 
   /* eslint-disable prefer-destructuring */
@@ -309,6 +309,19 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -323,6 +336,25 @@
     }
 
     return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
   }
 
   /* eslint-disable */
@@ -675,7 +707,8 @@
       enumerable: true,
       writable: true,
       value: function value(object) {
-        return Object.getOwnPropertyNames(object).concat(Object.getOwnPropertySymbols(object)).reduce(function (descriptors, key) {
+        var keys = !!Reflect && !!Reflect.ownKeys ? Reflect.ownKeys(object) : Object.getOwnPropertyNames(object).concat(Object.getOwnPropertySymbols(object));
+        return keys.reduce(function (descriptors, key) {
           return Object.defineProperty(descriptors, key, {
             configurable: true,
             enumerable: true,
@@ -732,9 +765,7 @@
    * @export
    * @class FlagsClass
    */
-  var FlagsClass =
-  /*#__PURE__*/
-  function () {
+  var FlagsClass = /*#__PURE__*/function () {
     /**
      * Creates an instance of FlagsClass.
      * @param {any} [ua=null]
@@ -826,10 +857,10 @@
    * @extends {FlagsClass}
    */
 
-  var CssFlagsClass =
-  /*#__PURE__*/
-  function (_FlagsClass) {
+  var CssFlagsClass = /*#__PURE__*/function (_FlagsClass) {
     _inherits(CssFlagsClass, _FlagsClass);
+
+    var _super = _createSuper(CssFlagsClass);
 
     /**
      * Creates an instance of CssFlagsClass.
@@ -848,7 +879,7 @@
 
       _classCallCheck(this, CssFlagsClass);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CssFlagsClass).call(this, ua));
+      _this = _super.call(this, ua);
       _this._flags = flags;
       _this._cssFlagsPrefix = cssFlagsPrefix;
       return _this;
@@ -889,9 +920,7 @@
    * @export
    * @class Asserts
    */
-  var Asserts =
-  /*#__PURE__*/
-  function () {
+  var Asserts = /*#__PURE__*/function () {
     function Asserts() {
       _classCallCheck(this, Asserts);
     }
@@ -972,10 +1001,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var Feature =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var Feature = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(Feature, _CssFlagsClass);
+
+    var _super = _createSuper(Feature);
 
     /**
      * Creates an instance of Feature.
@@ -994,7 +1023,7 @@
 
       _classCallCheck(this, Feature);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Feature).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
 
       _this._createTestElements();
 
@@ -1854,10 +1883,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var VideoFeature =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var VideoFeature = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(VideoFeature, _CssFlagsClass);
+
+    var _super = _createSuper(VideoFeature);
 
     /**
      * Creates an instance of VideoFeature.
@@ -1876,7 +1905,7 @@
 
       _classCallCheck(this, VideoFeature);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(VideoFeature).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
 
       _this._createTestElements();
 
@@ -1989,10 +2018,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var AudioFeature =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(AudioFeature, _CssFlagsClass);
+
+    var _super = _createSuper(AudioFeature);
 
     /**
      * Creates an instance of AudioFeature.
@@ -2011,7 +2040,7 @@
 
       _classCallCheck(this, AudioFeature);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(AudioFeature).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
 
       _this._createTestElements();
 
@@ -2192,10 +2221,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var OS =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var OS = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(OS, _CssFlagsClass);
+
+    var _super = _createSuper(OS);
 
     /**
      * Creates an instance of OS.
@@ -2214,7 +2243,7 @@
 
       _classCallCheck(this, OS);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(OS).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
       _this.version = 'n/a';
       _this.versionName = 'n/a';
       return _this;
@@ -2836,6 +2865,14 @@
         return this._checkAssertsResult(Asserts.one([/(tizen)[/\s](\d+(\.\d+)*)/i.test(this._ua)]));
       } //! Other OSs
 
+      /**
+       *
+       *
+       * @readonly
+       *
+       * @memberOf OS
+       */
+
     }, {
       key: "Raspbian",
       get: function get() {
@@ -2854,10 +2891,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var Browser =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var Browser = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(Browser, _CssFlagsClass);
+
+    var _super = _createSuper(Browser);
 
     /**
      * Creates an instance of Browser.
@@ -2876,7 +2913,7 @@
 
       _classCallCheck(this, Browser);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Browser).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
 
       _this._createTestElements();
 
@@ -4295,10 +4332,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var Platform =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var Platform = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(Platform, _CssFlagsClass);
+
+    var _super = _createSuper(Platform);
 
     /**
      * Creates an instance of Platform.
@@ -4315,7 +4352,7 @@
 
       _classCallCheck(this, Platform);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(Platform).call(this, ua, flags, cssFlagsPrefix));
+      return _super.call(this, ua, flags, cssFlagsPrefix);
     }
     /**
      *
@@ -4429,10 +4466,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var Device =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var Device = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(Device, _CssFlagsClass);
+
+    var _super = _createSuper(Device);
 
     /**
      * Creates an instance of Device.
@@ -4449,16 +4486,16 @@
 
       _classCallCheck(this, Device);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(Device).call(this, ua, flags, cssFlagsPrefix));
+      return _super.call(this, ua, flags, cssFlagsPrefix);
     }
 
     return Device;
   }(CssFlagsClass);
 
-  var CPU =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var CPU = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(CPU, _CssFlagsClass);
+
+    var _super = _createSuper(CPU);
 
     function CPU() {
       var _this;
@@ -4469,7 +4506,7 @@
 
       _classCallCheck(this, CPU);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(CPU).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
       _this._booleanFlagsValuePropertyName = 'vendor';
       _this.platform = _this.getPlatform();
       _this.cores = _this.getCores();
@@ -4661,10 +4698,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var GPU =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var GPU = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(GPU, _CssFlagsClass);
+
+    var _super = _createSuper(GPU);
 
     /**
      * Creates an instance of GPU.
@@ -4683,7 +4720,7 @@
 
       _classCallCheck(this, GPU);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(GPU).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
 
       _this._createTestElements();
 
@@ -4777,10 +4814,10 @@
    * @extends {CssFlagsClass}
    */
 
-  var Engine =
-  /*#__PURE__*/
-  function (_CssFlagsClass) {
+  var Engine = /*#__PURE__*/function (_CssFlagsClass) {
     _inherits(Engine, _CssFlagsClass);
+
+    var _super = _createSuper(Engine);
 
     /**
      * Creates an instance of Engine.
@@ -4799,7 +4836,7 @@
 
       _classCallCheck(this, Engine);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Engine).call(this, ua, flags, cssFlagsPrefix));
+      _this = _super.call(this, ua, flags, cssFlagsPrefix);
       _this.version = 'n/a';
       return _this;
     } //#region Un-Common/Rare/Mythic Engines
@@ -5080,10 +5117,10 @@
    * @extends {FlagsClass}
    */
 
-  var Detector =
-  /*#__PURE__*/
-  function (_FlagsClass) {
+  var Detector = /*#__PURE__*/function (_FlagsClass) {
     _inherits(Detector, _FlagsClass);
+
+    var _super = _createSuper(Detector);
 
     /**
      * Creates an instance of Detector.
@@ -5103,7 +5140,7 @@
 
       _classCallCheck(this, Detector);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Detector).call(this, ua));
+      _this = _super.call(this, ua);
       _this._values = values;
       _this._cssFlags = !!cssFlags ? [] : null;
       _this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : ''); //! Features

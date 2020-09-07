@@ -1356,7 +1356,6 @@ export default class Browser extends CssFlagsClass {
     ]), true);
   }
 
-
   /**
    *
    *

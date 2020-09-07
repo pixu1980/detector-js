@@ -588,7 +588,6 @@ export default class OS extends CssFlagsClass {
     ]));
   }
 
-
   /**
    *
    *
@@ -603,6 +602,13 @@ export default class OS extends CssFlagsClass {
   }
 
   //! Other OSs
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf OS
+   */
   get Raspbian() {
     return this._checkAssertsResult(Asserts.one([
       /raspbian[/\s](\d+(\.\d+)*)/i.test(this._ua),
