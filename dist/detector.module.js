@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  window.Reflect = window.Reflect || {};
+
   /* eslint-disable prefer-destructuring */
 
   /* eslint-disable prefer-rest-params */

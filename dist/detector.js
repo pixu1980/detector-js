@@ -4,6 +4,8 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Detector = factory());
 }(this, (function () { 'use strict';
 
+  window.Reflect = window.Reflect || {};
+
   /* eslint-disable prefer-destructuring */
 
   /* eslint-disable prefer-rest-params */
