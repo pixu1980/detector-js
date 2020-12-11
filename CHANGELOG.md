@@ -1,3 +1,13 @@
+## [Version 1.2.2](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.2) (2020-12-11)
+
+### Bug fixes
+
+- added Reflect polyfill to fix IE issues: [`de55e59`](https://github.com/:blackmirror1980/detector-js/commit/de55e59)
+- bumped dev dependencies: [`2ed0df3`](https://github.com/:blackmirror1980/detector-js/commit/2ed0df3)
+- build v1.2.2: [`1ff15a9`](https://github.com/:blackmirror1980/detector-js/commit/1ff15a9)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.2.1...v1.2.2)
+
 ## [Version 1.2.1](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.1) (2020-9-7)
 
 ### Bug fixes
