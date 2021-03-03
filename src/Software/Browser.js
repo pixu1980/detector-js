@@ -174,6 +174,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Brave() {
     return this._checkAssertsResult(Asserts.one([
+      !!window.navigator.brave || !!window.navigator.Brave,
       this._reTest('(?:brave)' + this._reStrVerNum),
     ]));
   }
