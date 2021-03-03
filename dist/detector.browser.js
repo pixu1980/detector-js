@@ -1721,6 +1721,29 @@ var Feature = /*#__PURE__*/function (_CssFlagsClass) {
       return Asserts.all([function () {
         return 'createElementNS' in _this11._document && 'createSVGRect' in _this11._document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       }], true);
+    } // Test if WebP is supported
+
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Feature
+     */
+
+  }, {
+    key: "webp",
+    get: function get() {
+      return Asserts.all([function () {
+        var elem = document.createElement('canvas');
+
+        if (!!(elem.getContext && elem.getContext('2d'))) {
+          // was able or not to get WebP representation
+          return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+        }
+
+        return false;
+      }], true);
     } // Test if WebGL is supported
 
     /**
@@ -3138,7 +3161,7 @@ var Browser = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "Brave",
     get: function get() {
-      return this._checkAssertsResult(Asserts.one([this._reTest('(?:brave)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.one([!!window.navigator.brave || !!window.navigator.Brave, this._reTest('(?:brave)' + this._reStrVerNum)]));
     }
     /**
      *
