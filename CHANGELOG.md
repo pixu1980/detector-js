@@ -1,3 +1,11 @@
+## [Version 1.3.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.3.0) (2021-3-3)
+
+### New features
+
+- added webp and brave support: [`f4ac0e7`](https://github.com/:blackmirror1980/detector-js/commit/f4ac0e7)
+
+[...full changes](https://github.com/:blackmirror1980/detector-js/compare/v1.2.2...v1.3.0)
+
 ## [Version 1.2.2](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.2.2) (2020-12-11)
 
 ### Bug fixes
