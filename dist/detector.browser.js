@@ -313,7 +313,7 @@ function _isNativeReflectConstruct() {
   if (typeof Proxy === "function") return true;
 
   try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
   } catch (e) {
     return false;
@@ -1665,7 +1665,7 @@ var Feature = /*#__PURE__*/function (_CssFlagsClass) {
       var _this8 = this;
 
       return Asserts.all([function () {
-        return _this8._img.style.width =  _this8._img.style.width !== '';
+        return _this8._img.style.width = _this8._img.style.width !== '';
       }], true);
     } // Test if REM units are supported
 
@@ -1683,7 +1683,7 @@ var Feature = /*#__PURE__*/function (_CssFlagsClass) {
       var _this9 = this;
 
       return Asserts.all([function () {
-        return _this9._img.style.width =  _this9._img.style.width !== '';
+        return _this9._img.style.width = _this9._img.style.width !== '';
       }], true);
     } // Test if Canvas is supported
 
@@ -1967,8 +1967,14 @@ var VideoFeature = /*#__PURE__*/function (_CssFlagsClass) {
      */
 
   }, {
-    key: "getMp4",
+    key: "supported",
+    get: function get() {
+      var _this2 = this;
 
+      return Asserts.all(['HTMLVideoElement' in this._root, 'HTMLMediaElement' in this._root, function () {
+        return !!_this2._videoElement && 'canPlayType' in _this2._videoElement && _this2._videoElement instanceof _this2._root.HTMLVideoElement && _this2._videoElement instanceof _this2._root.HTMLMediaElement;
+      }], true);
+    }
     /**
      *
      *
@@ -1976,11 +1982,14 @@ var VideoFeature = /*#__PURE__*/function (_CssFlagsClass) {
      *
      * @memberOf VideoFeature
      */
+
+  }, {
+    key: "getMp4",
     value: function getMp4() {
-      var _this2 = this;
+      var _this3 = this;
 
       return Asserts.all([function () {
-        return _this2.supported && _this2._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '';
+        return _this3.supported && _this3._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -1994,10 +2003,10 @@ var VideoFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getOgv",
     value: function getOgv() {
-      var _this3 = this;
+      var _this4 = this;
 
       return Asserts.all([function () {
-        return _this3.supported && _this3._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '';
+        return _this4.supported && _this4._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2011,19 +2020,10 @@ var VideoFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getWebm",
     value: function getWebm() {
-      var _this4 = this;
-
-      return Asserts.all([function () {
-        return _this4.supported && _this4._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '';
-      }], true);
-    }
-  }, {
-    key: "supported",
-    get: function get() {
       var _this5 = this;
 
-      return Asserts.all(['HTMLVideoElement' in this._root, 'HTMLMediaElement' in this._root, function () {
-        return !!_this5._videoElement && 'canPlayType' in _this5._videoElement && _this5._videoElement instanceof _this5._root.HTMLVideoElement && _this5._videoElement instanceof _this5._root.HTMLMediaElement;
+      return Asserts.all([function () {
+        return _this5.supported && _this5._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '';
       }], true);
     }
   }]);
@@ -2106,8 +2106,14 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
      */
 
   }, {
-    key: "getContext",
+    key: "supported",
+    get: function get() {
+      var _this2 = this;
 
+      return Asserts.all(['Audio' in this._root, 'HTMLAudioElement' in this._root, 'HTMLMediaElement' in this._root, function () {
+        return !!_this2._audioElement && 'canPlayType' in _this2._audioElement && _this2._audioElement instanceof _this2._root.HTMLAudioElement && _this2._audioElement instanceof _this2._root.HTMLMediaElement;
+      }], true);
+    }
     /**
      *
      *
@@ -2115,6 +2121,9 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
      *
      * @memberOf AudioFeature
      */
+
+  }, {
+    key: "getContext",
     value: function getContext() {
       return Asserts.one(['AudioContext' in this._root, 'webkitAudioContext' in this._root]);
     }
@@ -2129,10 +2138,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getMp3",
     value: function getMp3() {
-      var _this2 = this;
+      var _this3 = this;
 
       return Asserts.all([function () {
-        return _this2.supported && _this2._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '';
+        return _this3.supported && _this3._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2146,10 +2155,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getWebm",
     value: function getWebm() {
-      var _this3 = this;
+      var _this4 = this;
 
       return Asserts.all([function () {
-        return _this3.supported && _this3._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '';
+        return _this4.supported && _this4._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2163,10 +2172,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getOgg",
     value: function getOgg() {
-      var _this4 = this;
+      var _this5 = this;
 
       return Asserts.all([function () {
-        return _this4.supported && _this4._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '';
+        return _this5.supported && _this5._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2180,10 +2189,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getOpus",
     value: function getOpus() {
-      var _this5 = this;
+      var _this6 = this;
 
       return Asserts.all([function () {
-        return _this5.supported && _this5._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '';
+        return _this6.supported && _this6._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2197,10 +2206,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getWav",
     value: function getWav() {
-      var _this6 = this;
+      var _this7 = this;
 
       return Asserts.all([function () {
-        return _this6.supported && _this6._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '';
+        return _this7.supported && _this7._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '';
       }], true);
     }
     /**
@@ -2214,19 +2223,10 @@ var AudioFeature = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "getM4a",
     value: function getM4a() {
-      var _this7 = this;
-
-      return Asserts.all([function () {
-        return _this7.supported && (_this7._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || _this7._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '';
-      }], true);
-    }
-  }, {
-    key: "supported",
-    get: function get() {
       var _this8 = this;
 
-      return Asserts.all(['Audio' in this._root, 'HTMLAudioElement' in this._root, 'HTMLMediaElement' in this._root, function () {
-        return !!_this8._audioElement && 'canPlayType' in _this8._audioElement && _this8._audioElement instanceof _this8._root.HTMLAudioElement && _this8._audioElement instanceof _this8._root.HTMLMediaElement;
+      return Asserts.all([function () {
+        return _this8.supported && (_this8._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || _this8._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '';
       }], true);
     }
   }]);
@@ -2334,8 +2334,14 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      */
 
   }, {
-    key: "_getMacOSVersionName",
-
+    key: "Windows",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([/Win/i.test(this._ua)]) && Asserts.one([/Windows ((NT|XP)( \d\d?.\d)?)/i.test(this._ua) //       /(windows)\snt\s6\.2;\s(arm)/i, // Windows RT
+      // // ], [NAME, [VERSION, mapper.str, maps.os.windows.version]], [
+      // /(win(?=3|9|n)|win\s9x\s)([nt\d\.]+)/i,
+      // // ], [[NAME, 'Windows'], [VERSION, mapper.str, maps.os.windows.version]], [
+      ]), null, this._getWindowsVersionName);
+    }
     /**
      *
      *
@@ -2344,6 +2350,9 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      *
      * @memberOf OS
      */
+
+  }, {
+    key: "_getMacOSVersionName",
     value: function _getMacOSVersionName() {
       var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : RegExp.$1 || null;
       return this._getVersionNames({
@@ -2385,8 +2394,10 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      */
 
   }, {
-    key: "_getUnixDistroName",
-
+    key: "macOS",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([!this.iOS, !/mobile\//i.test(this._ua), /mac/i.test(this._ua), !/like mac/i.test(this._ua)]) && Asserts.one([/(macintosh|mac(?=_powerpc)\s)/i.test(this._ua), /(mac\sos\sx)\s?([\w\s\.]*)/i.test(this._ua)]) && Asserts.one([/Mac[ +]OS[ +]X(?:[ /](?:Version )?(\d+(?:[_\.]\d+)+))?/i.test(this._ua), /Mac (\d+(?:[_\.]\d+)+)/i.test(this._ua), /mac os x (\d+(\.?_?\d+)+)/i.test(this._ua)]), null, this._getMacOSVersionName);
+    }
     /**
      *
      *
@@ -2395,6 +2406,9 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      *
      * @memberOf OS
      */
+
+  }, {
+    key: "_getUnixDistroName",
     value: function _getUnixDistroName() {
       var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : RegExp.$1 || null;
       return this._getVersionNames({
@@ -2414,8 +2428,10 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      */
 
   }, {
-    key: "_getLinuxDistroName",
-
+    key: "Unix",
+    get: function get() {
+      return this._checkAssertsResult(Asserts.all([/X11/i.test(this._ua)]) && Asserts.one([/(unix)\s?([\w\.]*)/i.test(this._ua)]), null, this._getUnixDistroName);
+    }
     /**
      *
      *
@@ -2424,6 +2440,9 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      *
      * @memberOf OS
      */
+
+  }, {
+    key: "_getLinuxDistroName",
     value: function _getLinuxDistroName() {
       var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : RegExp.$1 || null;
       return this._getVersionNames({
@@ -2454,121 +2473,6 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
      * @memberOf OS
      */
 
-  }, {
-    key: "_getAndroidVersionName",
-
-    /**
-     *
-     *
-     * @param {any} [version=RegExp.$1 || null]
-     * @returns string
-     *
-     * @memberOf OS
-     */
-    value: function _getAndroidVersionName() {
-      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : RegExp.$1 || null;
-      return this._getVersionNames({
-        '1.0': /^1\.[01234]$/i.test(version),
-        'Cupcake': /^1\.5(\.+\d)?$/i.test(version),
-        'Donut': /^1\.6(\.+\d)?$/i.test(version),
-        'Eclair': /^2\.[01](\.+\d)?$/i.test(version),
-        'Froyo': /^2\.2(\.+\d)?$/i.test(version),
-        'Gingerbread': /^2\.3(\.+\d)?$/i.test(version),
-        'Honeycomb': /^3(\.+\d)(\.+\d)?$/i.test(version),
-        'Ice Cream Sandwich': /^4\.[01](\.+\d)?$/i.test(version),
-        'Jelly Bean': /^4\.[23](\.+\d)?$/i.test(version),
-        'KitKat': /^4\.[456789](\.+\d)?$/i.test(version),
-        'Lollipop': /^5(\.\d)(\.+\d)?$/i.test(version),
-        'Marshmallow': /^6(\.\d)(\.+\d)?$/i.test(version),
-        'Nougat': /^7(\.\d)(\.+\d)?$/i.test(version),
-        'Oreo': /^8(\.\d)(\.+\d)?$/i.test(version),
-        'Pie': /^9(\.\d)(\.+\d)?$/i.test(version)
-      }, version);
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf OS
-     */
-
-  }, {
-    key: "_checkAssertsResult",
-
-    /**
-     *
-     *
-     * @param {boolean} [assertsResult=false]
-     * @param {any} [version=null]
-     * @param {any} [versionNameFn=null]
-     * @returns boolean
-     *
-     * @memberOf OS
-     */
-    value: function _checkAssertsResult() {
-      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var versionNameFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      if (assertsResult) {
-        this.setVersion(version);
-        this.setVersionName(versionNameFn);
-        return true;
-      }
-
-      return false;
-    }
-    /**
-     *
-     *
-     * @param {any} [version=null]
-     *
-     * @memberOf OS
-     */
-
-  }, {
-    key: "setVersion",
-    value: function setVersion() {
-      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.version = (version || RegExp.$1 || 'n/a').replace(/_/ig, '.');
-    }
-    /**
-     *
-     *
-     * @param {any} [versionNameFn=null]
-     *
-     * @memberOf OS
-     */
-
-  }, {
-    key: "setVersionName",
-    value: function setVersionName() {
-      var versionNameFn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (versionNameFn instanceof Function) {
-        this.versionName = versionNameFn.call(this, this.version);
-      }
-    }
-  }, {
-    key: "Windows",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([/Win/i.test(this._ua)]) && Asserts.one([/Windows ((NT|XP)( \d\d?.\d)?)/i.test(this._ua) //       /(windows)\snt\s6\.2;\s(arm)/i, // Windows RT
-      // // ], [NAME, [VERSION, mapper.str, maps.os.windows.version]], [
-      // /(win(?=3|9|n)|win\s9x\s)([nt\d\.]+)/i,
-      // // ], [[NAME, 'Windows'], [VERSION, mapper.str, maps.os.windows.version]], [
-      ]), null, this._getWindowsVersionName);
-    }
-  }, {
-    key: "macOS",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.iOS, !/mobile\//i.test(this._ua), /mac/i.test(this._ua), !/like mac/i.test(this._ua)]) && Asserts.one([/(macintosh|mac(?=_powerpc)\s)/i.test(this._ua), /(mac\sos\sx)\s?([\w\s\.]*)/i.test(this._ua)]) && Asserts.one([/Mac[ +]OS[ +]X(?:[ /](?:Version )?(\d+(?:[_\.]\d+)+))?/i.test(this._ua), /Mac (\d+(?:[_\.]\d+)+)/i.test(this._ua), /mac os x (\d+(\.?_?\d+)+)/i.test(this._ua)]), null, this._getMacOSVersionName);
-    }
-  }, {
-    key: "Unix",
-    get: function get() {
-      return this._checkAssertsResult(Asserts.all([/X11/i.test(this._ua)]) && Asserts.one([/(unix)\s?([\w\.]*)/i.test(this._ua)]), null, this._getUnixDistroName);
-    }
   }, {
     key: "Linux",
     get: function get() {
@@ -2749,6 +2653,45 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
     get: function get() {
       return this._checkAssertsResult(Asserts.all([!window.MSStream, /iP(?:ad|hone|od)/.test(this._ua)]) && Asserts.one([/os\s((\d+([_\s]\d+)*)|(\d+(?:[_\.]\d+)*)) like mac os x/i.test(this._ua)]));
     }
+    /**
+     *
+     *
+     * @param {any} [version=RegExp.$1 || null]
+     * @returns string
+     *
+     * @memberOf OS
+     */
+
+  }, {
+    key: "_getAndroidVersionName",
+    value: function _getAndroidVersionName() {
+      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : RegExp.$1 || null;
+      return this._getVersionNames({
+        '1.0': /^1\.[01234]$/i.test(version),
+        'Cupcake': /^1\.5(\.+\d)?$/i.test(version),
+        'Donut': /^1\.6(\.+\d)?$/i.test(version),
+        'Eclair': /^2\.[01](\.+\d)?$/i.test(version),
+        'Froyo': /^2\.2(\.+\d)?$/i.test(version),
+        'Gingerbread': /^2\.3(\.+\d)?$/i.test(version),
+        'Honeycomb': /^3(\.+\d)(\.+\d)?$/i.test(version),
+        'Ice Cream Sandwich': /^4\.[01](\.+\d)?$/i.test(version),
+        'Jelly Bean': /^4\.[23](\.+\d)?$/i.test(version),
+        'KitKat': /^4\.[456789](\.+\d)?$/i.test(version),
+        'Lollipop': /^5(\.\d)(\.+\d)?$/i.test(version),
+        'Marshmallow': /^6(\.\d)(\.+\d)?$/i.test(version),
+        'Nougat': /^7(\.\d)(\.+\d)?$/i.test(version),
+        'Oreo': /^8(\.\d)(\.+\d)?$/i.test(version),
+        'Pie': /^9(\.\d)(\.+\d)?$/i.test(version)
+      }, version);
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf OS
+     */
+
   }, {
     key: "Android",
     get: function get() {
@@ -2899,6 +2842,63 @@ var OS = /*#__PURE__*/function (_CssFlagsClass) {
     get: function get() {
       return this._checkAssertsResult(Asserts.one([/raspbian[/\s](\d+(\.\d+)*)/i.test(this._ua)]));
     }
+    /**
+     *
+     *
+     * @param {boolean} [assertsResult=false]
+     * @param {any} [version=null]
+     * @param {any} [versionNameFn=null]
+     * @returns boolean
+     *
+     * @memberOf OS
+     */
+
+  }, {
+    key: "_checkAssertsResult",
+    value: function _checkAssertsResult() {
+      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var versionNameFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (assertsResult) {
+        this.setVersion(version);
+        this.setVersionName(versionNameFn);
+        return true;
+      }
+
+      return false;
+    }
+    /**
+     *
+     *
+     * @param {any} [version=null]
+     *
+     * @memberOf OS
+     */
+
+  }, {
+    key: "setVersion",
+    value: function setVersion() {
+      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.version = (version || RegExp.$1 || 'n/a').replace(/_/ig, '.');
+    }
+    /**
+     *
+     *
+     * @param {any} [versionNameFn=null]
+     *
+     * @memberOf OS
+     */
+
+  }, {
+    key: "setVersionName",
+    value: function setVersionName() {
+      var versionNameFn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (versionNameFn instanceof Function) {
+        this.versionName = versionNameFn.call(this, this.version);
+      }
+    }
   }]);
 
   return OS;
@@ -2988,72 +2988,6 @@ var Browser = /*#__PURE__*/function (_CssFlagsClass) {
      * @memberOf Browser
      */
 
-  }, {
-    key: "_getElectronVersion",
-    value: function _getElectronVersion() {
-      try {
-        return this._process.versions.electron;
-      } catch (e) {
-        return 'n/a';
-      }
-    }
-    /**
-     *
-     *
-     * @readonly
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "_checkAssertsResult",
-    //#endregion
-
-    /**
-     *
-     *
-     * @param {boolean} [assertsResult=false]
-     * @param {boolean} [inverted=false]
-     * @param {any} [version=null]
-     * @returns boolean
-     *
-     * @memberOf Browser
-     */
-    value: function _checkAssertsResult() {
-      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var inverted = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var version = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      if (assertsResult) {
-        this.setVersion(version, inverted);
-        return true;
-      }
-
-      return false;
-    }
-    /**
-     *
-     *
-     * @param {any} [version=null]
-     * @param {boolean} [inverted=false]
-     *
-     * @memberOf Browser
-     */
-
-  }, {
-    key: "setVersion",
-    value: function setVersion() {
-      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var inverted = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (inverted) {
-        version = version || this.version || RegExp.$1 || 'n/a';
-      } else {
-        version = version || RegExp.$1 || this.version || 'n/a';
-      }
-
-      this.version = version.replace(/_/ig, '.');
-    }
   }, {
     key: "Amaya",
     get: function get() {
@@ -3267,6 +3201,23 @@ var Browser = /*#__PURE__*/function (_CssFlagsClass) {
     get: function get() {
       return this._checkAssertsResult(Asserts.all([this._reTest('(?:doris)' + this._reStrVerNum)]));
     }
+  }, {
+    key: "_getElectronVersion",
+    value: function _getElectronVersion() {
+      try {
+        return this._process.versions.electron;
+      } catch (e) {
+        return 'n/a';
+      }
+    }
+    /**
+     *
+     *
+     * @readonly
+     *
+     * @memberOf Browser
+     */
+
   }, {
     key: "Electron",
     get: function get() {
@@ -4142,7 +4093,7 @@ var Browser = /*#__PURE__*/function (_CssFlagsClass) {
   }, {
     key: "Chrome",
     get: function get() {
-      return this._checkAssertsResult(Asserts.all([!this.Chromium, !this.ChromeMobile, !this.AndroidBrowser, !this._reTest('like chrome'), this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum)]));
+      return this._checkAssertsResult(Asserts.all([!this.Brave, !this.ChromeMobile, !this.AndroidBrowser, !this._reTest('like chrome'), this._reTest('(?:(?:headless)?chrome)' + this._reStrVerNum)]));
     }
     /**
      *
@@ -4339,6 +4290,55 @@ var Browser = /*#__PURE__*/function (_CssFlagsClass) {
     key: "Safari",
     get: function get() {
       return this._checkAssertsResult(Asserts.all([/safari|applewebkit/i.test(this._ua), !this.AndroidBrowser, !this.SafariMobile, !this.Chrome, !this.PhantomJS]) && Asserts.one([/(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua)]));
+    } //#endregion
+
+    /**
+     *
+     *
+     * @param {boolean} [assertsResult=false]
+     * @param {boolean} [inverted=false]
+     * @param {any} [version=null]
+     * @returns boolean
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "_checkAssertsResult",
+    value: function _checkAssertsResult() {
+      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var inverted = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var version = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (assertsResult) {
+        this.setVersion(version, inverted);
+        return true;
+      }
+
+      return false;
+    }
+    /**
+     *
+     *
+     * @param {any} [version=null]
+     * @param {boolean} [inverted=false]
+     *
+     * @memberOf Browser
+     */
+
+  }, {
+    key: "setVersion",
+    value: function setVersion() {
+      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var inverted = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (inverted) {
+        version = version || this.version || RegExp.$1 || 'n/a';
+      } else {
+        version = version || RegExp.$1 || this.version || 'n/a';
+      }
+
+      this.version = version.replace(/_/ig, '.');
     }
   }]);
 
@@ -4384,17 +4384,6 @@ var Platform = /*#__PURE__*/function (_CssFlagsClass) {
 
 
   _createClass(Platform, [{
-    key: "toValues",
-    value: function toValues() {
-      var _this = this;
-
-      var proto = Object.getPrototypeOf(this);
-      var protoProperties = Object.getOwnPropertyNames(proto).filter(function (prop) {
-        return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!_this[prop];
-      });
-      return protoProperties[0] || 'n/a';
-    }
-  }, {
     key: "bot",
     get: function get() {
       return Asserts.one([/googlebot/i.test(this._ua)]);
@@ -4473,6 +4462,17 @@ var Platform = /*#__PURE__*/function (_CssFlagsClass) {
     key: "desktop",
     get: function get() {
       return Asserts.all([!this.bot, !this.console, !this.mobile, !this.tv]);
+    }
+  }, {
+    key: "toValues",
+    value: function toValues() {
+      var _this = this;
+
+      var proto = Object.getPrototypeOf(this);
+      var protoProperties = Object.getOwnPropertyNames(proto).filter(function (prop) {
+        return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!_this[prop];
+      });
+      return protoProperties[0] || 'n/a';
     }
   }]);
 
@@ -4872,52 +4872,6 @@ var Engine = /*#__PURE__*/function (_CssFlagsClass) {
 
 
   _createClass(Engine, [{
-    key: "_checkAssertsResult",
-    //#endregion
-
-    /**
-     *
-     *
-     * @param {boolean} [assertsResult=false]
-     * @param {any} [version=null]
-     * @returns boolean
-     *
-     * @memberOf Engine
-     */
-    value: function _checkAssertsResult() {
-      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-      if (assertsResult) {
-        this.setVersion(version);
-        return true;
-      }
-
-      return false;
-    }
-    /**
-     *
-     *
-     * @param {any} [version=null]
-     *
-     * @memberOf Engine
-     */
-
-    /**
-     *
-     *
-     * @param {any} [version=null]
-     *
-     * @memberOf Engine
-     */
-
-  }, {
-    key: "setVersion",
-    value: function setVersion() {
-      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.version = version || RegExp.$1 || 'n/a';
-    }
-  }, {
     key: "Amaya",
     get: function get() {
       return this._checkAssertsResult(Asserts.all([/(amaya)\/([\w\.]+)/i.test(this._ua)]));
@@ -5067,7 +5021,7 @@ var Engine = /*#__PURE__*/function (_CssFlagsClass) {
     get: function get() {
       return this._checkAssertsResult(Asserts.all([
       /*@cc_on!@*/
-       !!document.documentMode]) && Asserts.one([/trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua)]));
+      !!document.documentMode]) && Asserts.one([/trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua)]));
     }
     /**
      *
@@ -5124,6 +5078,52 @@ var Engine = /*#__PURE__*/function (_CssFlagsClass) {
     key: "WebKit",
     get: function get() {
       return this._checkAssertsResult(Asserts.all(['webkitConvertPointFromNodeToPage' in this._root]) && Asserts.one([/(?:(?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua)]));
+    } //#endregion
+
+    /**
+     *
+     *
+     * @param {boolean} [assertsResult=false]
+     * @param {any} [version=null]
+     * @returns boolean
+     *
+     * @memberOf Engine
+     */
+
+  }, {
+    key: "_checkAssertsResult",
+    value: function _checkAssertsResult() {
+      var assertsResult = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var version = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (assertsResult) {
+        this.setVersion(version);
+        return true;
+      }
+
+      return false;
+    }
+    /**
+     *
+     *
+     * @param {any} [version=null]
+     *
+     * @memberOf Engine
+     */
+
+    /**
+     *
+     *
+     * @param {any} [version=null]
+     *
+     * @memberOf Engine
+     */
+
+  }, {
+    key: "setVersion",
+    value: function setVersion() {
+      var version = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.version = version || RegExp.$1 || 'n/a';
     }
   }]);
 
