@@ -1166,7 +1166,7 @@ export default class Browser extends CssFlagsClass {
    */
   get Chrome() {
     return this._checkAssertsResult(Asserts.all([
-      !this.Chromium,
+      !this.Brave,
       !this.ChromeMobile,
       !this.AndroidBrowser,
       !this._reTest('like chrome'),
