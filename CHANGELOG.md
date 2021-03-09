@@ -1,3 +1,12 @@
+## [Version 1.3.1](https://github.blackmirror1980/:blackmirror1980/detector-js/releases/tag/v1.3.1) (2021-3-9)
+
+### Bug fixes
+
+- - dumped dependencies - fix Brave false positive wip: [`312d2e2`](https://github.blackmirror1980/:blackmirror1980/detector-js/commit/312d2e2)
+- - added lock files to gitignore - fixing Brave false positive wip: [`310c049`](https://github.blackmirror1980/:blackmirror1980/detector-js/commit/310c049)
+
+[...full changes](https://github.blackmirror1980/:blackmirror1980/detector-js/compare/v1.3.0...v1.3.1)
+
 ## [Version 1.3.0](https://github.com/:blackmirror1980/detector-js/releases/tag/v1.3.0) (2021-3-3)
 
 ### New features
