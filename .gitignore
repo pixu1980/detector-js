@@ -26,6 +26,9 @@ uglifyjs-cache.json
 nbproject
 Thumbs.db
 
+package-lock.json
+yarn.lock
+
 # Bower Components.
 bower_components/
 
