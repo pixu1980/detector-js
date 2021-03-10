@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blackmirror1980/detector-js.git"
+    "url": "git+https://github.com/pixu1980/detector-js.git"
   },
   "keywords": [
     "detector",
@@ -40,14 +40,14 @@
     "yarn",
     "rollup-js"
   ],
-  "author": "Black Mirror",
+  "author": "Pixu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/blackmirror1980/detector-js/issues"
+    "url": "https://github.com/pixu1980/detector-js/issues"
   },
-  "homepage": "https://github.com/blackmirror1980/detector-js#readme",
-  "documentation": "https://blackmirror1980.github.io/detector-js/docs/index.html",
-  "todo": "https://github.com/blackmirror1980/detector-js#todo",
+  "homepage": "https://github.com/pixu1980/detector-js#readme",
+  "documentation": "https://pixu1980.github.io/detector-js/docs/index.html",
+  "todo": "https://github.com/pixu1980/detector-js#todo",
   "files": [
     "dist"
   ],
