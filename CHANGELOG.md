@@ -1,3 +1,11 @@
+## [Version 1.3.2](https://github.blackmirror1980/:blackmirror1980/detector-js/releases/tag/v1.3.2) (2021-3-10)
+
+### Bug fixes
+
+- updated license and package infos: [`35957e6`](https://github.blackmirror1980/:blackmirror1980/detector-js/commit/35957e6)
+
+[...full changes](https://github.blackmirror1980/:blackmirror1980/detector-js/compare/v1.3.1...v1.3.2)
+
 ## [Version 1.3.1](https://github.pixu1980/:pixu1980/detector-js/releases/tag/v1.3.1) (2021-3-9)
 
 ### Bug fixes
