@@ -1,8 +1,9 @@
-import './Polyfills/index';
+'use strict';
 
-import Detector from './Detector';
+import Detector from './detector';
 
-if(typeof module !== 'undefined') {
-  // module export
-  module.exports = Detector;
-}
+window.addEventListener('DOMContentLoaded', () => {
+  const detector = new Detector();
+
+  console.log(detector);
+});

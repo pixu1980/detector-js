@@ -1,5 +1,5 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
 
 /**
  *
@@ -30,7 +30,7 @@ export default class AudioFeature extends CssFlagsClass {
       ogg: this.getOgg(),
       opus: this.getOpus(),
       wav: this.getWav(),
-      m4a: this.getM4a(),
+      m4a: this.getM4a()
     };
   }
 
@@ -62,12 +62,19 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   get supported() {
-    return Asserts.all([
-      'Audio' in this._root,
-      'HTMLAudioElement' in this._root,
-      'HTMLMediaElement' in this._root,
-      () => !!this._audioElement && 'canPlayType' in this._audioElement && this._audioElement instanceof this._root.HTMLAudioElement && this._audioElement instanceof this._root.HTMLMediaElement,
-    ], true);
+    return Asserts.all(
+      [
+        'Audio' in this._root,
+        'HTMLAudioElement' in this._root,
+        'HTMLMediaElement' in this._root,
+        () =>
+          !!this._audioElement &&
+          'canPlayType' in this._audioElement &&
+          this._audioElement instanceof HTMLAudioElement &&
+          this._audioElement instanceof HTMLMediaElement
+      ],
+      true
+    );
   }
 
   /**
@@ -78,23 +85,21 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getContext() {
-    return Asserts.one([
-      'AudioContext' in this._root,
-      'webkitAudioContext' in this._root,
-    ]);
+    return Asserts.one(['AudioContext' in this._root, 'webkitAudioContext' in this._root]);
   }
 
   /**
-   *
+   *__
    *
    * @returns boolean
    *
    * @memberOf AudioFeature
    */
   getMp3() {
-    return Asserts.all([
-      () => this.supported && this._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [() => this.supported && this._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== ''],
+      true
+    );
   }
 
   /**
@@ -105,9 +110,12 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getWebm() {
-    return Asserts.all([
-      () => this.supported && this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [
+        () => this.supported && this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== ''
+      ],
+      true
+    );
   }
 
   /**
@@ -118,9 +126,10 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getOgg() {
-    return Asserts.all([
-      () => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [() => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== ''],
+      true
+    );
   }
 
   /**
@@ -131,9 +140,10 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getOpus() {
-    return Asserts.all([
-      () => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [() => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== ''],
+      true
+    );
   }
 
   /**
@@ -144,9 +154,10 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getWav() {
-    return Asserts.all([
-      () => this.supported && this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [() => this.supported && this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== ''],
+      true
+    );
   }
 
   /**
@@ -157,8 +168,14 @@ export default class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getM4a() {
-    return Asserts.all([
-      () => this.supported && (this._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || this._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== '',
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          this.supported &&
+          (this._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') ||
+            this._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== ''
+      ],
+      true
+    );
   }
 }

@@ -1,5 +1,5 @@
 # detector-js
-v1.3.2
+v2.0.1-beta
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -7,7 +7,7 @@ DetectorJS, zero-dependency platform/environment detector written in ES6
 Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
 
 ## Author
-Pixu
+Emiliano &#39;Pixu&#39; Pisu &lt;pisuemiliano.1980@gmail.com&gt;
 
 ## Badges
 [![NPM](https://nodei.co/npm/detector-js.png)](https://nodei.co/npm/detector-js/)
@@ -146,31 +146,14 @@ console.log(detector);
 None
 
 ## Dev Dependencies
-- [@babel/core](https://ghub.io/@babel/core): Babel compiler core.
-- [@babel/preset-env](https://ghub.io/@babel/preset-env): A Babel preset for each environment.
+- [changelog](https://ghub.io/changelog): Command line tool (and Node module) that generates a changelog in color output, markdown, or json for modules in npmjs.org&#39;s registry as well as any public github.com repo.
 - [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
-- [eslint](https://ghub.io/eslint): An AST-based pattern checker for JavaScript.
-- [eslint-config-airbnb](https://ghub.io/eslint-config-airbnb): Airbnb&#39;s ESLint config, following our styleguide
-- [eslint-plugin-import](https://ghub.io/eslint-plugin-import): Import with sanity.
-- [eslint-plugin-jsx-a11y](https://ghub.io/eslint-plugin-jsx-a11y): Static AST checker for accessibility rules on JSX elements.
-- [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
 - [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [install](https://ghub.io/install): Minimal JavaScript module loader
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
-- [jshint](https://ghub.io/jshint): Static analysis tool for JavaScript
-- [rollup](https://ghub.io/rollup): Next-generation ES module bundler
-- [rollup-plugin-babel](https://ghub.io/rollup-plugin-babel): Seamless integration between Rollup and Babel.
-- [rollup-plugin-eslint](https://ghub.io/rollup-plugin-eslint): Verify entry point and all imported files with ESLint
-- [rollup-plugin-filesize](https://ghub.io/rollup-plugin-filesize): A rollup plugin to show filesize in the cli
-- [rollup-plugin-json](https://ghub.io/rollup-plugin-json): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [rollup-plugin-replace](https://ghub.io/rollup-plugin-replace): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [rollup-plugin-uglify](https://ghub.io/rollup-plugin-uglify): Rollup plugin to minify generated bundle
+- [lerna](https://ghub.io/lerna): Lerna is a fast, modern build system for managing and publishing multiple JavaScript/TypeScript packages from the same repository
+- [parcel](https://ghub.io/parcel): Blazing fast, zero configuration web application bundler
+- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
 
-## Tests
-```sh
-npm install
-npm test
-```
 
 
 ## License

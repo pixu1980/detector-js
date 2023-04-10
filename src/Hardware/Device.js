@@ -1,5 +1,5 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
 
 /**
  *
