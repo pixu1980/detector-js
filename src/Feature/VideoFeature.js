@@ -1,5 +1,5 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
 
 /**
  *
@@ -25,7 +25,7 @@ export default class VideoFeature extends CssFlagsClass {
     this.formats = {
       mp4: this.getMp4(),
       ogv: this.getOgv(),
-      webm: this.getWebm(),
+      webm: this.getWebm()
     };
   }
 
@@ -57,11 +57,18 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   get supported() {
-    return Asserts.all([
-      'HTMLVideoElement' in this._root,
-      'HTMLMediaElement' in this._root,
-      () => !!this._videoElement && 'canPlayType' in this._videoElement && this._videoElement instanceof this._root.HTMLVideoElement && this._videoElement instanceof this._root.HTMLMediaElement,
-    ], true);
+    return Asserts.all(
+      [
+        'HTMLVideoElement' in this._root,
+        'HTMLMediaElement' in this._root,
+        () =>
+          !!this._videoElement &&
+          'canPlayType' in this._videoElement &&
+          this._videoElement instanceof this._root.HTMLVideoElement &&
+          this._videoElement instanceof this._root.HTMLMediaElement
+      ],
+      true
+    );
   }
 
   /**
@@ -72,9 +79,14 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getMp4() {
-    return Asserts.all([
-      () => this.supported && this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          this.supported &&
+          this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== ''
+      ],
+      true
+    );
   }
 
   /**
@@ -85,9 +97,14 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getOgv() {
-    return Asserts.all([
-      () => this.supported && this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          this.supported &&
+          this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== ''
+      ],
+      true
+    );
   }
 
   /**
@@ -98,8 +115,13 @@ export default class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getWebm() {
-    return Asserts.all([
-      () => this.supported && this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== '',
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          this.supported &&
+          this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== ''
+      ],
+      true
+    );
   }
 }

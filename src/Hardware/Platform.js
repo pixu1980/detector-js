@@ -1,7 +1,7 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
-import OS from '../Software/OS';
-import Browser from '../Software/Browser';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
+import OS from '../software/os';
+import Browser from '../software/browser';
 
 /**
  *
@@ -30,9 +30,7 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get bot() {
-    return Asserts.one([
-      /googlebot/i.test(this._ua),
-    ]);
+    return Asserts.one([/googlebot/i.test(this._ua)]);
   }
 
   /**
@@ -44,7 +42,7 @@ export default class Platform extends CssFlagsClass {
   get console() {
     return Asserts.all([
       /(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua),
-      !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua),
+      !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua)
     ]);
   }
 
@@ -55,18 +53,16 @@ export default class Platform extends CssFlagsClass {
    * @memberof Platform
    */
   get tv() {
-    return Asserts.one([
-      /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
-      /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua),
-    ]) && Asserts.one([
-      !this.mobile,
-      !this.bot,
-      this._flags.feature.fullscreenKeyboard,
-    ]) && Asserts.one([
-      this._flags.os.Android,
-      this._flags.os.Tizen,
-      this._flags.os.WebOS,
-    ]);
+    return (
+      Asserts.one([
+        /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
+        /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(
+          this._ua
+        )
+      ]) &&
+      Asserts.one([!this.mobile, !this.bot, this._flags.feature.fullscreenKeyboard]) &&
+      Asserts.one([this._flags.os.Android, this._flags.os.Tizen, this._flags.os.WebOS])
+    );
   }
 
   /**
@@ -77,10 +73,7 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get tablet() {
-    return Asserts.all([
-      this.mobile,
-      /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua),
-    ]);
+    return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
   }
 
   /**
@@ -91,10 +84,7 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get smartphone() {
-    return Asserts.all([
-      this.mobile,
-      !this.tablet,
-    ]);
+    return Asserts.all([this.mobile, !this.tablet]);
   }
 
   /**
@@ -105,21 +95,52 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get mobile() {
-    return (Asserts.one([
-      this._flags.feature.deviceMotion,
-      this._flags.feature.deviceOrientation,
-      this._flags.feature.pixelRatio > 1,
-    ]) && Asserts.one([
-      this._flags.feature.touch,
-      this._flags.feature.forceTouch,
-      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
-    ]) && Asserts.all([
-      !this._flags.feature.pointerEvents,
-      this._flags.feature.file,
-    ])) || Asserts.all([
-      ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
-      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
-    ]);
+    return (
+      (Asserts.one([
+        this._flags.feature.deviceMotion,
+        this._flags.feature.deviceOrientation,
+        this._flags.feature.pixelRatio > 1
+      ]) &&
+        Asserts.one([
+          this._flags.feature.touch,
+          this._flags.feature.forceTouch,
+          [
+            'ChromeMobile',
+            'EdgeMobile',
+            'IEMobile',
+            'FirefoxMobile',
+            'MaxthonMobile',
+            'OperaMobile',
+            'SafariMobile'
+          ].includes(this._flags.browser.name)
+        ]) &&
+        Asserts.all([!this._flags.feature.pointerEvents, this._flags.feature.file])) ||
+      Asserts.all([
+        [
+          'Android',
+          'iOS',
+          'WindowsPhone',
+          'Bada',
+          'Blackberry',
+          'Contiki',
+          'MeeGo',
+          'RIM',
+          'QNX',
+          'Palm',
+          'Symbian',
+          'WebOS'
+        ].includes(this._flags.os.name),
+        [
+          'ChromeMobile',
+          'EdgeMobile',
+          'IEMobile',
+          'FirefoxMobile',
+          'MaxthonMobile',
+          'OperaMobile',
+          'SafariMobile'
+        ].includes(this._flags.browser.name)
+      ])
+    );
   }
 
   /**
@@ -129,12 +150,7 @@ export default class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get desktop() {
-    return Asserts.all([
-      !this.bot,
-      !this.console,
-      !this.mobile,
-      !this.tv,
-    ]);
+    return Asserts.all([!this.bot, !this.console, !this.mobile, !this.tv]);
   }
 
   toValues() {

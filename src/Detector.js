@@ -1,21 +1,16 @@
+import './polyfills/index';
+
 /*jshint expr: true */
-import FlagsClass from './Core/FlagsClass';
+import { FlagsClass } from './core';
 
 //! Features
-import Feature from './Feature/Feature';
-import VideoFeature from './Feature/VideoFeature';
-import AudioFeature from './Feature/AudioFeature';
+import { Feature, AudioFeature, VideoFeature } from './feature';
 
 //! Hardware
-import Platform from './Hardware/Platform';
-import Device from './Hardware/Device';
-import CPU from './Hardware/CPU';
-import GPU from './Hardware/GPU';
+import { Platform, Device, CPU, GPU } from './hardware';
 
 //! Software
-import OS from './Software/OS';
-import Browser from './Software/Browser';
-import Engine from './Software/Engine';
+import { Browser, Engine, OS } from './software';
 
 /**
  *
@@ -33,7 +28,7 @@ export default class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(ua = null, values = true, cssFlags = true, cssFlagsPrefix = 'djs') {
+  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = 'djs') {
     super(ua);
 
     this._values = values;
@@ -84,7 +79,7 @@ export default class Detector extends FlagsClass {
 
     this.feature = feature.toFlags().merge({
       audio: audio.toFlags(),
-      video: video.toFlags(),
+      video: video.toFlags()
     });
 
     if (!!this._cssFlags) {

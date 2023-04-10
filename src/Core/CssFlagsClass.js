@@ -1,4 +1,4 @@
-import FlagsClass from './FlagsClass';
+import FlagsClass from './flagsClass';
 
 /**
  *
@@ -33,14 +33,20 @@ export default class CssFlagsClass extends FlagsClass {
   toCssFlags() {
     const proto = Object.getPrototypeOf(this);
 
-    return Object.getOwnPropertyNames(proto).filter((prop) => {
-      return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
-    }).reduce((acc, prop) => {
-      if(!!this[prop]) {
-        acc.push((this._cssFlagsPrefix + '--' + prop + (typeof this[prop] !== 'boolean' ? '--' + this[prop] : '')).toLowerCase());
-      }
+    return Object.getOwnPropertyNames(proto)
+      .filter((prop) => {
+        return !!Object.getOwnPropertyDescriptors(proto)[prop].get;
+      })
+      .reduce((acc, prop) => {
+        if (!!this[prop]) {
+          acc.push(
+            `${this._cssFlagsPrefix}--${prop}--${
+              typeof this[prop] !== 'boolean' ? '--' + this[prop] : ''
+            }`.toLowerCase()
+          );
+        }
 
-      return acc;
-    }, []);
+        return acc;
+      }, []);
   }
 }

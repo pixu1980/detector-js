@@ -1,6 +1,6 @@
 /* eslint-disable no-return-assign */
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
 
 /**
  *
@@ -244,7 +244,7 @@ export default class Feature extends CssFlagsClass {
       'File' in this._root,
       'FileReader' in this._root,
       'FileList' in this._root,
-      'Blob' in this._root,
+      'Blob' in this._root
     ]);
   }
 
@@ -271,7 +271,7 @@ export default class Feature extends CssFlagsClass {
       'requestFullscreen' in this._canvas,
       'webkitRequestFullscreen' in this._canvas,
       'msRequestFullscreen' in this._canvas,
-      'mozRequestFullScreen' in this._canvas,
+      'mozRequestFullScreen' in this._canvas
     ]);
   }
 
@@ -283,9 +283,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFullscreenKeyboard() {
-    return Asserts.all([
-      () => 'Element' in this._root && 'ALLOW_KEYBOARD_INPUT' in this._root.Element,
-    ], true);
+    return Asserts.all([() => 'Element' in this._root && 'ALLOW_KEYBOARD_INPUT' in this._root.Element], true);
   }
 
   /**
@@ -307,9 +305,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getHistoryAPI() {
-    return Asserts.all([
-      () => 'history' in this._root && 'pushState' in this._root.history,
-    ], true);
+    return Asserts.all([() => 'history' in this._root && 'pushState' in this._root.history], true);
   }
 
   /**
@@ -320,10 +316,10 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getLittleEndian() {
-    return Asserts.all([
-      this.getTypedArray,
-      () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0,
-    ], true);
+    return Asserts.all(
+      [this.getTypedArray, () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0],
+      true
+    );
   }
 
   /**
@@ -334,17 +330,21 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getLocalStorage() {
-    return Asserts.one([
-      () => 'localStorage' in this._root,
-    ], true) && Asserts.one([
-      () => {
-        const test = 'x';
-        this._root.localStorage.setItem(test, test);
-        this._root.localStorage.removeItem(test);
+    return (
+      Asserts.one([() => 'localStorage' in this._root], true) &&
+      Asserts.one(
+        [
+          () => {
+            const test = 'x';
+            this._root.localStorage.setItem(test, test);
+            this._root.localStorage.removeItem(test);
 
-        return true;
-      },
-    ], true);
+            return true;
+          }
+        ],
+        true
+      )
+    );
   }
 
   /**
@@ -399,9 +399,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getTypedArray() {
-    return Asserts.all([
-      () => 'Int8Array' in this._root && typeof this._root.Int8Array !== 'undefined',
-    ], true);
+    return Asserts.all([() => 'Int8Array' in this._root && typeof this._root.Int8Array !== 'undefined'], true);
   }
 
   /**
@@ -416,7 +414,7 @@ export default class Feature extends CssFlagsClass {
       'getUserMedia' in this._navigator,
       'webkitGetUserMedia' in this._navigator,
       'mozGetUserMedia' in this._navigator,
-      'msGetUserMedia' in this._navigator,
+      'msGetUserMedia' in this._navigator
     ]);
   }
 
@@ -432,7 +430,7 @@ export default class Feature extends CssFlagsClass {
       'vibrate' in this._navigator,
       'webkitVibrate' in this._navigator,
       'mozVibrate' in this._navigator,
-      'msVibrate' in this._navigator,
+      'msVibrate' in this._navigator
     ]);
   }
 
@@ -455,10 +453,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerEnabled() {
-    return Asserts.one([
-      'pointerEnabled' in this._navigator,
-      'msPointerEnabled' in this._navigator,
-    ]);
+    return Asserts.one(['pointerEnabled' in this._navigator, 'msPointerEnabled' in this._navigator]);
   }
 
   /**
@@ -483,7 +478,7 @@ export default class Feature extends CssFlagsClass {
     return Asserts.one([
       'pointerLockElement' in this._document,
       'webkitPointerLockElement' in this._document,
-      'mozPointerLockElement' in this._document,
+      'mozPointerLockElement' in this._document
     ]);
   }
 
@@ -506,10 +501,13 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get css3D() {
-    return Asserts.all([
-      this._checkCssPrefixedPropValue.bind(this, 'transform', 'translate3d(1px,1px,1px)'),
-      this._checkCssPrefixedProp.bind(this, 'perspective'),
-    ], true);
+    return Asserts.all(
+      [
+        this._checkCssPrefixedPropValue.bind(this, 'transform', 'translate3d(1px,1px,1px)'),
+        this._checkCssPrefixedProp.bind(this, 'perspective')
+      ],
+      true
+    );
   }
 
   // Test if CSS transforms are supported
@@ -521,9 +519,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get cssTransform() {
-    return Asserts.one([
-      this._checkCssPrefixedProp.bind(this, 'transform-origin'),
-    ], true);
+    return Asserts.one([this._checkCssPrefixedProp.bind(this, 'transform-origin')], true);
   }
 
   // Test if CSS transitions are supported
@@ -535,9 +531,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get cssTransition() {
-    return Asserts.one([
-      this._checkCssPrefixedProp.bind(this, 'transition'),
-    ], true);
+    return Asserts.one([this._checkCssPrefixedProp.bind(this, 'transition')], true);
   }
 
   // Test if Device Motion is supported
@@ -573,10 +567,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get contextMenu() {
-    return Asserts.all([
-      'contextMenu' in this._document,
-      'HTMLMenuItemElement' in this._root,
-    ]);
+    return Asserts.all(['contextMenu' in this._document, 'HTMLMenuItemElement' in this._root]);
   }
 
   // Test if classList API is supported
@@ -612,9 +603,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get viewportUnit() {
-    return Asserts.all([
-      () => this._img.style.width = '1vw' && this._img.style.width !== '',
-    ], true);
+    return Asserts.all([() => (this._img.style.width = '1vw' && this._img.style.width !== '')], true);
   }
 
   // Test if REM units are supported
@@ -626,9 +615,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get remUnit() {
-    return Asserts.all([
-      () => this._img.style.width = '1rem' && this._img.style.width !== '',
-    ], true);
+    return Asserts.all([() => (this._img.style.width = '1rem' && this._img.style.width !== '')], true);
   }
 
   // Test if Canvas is supported
@@ -640,9 +627,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get canvas() {
-    return Asserts.all([
-      () => 'getContext' in this._canvas && !!this._canvas.getContext('2d'),
-    ], true);
+    return Asserts.all([() => 'getContext' in this._canvas && !!this._canvas.getContext('2d')], true);
   }
 
   // Test if SVG is supported
@@ -654,9 +639,14 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get svg() {
-    return Asserts.all([
-      () => 'createElementNS' in this._document && 'createSVGRect' in this._document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          'createElementNS' in this._document &&
+          'createSVGRect' in this._document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      ],
+      true
+    );
   }
 
   // Test if WebP is supported
@@ -668,18 +658,21 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webp() {
-    return Asserts.all([
-      () => {
-        const elem = document.createElement('canvas');
+    return Asserts.all(
+      [
+        () => {
+          const elem = document.createElement('canvas');
 
-        if (!!(elem.getContext && elem.getContext('2d'))) {
-          // was able or not to get WebP representation
-          return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+          if (!!(elem.getContext && elem.getContext('2d'))) {
+            // was able or not to get WebP representation
+            return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+          }
+
+          return false;
         }
-
-        return false;
-      },
-    ], true);
+      ],
+      true
+    );
   }
 
   // Test if WebGL is supported
@@ -691,10 +684,16 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webGL() {
-    return Asserts.one([
-      () => this.canvas && 'WebGLRenderingContext' in this._root && (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')),
-      () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2'),
-    ], true);
+    return Asserts.one(
+      [
+        () =>
+          this.canvas &&
+          'WebGLRenderingContext' in this._root &&
+          (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')),
+        () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2')
+      ],
+      true
+    );
   }
 
   // Test if WebVR is supported
@@ -706,9 +705,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webVR() {
-    return Asserts.all([
-      'getVRDisplays' in this._navigator,
-    ]);
+    return Asserts.all(['getVRDisplays' in this._navigator]);
   }
 
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
@@ -720,14 +717,17 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get touch() {
-    return Asserts.one([
-      () => 'ontouchstart' in this._root,
-      () => 'ontouchstart' in this._document.documentElement,
-    ], true) && Asserts.one([
-      () => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch,
-      () => this.pointerEnabled && 'MSGesture' in this._root,
-      () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1,
-    ], true);
+    return (
+      Asserts.one([() => 'ontouchstart' in this._root, () => 'ontouchstart' in this._document.documentElement], true) &&
+      Asserts.one(
+        [
+          () => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch,
+          () => this.pointerEnabled && 'MSGesture' in this._root,
+          () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1
+        ],
+        true
+      )
+    );
   }
 
   /**
@@ -738,9 +738,15 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get forceTouch() {
-    return Asserts.all([
-      () => 'MouseEvent' in this._root && 'WEBKIT_FORCE_AT_MOUSE_DOWN' in this._root.MouseEvent && 'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in this._root.MouseEvent,
-    ], true);
+    return Asserts.all(
+      [
+        () =>
+          'MouseEvent' in this._root &&
+          'WEBKIT_FORCE_AT_MOUSE_DOWN' in this._root.MouseEvent &&
+          'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in this._root.MouseEvent
+      ],
+      true
+    );
   }
 
   /**
@@ -751,9 +757,7 @@ export default class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerEvents() {
-    return Asserts.all([
-      this._root.PointerEvent,
-    ], true);
+    return Asserts.all([this._root.PointerEvent], true);
   }
 
   // Test if img srcset attribute is supported

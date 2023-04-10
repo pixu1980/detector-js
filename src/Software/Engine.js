@@ -1,5 +1,5 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
-import Asserts from '../Core/Asserts';
+import CssFlagsClass from '../core/cssFlagsClass';
+import Asserts from '../core/asserts';
 
 /**
  *
@@ -32,9 +32,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Amaya() {
-    return this._checkAssertsResult(Asserts.all([
-      /(amaya)\/([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(amaya)\/([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -45,9 +43,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Goanna() {
-    return this._checkAssertsResult(Asserts.all([
-      /(goanna)\/([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(goanna)\/([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -58,9 +54,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get iCab() {
-    return this._checkAssertsResult(Asserts.all([
-      /(icab)[\/\s]([23]\.[\d\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(icab)[\/\s]([23]\.[\d\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -71,9 +65,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get KHTML() {
-    return this._checkAssertsResult(Asserts.all([
-      /(khtml)[\/\s]\(?([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(khtml)[\/\s]\(?([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -84,9 +76,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Links() {
-    return this._checkAssertsResult(Asserts.all([
-      /(links)[\/\s]\(?([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(links)[\/\s]\(?([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -97,9 +87,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Linx() {
-    return this._checkAssertsResult(Asserts.all([
-      /(lynx)\/([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(lynx)\/([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -110,9 +98,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get NetFront() {
-    return this._checkAssertsResult(Asserts.all([
-      /(netfront)\/([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(netfront)\/([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -123,9 +109,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get NetSurf() {
-    return this._checkAssertsResult(Asserts.all([
-      /(netsurf)\/([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(netsurf)\/([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -136,10 +120,9 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Presto() {
-    return this._checkAssertsResult(Asserts.one([
-      /(presto)\/([\w\.]+)/i.test(this._ua),
-      /presto\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(
+      Asserts.one([/(presto)\/([\w\.]+)/i.test(this._ua), /presto\/(\d+(\.?_?\d+)+)/i.test(this._ua)])
+    );
   }
 
   /**
@@ -150,9 +133,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Tasman() {
-    return this._checkAssertsResult(Asserts.all([
-      /(tasman)[\/\s]\(?([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/(tasman)[\/\s]\(?([\w\.]+)/i.test(this._ua)]));
   }
 
   /**
@@ -163,9 +144,7 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get w3m() {
-    return this._checkAssertsResult(Asserts.all([
-      /w3m[\/\s]([\w\.]+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(Asserts.all([/w3m[\/\s]([\w\.]+)/i.test(this._ua)]));
   }
   //#endregion
 
@@ -178,11 +157,10 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Trident() {
-    return this._checkAssertsResult(Asserts.all([
-      /*@cc_on!@*/false || !!document.documentMode,
-    ]) && Asserts.one([
-      /trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(
+      Asserts.all([/*@cc_on!@*/ false || !!document.documentMode]) &&
+        Asserts.one([/trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua)])
+    );
   }
 
   /**
@@ -193,11 +171,16 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Blink() {
-    return this._checkAssertsResult(Asserts.all([
-      () => 'Intl' in this._root && 'v8BreakIterator' in this._root.Intl,
-      'CSS' in this._root,
-      /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua),
-    ], true));
+    return this._checkAssertsResult(
+      Asserts.all(
+        [
+          () => 'Intl' in this._root && 'v8BreakIterator' in this._root.Intl,
+          'CSS' in this._root,
+          /webkit\/537\.36.+chrome\/(?!27)/i.test(this._ua)
+        ],
+        true
+      )
+    );
   }
 
   /**
@@ -208,12 +191,10 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get EdgeHTML() {
-    return this._checkAssertsResult(Asserts.all([
-      'StyleMedia' in this._root,
-      !this.Trident,
-    ]) && Asserts.one([
-      /edge\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(
+      Asserts.all(['StyleMedia' in this._root, !this.Trident]) &&
+        Asserts.one([/edge\/(\d+(\.?_?\d+)+)/i.test(this._ua)])
+    );
   }
 
   /**
@@ -224,13 +205,10 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get Gecko() {
-    return this._checkAssertsResult(Asserts.all([
-      'InstallTrigger' in this._root,
-      !/like gecko/i.test(this._ua),
-    ]) && Asserts.one([
-      /rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua),
-      /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(
+      Asserts.all(['InstallTrigger' in this._root, !/like gecko/i.test(this._ua)]) &&
+        Asserts.one([/rv\:([\w\.]{1,9}).+(gecko)/i.test(this._ua), /gecko\/(\d+(\.?_?\d+)+)/i.test(this._ua)])
+    );
   }
 
   /**
@@ -241,11 +219,10 @@ export default class Engine extends CssFlagsClass {
    * @memberOf Engine
    */
   get WebKit() {
-    return this._checkAssertsResult(Asserts.all([
-      'webkitConvertPointFromNodeToPage' in this._root,
-    ]) && Asserts.one([
-      /(?:(?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua),
-    ]));
+    return this._checkAssertsResult(
+      Asserts.all(['webkitConvertPointFromNodeToPage' in this._root]) &&
+        Asserts.one([/(?:(?:apple)?webkit)\/(\d+(\.?_?\d+)+)/i.test(this._ua)])
+    );
   }
   //#endregion
 

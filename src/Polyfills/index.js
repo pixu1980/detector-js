@@ -1,4 +1,4 @@
-import './Core/index';
-import './String/index';
-import './Array/index';
-import './Object/index';
+import './core/index';
+import './string/index';
+import './array/index';
+import './object/index';

@@ -1,4 +1,4 @@
-import CssFlagsClass from '../Core/CssFlagsClass';
+import CssFlagsClass from '../core/cssFlagsClass';
 
 /**
  *
@@ -66,7 +66,7 @@ export default class GPU extends CssFlagsClass {
       webGLRenderer: 'n/a',
       vendor: 'n/a',
       model: 'n/a',
-      renderer: 'n/a',
+      renderer: 'n/a'
     };
 
     try {
@@ -79,16 +79,16 @@ export default class GPU extends CssFlagsClass {
           info.merge({
             vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
             model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
-            renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL),
+            renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL)
           });
         }
 
         info.merge({
           webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
-          webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER),
+          webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER)
         });
       }
-    } catch(e) {
+    } catch (e) {
       console.warn('webGL is not supported', e.message);
     }
 
