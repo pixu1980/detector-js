@@ -1,0 +1,46 @@
+{
+  "name": "@detector-js/feature",
+  "version": "0.0.1",
+  "description": "DetectorJS Feature Module",
+  "keywords": [
+    "detector-js",
+    "feature",
+    "module"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/feature.ts",
+  "main": "dist/feature.js",
+  "module": "dist/feature.mjs",
+  "types": "dist/feature.types.d.ts",
+  "scripts": {
+    "test": "node ./__tests__/feature.test.js",
+    "build": "parcel build",
+    "watch": "parcel watch --port 5901"
+  },
+  "dependencies": {
+    "@detector-js/core": "^0.0.1"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/detector-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixu1980/detector-js/issues"
+  }
+}

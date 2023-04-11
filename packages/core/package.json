@@ -1,0 +1,43 @@
+{
+  "name": "@detector-js/core",
+  "version": "0.0.1",
+  "description": "DetectorJS Core Module",
+  "keywords": [
+    "detector-js",
+    "core",
+    "module"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/core.ts",
+  "main": "dist/core.js",
+  "module": "dist/core.mjs",
+  "types": "dist/core.types.d.ts",
+  "scripts": {
+    "test": "node ./__tests__/core.test.js",
+    "build": "parcel build",
+    "watch": "parcel watch --port 5900"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/detector-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixu1980/detector-js/issues"
+  }
+}

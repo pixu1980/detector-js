@@ -1,5 +1,5 @@
 # detector-js
-v2.0.1-beta
+v1.3.2
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -143,16 +143,23 @@ console.log(detector);
 - decide to implement or not device infos detection
 
 ## Dependencies
-None
+- [@detector-js/core](https://ghub.io/@detector-js/core): DetectorJS Core Module
+- [@detector-js/feature](https://ghub.io/@detector-js/feature): DetectorJS Feature Module
+- [@detector-js/hardware](https://ghub.io/@detector-js/hardware): DetectorJS Hardware Module
+- [@detector-js/software](https://ghub.io/@detector-js/software): DetectorJS Software Module
 
 ## Dev Dependencies
 - [changelog](https://ghub.io/changelog): Command line tool (and Node module) that generates a changelog in color output, markdown, or json for modules in npmjs.org&#39;s registry as well as any public github.com repo.
 - [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
 - [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, zero-dependency platform/environment detector written in ES6
 - [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
+- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
+- [@parcel/packager-ts](https://ghub.io/@parcel/packager-ts): DetectorJS, zero-dependency platform/environment detector written in ES6
+- [@parcel/transformer-typescript-types](https://ghub.io/@parcel/transformer-typescript-types): DetectorJS, zero-dependency platform/environment detector written in ES6
+- [@types/node](https://ghub.io/@types/node): TypeScript definitions for Node.js
 - [lerna](https://ghub.io/lerna): Lerna is a fast, modern build system for managing and publishing multiple JavaScript/TypeScript packages from the same repository
 - [parcel](https://ghub.io/parcel): Blazing fast, zero configuration web application bundler
-- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
+- [typescript](https://ghub.io/typescript): TypeScript is a language for application scale JavaScript development
 
 
 
