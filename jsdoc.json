@@ -9,7 +9,7 @@
     "include": [
       "./src"
     ],
-    "includePattern": ".+\\.js$",
+    "includePattern": ".+\\.([tj])s$",
     "excludePattern": "(docs)"
   },
   "plugins": [],

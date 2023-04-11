@@ -2,9 +2,6 @@
   "name": "detector-js",
   "version": "1.3.2",
   "description": "DetectorJS, zero-dependency platform/environment detector written in ES6",
-  "main": "dist/detector.min.js",
-  "browser": "dist/detector.browser.min.js",
-  "module": "dist/detector.module.min.js",
   "scripts": {
     "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
@@ -14,10 +11,6 @@
     "build": "NODE_ENV=production rollup -c",
     "release": "yarn build && yarn git-prepare",
     "test": "echo \"Error: no test specified\" && exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixu1980/detector-js.git"
   },
   "keywords": [
     "detector",
@@ -34,13 +27,20 @@
     "useragent-parser",
     "zero-dependency",
     "es6",
-    "javascript",
-    "module",
-    "npm",
-    "yarn",
-    "rollup-js"
+    "javascript"
   ],
-  "author": "Pixu",
+  "source": "src/detector.ts",
+  "main": "dist/detector.js",
+  "module": "dist/detector.mjs",
+  "types": "dist/detector.types.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/detector-js.git"
+  },
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pixu1980/detector-js/issues"
@@ -51,26 +51,27 @@
   "files": [
     "dist"
   ],
-  "dependencies": {},
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@detector-js/core": "^0.0.1",
+    "@detector-js/feature": "^0.0.1",
+    "@detector-js/hardware": "^0.0.1",
+    "@detector-js/software": "^0.0.1"
+  },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "docdash": "^1.2.0",
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.22.0",
-    "ink-docstrap": "^1.3.2",
-    "install": "^0.13.0",
-    "jsdoc": "^3.6.6",
-    "jshint": "^2.12.0",
-    "rollup": "^2.41.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-filesize": "^9.1.1",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-replace": "^2.2.0",
-    "rollup-plugin-uglify": "^6.0.4"
+    "@parcel/packager-ts": "2.8.3",
+    "@parcel/transformer-typescript-types": "2.8.3",
+    "@types/node": "18.15.11",
+    "changelog": "1.4.2",
+    "docdash": "2.0.1",
+    "ink-docstrap": "1.3.2",
+    "jsdoc": "4.0.2",
+    "lerna": "6.6.1",
+    "parcel": "2.8.3",
+    "pkg-2-readme": "0.0.6",
+    "typedoc": "^0.24.1",
+    "typescript": "5.0.4"
   }
 }

@@ -8,6 +8,7 @@
     "allowJs": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "lib": ["DOM", "ESNext", "ESNext.Symbol", "ESNext.Intl"]
   },
