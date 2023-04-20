@@ -41,9 +41,12 @@ yarn add {{name}}
 
 ## Usage
 ```js
-import Detector from 'detector-js';
+import { Detector } from 'detector-js';
 
-const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
+const detector = new Detector();
+
+// It's possible to specify a custom userAgent if needed
+// const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
 
 console.log(detector);
 // {

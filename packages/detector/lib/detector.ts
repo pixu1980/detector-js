@@ -258,4 +258,4 @@ export class Detector extends FlagsClass {
   }
 }
 
-console.log(`DetectorJS v${packageJSON.version} initialized`);
+console.log(`${packageJSON.description} v${packageJSON.version} initialized`);

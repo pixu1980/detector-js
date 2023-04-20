@@ -2,7 +2,7 @@
 v1.3.2
 
 ## Description
-DetectorJS, zero-dependency platform/environment detector written in ES6
+DetectorJS, zero-dependency platform/environment detector written in TypeScript
 
 Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
 
@@ -33,9 +33,12 @@ yarn add detector-js
 
 ## Usage
 ```js
-import Detector from 'detector-js';
+import { Detector } from 'detector-js';
 
-const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
+const detector = new Detector();
+
+// It's possible to specify a custom userAgent if needed
+// const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
 
 console.log(detector);
 // {
@@ -147,18 +150,17 @@ console.log(detector);
 - [@detector-js/feature](https://ghub.io/@detector-js/feature): DetectorJS Feature Module
 - [@detector-js/hardware](https://ghub.io/@detector-js/hardware): DetectorJS Hardware Module
 - [@detector-js/software](https://ghub.io/@detector-js/software): DetectorJS Software Module
+- [@detector-js/detector](https://ghub.io/@detector-js/detector): DetectorJS Detector Module
 
 ## Dev Dependencies
-- [changelog](https://ghub.io/changelog): Command line tool (and Node module) that generates a changelog in color output, markdown, or json for modules in npmjs.org&#39;s registry as well as any public github.com repo.
-- [docdash](https://ghub.io/docdash): A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami
-- [ink-docstrap](https://ghub.io/ink-docstrap): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [jsdoc](https://ghub.io/jsdoc): An API documentation generator for JavaScript.
-- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
-- [@parcel/packager-ts](https://ghub.io/@parcel/packager-ts): DetectorJS, zero-dependency platform/environment detector written in ES6
-- [@parcel/transformer-typescript-types](https://ghub.io/@parcel/transformer-typescript-types): DetectorJS, zero-dependency platform/environment detector written in ES6
+- [@parcel/packager-ts](https://ghub.io/@parcel/packager-ts): DetectorJS, zero-dependency platform/environment detector written in TypeScript
+- [@parcel/transformer-typescript-types](https://ghub.io/@parcel/transformer-typescript-types): DetectorJS, zero-dependency platform/environment detector written in TypeScript
 - [@types/node](https://ghub.io/@types/node): TypeScript definitions for Node.js
+- [changelog](https://ghub.io/changelog): Command line tool (and Node module) that generates a changelog in color output, markdown, or json for modules in npmjs.org&#39;s registry as well as any public github.com repo.
 - [lerna](https://ghub.io/lerna): Lerna is a fast, modern build system for managing and publishing multiple JavaScript/TypeScript packages from the same repository
 - [parcel](https://ghub.io/parcel): Blazing fast, zero configuration web application bundler
+- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
+- [typedoc](https://ghub.io/typedoc): Create api documentation for TypeScript projects.
 - [typescript](https://ghub.io/typescript): TypeScript is a language for application scale JavaScript development
 
 
