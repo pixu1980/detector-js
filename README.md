@@ -1,5 +1,5 @@
 # detector-js
-v1.3.2
+v2.0.1
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in TypeScript
