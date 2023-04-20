@@ -18,5 +18,5 @@
     
     "lib": ["DOM", "ESNext", "ESNext.Symbol", "ESNext.Intl"]
   },
-  "exclude": ["node_modules", "**/node_modules/*"],
+  "exclude": ["dist/*", "node_modules", "**/node_modules/*"]
 }

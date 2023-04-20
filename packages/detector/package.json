@@ -1,10 +1,10 @@
 {
-  "name": "@detector-js/core",
+  "name": "@detector-js/detector",
   "version": "0.0.1",
-  "description": "DetectorJS Core Module",
+  "description": "DetectorJS Detector Module",
   "keywords": [
     "detector-js",
-    "core",
+    "detector",
     "module"
   ],
   "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
@@ -13,14 +13,20 @@
   ],
   "homepage": "",
   "license": "MIT",
-  "source": "lib/core.ts",
-  "main": "dist/core.js",
-  "module": "dist/core.mjs",
-  "types": "dist/core.types.d.ts",
+  "source": "lib/detector.ts",
+  "main": "dist/detector.js",
+  "module": "dist/detector.mjs",
+  "types": "dist/detector.types.d.ts",
   "scripts": {
-    "test": "node ./__tests__/core.test.js",
+    "test": "node ./__tests__/detector.test.js",
     "build": "parcel build",
-    "watch": "parcel watch --port 5901"
+    "watch": "parcel watch --port 5900"
+  },
+  "dependencies": {
+    "@detector-js/core": "^0.0.1",
+    "@detector-js/feature": "^0.0.1",
+    "@detector-js/hardware": "^0.0.1",
+    "@detector-js/software": "^0.0.1"
   },
   "directories": {
     "dist": "dist",

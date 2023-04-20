@@ -1,0 +1,5 @@
+{
+  "extends": ["../../typedoc.base.json"],
+  "entryPoints": ["lib/feature.ts"],
+  "readme": "README.md"
+}

@@ -20,7 +20,7 @@
   "scripts": {
     "test": "node ./__tests__/feature.test.js",
     "build": "parcel build",
-    "watch": "parcel watch --port 5901"
+    "watch": "parcel watch --port 5902"
   },
   "dependencies": {
     "@detector-js/core": "^0.0.1"
