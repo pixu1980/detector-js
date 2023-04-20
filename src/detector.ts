@@ -1,7 +1,5 @@
 import packageJSON from '../package.json';
 
-import { Detector } from '@detector-js/detector';
-
-export default Detector;
+export * from '@detector-js/detector';
 
 console.log(`DetectorJS v${packageJSON.version} initialized`);
