@@ -1,0 +1,6 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "tsconfig": "./jsconfig.json",
+  "exclude": ["dist"],
+  "includeVersion": true,
+}

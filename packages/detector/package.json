@@ -1,0 +1,49 @@
+{
+  "name": "@detector-js/detector",
+  "version": "0.0.1",
+  "description": "DetectorJS Detector Module",
+  "keywords": [
+    "detector-js",
+    "detector",
+    "module"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/detector.ts",
+  "main": "dist/detector.js",
+  "module": "dist/detector.mjs",
+  "types": "dist/detector.types.d.ts",
+  "scripts": {
+    "test": "node ./__tests__/detector.test.js",
+    "build": "parcel build",
+    "watch": "parcel watch --port 5900"
+  },
+  "dependencies": {
+    "@detector-js/core": "^0.0.1",
+    "@detector-js/feature": "^0.0.1",
+    "@detector-js/hardware": "^0.0.1",
+    "@detector-js/software": "^0.0.1"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/detector-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixu1980/detector-js/issues"
+  }
+}

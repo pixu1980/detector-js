@@ -4,5 +4,5 @@
   "version": "independent",
   "useNx": false,
   "npmClient": "yarn",
-  "message": "@pix-js release"
+  "message": "@detector-js release"
 }
