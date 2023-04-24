@@ -1,5 +1,3 @@
-import packageJSON from '../package.json';
-
 /*jshint expr: true */
 import { FlagsClass } from '@detector-js/core';
 
@@ -258,4 +256,8 @@ export class Detector extends FlagsClass {
   }
 }
 
-console.log(`${packageJSON.description} v${packageJSON.version} initialized`);
+if (process.env.NODE_ENV === 'development') {
+  const packageJSON = require('../package.json');
+
+  console.log(`${packageJSON.description} v${packageJSON.version} initialized`);
+}

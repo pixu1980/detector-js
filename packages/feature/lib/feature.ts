@@ -1,7 +1,5 @@
 import { Asserts, CssFlagsClass } from '@detector-js/core';
 
-import packageJSON from '../package.json';
-
 /**
  *
  *
@@ -834,7 +832,11 @@ export class Feature extends CssFlagsClass {
   }
 }
 
-console.log(`${packageJSON.description} v${packageJSON.version} initialized`);
+if (process.env.NODE_ENV === 'development') {
+  const packageJSON = require('../package.json');
+
+  console.log(`${packageJSON.description} v${packageJSON.version} initialized`);
+}
 
 export * from './audioFeature';
 export * from './videoFeature';
