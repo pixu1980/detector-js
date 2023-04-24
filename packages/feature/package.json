@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/feature",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "DetectorJS Feature Module",
   "keywords": [
     "detector-js",
@@ -23,7 +23,7 @@
     "watch": "parcel watch --port 5902"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.1"
+    "@detector-js/core": "^0.0.2"
   },
   "directories": {
     "dist": "dist",
