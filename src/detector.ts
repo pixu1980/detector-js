@@ -1,5 +1,9 @@
-import packageJSON from '../package.json';
+'use strict';
 
 export * from '@detector-js/detector';
 
-console.log(`DetectorJS v${packageJSON.version} initialized`);
+if (process.env.NODE_ENV === 'development') {
+  const packageJSON = require('../package.json');
+
+  console.log(`DetectorJS v${packageJSON.version} initialized`);
+}
