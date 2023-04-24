@@ -1,3 +1,17 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [2.0.2](https://github.com/pixu1980/detector-js/compare/v1.3.2...v2.0.2) (2023-04-24)
+
+
+### Features
+
+* **docs:** improved typedoc docs generation, updated usage ex ([5308768](https://github.com/pixu1980/detector-js/commit/5308768141135b092158b7ebb1ec5c4515ed98c9))
+* **docs:** replaced jsdoc with typedoc ([7595bb9](https://github.com/pixu1980/detector-js/commit/7595bb9c0f0c648c073bfbaa048e36ce7186b4d1))
+* **parcel:** replaced rollup with parcel ([ebe9128](https://github.com/pixu1980/detector-js/commit/ebe9128096d7195bc20e80e93c991ea7aa06b3c8))
+* **ts:** typescript rework ([4838e91](https://github.com/pixu1980/detector-js/commit/4838e9120d11100d026afbc9758dfaf75e5c1d92))
+
 ## [Version 1.3.2](https://github.blackmirror1980/:blackmirror1980/detector-js/releases/tag/v1.3.2) (2021-3-10)
 
 ### Bug fixes
