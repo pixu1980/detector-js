@@ -1,0 +1,1 @@
+{"mappings":";;AAAA;AAAA","sources":["src/detector.ts"],"sourcesContent":["'use strict';\n\nimport { Detector } from '@detector-js/detector';\n\nexport { Detector };\n"],"names":[],"version":3,"file":"detector.mjs.map"}

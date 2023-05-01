@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "jsx": "react",
+    "checkJs": false,
+    "allowJs": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    
+    // These options are necessary so that TypeDoc can resolve references across packages
+    "declaration": true,
+    "declarationMap": true,
+    // These options are necessary so that TypeDoc can resolve references across packages
+    
+    "lib": ["DOM", "ESNext", "ESNext.Symbol", "ESNext.Intl"]
+  },
+  "exclude": ["node_modules", "**/node_modules/*"],
+}
