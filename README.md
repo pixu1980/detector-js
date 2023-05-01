@@ -1,5 +1,5 @@
 # detector-js
-v2.0.2
+v2.0.3
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in TypeScript
@@ -156,10 +156,10 @@ console.log(detector);
 - [@parcel/packager-ts](https://ghub.io/@parcel/packager-ts): DetectorJS, zero-dependency platform/environment detector written in TypeScript
 - [@parcel/transformer-typescript-types](https://ghub.io/@parcel/transformer-typescript-types): DetectorJS, zero-dependency platform/environment detector written in TypeScript
 - [@types/node](https://ghub.io/@types/node): TypeScript definitions for Node.js
-- [changelog](https://ghub.io/changelog): Command line tool (and Node module) that generates a changelog in color output, markdown, or json for modules in npmjs.org&#39;s registry as well as any public github.com repo.
 - [lerna](https://ghub.io/lerna): Lerna is a fast, modern build system for managing and publishing multiple JavaScript/TypeScript packages from the same repository
 - [parcel](https://ghub.io/parcel): Blazing fast, zero configuration web application bundler
 - [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
+- [standard-version](https://ghub.io/standard-version): replacement for `npm version` with automatic CHANGELOG generation
 - [typedoc](https://ghub.io/typedoc): Create api documentation for TypeScript projects.
 - [typescript](https://ghub.io/typescript): TypeScript is a language for application scale JavaScript development
 

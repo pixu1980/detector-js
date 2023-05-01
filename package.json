@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "DetectorJS, zero-dependency platform/environment detector written in TypeScript",
   "keywords": [
     "detector",
@@ -36,7 +36,10 @@
   "scripts": {
     "docs": "rm -rf docs && typedoc --tsconfig ./jsconfig.json && echo 'Documentation built in ./docs folder'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
-    "changelog": "changelog && echo 'CHANGELOG.md file built'",
+    "version:patch": "standard-version --release-as patch && echo 'CHANGELOG.md file built'",
+    "version:minor": "standard-version --release-as minor && echo 'CHANGELOG.md file built'",
+    "version:major": "standard-version --release-as major && echo 'CHANGELOG.md file built'",
+    "version": "yarn version:patch",
     "lerna": "lerna bootstrap && lerna link",
     "cache:clear": "rm -rf .parcel-cache dist",
     "deps:clear": "rm -rf packages/**/dist node_modules yarn.lock",
@@ -50,7 +53,7 @@
     "build:all": "lerna run build",
     "prebuild": "yarn build:all",
     "build": "parcel build",
-    "prerelease": "yarn build:all && yarn build && yarn changelog && yarn readme && yarn docs",
+    "prerelease": "yarn build:all && yarn build && yarn version && yarn readme && yarn docs",
     "release": "lerna publish && yarn publish"
   },
   "bugs": {
@@ -76,11 +79,11 @@
     "@parcel/packager-ts": "2.8.3",
     "@parcel/transformer-typescript-types": "2.8.3",
     "@types/node": "18.16.3",
-    "changelog": "1.4.2",
     "lerna": "6.6.1",
     "parcel": "2.8.3",
     "pkg-2-readme": "0.0.6",
-    "typedoc": "^0.24.6",
+    "standard-version": "9.5.0",
+    "typedoc": "0.24.6",
     "typescript": "5.0.4"
   }
 }
