@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.10](https://github.com/pixu1980/detector-js/compare/v2.0.3...v2.0.10) (2023-05-29)
+
+
+### Features
+
+* **yarn:** yarn release support ([7f3a603](https://github.com/pixu1980/detector-js/commit/7f3a60374ed50d29ad66d02f534456ecafc3422d))
+
+
+### Bug Fixes
+
+* **feature:** fixed getTypedArray bug ([b2647a6](https://github.com/pixu1980/detector-js/commit/b2647a6a34bad7ba70c5ebcf1bb9abf042c33cc9))
+* **feature:** fixed getTypedArray bug) ([c54c138](https://github.com/pixu1980/detector-js/commit/c54c138edd47e7e88b1160f928691ce8a649cd2f))
+* **feature:** fixed pointerEvents constructor error ([6a92328](https://github.com/pixu1980/detector-js/commit/6a923289f0a8a0e8b4745939a71670ea4ab7cf16))
+
 ### [2.0.9](https://github.com/pixu1980/detector-js/compare/v2.0.8...v2.0.9) (2023-05-29)
 
 ### Features
