@@ -780,7 +780,7 @@ export class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerEvents() {
-    return Asserts.all([this.root.PointerEvent], true);
+    return Asserts.all([!!this.root.PointerEvent], true);
   }
 
   // Test if img srcset attribute is supported
