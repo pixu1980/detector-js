@@ -32,7 +32,7 @@
     "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
   ],
   "license": "MIT",
-  "private": true,
+  "private": false,
   "targets": {
     "main": {
       "optimize": true
