@@ -68,7 +68,7 @@
     "url": "https://github.com/pixu1980/detector-js/issues"
   },
   "homepage": "https://detector.js.org",
-  "documentation": "https://detector.js.org",
+  "documentation": "https://detector.js.org/docs/index.html",
   "todo": "https://github.com/pixu1980/detector-js#todo",
   "files": [
     "dist"
