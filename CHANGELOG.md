@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.9](https://github.com/pixu1980/detector-js/compare/v2.0.10...v2.0.9) (2023-05-29)
+
 ### [2.0.10](https://github.com/pixu1980/detector-js/compare/v2.0.3...v2.0.10) (2023-05-29)
 
 
