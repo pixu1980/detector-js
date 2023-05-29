@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/detector",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "DetectorJS Detector Module",
   "keywords": [
     "detector-js",
@@ -34,7 +34,7 @@
     "@detector-js/core": "^0.0.6",
     "@detector-js/feature": "^0.0.6",
     "@detector-js/hardware": "^0.0.6",
-    "@detector-js/software": "^0.0.6"
+    "@detector-js/software": "^0.0.7"
   },
   "directories": {
     "dist": "dist",
