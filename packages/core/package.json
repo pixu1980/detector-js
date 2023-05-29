@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/core",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "DetectorJS Core Module",
   "keywords": [
     "detector-js",
@@ -17,6 +17,14 @@
   "main": "dist/core.js",
   "module": "dist/core.mjs",
   "types": "dist/core.types.d.ts",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "test": "node ./__tests__/core.test.js",
     "build": "parcel build",

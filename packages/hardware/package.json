@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/hardware",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "DetectorJS Hardware Module",
   "keywords": [
     "detector-js",
@@ -17,13 +17,21 @@
   "main": "dist/hardware.js",
   "module": "dist/hardware.mjs",
   "types": "dist/hardware.types.d.ts",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "test": "node ./__tests__/hardware.test.js",
     "build": "parcel build",
     "watch": "parcel watch --port 5904"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.2"
+    "@detector-js/core": "^0.0.4"
   },
   "directories": {
     "dist": "dist",

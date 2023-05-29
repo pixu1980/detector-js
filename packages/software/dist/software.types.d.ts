@@ -975,7 +975,7 @@ export class Engine extends CssFlagsClass {
      *
      * @memberOf Engine
      */
-    _checkAssertsResult(assertsResult?: boolean, version?: null): boolean;
+    _checkAssertsResult(assertsResult?: boolean, version?: any): boolean;
     /**
      *
      *
@@ -990,7 +990,7 @@ export class Engine extends CssFlagsClass {
      *
      * @memberOf Engine
      */
-    setVersion(version?: null): void;
+    setVersion(version?: any): void;
 }
 /**
  *
