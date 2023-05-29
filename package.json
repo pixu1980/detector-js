@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "DetectorJS, zero-dependency platform/environment detector written in TypeScript",
   "keywords": [
     "detector",
@@ -32,7 +32,7 @@
     "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
   ],
   "license": "MIT",
-  "private": false,
+  "private": true,
   "targets": {
     "main": {
       "optimize": true
