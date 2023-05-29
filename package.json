@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "DetectorJS, zero-dependency platform/environment detector written in TypeScript",
   "keywords": [
     "detector",
