@@ -271,8 +271,8 @@ export class Browser extends CssFlagsClass {
       Asserts.one(
         [
           // @ts-ignore
-          () => this.process.type === 'renderer', // Renderer process
-          () => !!this.process.versions.electron, // Main process
+          () => this.process?.type === 'renderer', // Renderer process
+          () => !!this.process?.versions?.electron, // Main process
           () => !!this.navigator && this.#reTest('electron') // Detect the user agent when the `nodeIntegration` option is set to true
         ],
         true
