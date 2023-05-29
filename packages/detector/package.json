@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/detector",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "DetectorJS Detector Module",
   "keywords": [
     "detector-js",
@@ -31,10 +31,10 @@
     "watch": "parcel watch --port 5900"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.5",
-    "@detector-js/feature": "^0.0.5",
-    "@detector-js/hardware": "^0.0.5",
-    "@detector-js/software": "^0.0.5"
+    "@detector-js/core": "^0.0.6",
+    "@detector-js/feature": "^0.0.6",
+    "@detector-js/hardware": "^0.0.6",
+    "@detector-js/software": "^0.0.6"
   },
   "directories": {
     "dist": "dist",
