@@ -32,7 +32,15 @@
     "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
   ],
   "license": "MIT",
-  "private": true,
+  "private": false,
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "docs": "rm -rf docs && typedoc --tsconfig ./jsconfig.json && echo 'Documentation built in ./docs folder'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
@@ -59,8 +67,8 @@
   "bugs": {
     "url": "https://github.com/pixu1980/detector-js/issues"
   },
-  "homepage": "https://github.com/pixu1980/detector-js#readme",
-  "documentation": "https://pixu1980.github.io/detector-js/docs/index.html",
+  "homepage": "https://detector.js.org",
+  "documentation": "https://detector.js.org",
   "todo": "https://github.com/pixu1980/detector-js#todo",
   "files": [
     "dist"
@@ -78,12 +86,12 @@
   "devDependencies": {
     "@parcel/packager-ts": "2.8.3",
     "@parcel/transformer-typescript-types": "2.8.3",
-    "@types/node": "18.16.3",
-    "lerna": "6.6.1",
+    "@types/node": "20.2.3",
+    "lerna": "6.6.2",
     "parcel": "2.8.3",
     "pkg-2-readme": "0.0.6",
     "standard-version": "9.5.0",
-    "typedoc": "0.24.6",
+    "typedoc": "0.24.7",
     "typescript": "5.0.4"
   }
 }

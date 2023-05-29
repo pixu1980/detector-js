@@ -4,7 +4,7 @@ v{{version}}
 ## Description
 {{description}}
 
-Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
+Please feel free to ask for modifications, fixes or do a PR to improve Detector behaviors or add detection rules
 
 {{#author}}
 ## Author
@@ -27,7 +27,7 @@ Check out this [Codepen]({{example}}) example
 {{/example}}
 
 ## Installation
-This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/). 
+This is a JS/TS module available through the [npm registry](https://www.npmjs.com/). 
 
 It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) package managers.
 

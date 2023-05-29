@@ -211,7 +211,7 @@ export class Feature extends CssFlagsClass {
      *
      * @memberOf Feature
      */
-    _getCssPrefixedPropValue(prop: any, value: any): string | null;
+    _getCssPrefixedPropValue(prop: any, value: any): string;
     /**
      *
      *
