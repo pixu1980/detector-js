@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.7](https://github.com/pixu1980/detector-js/compare/v2.0.6...v2.0.7) (2023-05-29)
+
+### [2.0.6](https://github.com/pixu1980/detector-js/compare/v2.0.5...v2.0.6) (2023-05-29)
+
+### [2.0.5](https://github.com/pixu1980/detector-js/compare/v2.0.4...v2.0.5) (2023-05-29)
+
+### [2.0.4](https://github.com/pixu1980/detector-js/compare/v2.0.3...v2.0.4) (2023-05-29)
+
+
+### Features
+
+* **yarn:** yarn release support ([7f3a603](https://github.com/pixu1980/detector-js/commit/7f3a60374ed50d29ad66d02f534456ecafc3422d))
+
 ### [2.0.3](https://github.com/pixu1980/detector-js/compare/v1.3.2...v2.0.3) (2023-05-01)
 
 

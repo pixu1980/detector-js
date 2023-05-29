@@ -5,7 +5,7 @@
  * @class Asserts
  */
 export class Asserts {
-    #private;
+    static checkAssert(assert: any, safe?: boolean): any;
     /**
      * Check for every assert to be true
      *

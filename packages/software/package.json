@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/software",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "DetectorJS Software Module",
   "keywords": [
     "detector-js",
@@ -17,13 +17,21 @@
   "main": "dist/software.js",
   "module": "dist/software.mjs",
   "types": "dist/software.types.d.ts",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "test": "node ./__tests__/software.test.js",
     "build": "parcel build",
     "watch": "parcel watch --port 5903"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.2"
+    "@detector-js/core": "^0.0.4"
   },
   "directories": {
     "dist": "dist",

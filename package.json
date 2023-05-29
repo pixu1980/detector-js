@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "2.0.3",
+  "version": "2.0.7",
   "description": "DetectorJS, zero-dependency platform/environment detector written in TypeScript",
   "keywords": [
     "detector",
@@ -33,6 +33,14 @@
   ],
   "license": "MIT",
   "private": true,
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "docs": "rm -rf docs && typedoc --tsconfig ./jsconfig.json && echo 'Documentation built in ./docs folder'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
@@ -59,8 +67,8 @@
   "bugs": {
     "url": "https://github.com/pixu1980/detector-js/issues"
   },
-  "homepage": "https://github.com/pixu1980/detector-js#readme",
-  "documentation": "https://pixu1980.github.io/detector-js/docs/index.html",
+  "homepage": "https://detector.js.org",
+  "documentation": "https://detector.js.org/docs/index.html",
   "todo": "https://github.com/pixu1980/detector-js#todo",
   "files": [
     "dist"
@@ -69,21 +77,21 @@
     "packages/*"
   ],
   "dependencies": {
-    "@detector-js/core": "^0.0.2",
-    "@detector-js/feature": "^0.0.2",
-    "@detector-js/hardware": "^0.0.2",
-    "@detector-js/software": "^0.0.2",
-    "@detector-js/detector": "^0.0.2"
+    "@detector-js/core": "^0.0.4",
+    "@detector-js/feature": "^0.0.4",
+    "@detector-js/hardware": "^0.0.4",
+    "@detector-js/software": "^0.0.4",
+    "@detector-js/detector": "^0.0.4"
   },
   "devDependencies": {
-    "@parcel/packager-ts": "2.8.3",
-    "@parcel/transformer-typescript-types": "2.8.3",
-    "@types/node": "18.16.3",
-    "lerna": "6.6.1",
-    "parcel": "2.8.3",
+    "@parcel/packager-ts": "2.9.1",
+    "@parcel/transformer-typescript-types": "2.9.1",
+    "@types/node": "20.2.5",
+    "lerna": "6.6.2",
+    "parcel": "2.9.1",
     "pkg-2-readme": "0.0.6",
     "standard-version": "9.5.0",
-    "typedoc": "0.24.6",
+    "typedoc": "0.24.7",
     "typescript": "5.0.4"
   }
 }

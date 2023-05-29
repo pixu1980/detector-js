@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/feature",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "DetectorJS Feature Module",
   "keywords": [
     "detector-js",
@@ -17,13 +17,21 @@
   "main": "dist/feature.js",
   "module": "dist/feature.mjs",
   "types": "dist/feature.types.d.ts",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "test": "node ./__tests__/feature.test.js",
     "build": "parcel build",
     "watch": "parcel watch --port 5902"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.2"
+    "@detector-js/core": "^0.0.4"
   },
   "directories": {
     "dist": "dist",

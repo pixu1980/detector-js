@@ -1,12 +1,2 @@
-var $5lkKU$detectorjsdetector = require("@detector-js/detector");
-
-function $parcel$export(e, n, v, s) {
-  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
-}
-
-$parcel$export(module.exports, "Detector", () => $60ed293a319c8885$re_export$Detector);
-
-"use strict";
-
-
+"use strict";require("@detector-js/detector"),Object.defineProperty(module.exports,"Detector",{get:()=>$6a31c933d71b1d5d$re_export$Detector,set:void 0,enumerable:!0,configurable:!0});
 //# sourceMappingURL=detector.js.map
