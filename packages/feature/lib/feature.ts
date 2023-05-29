@@ -340,7 +340,7 @@ export class Feature extends CssFlagsClass {
    */
   getLittleEndian() {
     return Asserts.all(
-      [this.getTypedArray, () => new this.root.Int8Array(new this.root.Int16Array([1]).buffer)[0] > 0],
+      [this.getTypedArray.bind(this), () => new this.root.Int8Array(new this.root.Int16Array([1]).buffer)[0] > 0],
       true
     );
   }
