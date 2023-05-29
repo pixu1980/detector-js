@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/software",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "DetectorJS Software Module",
   "keywords": [
     "detector-js",
@@ -31,7 +31,7 @@
     "watch": "parcel watch --port 5903"
   },
   "dependencies": {
-    "@detector-js/core": "^0.0.5"
+    "@detector-js/core": "^0.0.6"
   },
   "directories": {
     "dist": "dist",
