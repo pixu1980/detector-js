@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "DetectorJS, zero-dependency platform/environment detector written in TypeScript",
   "keywords": [
     "detector",
@@ -77,11 +77,11 @@
     "packages/*"
   ],
   "dependencies": {
-    "@detector-js/core": "^0.0.3",
-    "@detector-js/feature": "^0.0.3",
-    "@detector-js/hardware": "^0.0.3",
-    "@detector-js/software": "^0.0.3",
-    "@detector-js/detector": "^0.0.3"
+    "@detector-js/core": "^0.0.4",
+    "@detector-js/feature": "^0.0.4",
+    "@detector-js/hardware": "^0.0.4",
+    "@detector-js/software": "^0.0.4",
+    "@detector-js/detector": "^0.0.4"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.9.1",
