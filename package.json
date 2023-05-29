@@ -77,11 +77,11 @@
     "packages/*"
   ],
   "dependencies": {
-    "@detector-js/core": "^0.0.4",
-    "@detector-js/feature": "^0.0.4",
-    "@detector-js/hardware": "^0.0.4",
-    "@detector-js/software": "^0.0.4",
-    "@detector-js/detector": "^0.0.4"
+    "@detector-js/core": "^0.0.5",
+    "@detector-js/feature": "^0.0.5",
+    "@detector-js/hardware": "^0.0.5",
+    "@detector-js/software": "^0.0.5",
+    "@detector-js/detector": "^0.0.5"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.9.1",
