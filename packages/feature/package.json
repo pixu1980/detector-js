@@ -17,6 +17,14 @@
   "main": "dist/feature.js",
   "module": "dist/feature.mjs",
   "types": "dist/feature.types.d.ts",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
   "scripts": {
     "test": "node ./__tests__/feature.test.js",
     "build": "parcel build",
