@@ -1,10 +1,10 @@
 # detector-js
-v2.0.3
+v2.0.4
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in TypeScript
 
-Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
+Please feel free to ask for modifications, fixes or do a PR to improve Detector behaviors or add detection rules
 
 ## Author
 Emiliano &#39;Pixu&#39; Pisu &lt;pisuemiliano.1980@gmail.com&gt;
@@ -15,11 +15,11 @@ Emiliano &#39;Pixu&#39; Pisu &lt;pisuemiliano.1980@gmail.com&gt;
 [![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](https://img.shields.io/npm/dm/detector-js.svg) [![GitHub stars](https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/stargazers) [![GitHub forks](https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/network) [![GitHub issues](https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/issues) [![GitHub license](https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/blob/master/LICENSE) [![Build Status](https://travis-ci.org/pixu1980/detector-js.svg?branch=master)](https://travis-ci.org/pixu1980/detector-js) [![Coverage Status](https://coveralls.io/repos/github/pixu1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/pixu1980/detector-js?branch=master)
 
 ## Documentation
-Check out the [Latest Documentation](https://pixu1980.github.io/detector-js/docs/index.html) here
+Check out the [Latest Documentation](https://detector.js.org/docs/index.html) here
 
 
 ## Installation
-This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/). 
+This is a JS/TS module available through the [npm registry](https://www.npmjs.com/). 
 
 It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) package managers.
 

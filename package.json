@@ -32,7 +32,7 @@
     "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
   ],
   "license": "MIT",
-  "private": false,
+  "private": true,
   "targets": {
     "main": {
       "optimize": true
@@ -77,18 +77,18 @@
     "packages/*"
   ],
   "dependencies": {
-    "@detector-js/core": "^0.0.2",
-    "@detector-js/feature": "^0.0.2",
-    "@detector-js/hardware": "^0.0.2",
-    "@detector-js/software": "^0.0.2",
-    "@detector-js/detector": "^0.0.2"
+    "@detector-js/core": "^0.0.3",
+    "@detector-js/feature": "^0.0.3",
+    "@detector-js/hardware": "^0.0.3",
+    "@detector-js/software": "^0.0.3",
+    "@detector-js/detector": "^0.0.3"
   },
   "devDependencies": {
-    "@parcel/packager-ts": "2.8.3",
-    "@parcel/transformer-typescript-types": "2.8.3",
-    "@types/node": "20.2.3",
+    "@parcel/packager-ts": "2.9.1",
+    "@parcel/transformer-typescript-types": "2.9.1",
+    "@types/node": "20.2.5",
     "lerna": "6.6.2",
-    "parcel": "2.8.3",
+    "parcel": "2.9.1",
     "pkg-2-readme": "0.0.6",
     "standard-version": "9.5.0",
     "typedoc": "0.24.7",
