@@ -50,6 +50,14 @@ test.describe('live demo layout', () => {
         quirksDesc: descFor('Quirks mode'),
         unmappedDescribed: disabled.every((c) => (c.querySelector('.desc') || {}).textContent.trim().length > 15),
         rawPre: !!document.querySelector('#out') && document.querySelector('#out').textContent.length > 200,
+        rawTitleSticky: (() => {
+          const t = document.querySelector('.raw-title');
+          return t ? getComputedStyle(t).position === 'sticky' : false;
+        })(),
+        rawTitleCompact: (() => {
+          const t = document.querySelector('.raw-title');
+          return t ? getComputedStyle(t).fontSize.endsWith('13px') || getComputedStyle(t).fontSize.endsWith('14px') || parseFloat(getComputedStyle(t).fontSize) < 16 : false;
+        })(),
       };
     });
 
@@ -73,5 +81,7 @@ test.describe('live demo layout', () => {
     expect(info.onlineDesc.length).toBeGreaterThan(15);
     expect(info.quirksDesc.length).toBeGreaterThan(15);
     expect(info.rawPre).toBe(true);
+    expect(info.rawTitleSticky).toBe(true);
+    expect(info.rawTitleCompact).toBe(true);
   });
 });
