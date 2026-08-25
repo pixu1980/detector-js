@@ -76,6 +76,7 @@ function layout() {
           <li><a href="${rel}docs/browser-support.html">Browser support</a></li>
           <li><a href="${rel}docs/migration.html">Migrate v1/v2 → v3</a></li>
           <li><a href="${rel}docs/roadmap.html">Roadmap</a></li>
+          <li><a href="${rel}examples/devices/index.html">Device gallery</a></li>
         </ul>
       </div>
       <div>

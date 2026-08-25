@@ -28,8 +28,11 @@
 <p>Priorities captured from the maintainer interview (3.0.0 release-prep cycle).</p>
 <h2>Next (post-3.0.0)</h2>
 <ul>
-<li><strong>[P1] More platforms / WebAPIs</strong> — expand detection tables (browsers, engines, OSs and
-WebAPI flags), verified against MDN Browser Compatibility Data before merging
+<li><strong>[DONE] Full MDN Web API coverage</strong> — <code>Feature</code> now probes the complete MDN <code>/docs/Web/API</code>
+interface index (1021 globals, camelCase flags, never shadowing curated ones); regenerable via
+<code>scripts/update-webapis.mjs</code>. See CHANGELOG &quot;Unreleased&quot;.</li>
+<li><strong>[P1] More platforms / browsers / OSs</strong> — expand the UA detection tables (browsers, engines,
+OSs), verified against MDN Browser Compatibility Data before merging
 (see <code>CONTRIBUTING.md → Adding a new detection</code>).</li>
 <li><strong>[P1] GPU / vendor parsing</strong> — normalize GPU identities: Apple M-series (M1…M5,
 Pro/Max/Ultra), NVIDIA GeForce, AMD Radeon, Intel Iris/Arc; expose structured
@@ -74,6 +77,7 @@ the bundle (the library makes zero network calls by design).</li>
           <li><a href="../docs/browser-support.html">Browser support</a></li>
           <li><a href="../docs/migration.html">Migrate v1/v2 → v3</a></li>
           <li><a href="../docs/roadmap.html">Roadmap</a></li>
+          <li><a href="../examples/devices/index.html">Device gallery</a></li>
         </ul>
       </div>
       <div>
