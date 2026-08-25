@@ -13,41 +13,46 @@
       gap: 1.25rem;
       align-items: start;
     }
-    @media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1100px) { .demo-grid { grid-template-columns: 1fr; } }
 
     /* ---------- left column: detection cards ---------- */
     .panel h2 { font-size: var(--fs-md); margin: 0 0 .6rem; display: flex; align-items: center; gap: .5rem; }
     .panel { margin-bottom: 1.25rem; }
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: .5rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: .6rem;
     }
     .flag-card {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .4rem;
+      flex-direction: column;
+      gap: .3rem;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: .5rem .7rem;
-      font-size: var(--fs-sm);
+      border-radius: 12px;
+      padding: .7rem .85rem;
       text-decoration: none;
       color: var(--text);
       transition: border-color .15s ease, transform .1s ease;
+    }
+    .flag-card .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
     }
     a.flag-card:hover, a.flag-card:focus-visible {
       border-color: var(--accent2);
       transform: translateY(-1px);
       outline: none;
     }
-    a.flag-card::after { content: "↗"; color: var(--muted); font-size: .72rem; }
-    .flag-card .name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .flag-card .state { font-size: .72rem; font-weight: 800; padding: .08rem .42rem; border-radius: 999px; white-space: nowrap; }
+    a.flag-card .name::after { content: " ↗"; color: var(--muted); font-size: .75rem; }
+    .flag-card .name { font-weight: 700; font-size: var(--fs-md); line-height: 1.25; }
+    .flag-card .state { font-size: .7rem; font-weight: 800; padding: .1rem .5rem; border-radius: 999px; white-space: nowrap; }
     .flag-card .state.on { background: rgba(61, 220, 151, .14); color: var(--ok); }
     .flag-card .state.off { background: rgba(152, 162, 195, .12); color: var(--muted); }
     .flag-card .state.value { background: rgba(0, 229, 199, .14); color: var(--accent2); }
+    .flag-card .desc { color: var(--muted); font-size: var(--fs-sm); line-height: 1.45; }
 
     .kv-card {
       background: var(--card);
@@ -98,7 +103,7 @@
   <main>
     <h1>Live demo</h1>
     <p class="sub">Runs entirely in your browser: <code>const detector = new Detector(); detector.upgrade();</code> —
-      WebAPI cards open the matching MDN page (new tab).</p>
+      WebAPI cards with a ↗ open the matching MDN page in a new tab; every card shows a short description.</p>
 
     <div class="demo-grid">
       <!-- LEFT: detection cards -->
@@ -112,7 +117,7 @@
           <div class="cards" id="cards-hardware"></div>
         </section>
         <section class="panel" id="panel-apis">
-          <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(click a card → MDN)</span></h2>
+          <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
           <div class="cards" id="cards-apis"></div>
         </section>
       </div>
@@ -162,7 +167,7 @@
   <script src="dist/detector.browser.min.js"></script>
   <script>
     // ------------------------------------------------------------------
-    // WebAPI flag -> MDN page (only feature/Web API cards get a link)
+    // WebAPI flag -> MDN page (feature/Web API cards only)
     // ------------------------------------------------------------------
     var MDN = 'https://developer.mozilla.org/en-US/docs/';
     var API = function (p) { return MDN + 'Web/API/' + p; };
@@ -248,6 +253,97 @@
       webp: MDN + 'Web/Media/Formats/Image_types',
       worker: API('Web_Workers_API')
     };
+
+    // ------------------------------------------------------------------
+    // Short description for EVERY detected API (also the ones without MDN)
+    // ------------------------------------------------------------------
+    var DESCRIPTIONS = {
+      addEventListener: 'Attaches event handlers to elements and the window.',
+      asyncScript: 'Loads scripts asynchronously without blocking parsing.',
+      battery: 'Exposes the device battery status (Battery Manager).',
+      bluetooth: 'Connects to and interacts with Bluetooth devices.',
+      broadcastChannel: 'Cross-context messaging between tabs and workers.',
+      caches: 'Stores network responses for offline use (Cache API).',
+      canvas: '2D drawing surface via the Canvas API.',
+      classList: 'Toggles and reads CSS classes on elements.',
+      clipboard: 'Reads and writes text/images to the system clipboard.',
+      contextMenu: 'Custom context menus on elements (legacy).',
+      cors: 'Cross-Origin Resource Sharing — HTTP requests across origins.',
+      credentials: 'Credential Management — password/federated login flows.',
+      css3D: '3D CSS transforms (transform + perspective).',
+      cssTransform: '2D/3D CSS transforms support.',
+      cssTransition: 'Animated CSS property changes (transitions).',
+      deferScript: 'Loads scripts after parsing, in document order.',
+      dialogElement: 'Native modal/non-modal <dialog> element.',
+      deviceMemory: 'Approximate device RAM in GB (coarse values).',
+      deviceMotion: 'Position/rotation events from accelerometer and gyroscope.',
+      deviceOrientation: 'Compass/orientation events (alpha/beta/gamma).',
+      fetch: 'Modern promise-based network requests API.',
+      file: 'File, FileReader, FileList and Blob objects.',
+      fileSystem: 'Read/write to a sandboxed file system (legacy).',
+      forceTouch: 'Trackpad force/3D Touch pressure on mouse events.',
+      fullscreen: 'Shows elements/content in fullscreen mode.',
+      fullscreenKeyboard: 'Fullscreen with keyboard input enabled.',
+      gamepad: 'Reads state from connected game controllers.',
+      geolocation: 'Device GPS/location access.',
+      historyAPI: 'pushState/replaceState — SPA routing without reload.',
+      indexedDB: 'Local structured data storage (IndexedDB).',
+      intersectionObserver: 'Efficient scroll/spacing visibility tracking.',
+      littleEndian: 'Byte order of the platform (low-bytes-first).',
+      localStorage: 'Persistent key/value storage per origin.',
+      matchMedia: 'Evaluates CSS media queries in JavaScript.',
+      mediaCapabilities: 'WebRTC/decoding capabilities of the device.',
+      mediaRecorder: 'Records canvas/media streams (MediaStream Recording).',
+      mediaSession: 'Media controls in the OS lock screen/media widgets.',
+      nfc: 'Near-Field Communication — read/write NFC tags (experimental).',
+      notifications: 'OS-level push-style notifications (web notifications).',
+      offscreenCanvas: 'Canvas rendering off the main thread (workers).',
+      paymentRequest: 'In-browser payment flow with the OS payment sheets.',
+      permissions: 'Queries and manages permission states.',
+      pictureElement: 'Responsive <picture> element.',
+      pixelRatio: 'devicePixelRatio — physical vs CSS pixels.',
+      placeholder: 'Placeholder hint inside <input> fields.',
+      pointerEnabled: 'Pointer events support (legacy flag).',
+      pointerLock: 'Locks the mouse pointer for games/apps (Pointer Lock).',
+      pointerEvents: 'Unified mouse/touch/pen event model (Pointer Events).',
+      quirksMode: 'Rendering mode: quirks vs standards (compatMode).',
+      querySelector: 'CSS selector lookup — first match.',
+      querySelectorAll: 'CSS selector lookup — all matches.',
+      remUnit: 'Relative font-size unit cascading from <html>.',
+      resizeObserver: 'Observers that fire on element size changes.',
+      serial: 'Serial ports access (Web Serial API).',
+      serviceWorker: 'Background script for offline/caching/PWA.',
+      sizes: 'Declares image slot sizes for responsive images.',
+      speechSynthesis: 'Text-to-speech voices and playback.',
+      srcset: 'Candidate image sources for responsive images.',
+      storage: 'Storage Manager — estimate/persist quota info.',
+      structuredClone: 'Deep-clones objects including Dates, Maps, typed arrays.',
+      svg: 'Scalable Vector Graphics rendering.',
+      touch: 'Touch events on the device.',
+      touchPoints: 'Maximum simultaneous touch contact points.',
+      typedArray: 'Typed arrays (Int8Array, Float32Array…) for binary data.',
+      usb: 'Access to USB devices (WebUSB).',
+      userMedia: 'Camera/microphone capture (getUserMedia).',
+      vibration: 'Vibration patterns for mobile devices.',
+      visualViewport: 'Viewport metrics accounting for pinch/keyboard (Visual Viewport).',
+      wakeLock: 'Keeps the screen on (Screen Wake Lock).',
+      webAssembly: 'Compiled binary code running near-native speed.',
+      webAuthn: 'Passwordless/factor auth with security keys and biometrics.',
+      webCrypto: 'Cryptographic primitives (subtle crypto) in the browser.',
+      webGL: 'GPU-accelerated 2D/3D graphics (WebGL 1).',
+      webGL2: 'WebGL 2 — modern GPU pipeline and features.',
+      webGPU: 'Next-generation GPU API (compute + rendering).',
+      webLocks: 'Coordination locks shared across tabs/workers.',
+      webRTC: 'Real-time audio/video/data peer connections.',
+      webShare: 'Native share sheet (navigator.share).',
+      webSocket: 'Full-duplex real-time connection over TCP.',
+      webVR: 'Virtual reality headsets (legacy WebVR).',
+      webXr: 'VR/AR experiences (WebXR Device API).',
+      webp: 'WebP image format support.',
+      worker: 'Scripts running on background threads (Web Workers).',
+      online: 'Network connectivity status.'
+    };
+
     var DISPLAY = {
       webAuthn: 'WebAuthn', webGPU: 'WebGPU', webGL: 'WebGL', webGL2: 'WebGL2',
       webAssembly: 'WebAssembly', webRTC: 'WebRTC', webSocket: 'WebSocket', webXr: 'WebXR',
@@ -264,18 +360,19 @@
     };
 
     function pretty(name) {
-      if (DISPLAY[name]) return DISPLAY[name];
-      return name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
+      return DISPLAY[name] ||
+        name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
     }
 
-    function card(flag, value, href) {
+    function card(flag, value, href, desc) {
       var tag = href ? 'a' : 'div';
       var state = typeof value === 'boolean' ? (value ? 'on' : 'off') : 'value';
       var label = typeof value === 'boolean' ? (value ? 'on' : 'off') : String(value);
       var attrs = href ? ' href="' + href + '" target="_blank" rel="noopener" title="Open on MDN: ' + pretty(flag) + '"' : '';
       return '<' + tag + ' class="flag-card"' + attrs + '>' +
-        '<span class="name">' + pretty(flag) + '</span>' +
-        '<span class="state ' + state + '">' + label + '</span>' +
+        '<span class="top"><span class="name">' + pretty(flag) + '</span>' +
+        '<span class="state ' + state + '">' + label + '</span></span>' +
+        '<span class="desc">' + (desc || 'No description available for this flag.') + '</span>' +
         '</' + tag + '>';
     }
 
@@ -306,12 +403,12 @@
       hw.push(kvCard('GPU', [gpu.vendor, gpu.model].filter(function (v) { return v && v !== 'n/a'; }).join(' · ') || 'n/a'));
       document.getElementById('cards-hardware').innerHTML = hw.join('');
 
-      // WEB APIs (feature flags: flags with a boolean or numeric value, top-level only)
+      // WEB APIs (top-level non-object flags, alphabetical)
       var apis = Object.keys(detector.feature || {}).filter(function (k) {
         return typeof detector.feature[k] !== 'object';
       }).sort();
       var html = apis.map(function (flag) {
-        return card(flag, detector.feature[flag], MDN_LINKS[flag] || null);
+        return card(flag, detector.feature[flag], MDN_LINKS[flag] || null, DESCRIPTIONS[flag]);
       }).join('');
       document.getElementById('cards-apis').innerHTML = html;
 
