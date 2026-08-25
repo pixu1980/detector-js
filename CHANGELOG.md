@@ -1,3 +1,42 @@
+
+## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2026-08-25)
+
+### New features
+
+- logo+favicon, semantic HTML and axe-clean pages; sticky on the raw-output container: [`6094e0a`](https://github.com/pixu1980/detector-js/commit/6094e0a)
+- device gallery — sample UAs from real devices parsed live: [`36213fc`](https://github.com/pixu1980/detector-js/commit/36213fc)
+- full MDN Web API catalog (1021 interfaces) — all Web APIs detected: [`9f37706`](https://github.com/pixu1980/detector-js/commit/9f37706)
+- bigger API cards with full-text descriptions (also for unmapped flags): [`a379bd7`](https://github.com/pixu1980/detector-js/commit/a379bd7)
+- two-column live demo — detection cards (left) + raw output (right): [`a4d4d24`](https://github.com/pixu1980/detector-js/commit/a4d4d24)
+- Safari/WebKit macOS version from the Version token + verified version tables: [`4a67e44`](https://github.com/pixu1980/detector-js/commit/4a67e44)
+- resolve the real OS version via User-Agent Client Hints (macOS 'Tahoe' etc.): [`7692081`](https://github.com/pixu1980/detector-js/commit/7692081)
+- build static HTML pages from markdown with marked (build time): [`ecf9a5a`](https://github.com/pixu1980/detector-js/commit/ecf9a5a)
+- esbuild toolchain, marketing site, privacy/legal docs, tests + governance: [`d5ead70`](https://github.com/pixu1980/detector-js/commit/d5ead70)
+- restructure as vanillaJS monorepo, align versioning to latest release (BREAKING): [`9545c5c`](https://github.com/pixu1980/detector-js/commit/9545c5c)
+- restore vanillaJS zero-dep codebase and backport upstream v2 behaviors: [`f832443`](https://github.com/pixu1980/detector-js/commit/f832443)
+
+### Bug fixes
+
+- resolve directory index.html (device gallery served at /examples/devices/): [`9ae949a`](https://github.com/pixu1980/detector-js/commit/9ae949a)
+- correct Apple Silicon detection (was x64/intel on M-series Macs): [`0010544`](https://github.com/pixu1980/detector-js/commit/0010544)
+
+### Refactoring
+
+- pnpm release is the only release command: [`4898c41`](https://github.com/pixu1980/detector-js/commit/4898c41)
+
+### Chores
+
+- rebuild CHANGELOG.html from regenerated changelog: [`f9a3f99`](https://github.com/pixu1980/detector-js/commit/f9a3f99)
+- conventional-commits release tooling — baseline 2.0.11, next 3.0.0: [`3867af0`](https://github.com/pixu1980/detector-js/commit/3867af0)
+- add minimal demo page for the UMD bundle: [`64fa0ef`](https://github.com/pixu1980/detector-js/commit/64fa0ef)
+
+### Style
+
+- compact sticky 'Raw output' title under the fixed header: [`416fd2d`](https://github.com/pixu1980/detector-js/commit/416fd2d)
+- system fonts + fluid typography (site.css), consistent chrome, extension-free link labels: [`7bb3f06`](https://github.com/pixu1980/detector-js/commit/7bb3f06)
+
+...full changes: https://github.com/pixu1980/detector-js/compare/v3.0.x...v3.0.0
+
 ## [Unreleased] — a11y, logo & demo semantics
 
 ### Accessibility & semantic HTML (axe-core, per pix-styleguide a11y)

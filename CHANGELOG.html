@@ -27,7 +27,35 @@
       </nav>
     </div>
   </header>
-<main><h2>[Unreleased] — examples &amp; device detection fixes</h2>
+<main><h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v3.0.0">Version 3.0.0</a> (2026-08-25)</h2>
+<h3>New features</h3>
+<ul>
+<li>logo+favicon, semantic HTML and axe-clean pages; sticky on the raw-output container: <a href="https://github.com/pixu1980/detector-js/commit/6094e0a"><code>6094e0a</code></a></li><li>device gallery — sample UAs from real devices parsed live: <a href="https://github.com/pixu1980/detector-js/commit/36213fc"><code>36213fc</code></a></li><li>full MDN Web API catalog (1021 interfaces) — all Web APIs detected: <a href="https://github.com/pixu1980/detector-js/commit/9f37706"><code>9f37706</code></a></li><li>bigger API cards with full-text descriptions (also for unmapped flags): <a href="https://github.com/pixu1980/detector-js/commit/a379bd7"><code>a379bd7</code></a></li><li>two-column live demo — detection cards (left) + raw output (right): <a href="https://github.com/pixu1980/detector-js/commit/a4d4d24"><code>a4d4d24</code></a></li><li>Safari/WebKit macOS version from the Version token + verified version tables: <a href="https://github.com/pixu1980/detector-js/commit/4a67e44"><code>4a67e44</code></a></li><li>resolve the real OS version via User-Agent Client Hints (macOS &#39;Tahoe&#39; etc.): <a href="https://github.com/pixu1980/detector-js/commit/7692081"><code>7692081</code></a></li><li>build static HTML pages from markdown with marked (build time): <a href="https://github.com/pixu1980/detector-js/commit/ecf9a5a"><code>ecf9a5a</code></a></li><li>esbuild toolchain, marketing site, privacy/legal docs, tests + governance: <a href="https://github.com/pixu1980/detector-js/commit/d5ead70"><code>d5ead70</code></a></li><li>restructure as vanillaJS monorepo, align versioning to latest release (BREAKING): <a href="https://github.com/pixu1980/detector-js/commit/9545c5c"><code>9545c5c</code></a></li><li>restore vanillaJS zero-dep codebase and backport upstream v2 behaviors: <a href="https://github.com/pixu1980/detector-js/commit/f832443"><code>f832443</code></a></li></ul>
+<h3>Bug fixes</h3>
+<ul>
+<li>resolve directory index.html (device gallery served at /examples/devices/): <a href="https://github.com/pixu1980/detector-js/commit/9ae949a"><code>9ae949a</code></a></li><li>correct Apple Silicon detection (was x64/intel on M-series Macs): <a href="https://github.com/pixu1980/detector-js/commit/0010544"><code>0010544</code></a></li></ul>
+<h3>Refactoring</h3>
+<ul>
+<li>pnpm release is the only release command: <a href="https://github.com/pixu1980/detector-js/commit/4898c41"><code>4898c41</code></a></li></ul>
+<h3>Chores</h3>
+<ul>
+<li>rebuild CHANGELOG.html from regenerated changelog: <a href="https://github.com/pixu1980/detector-js/commit/f9a3f99"><code>f9a3f99</code></a></li><li>conventional-commits release tooling — baseline 2.0.11, next 3.0.0: <a href="https://github.com/pixu1980/detector-js/commit/3867af0"><code>3867af0</code></a></li><li>add minimal demo page for the UMD bundle: <a href="https://github.com/pixu1980/detector-js/commit/64fa0ef"><code>64fa0ef</code></a></li></ul>
+<h3>Style</h3>
+<ul>
+<li>compact sticky &#39;Raw output&#39; title under the fixed header: <a href="https://github.com/pixu1980/detector-js/commit/416fd2d"><code>416fd2d</code></a></li><li>system fonts + fluid typography (site.css), consistent chrome, extension-free link labels: <a href="https://github.com/pixu1980/detector-js/commit/7bb3f06"><code>7bb3f06</code></a></li></ul>
+<p>...full changes: <a href="https://github.com/pixu1980/detector-js/compare/v3.0.x...v3.0.0">https://github.com/pixu1980/detector-js/compare/v3.0.x...v3.0.0</a></p>
+<h2>[Unreleased] — a11y, logo &amp; demo semantics</h2>
+<h3>Accessibility &amp; semantic HTML (axe-core, per pix-styleguide a11y)</h3>
+<ul>
+<li><strong>logo + favicon</strong>: <code>logo.svg</code>/<code>favicon.svg</code> (radar mark) + PNG favicon + Apple touch icon (generated
+via Playwright), in the brand on every page (index, demo, devices, generated docs) and page heads</li><li>landmark structure: <code>index.html</code> now has a real <code>&lt;main&gt;</code>; task-list checkboxes in generated docs
+carry <code>aria-label</code> and focusable <code>&lt;pre&gt;</code>s got <code>tabindex=&quot;0&quot;</code> (marked renderer <code>code</code>/<code>listitem</code>/<code>checkbox</code>)</li><li>footer headings <code>h4 → h3</code> (no heading-level skips), <code>.cm</code> comment color contrast fixed,
+card descriptions are HTML-escaped (a <code>placeholder</code> description containing &quot;<code>&lt;input&gt; fields</code>&quot;
+was injecting an unlabelled <code>&lt;input&gt;</code>), search/filter inputs labelled, <code>aria-live</code> on the UA analyzer</li><li><strong>demo raw output</strong>: <code>position: sticky</code> moved onto the containing <code>&lt;aside class=&quot;raw-panel&quot;&gt;</code>
+(title + JSON scroll inside the panel) — compact title kept</li><li>e2e: <code>test/e2e/a11y.e2e.js</code> (axe: <strong>0 violations</strong> on /, demo, devices, getting-started, PRIVACY;
+single h1, no skipped headings, <main>, lang), chrome test asserts logo + favicon on every page;
+<strong>47 e2e passed</strong> (chromium + webkit)</li></ul>
+<h2>[Unreleased] — examples &amp; device detection fixes</h2>
 <h3>Examples</h3>
 <ul>
 <li>new <strong>Device gallery</strong> page (<code>examples/devices/</code>): 27 sample user-agents from real devices

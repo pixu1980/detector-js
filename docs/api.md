@@ -82,4 +82,4 @@ Older Safari majors were back-ported across multiple macOS releases, so pre-26 v
 Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then numerical (10–17+).
 
 ## Versioning & release
-SemVer; last published **2.0.11** (baseline); next major **3.0.0** is prepared by `pnpm release` (conventional commits, all packages in sync). See [GOVERNANCE.md](../GOVERNANCE.md).
+SemVer via `pnpm release` (single synced version for root + all `@detector-js/*`; Conventional Commits drive major/minor/patch). See [GOVERNANCE.md](../GOVERNANCE.md).

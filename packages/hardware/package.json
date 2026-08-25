@@ -1,6 +1,6 @@
 {
   "name": "@detector-js/hardware",
-  "version": "2.0.11",
+  "version": "3.0.0",
   "description": "DetectorJS Hardware Module",
   "keywords": [
     "detector-js",
