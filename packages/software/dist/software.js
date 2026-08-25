@@ -1928,6 +1928,27 @@ var OS = class extends import_core3.CssFlagsClass {
     return null;
   }
   /**
+   * Safari has no User-Agent Client Hints, and its UA keeps the legacy-compat
+   * string ("Mac OS X 10_15_7"). Since Safari 26 (bundled with macOS 26,
+   * September 2025) Apple aligned Safari and macOS version numbers 1:1, so the
+   * "Version/" token reveals the real macOS version (e.g. Version/26.6.2 →
+   * macOS 26.6.2 'Tahoe'). Older Safari majors were back-ported across several
+   * macOS releases, so only the post-renumbering era is unambiguous.
+   *
+   * @param {string} ua
+   * @returns {string|null}
+   *
+   * @memberOf OS
+   */
+  _getSafariMacOSVersion(ua) {
+    if (!/safari/i.test(ua)) return null;
+    const m = /Version\/(\d+(\.\d+){0,2})/i.exec(ua);
+    if (!m) return null;
+    const major = parseInt(m[1], 10);
+    if (major < 26) return null;
+    return m[1].replace(/_/gi, ".");
+  }
+  /**
    * Resolves the real OS version through User-Agent Client Hints and refreshes
    * the values (used by Detector.upgrade()). Falls back to the UA-based result
    * when hints are unavailable or denied.
@@ -1979,7 +2000,7 @@ var OS = class extends import_core3.CssFlagsClass {
    */
   get macOS() {
     const ch = this._getClientHintsPlatformVersion(this._navigator.userAgentData);
-    const chMac = ch ? this._mapMacOSVersion(ch) : null;
+    const chMac = ch ? this._mapMacOSVersion(ch) : this._getSafariMacOSVersion(this._ua);
     return this._checkAssertsResult(import_core3.Asserts.all([
       !this.iOS,
       !/mobile\//i.test(this._ua),

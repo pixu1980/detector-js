@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './test/e2e',
@@ -11,6 +11,10 @@ export default defineConfig({
     baseURL: 'http://localhost:3222',
     headless: true,
   },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+  ],
   webServer: {
     command: 'node scripts/serve.mjs',
     port: 3222,
