@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // byte limits per artifact (min bundles + node builds)
 const LIMITS = {
-  'dist/detector.browser.min.js': 60000,
-  'dist/detector.browser.es2015.min.js': 60500,
+  'dist/detector.browser.min.js': 90000,
+  'dist/detector.browser.es2015.min.js': 90500,
   'dist/detector.js': 12000,
   'dist/detector.mjs': 12000,
 };

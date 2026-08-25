@@ -20,6 +20,21 @@ describe('feature WebAPI flags', () => {
     assert.equal(f.touchPoints, 5);
   });
 
+  test('MDN catalog covers the full Web API interface list', () => {
+    const d = new Detector(null, true, false);
+    const f = d.feature;
+    const keys = Object.keys(f);
+    assert.ok(keys.length >= 1000, `expected >= 1000 catalog flags, got ${keys.length}`);
+    // representative catalog globals exposed by the mock
+    for (const flag of ['abortController', 'mutationObserver', 'urlPattern', 'textEncoder', 'messageChannel', 'compressionStream', 'readableStream', 'sanitizer', 'audioContext']) {
+      assert.equal(f[flag], true, `catalog feature.${flag} should be true under the mock`);
+    }
+    // catalog never shadows explicit curated flags (still booleans, same semantics)
+    for (const flag of ['mediaRecorder', 'gamepad', 'notifications']) {
+      assert.equal(typeof f[flag], 'boolean', `explicit ${flag} preserved`);
+    }
+  });
+
   test('flags that need real support are false under the mock', () => {
     const d = new Detector(null, true, false);
     const f = d.feature;

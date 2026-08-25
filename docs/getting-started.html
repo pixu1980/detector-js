@@ -105,7 +105,7 @@ detector.os      // { name: &#39;macOS&#39;, version: &#39;10.15.7&#39;, version
 detector.platform// &#39;desktop&#39;
 detector.cpu     // { platform: &#39;MacIntel&#39;, cores: 8, architecture: &#39;x64&#39;, vendor: &#39;intel&#39; }
 detector.gpu     // { webGLVendor: &#39;WebKit&#39;, vendor: &#39;Apple Inc.&#39;, model: &#39;Apple M1&#39;, ... }
-detector.feature // 87+ flags: webGPU, webAuthn, wakeLock, webShare, indexedDB, ...
+detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plus the full MDN /Web/API catalog (abortController, rtcPeerConnection, …)
 </code></pre>
 <h2>Using only a slice of the library</h2>
 <p>The monorepo ships scoped packages — use exactly what you need:</p>

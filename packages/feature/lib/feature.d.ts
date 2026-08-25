@@ -59,6 +59,7 @@ export declare class Feature extends CssFlagsClass {
   webXr: boolean;
   worker: boolean;
 
+  static get APIS(): object;
   getAddEventListener(): boolean;
   getAsyncScript(): boolean;
   getBattery(): boolean;
