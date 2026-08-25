@@ -5,7 +5,7 @@
  * @class Asserts
  */
 export default class Asserts {
-  static _checkAssert(assert, safe = false) {
+  static checkAssert(assert, safe = false) {
     if (!!assert) {
       if (assert instanceof Function) {
         if (!!safe) {
@@ -37,7 +37,7 @@ export default class Asserts {
    */
   static all(asserts = [], safe = false) {
     return asserts.every((assert) => {
-      return Asserts._checkAssert(assert, safe);
+      return Asserts.checkAssert(assert, safe);
     });
   }
 
@@ -53,7 +53,7 @@ export default class Asserts {
    */
   static one(asserts = [], safe = false) {
     return asserts.some((assert) => {
-      return Asserts._checkAssert(assert, safe);
+      return Asserts.checkAssert(assert, safe);
     });
   }
 }

@@ -132,6 +132,12 @@ export default class OS extends CssFlagsClass {
       'Sierra': /^10\.12(\.+\d)?$/i.test(version),
       'High Sierra': /^10\.13(\.+\d)?$/i.test(version),
       'Mojave': /^10\.14(\.+\d)?$/i.test(version),
+      'Catalina': /^10\.15(\.+\d)?$/i.test(version),
+      'Big Sur': /^11(\.+\d)(\.+\d)?$/i.test(version),
+      'Monterey': /^12(\.+\d)(\.+\d)?$/i.test(version),
+      'Ventura': /^13(\.+\d)(\.+\d)?$/i.test(version),
+      'Sonoma': /^14(\.+\d)(\.+\d)?$/i.test(version),
+      'Sequoia': /^15(\.+\d)(\.+\d)?$/i.test(version),
     }, version);
   }
 
@@ -644,7 +650,7 @@ export default class OS extends CssFlagsClass {
    * @memberOf OS
    */
   setVersion(version = null) {
-    this.version = (version || RegExp.$1 || 'n/a').replace(/_/ig, '.');
+    this.version = (version || RegExp.$1 || 'n/a').replace(/_/gi, '.');
   }
 
   /**

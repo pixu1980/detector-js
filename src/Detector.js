@@ -33,7 +33,7 @@ export default class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(ua = null, values = true, cssFlags = true, cssFlagsPrefix = 'djs') {
+  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = 'djs') {
     super(ua);
 
     this._values = values;
@@ -55,21 +55,7 @@ export default class Detector extends FlagsClass {
     this.checkPlatform();
 
     this.setCssFlags();
-
-    // remove unnecessary memory usage
-    delete this._booleanFlagsValuePropertyName;
-    delete this._values;
-    delete this._cssFlags;
-    delete this._cssFlagsPrefix;
-    delete this._root;
-    delete this._process;
-    delete this._navigator;
-    delete this._document;
-    delete this._ua;
-
-    console.warn('DetectorJS initialized', this.toFlags());
   }
-
   //! Feature
   /**
    *
@@ -248,4 +234,11 @@ export default class Detector extends FlagsClass {
       htmlElement.className += cssFlagsPrefixed.join(' ').trim();
     }
   }
+}
+
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time by rollup-plugin-replace.
+if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line no-console
+  console.log('DetectorJS v' + (typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0') + ' initialized');
 }

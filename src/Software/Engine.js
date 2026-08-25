@@ -179,7 +179,7 @@ export default class Engine extends CssFlagsClass {
    */
   get Trident() {
     return this._checkAssertsResult(Asserts.all([
-      /*@cc_on!@*/false || !!document.documentMode,
+      /*@cc_on!@*/false || !!this._document?.documentMode,
     ]) && Asserts.one([
       /trident[\/\s](\d+(\.?_?\d+)+)/i.test(this._ua),
     ]));

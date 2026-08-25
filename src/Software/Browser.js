@@ -300,8 +300,8 @@ export default class Browser extends CssFlagsClass {
    */
   get Electron() {
     return this._checkAssertsResult(Asserts.one([
-      () => this._process.type === 'renderer', // Renderer process
-      () => !!this._process.versions.electron, // Main process
+      () => this._process?.type === 'renderer', // Renderer process
+      () => !!this._process?.versions?.electron, // Main process
       () => !!this._navigator && this._reTest('electron'), // Detect the user agent when the `nodeIntegration` option is set to true
     ], true), false, this._getElectronVersion());
   }
@@ -1167,6 +1167,8 @@ export default class Browser extends CssFlagsClass {
   get Chrome() {
     return this._checkAssertsResult(Asserts.all([
       !this.Brave,
+      !this.Electron,
+      !this.SamsungBrowser,
       !this.ChromeMobile,
       !this.AndroidBrowser,
       !this._reTest('like chrome'),
@@ -1396,6 +1398,99 @@ export default class Browser extends CssFlagsClass {
       /(?:applewebkit\/\d+.*)(?:version)(?:\s|\/)?(\w+(?:(?:[._])\w+)+|\d+)?(?:.*safari\/(?:\d+)?)?/i.test(this._ua),
     ]));
   }
+
+  //#region Modern WebView & Embedded Browsers
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get DuckDuckGo() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:duckduckgo)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Facebook() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:fban|fbav)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Instagram() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:instagram)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get TikTok() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:tiktok)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Kiwi() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:kiwi)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get HuaweiBrowser() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:huaweibrowser)' + this._reStrVerNum),
+    ]));
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Browser
+   */
+  get Line() {
+    return this._checkAssertsResult(Asserts.one([
+      this._reTest('(?:line)' + this._reStrVerNum),
+    ]));
+  }
+  //#endregion
   //#endregion
 
   /**
@@ -1433,6 +1528,6 @@ export default class Browser extends CssFlagsClass {
       version = version || RegExp.$1 || this.version || 'n/a';
     }
 
-    this.version = version.replace(/_/ig, '.');
+    this.version = version.replace(/_/gi, '.');
   }
 }
