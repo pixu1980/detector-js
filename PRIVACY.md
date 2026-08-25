@@ -16,7 +16,7 @@ DetectorJS inspects the runtime environment available to the page that loads it:
 
 By design the library:
 
-| Does it? | |
+| Aspect | DetectorJS |
 | --- | --- |
 | ❌ Make network requests | No. Zero `fetch`/`XMLHttpRequest`/beacon/pixel calls. |
 | ❌ Store anything (cookies, localStorage, IndexedDB) | No persistence APIs are touched for storage (a localStorage *capability probe* writes a throwaway key and removes it — see §3). |

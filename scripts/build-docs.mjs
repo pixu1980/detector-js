@@ -24,6 +24,22 @@ function rewriteHref(href) {
 }
 
 const renderer = {
+  checkbox() {
+    return ''; // task-list checkboxes are emitted (labelled) by listitem()
+  },
+  code({ text, lang }) {
+    const langAttr = lang ? ` class="language-${lang}"` : '';
+    return `<pre tabindex="0"><code${langAttr}>${text}</code></pre>`;
+  },
+  listitem({ checked, tokens }) {
+    // tokens may contain block-level tokens (nested lists, paragraphs) — use parse()
+    const content = this.parser.parse(tokens);
+    if (typeof checked === 'boolean') {
+      const label = checked ? 'Checked' : 'Unchecked';
+      return `<li><input type="checkbox" disabled aria-label="${label} checklist item"${checked ? ' checked' : ''} /> ${content}</li>`;
+    }
+    return `<li>${content}</li>`;
+  },
   link({ href, title, tokens }) {
     let text = this.parser.parseInline(tokens);
     // display label without extension (PRIVACY.md -> PRIVACY) when linking a markdown twin
@@ -47,7 +63,7 @@ function layout() {
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="${rel}index.html">Detector<span>JS</span></a>
+        <a class="brand" href="${rel}index.html"><img class="logo" src="${rel}logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="${rel}index.html">Home</a>
           <a href="${rel}docs/getting-started.html">Docs</a>
@@ -64,11 +80,11 @@ function layout() {
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="${rel}index.html">Detector<span>JS</span></a>
+        <a class="brand" href="${rel}index.html"><img class="logo" src="${rel}logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="${rel}docs/getting-started.html">Getting started</a></li>
           <li><a href="${rel}docs/api.html">API reference</a></li>
@@ -80,7 +96,7 @@ function layout() {
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="${rel}PRIVACY.html">Privacy</a></li>
           <li><a href="${rel}SECURITY.html">Security</a></li>
@@ -89,7 +105,7 @@ function layout() {
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="${rel}packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="${rel}packages/software/README.html">@detector-js/software</a></li>
@@ -117,7 +133,10 @@ function wrapHtml({ title, body, rel }) {
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>${safeTitle}</title>
-<link rel="stylesheet" href="${rel}site.css" />
+<link rel="icon" href="${rel}favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="${rel}favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="${rel}apple-touch-icon.png" />
+  <link rel="stylesheet" href="${rel}site.css" />
 </head>
 <body>
 ${shared.header(rel)}

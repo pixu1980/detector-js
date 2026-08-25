@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Device gallery — DetectorJS examples</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
   <link rel="stylesheet" href="../../site.css" />
   <style>
     main { padding-top: 1.5rem; }
@@ -39,7 +42,7 @@
     }
     .dev .head { display: flex; align-items: center; gap: .6rem; }
     .dev .head .ico { font-size: 1.35rem; }
-    .dev .head h3 { margin: 0; font-size: var(--fs-md); font-weight: 800; }
+    .dev .head h2 { margin: 0; font-size: var(--fs-md); font-weight: 800; }
     .dev .head .cat {
       margin-left: auto; font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase;
       letter-spacing: .05em; padding: .15rem .5rem; border-radius: 999px;
@@ -70,7 +73,7 @@
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="../../index.html">Home</a>
           <a href="../../docs/getting-started.html">Docs</a>
@@ -91,10 +94,10 @@
     </p>
 
     <div class="own-ua">
-      <input type="text" id="ua-input" placeholder="Paste any User-Agent and press Analyze…" />
+      <input type="text" id="ua-input" aria-label="Custom User-Agent" placeholder="Paste any User-Agent and press Analyze…" />
       <button class="btn btn-primary" id="ua-analyze" type="button">Analyze</button>
     </div>
-    <div class="own-result" id="own-result">
+    <div class="own-result" id="own-result" aria-live="polite">
       <div class="kv" id="own-kv"></div>
     </div>
 
@@ -108,11 +111,11 @@
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="../../docs/getting-started.html">Getting started</a></li>
           <li><a href="../../docs/api.html">API reference</a></li>
@@ -120,7 +123,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="../../PRIVACY.html">Privacy</a></li>
           <li><a href="../../SECURITY.html">Security</a></li>
@@ -128,7 +131,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="../../packages/software/README.html">@detector-js/software</a></li>
@@ -188,7 +191,7 @@
       var osVer = r.os && r.os.version ? ' ' + r.os.version : '';
       var osVerName = r.os && r.os.versionName && r.os.versionName !== 'n/a' ? ' · ' + r.os.versionName : '';
       return '<div class="dev">' +
-        '<div class="head"><span class="ico">' + ico + '</span><h3>' + name + '</h3><span class="cat">' + cat + '</span></div>' +
+        '<div class="head"><span class="ico">' + ico + '</span><h2>' + name + '</h2><span class="cat">' + cat + '</span></div>' +
         '<div class="ua">' + esc(ua) + '<button type="button" data-copy="' + ua.replace(/"/g, '&quot;') + '">copy</button></div>' +
         '<div class="rows">' +
         '<span class="k">Browser</span><span class="v">' + esc(r.browser.name) + ' ' + esc(r.browser.version) + '</span>' +

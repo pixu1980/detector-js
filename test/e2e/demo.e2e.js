@@ -50,8 +50,8 @@ test.describe('live demo layout', () => {
         quirksDesc: descFor('Quirks mode'),
         unmappedDescribed: disabled.every((c) => (c.querySelector('.desc') || {}).textContent.trim().length > 15),
         rawPre: !!document.querySelector('#out') && document.querySelector('#out').textContent.length > 200,
-        rawTitleSticky: (() => {
-          const t = document.querySelector('.raw-title');
+        rawPanelSticky: (() => {
+          const t = document.querySelector('.raw-panel');
           return t ? getComputedStyle(t).position === 'sticky' : false;
         })(),
         rawTitleCompact: (() => {
@@ -81,7 +81,7 @@ test.describe('live demo layout', () => {
     expect(info.onlineDesc.length).toBeGreaterThan(15);
     expect(info.quirksDesc.length).toBeGreaterThan(15);
     expect(info.rawPre).toBe(true);
-    expect(info.rawTitleSticky).toBe(true);
+    expect(info.rawPanelSticky).toBe(true);
     expect(info.rawTitleCompact).toBe(true);
   });
 });

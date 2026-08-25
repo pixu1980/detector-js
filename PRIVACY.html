@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>Privacy &amp; Legal Notes — DetectorJS</title>
-<link rel="stylesheet" href="./site.css" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="./index.html">Home</a>
           <a href="./docs/getting-started.html">Docs</a>
@@ -34,16 +37,13 @@ If <strong>you</strong> run DetectorJS about your own users, general data-protec
 <h2>1. What the library does (and does not do)</h2>
 <p>DetectorJS inspects the runtime environment available to the page that loads it:</p>
 <ul>
-<li>parses the <code>navigator.userAgent</code> string and exposes the detected <strong>browser / engine / OS / platform</strong>;</li>
-<li>probes the environment for <strong>hardware info</strong> (CPU vendor, GPU via WebGL, device memory…) and for <strong>support of ~90 WebAPIs</strong>;</li>
-<li>returns plain JavaScript objects (<code>detector.toFlags()</code>, <code>detector.toValues()</code>).</li>
-</ul>
+<li>parses the <code>navigator.userAgent</code> string and exposes the detected <strong>browser / engine / OS / platform</strong>;</li><li>probes the environment for <strong>hardware info</strong> (CPU vendor, GPU via WebGL, device memory…) and for <strong>support of ~90 WebAPIs</strong>;</li><li>returns plain JavaScript objects (<code>detector.toFlags()</code>, <code>detector.toValues()</code>).</li></ul>
 <p>By design the library:</p>
 <table>
 <thead>
 <tr>
-<th>Does it?</th>
-<th></th>
+<th>Aspect</th>
+<th>DetectorJS</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -72,88 +72,44 @@ If <strong>you</strong> run DetectorJS about your own users, general data-protec
 <p>Environment detection produces a set of attributes (&quot;user agent&quot;, screen/platform characteristics, API availability, GPU strings, device memory…) that, <strong>combined</strong>, can uniquely or near-uniquely identify a device — this is colloquially known as <strong>browser fingerprinting</strong>.</p>
 <p>Key academic background:</p>
 <ul>
-<li><strong>Peter Eckersley, <em>How Unique Is Your Web Browser?</em> (EFF, 2010)</strong> — the landmark study showing ~94% of tested browsers were uniquely identifiable by fingerprints (panopticlick.eff.org).</li>
-<li><strong>Gunes Acar et al., <em>The Cookieless Monster: Exploring the Ecosystem of Web-Based Device Fingerprinting</em> (WPES/ACM, 2013)</strong> — documented the scale and stealth of fingerprinting in the wild and its user-tracking risks.</li>
-<li><strong>Nick Nikiforakis et al., <em>Cookieless Monster</em> follow-ups and <em>On the Privacy Risks of Browser Fingerprinting</em> (2015-2016)</strong> — continued analysis of trackability and evasions.</li>
-</ul>
+<li><strong>Peter Eckersley, <em>How Unique Is Your Web Browser?</em> (EFF, 2010)</strong> — the landmark study showing ~94% of tested browsers were uniquely identifiable by fingerprints (panopticlick.eff.org).</li><li><strong>Gunes Acar et al., <em>The Cookieless Monster: Exploring the Ecosystem of Web-Based Device Fingerprinting</em> (WPES/ACM, 2013)</strong> — documented the scale and stealth of fingerprinting in the wild and its user-tracking risks.</li><li><strong>Nick Nikiforakis et al., <em>Cookieless Monster</em> follow-ups and <em>On the Privacy Risks of Browser Fingerprinting</em> (2015-2016)</strong> — continued analysis of trackability and evasions.</li></ul>
 <p>These are <em>ability</em> papers: they show what is technically possible. They are also the reason regulators treat fingerprinting as a <strong>privacy-relevant technique</strong> even when it is not used for tracking.</p>
 <h2>3. Capability probes that touch the environment</h2>
 <p>Most checks are read-only (<code>&#39;xxx&#39; in navigator</code> and friends). A few execute real probes with <strong>no lasting effect</strong>:</p>
 <ul>
-<li><strong>Canvas/WebGL</strong> — creates throwaway canvas/WebGL contexts to read capabilities (and, in the GPU module, vendor/renderer strings). Nothing is serialized or transmitted.</li>
-<li><strong>localStorage / storage</strong> — the <em>capability</em> check writes a dummy key <code>x</code> and immediately removes it, only to verify the API exists (existing behavior ported from upstream; nothing is persisted).</li>
-<li><strong>CSS flags</strong> (optional, off by default since v2/v3) — when enabled via <code>new Detector(ua, values, cssFlags=true)</code>, adds <code>djs--…</code> classes on <code>&lt;html&gt;</code>. This is a DOM change only.</li>
-<li><strong>Audio/video codec probes</strong> — call <code>canPlayType()</code> on in-memory elements; no media is played or fetched.</li>
-</ul>
+<li><strong>Canvas/WebGL</strong> — creates throwaway canvas/WebGL contexts to read capabilities (and, in the GPU module, vendor/renderer strings). Nothing is serialized or transmitted.</li><li><strong>localStorage / storage</strong> — the <em>capability</em> check writes a dummy key <code>x</code> and immediately removes it, only to verify the API exists (existing behavior ported from upstream; nothing is persisted).</li><li><strong>CSS flags</strong> (optional, off by default since v2/v3) — when enabled via <code>new Detector(ua, values, cssFlags=true)</code>, adds <code>djs--…</code> classes on <code>&lt;html&gt;</code>. This is a DOM change only.</li><li><strong>Audio/video codec probes</strong> — call <code>canPlayType()</code> on in-memory elements; no media is played or fetched.</li></ul>
 <p>None of these probes create network activity, storage, or cross-site linkage.</p>
 <h2>4. The legal landscape (international overview)</h2>
 <p>This list is informative, not legal advice. Applicability depends on your context, audience, jurisdiction and how you use the output.</p>
 <h3>4.1 European Union</h3>
 <ul>
 <li><strong>GDPR — Regulation (EU) 2016/679</strong><ul>
-<li>Art. 4(1): <em>personal data</em> = any information relating to an identified or identifiable natural person; an identifier online (device ID, cookie, fingerprint) can make a person identifiable.</li>
-<li>Recital 26: identifiers processed about a person (incl. device fingerprints) fall under the GDPR when used to single out.</li>
-<li>Recital 30: online identifiers (incl. device identifiers) and location data are matters of the GDPR.</li>
-<li>Art. 5: lawfulness, fairness, transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity &amp; confidentiality.</li>
-<li>Art. 6/9: lawful bases (consent, legitimate interest, contract, legal obligation…; special categories need Art. 9 grounds).</li>
-<li>Art. 25: data protection by design and by default.</li>
-<li>Art. 32: security of processing.</li>
-<li>Accountability: maintain records (Art. 30), DPIAs for high-risk processing (Art. 35), DPO if required (Art. 37).</li>
-</ul>
-</li>
-<li><strong>ePrivacy Directive — 2002/58/EC</strong> (as amended by 2009/136/EC)<ul>
-<li>Art. 5(3): storing or accessing information on a user&#39;s equipment (&quot;terminal equipment&quot;) — the operative article for cookie-like mechanisms, <strong>which is the legal hook most EU DPAs use for fingerprinting</strong> — requires informed consent (with <code>legitimate_interest</code> generally not being available for the storage/access act under national rules implementing it).</li>
-</ul>
-</li>
-</ul>
+<li>Art. 4(1): <em>personal data</em> = any information relating to an identified or identifiable natural person; an identifier online (device ID, cookie, fingerprint) can make a person identifiable.</li><li>Recital 26: identifiers processed about a person (incl. device fingerprints) fall under the GDPR when used to single out.</li><li>Recital 30: online identifiers (incl. device identifiers) and location data are matters of the GDPR.</li><li>Art. 5: lawfulness, fairness, transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity &amp; confidentiality.</li><li>Art. 6/9: lawful bases (consent, legitimate interest, contract, legal obligation…; special categories need Art. 9 grounds).</li><li>Art. 25: data protection by design and by default.</li><li>Art. 32: security of processing.</li><li>Accountability: maintain records (Art. 30), DPIAs for high-risk processing (Art. 35), DPO if required (Art. 37).</li></ul>
+</li><li><strong>ePrivacy Directive — 2002/58/EC</strong> (as amended by 2009/136/EC)<ul>
+<li>Art. 5(3): storing or accessing information on a user&#39;s equipment (&quot;terminal equipment&quot;) — the operative article for cookie-like mechanisms, <strong>which is the legal hook most EU DPAs use for fingerprinting</strong> — requires informed consent (with <code>legitimate_interest</code> generally not being available for the storage/access act under national rules implementing it).</li></ul>
+</li></ul>
 <h3>4.2 Italy</h3>
 <ul>
-<li><strong>D.Lgs. 196/2003</strong> (Codice in materia di protezione dei dati personali), notably Part II on the processing by private parties.</li>
-<li><strong>D.Lgs. 101/2018</strong> — brought the Codice in line with the GDPR.</li>
-<li><strong>Garante per la protezione dei dati personali</strong> — guidelines and provvedimenti on cookies &amp; tracking (e.g., the &quot;cookie banner&quot; enforcement line and clarifications that <strong>fingerprinting techniques require user consent</strong>); the Garante has repeatedly stressed that device fingerprinting is covered by the cookie-consent regime.</li>
-</ul>
+<li><strong>D.Lgs. 196/2003</strong> (Codice in materia di protezione dei dati personali), notably Part II on the processing by private parties.</li><li><strong>D.Lgs. 101/2018</strong> — brought the Codice in line with the GDPR.</li><li><strong>Garante per la protezione dei dati personali</strong> — guidelines and provvedimenti on cookies &amp; tracking (e.g., the &quot;cookie banner&quot; enforcement line and clarifications that <strong>fingerprinting techniques require user consent</strong>); the Garante has repeatedly stressed that device fingerprinting is covered by the cookie-consent regime.</li></ul>
 <h3>4.3 United States</h3>
 <ul>
-<li><strong>CCPA/CPRA (California Civil Code §1798.100 et seq.)</strong> — obligations for personal information of California residents; CPRA added &quot;sensitive personal information&quot; and tightened retention/use limits.</li>
-<li>Other state privacy laws (Virginia CDPA, Colorado CPA, Connecticut CTDPA, Utah UCPA, Iowa ICDPA, Texas TDPSA, Oregon, Montana, Delaware…).</li>
-<li><strong>FTC Act §5</strong> — unfair/deceptive practices; disclosures about tracking and data use must be truthful.</li>
-<li>No single federal omnibus privacy law exists; sectoral laws (e.g., COPPA for children) apply in specific cases.</li>
-</ul>
+<li><strong>CCPA/CPRA (California Civil Code §1798.100 et seq.)</strong> — obligations for personal information of California residents; CPRA added &quot;sensitive personal information&quot; and tightened retention/use limits.</li><li>Other state privacy laws (Virginia CDPA, Colorado CPA, Connecticut CTDPA, Utah UCPA, Iowa ICDPA, Texas TDPSA, Oregon, Montana, Delaware…).</li><li><strong>FTC Act §5</strong> — unfair/deceptive practices; disclosures about tracking and data use must be truthful.</li><li>No single federal omnibus privacy law exists; sectoral laws (e.g., COPPA for children) apply in specific cases.</li></ul>
 <h3>4.4 Other jurisdictions (non-exhaustive)</h3>
 <ul>
-<li><strong>Canada</strong> — PIPEDA (OPC guidance on online tracking: consent required).</li>
-<li><strong>Brazil</strong> — LGPD (Lei 13.709/2018; data subject rights + legal bases).</li>
-<li><strong>UK</strong> — UK GDPR + PECR (the UK&#39;s ePrivacy instrument, same Art. 5(3) lineage).</li>
-<li><strong>Korea</strong> — PIPA; <strong>Japan</strong> — APPI; <strong>Australia</strong> — Privacy Act (and the 2023–2025 amendments trajectory); <strong>India</strong> — DPDP Act 2023 (consent-based, personal data breach framework).</li>
-</ul>
+<li><strong>Canada</strong> — PIPEDA (OPC guidance on online tracking: consent required).</li><li><strong>Brazil</strong> — LGPD (Lei 13.709/2018; data subject rights + legal bases).</li><li><strong>UK</strong> — UK GDPR + PECR (the UK&#39;s ePrivacy instrument, same Art. 5(3) lineage).</li><li><strong>Korea</strong> — PIPA; <strong>Japan</strong> — APPI; <strong>Australia</strong> — Privacy Act (and the 2023–2025 amendments trajectory); <strong>India</strong> — DPDP Act 2023 (consent-based, personal data breach framework).</li></ul>
 <h2>5. Practical checklists</h2>
 <h3>5.1 If you run DetectorJS **for yourself / in dev / on your own page **</h3>
 <ul>
-<li>Nothing to do: the data stays local.</li>
-<li>Optional good practice: add a comment in your code that DetectorJS makes no network calls, so future maintainers don&#39;t &quot;wire it up&quot; innocently.</li>
-</ul>
+<li>Nothing to do: the data stays local.</li><li>Optional good practice: add a comment in your code that DetectorJS makes no network calls, so future maintainers don&#39;t &quot;wire it up&quot; innocently.</li></ul>
 <h3>5.2 If you run DetectorJS about <strong>your users</strong> (web product)</h3>
 <ul>
-<li><input disabled="" type="checkbox"> <strong>Transparency:</strong> privacy policy / cookie notice explicitly states you perform client-side environment detection, why, and how long output is kept.</li>
-<li><input disabled="" type="checkbox"> <strong>Consent for storage/access:</strong> where required (EU/ePrivacy lineage, and EU/Italian practice on fingerprinting), obtain consent <strong>before</strong> running detection that could be used to single out, with a real consent-management flow (not just a banner) unless another lawful basis clearly applies.</li>
-<li><input disabled="" type="checkbox"> <strong>Purpose limitation &amp; minimality:</strong> only compute the flags you need; don&#39;t conflate detection with tracking.</li>
-<li><input disabled="" type="checkbox"> <strong>No linkage/persistence:</strong> prefer not to persist or join fingerprint output to profiles; use it (e.g.) for A/B/CSS it is intended (CSS feature flags) or in-memory sessions.</li>
-<li><input disabled="" type="checkbox"> <strong>Retention &amp; security:</strong> delete or pseudonymize what you store; apply technical/organisational measures (Art. 32 GDPR).</li>
-<li><input disabled="" type="checkbox"> <strong>DPIA:</strong> consider a Data Protection Impact Assessment if you combine detection with other identifiers at scale (Art. 35 + national lists).</li>
-<li><input disabled="" type="checkbox"> <strong>Data transfers:</strong> if output crosses borders, check transfer mechanisms (Chapter V GDPR).</li>
-<li><input disabled="" type="checkbox"> <strong>Processing records:</strong> document the processing (Art. 30).</li>
-<li><input disabled="" type="checkbox"> <strong>DPO/representatives:</strong> appoint if thresholds are met.</li>
-</ul>
+<li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Transparency:</strong> privacy policy / cookie notice explicitly states you perform client-side environment detection, why, and how long output is kept.</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Consent for storage/access:</strong> where required (EU/ePrivacy lineage, and EU/Italian practice on fingerprinting), obtain consent <strong>before</strong> running detection that could be used to single out, with a real consent-management flow (not just a banner) unless another lawful basis clearly applies.</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Purpose limitation &amp; minimality:</strong> only compute the flags you need; don&#39;t conflate detection with tracking.</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>No linkage/persistence:</strong> prefer not to persist or join fingerprint output to profiles; use it (e.g.) for A/B/CSS it is intended (CSS feature flags) or in-memory sessions.</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Retention &amp; security:</strong> delete or pseudonymize what you store; apply technical/organisational measures (Art. 32 GDPR).</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>DPIA:</strong> consider a Data Protection Impact Assessment if you combine detection with other identifiers at scale (Art. 35 + national lists).</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Data transfers:</strong> if output crosses borders, check transfer mechanisms (Chapter V GDPR).</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>Processing records:</strong> document the processing (Art. 30).</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <strong>DPO/representatives:</strong> appoint if thresholds are met.</li></ul>
 <h3>5.3 If you publish/pass the output to third parties</h3>
 <ul>
-<li>You are the controller (or joint controller); third parties (analytics, fraud, adtech) process it under your instructions — have DPAs/contracts in place, don&#39;t hand fingerprints to parties without a lawful basis.</li>
-</ul>
+<li>You are the controller (or joint controller); third parties (analytics, fraud, adtech) process it under your instructions — have DPAs/contracts in place, don&#39;t hand fingerprints to parties without a lawful basis.</li></ul>
 <h2>6. Statements &amp; guarantees in this repo</h2>
 <ul>
-<li>The demo site (<code>index.html</code>, <code>demo.html</code>) loads <strong>no external resources</strong> — provable by opening DevTools → Network while using it: zero requests besides the page itself and the local bundle.</li>
-<li>The library&#39;s source contains <strong>no network APIs</strong> (<code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>EventSource</code>, <code>navigator.sendBeacon</code>, <code>&lt;img&gt;</code>/pixels…). Automated tests include an e2e assertion that a page embedding DetectorJS performs <strong>zero network requests</strong>.</li>
-<li>The <strong>CSS-flags feature is off by default</strong> since v3 — opt-in per instance.</li>
-</ul>
+<li>The demo site (<code>index.html</code>, <code>demo.html</code>) loads <strong>no external resources</strong> — provable by opening DevTools → Network while using it: zero requests besides the page itself and the local bundle.</li><li>The library&#39;s source contains <strong>no network APIs</strong> (<code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>EventSource</code>, <code>navigator.sendBeacon</code>, <code>&lt;img&gt;</code>/pixels…). Automated tests include an e2e assertion that a page embedding DetectorJS performs <strong>zero network requests</strong>.</li><li>The <strong>CSS-flags feature is off by default</strong> since v3 — opt-in per instance.</li></ul>
 <h2>7. Legal disclaimer</h2>
 <p>This document is provided for general information and is <strong>not legal advice</strong>. Laws and regulators&#39; positions evolve; consult qualified counsel in the jurisdictions where you operate. The authors of DetectorJS are not responsible for how third parties use the library.</p>
 <hr>
@@ -163,11 +119,11 @@ If <strong>you</strong> run DetectorJS about your own users, general data-protec
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="./docs/getting-started.html">Getting started</a></li>
           <li><a href="./docs/api.html">API reference</a></li>
@@ -179,7 +135,7 @@ If <strong>you</strong> run DetectorJS about your own users, general data-protec
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="./PRIVACY.html">Privacy</a></li>
           <li><a href="./SECURITY.html">Security</a></li>
@@ -188,7 +144,7 @@ If <strong>you</strong> run DetectorJS about your own users, general data-protec
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="./packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="./packages/software/README.html">@detector-js/software</a></li>

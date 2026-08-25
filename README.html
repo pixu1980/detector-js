@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>detector-js — DetectorJS</title>
-<link rel="stylesheet" href="./site.css" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="./index.html">Home</a>
           <a href="./docs/getting-started.html">Docs</a>
@@ -47,26 +50,16 @@
 <h2>Installation</h2>
 <p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the <a href="https://www.npmjs.com/">npm registry</a>. </p>
 <p>It can be installed using either <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a> or <a href="https://yarnpkg.com/en/"><code>yarn</code></a> package managers.</p>
-<pre><code class="language-sh">npm i detector-js
-</code></pre>
-<pre><code class="language-sh">yarn add detector-js
-</code></pre>
-<h2>Usage</h2>
+<pre tabindex="0"><code class="language-sh">npm i detector-js</code></pre><pre tabindex="0"><code class="language-sh">yarn add detector-js</code></pre><h2>Usage</h2>
 <h3>Browser (script tag)</h3>
-<pre><code class="language-html">&lt;script src=&quot;dist/detector.browser.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
+<pre tabindex="0"><code class="language-html"><script src="dist/detector.browser.min.js"></script>
+<script>
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
-  detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS &#39;Tahoe&#39;…)
-&lt;/script&gt;
-</code></pre>
-<h3>npm (ESM / CJS)</h3>
-<pre><code class="language-sh">npm i detector-js
-</code></pre>
-<pre><code class="language-js">import { Detector } from &#39;detector-js&#39;;      // ESM
-const { Detector } = require(&#39;detector-js&#39;); // CJS
-</code></pre>
-<h3>TypeScript</h3>
+  detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
+</script></code></pre><h3>npm (ESM / CJS)</h3>
+<pre tabindex="0"><code class="language-sh">npm i detector-js</code></pre><pre tabindex="0"><code class="language-js">import { Detector } from 'detector-js';      // ESM
+const { Detector } = require('detector-js'); // CJS</code></pre><h3>TypeScript</h3>
 <p>Types ship with the package (<code>index.d.ts</code> + per-package <code>.d.ts</code>).</p>
 <h2>Privacy</h2>
 <p><strong>100% client-side — zero network calls, zero storage, zero telemetry.</strong>
@@ -74,62 +67,53 @@ DetectorJS never registers or sends anything anywhere; the data stays in the han
 Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in <a href="PRIVACY.html">PRIVACY</a>.</p>
 <h2>Documentation</h2>
 <ul>
-<li><a href="docs/getting-started.html">Getting started</a></li>
-<li><a href="docs/api.html">API reference</a></li>
-<li><a href="docs/toolchain.html">Toolchain (esbuild)</a></li>
-<li><a href="docs/browser-support.html">Browser support</a></li>
-<li><a href="examples/">Examples</a></li>
-</ul>
+<li><a href="docs/getting-started.html">Getting started</a></li><li><a href="docs/api.html">API reference</a></li><li><a href="docs/toolchain.html">Toolchain (esbuild)</a></li><li><a href="docs/browser-support.html">Browser support</a></li><li><a href="examples/">Examples</a></li></ul>
 <h2>Governance &amp; community</h2>
 <p><a href="CONTRIBUTING.html">CONTRIBUTING</a> · <a href="CODE_OF_CONDUCT.html">CODE_OF_CONDUCT</a> · <a href="SECURITY.html">SECURITY</a> · <a href="GOVERNANCE.html">GOVERNANCE</a></p>
 <h2>Monorepo structure</h2>
 <p><code>detector-js</code> v3 is a zero-dependency vanillaJS monorepo:</p>
-<pre><code>packages/
+<pre tabindex="0"><code>packages/
   core/       @detector-js/core       asserts, FlagsClass, CssFlagsClass, polyfills
   feature/    @detector-js/feature    Feature, AudioFeature, VideoFeature (+ modern WebAPIs)
   software/   @detector-js/software   Browser, Engine, OS
   hardware/   @detector-js/hardware   Platform, Device, CPU, GPU
-  detector/   @detector-js/detector   Detector (composes everything)
-</code></pre>
-<p>Runtime dependencies are limited to the internal workspaces: <strong>zero external dependencies</strong>.</p>
+  detector/   @detector-js/detector   Detector (composes everything)</code></pre><p>Runtime dependencies are limited to the internal workspaces: <strong>zero external dependencies</strong>.</p>
 <p>The scoped packages can be consumed individually:</p>
-<pre><code class="language-js">import { Browser } from &#39;@detector-js/software&#39;;
-import { Detector } from &#39;@detector-js/detector&#39;;
-</code></pre>
-<h2>Usage</h2>
-<pre><code class="language-js">import Detector from &#39;detector-js&#39;;
+<pre tabindex="0"><code class="language-js">import { Browser } from '@detector-js/software';
+import { Detector } from '@detector-js/detector';</code></pre><h2>Usage</h2>
+<pre tabindex="0"><code class="language-js">import Detector from 'detector-js';
 
-const detector = new Detector(&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15&#39;);
+const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
 
 console.log(detector);
 // {
 //   engine:{
-//     name:&#39;WebKit&#39;,
-//     version:&#39;605.1.15&#39;
+//     name:'WebKit',
+//     version:'605.1.15'
 //   },
 //   browser:{
-//     name:&#39;Safari&#39;,
-//     version:&#39;12.0.3&#39;
+//     name:'Safari',
+//     version:'12.0.3'
 //   },
 //   os:{
-//     name:&#39;macOS&#39;,
-//     version:&#39;10.14.3&#39;,
-//     versionName:&#39;Mojave&#39;
+//     name:'macOS',
+//     version:'10.14.3',
+//     versionName:'Mojave'
 //   },
 //   cpu:{
-//     platform:&#39;MacIntel&#39;,
+//     platform:'MacIntel',
 //     cores:1,
-//     architecture:&#39;x64&#39;,
-//     vendor:&#39;intel&#39;
+//     architecture:'x64',
+//     vendor:'intel'
 //   },
 //   gpu:{
-//     webGLVendor:&#39;WebKit&#39;,
-//     webGLRenderer:&#39;WebKit WebGL&#39;,
-//     vendor:&#39;Intel Inc.&#39;,
-//     model:&#39;Intel Iris&#39;,
-//     renderer:&#39;Intel Iris OpenGL Engine&#39;
+//     webGLVendor:'WebKit',
+//     webGLRenderer:'WebKit WebGL',
+//     vendor:'Intel Inc.',
+//     model:'Intel Iris',
+//     renderer:'Intel Iris OpenGL Engine'
 //   },
-//   platform:&#39;desktop&#39;,
+//   platform:'desktop',
 //     feature: {
 //     pointerEnabled:false,
 //     pixelRatio:1,
@@ -235,15 +219,9 @@ console.log(detector);
 //       }
 //     }
 //   }
-// }
-</code></pre>
-<h2>Todo</h2>
+// }</code></pre><h2>Todo</h2>
 <ul>
-<li>refine browsers regexes</li>
-<li>refine documentation</li>
-<li>implement modular custom build feature</li>
-<li>decide to implement or not device infos detection</li>
-</ul>
+<li>refine browsers regexes</li><li>refine documentation</li><li>implement modular custom build feature</li><li>decide to implement or not device infos detection</li></ul>
 <h2>Dependencies</h2>
 <p>{{#depDetails}}</p>
 <ul>
@@ -251,8 +229,7 @@ console.log(detector);
 {{/depDetails}}
 {{^depDetails}}
 None
-{{/depDetails}}</li>
-</ul>
+{{/depDetails}}</li></ul>
 <h2>Dev Dependencies</h2>
 <p>{{#devDepDetails}}</p>
 <ul>
@@ -260,18 +237,13 @@ None
 {{/devDepDetails}}
 {{^devDepDetails}}
 None
-{{/devDepDetails}}</li>
-</ul>
+{{/devDepDetails}}</li></ul>
 <p>{{#scripts.test}}</p>
 <h2>Tests</h2>
-<pre><code class="language-sh">npm install
-npm test
-</code></pre>
-<p>{{/scripts.test}}</p>
+<pre tabindex="0"><code class="language-sh">npm install
+npm test</code></pre><p>{{/scripts.test}}</p>
 <p>{{#testOutput}}</p>
-<pre><code>{{{testOutput}}}
-</code></pre>
-<p>{{/testOutput}}</p>
+<pre tabindex="0"><code>{{{testOutput}}}</code></pre><p>{{/testOutput}}</p>
 <p>{{#license}}</p>
 <h2>License</h2>
 <p>MIT
@@ -285,11 +257,11 @@ npm test
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="./docs/getting-started.html">Getting started</a></li>
           <li><a href="./docs/api.html">API reference</a></li>
@@ -301,7 +273,7 @@ npm test
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="./PRIVACY.html">Privacy</a></li>
           <li><a href="./SECURITY.html">Security</a></li>
@@ -310,7 +282,7 @@ npm test
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="./packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="./packages/software/README.html">@detector-js/software</a></li>

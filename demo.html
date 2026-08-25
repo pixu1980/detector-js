@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DetectorJS — live demo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="site.css" />
   <style>
     main { padding-top: 1.5rem; }
@@ -66,17 +69,17 @@
     .kv-card .v { font-weight: 700; margin-top: .1rem; word-break: break-word; }
 
     /* ---------- right column: current JSON dump ---------- */
+    .raw-panel {
+      position: sticky;               /* sticky on the container, not title/pre */
+      top: calc(var(--header-h) + 1rem);
+      z-index: 1;
+    }
     .raw-title {
-      position: sticky;
-      top: calc(var(--header-h) + .7rem);
-      z-index: 3;
       font-size: var(--fs-sm);
       font-weight: 800;
       letter-spacing: .02em;
       line-height: 1.25;
       margin: 0 0 .45rem;
-      padding: .15rem 0;
-      background: var(--bg);
     }
     pre {
       background: #070b18;
@@ -88,9 +91,7 @@
       color: #d7dff7;
       font-family: var(--font-mono);
       margin: 0;
-      position: sticky;
-      top: calc(var(--header-h) + 2.9rem); /* under the sticky title */
-      max-height: calc(100vh - var(--header-h) - 4.5rem);
+      max-height: calc(100vh - var(--header-h) - 5rem);
     }
     p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
     p.sub code { color: var(--accent2); }
@@ -107,7 +108,7 @@
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="index.html">Home</a>
           <a href="docs/getting-started.html">Docs</a>
@@ -139,29 +140,29 @@
           <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
           <div class="toolbar">
             <label><input type="checkbox" id="only-supported" checked /> only supported</label>
-            <input type="search" id="api-filter" placeholder="Filter APIs…" />
+            <input type="search" id="api-filter" aria-label="Filter APIs" placeholder="Filter APIs…" />
             <span class="count" id="api-count"></span>
           </div>
           <div class="cards" id="cards-apis"></div>
         </section>
       </div>
 
-      <!-- RIGHT: current demo content -->
-      <div>
+      <!-- RIGHT: current demo content — the <aside> panel is sticky -->
+      <aside class="raw-panel" aria-label="Raw output">
         <h2 class="raw-title">Raw output</h2>
-        <pre id="out">detecting…</pre>
-      </div>
+        <pre id="out" role="region" aria-label="Raw detected environment output" tabindex="0">detecting…</pre>
+      </aside>
     </div>
   </main>
 
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="docs/getting-started.html">Getting started</a></li>
           <li><a href="docs/api.html">API reference</a></li>
@@ -170,7 +171,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="PRIVACY.html">Privacy</a></li>
           <li><a href="SECURITY.html">Security</a></li>
@@ -178,7 +179,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="packages/software/README.html">@detector-js/software</a></li>
@@ -408,15 +409,19 @@
         name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
     }
 
+    function escHtml(v) {
+      return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
     function card(flag, value, href, desc) {
       var tag = href ? 'a' : 'div';
       var state = typeof value === 'boolean' ? (value ? 'on' : 'off') : 'value';
       var label = typeof value === 'boolean' ? (value ? 'on' : 'off') : String(value);
-      var attrs = href ? ' href="' + href + '" target="_blank" rel="noopener" title="Open on MDN: ' + pretty(flag) + '"' : '';
+      var attrs = href ? ' href="' + href + '" target="_blank" rel="noopener" title="Open on MDN: ' + escHtml(pretty(flag)) + '"' : '';
       return '<' + tag + ' class="flag-card"' + attrs + '>' +
-        '<span class="top"><span class="name">' + pretty(flag) + '</span>' +
-        '<span class="state ' + state + '">' + label + '</span></span>' +
-        '<span class="desc">' + (desc || 'No description available for this flag.') + '</span>' +
+        '<span class="top"><span class="name">' + escHtml(pretty(flag)) + '</span>' +
+        '<span class="state ' + state + '">' + escHtml(label) + '</span></span>' +
+        '<span class="desc">' + escHtml(desc || 'No description available for this flag.') + '</span>' +
         '</' + tag + '>';
     }
 

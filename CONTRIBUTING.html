@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>Contributing to DetectorJS</title>
-<link rel="stylesheet" href="./site.css" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="./index.html">Home</a>
           <a href="./docs/getting-started.html">Docs</a>
@@ -27,54 +30,35 @@
 <main><h1>Contributing to DetectorJS</h1>
 <p>Thanks for helping! This project values <strong>zero external dependencies</strong>, <strong>privacy by design</strong>, and <strong>support for old platforms</strong>.</p>
 <h2>Quick start</h2>
-<pre><code class="language-sh">pnpm install          # dev toolchain (esbuild, eslint, node:test, playwright)
+<pre tabindex="0"><code class="language-sh">pnpm install          # dev toolchain (esbuild, eslint, node:test, playwright)
 pnpm build            # builds all packages + root bundles (dist/)
 pnpm lint             # eslint on packages, test, browser, scripts
 pnpm types:check      # tsc --noEmit on the generated .d.ts (test-types/usage.ts)
 pnpm test             # unit tests (node:test) + e2e (playwright, chromium+webkit) + smoke
-pnpm serve            # serves the site on the first free port
-</code></pre>
-<h2>Repo layout (monorepo)</h2>
-<pre><code>packages/
+pnpm serve            # serves the site on the first free port</code></pre><h2>Repo layout (monorepo)</h2>
+<pre tabindex="0"><code>packages/
   core/       @detector-js/core       Asserts, FlagsClass, CssFlagsClass, polyfills
   feature/    @detector-js/feature    Feature, AudioFeature, VideoFeature
   software/   @detector-js/software   Browser, Engine, OS
   hardware/   @detector-js/hardware   Platform, Device, CPU, GPU
   detector/   @detector-js/detector   Detector (composer)
 browser/      esbuild entry for the UMD/global bundle (window.Detector)
-scripts/      build &amp; test orchestration (esbuild, no rollup/babel)
+scripts/      build & test orchestration (esbuild, no rollup/babel)
 test/         integration smoke + e2e (playwright)
-docs/         governance, getting-started, API, privacy, security docs
-</code></pre>
-<h2>Rules</h2>
+docs/         governance, getting-started, API, privacy, security docs</code></pre><h2>Rules</h2>
 <ol>
-<li><strong>No new runtime dependencies — ever.</strong> If you think one is needed, open an issue first (it will likely be closed: we polyfill or implement in-house).</li>
-<li><strong>No network, no storage, no telemetry.</strong> The privacy contract in <a href="PRIVACY.html">PRIVACY</a> is a test: <code>test/e2e/privacy.e2e.js</code> asserts a page embedding the bundle makes zero requests. Any new capability probe must be read-only or self-cleaning, and added to that test.</li>
-<li><strong>Keep it vanilla &amp; old-platform friendly.</strong> Source is ES2016+ with optional chaining used sparingly; the build targets <code>es2016</code> (polyfills cover the rest). Avoid APIs like <code>Map</code>/<code>Set</code> in hot paths without need; keep <code>assists</code> in safe mode (<code>Asserts.one/all(..., true)</code>).</li>
-<li><strong>Style:</strong> run <code>pnpm lint</code>. Follow existing patterns (getters + <code>_checkAssertsResult</code>, <code>toFlags</code>/<code>toValues</code>, <code>get</code>-prefixed factory methods in <code>Feature</code>).</li>
-</ol>
+<li><strong>No new runtime dependencies — ever.</strong> If you think one is needed, open an issue first (it will likely be closed: we polyfill or implement in-house).</li><li><strong>No network, no storage, no telemetry.</strong> The privacy contract in <a href="PRIVACY.html">PRIVACY</a> is a test: <code>test/e2e/privacy.e2e.js</code> asserts a page embedding the bundle makes zero requests. Any new capability probe must be read-only or self-cleaning, and added to that test.</li><li><strong>Keep it vanilla &amp; old-platform friendly.</strong> Source is ES2016+ with optional chaining used sparingly; the build targets <code>es2016</code> (polyfills cover the rest). Avoid APIs like <code>Map</code>/<code>Set</code> in hot paths without need; keep <code>assists</code> in safe mode (<code>Asserts.one/all(..., true)</code>).</li><li><strong>Style:</strong> run <code>pnpm lint</code>. Follow existing patterns (getters + <code>_checkAssertsResult</code>, <code>toFlags</code>/<code>toValues</code>, <code>get</code>-prefixed factory methods in <code>Feature</code>).</li></ol>
 <h2>Adding a new detection</h2>
 <ul>
-<li><strong>Browser/Engine/OS:</strong> add a getter in <code>packages/software/lib/*.js</code> following the <code>Asserts.one/all([...])</code> + <code>_reTest</code> pattern, with a UA-based sanity check in the unit tests table.</li>
-<li><strong>WebAPI flag:</strong> add a <code>get*()</code> method + constructor assignment in <code>packages/feature/lib/feature.js</code>, follow alphabetical placement, and add a unit-test assertion. Verify support with MDN Browser Compatibility Data before merging.</li>
-<li><strong>Values:</strong> add read-only getters (like <code>pixelRatio</code>, <code>deviceMemory</code>, <code>touchPoints</code>).</li>
-</ul>
+<li><strong>Browser/Engine/OS:</strong> add a getter in <code>packages/software/lib/*.js</code> following the <code>Asserts.one/all([...])</code> + <code>_reTest</code> pattern, with a UA-based sanity check in the unit tests table.</li><li><strong>WebAPI flag:</strong> add a <code>get*()</code> method + constructor assignment in <code>packages/feature/lib/feature.js</code>, follow alphabetical placement, and add a unit-test assertion. Verify support with MDN Browser Compatibility Data before merging.</li><li><strong>Values:</strong> add read-only getters (like <code>pixelRatio</code>, <code>deviceMemory</code>, <code>touchPoints</code>).</li></ul>
 <h2>Testing</h2>
-<pre><code class="language-sh">pnpm test                       # everything
+<pre tabindex="0"><code class="language-sh">pnpm test                       # everything
 pnpm --filter @detector-js/core test
-pnpm exec playwright install chromium   # once, for e2e
-</code></pre>
-<ul>
-<li>Unit tests: <code>node:test</code> per package (<code>packages/*/__tests__/*.test.js</code>).</li>
-<li>Integration smoke: <code>test/smoke.js</code> — real UA table against built bundles.</li>
-<li>E2E: <code>test/e2e/*.e2e.js</code> — real Chromium, real <code>navigator</code>, privacy (zero requests).</li>
-</ul>
+pnpm exec playwright install chromium   # once, for e2e</code></pre><ul>
+<li>Unit tests: <code>node:test</code> per package (<code>packages/*/__tests__/*.test.js</code>).</li><li>Integration smoke: <code>test/smoke.js</code> — real UA table against built bundles.</li><li>E2E: <code>test/e2e/*.e2e.js</code> — real Chromium, real <code>navigator</code>, privacy (zero requests).</li></ul>
 <h2>Pull requests</h2>
 <ol>
-<li>Branch from <code>vanilla</code> (default working branch) or <code>master</code> (mirror of remote v2).</li>
-<li>Keep PRs small; one logical change each.</li>
-<li>PR checklist: lint ✅, unit ✅, e2e ✅, privacy review ✅, changelog entry (if user-facing), ADR for breaking changes.</li>
-</ol>
+<li>Branch from <code>vanilla</code> (default working branch) or <code>master</code> (mirror of remote v2).</li><li>Keep PRs small; one logical change each.</li><li>PR checklist: lint ✅, unit ✅, e2e ✅, privacy review ✅, changelog entry (if user-facing), ADR for breaking changes.</li></ol>
 <h2>Commit style</h2>
 <p>Conventional Commits (<code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>chore:</code>, <code>test:</code>, <code>build:</code>, with <code>!</code> for breaking).</p>
 <h2>Releasing (maintainers)</h2>
@@ -86,11 +70,11 @@ pnpm exec playwright install chromium   # once, for e2e
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="./docs/getting-started.html">Getting started</a></li>
           <li><a href="./docs/api.html">API reference</a></li>
@@ -102,7 +86,7 @@ pnpm exec playwright install chromium   # once, for e2e
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="./PRIVACY.html">Privacy</a></li>
           <li><a href="./SECURITY.html">Security</a></li>
@@ -111,7 +95,7 @@ pnpm exec playwright install chromium   # once, for e2e
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="./packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="./packages/software/README.html">@detector-js/software</a></li>

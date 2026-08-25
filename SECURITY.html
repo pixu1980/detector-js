@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>Security Policy — DetectorJS</title>
-<link rel="stylesheet" href="./site.css" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="./index.html">Home</a>
           <a href="./docs/getting-started.html">Docs</a>
@@ -49,33 +52,20 @@
 <h2>Reporting a vulnerability</h2>
 <p>Please <strong>do not open a public issue</strong> for security problems. Report privately:</p>
 <ul>
-<li>GitHub Security Advisories: <code>https://github.com/pixu1980/detector-js/security/advisories/new</code></li>
-<li>or email the maintainers (see <code>package.json</code> <code>author</code> / <code>contributors</code>).</li>
-</ul>
+<li>GitHub Security Advisories: <code>https://github.com/pixu1980/detector-js/security/advisories/new</code></li><li>or email the maintainers (see <code>package.json</code> <code>author</code> / <code>contributors</code>).</li></ul>
 <p>You can expect:</p>
 <ul>
-<li>an acknowledgement within <strong>72 hours</strong>;</li>
-<li>a triage/impact assessment within <strong>5 business days</strong>;</li>
-<li>coordinated disclosure — we prefer a fix to be ready before public details are shared.</li>
-</ul>
+<li>an acknowledgement within <strong>72 hours</strong>;</li><li>a triage/impact assessment within <strong>5 business days</strong>;</li><li>coordinated disclosure — we prefer a fix to be ready before public details are shared.</li></ul>
 <p>If you responsibly disclose, we&#39;re happy to credit you (unless you prefer anonymity).</p>
 <h2>Security model</h2>
 <p>DetectorJS runs <strong>entirely client-side</strong> and <strong>never sends data anywhere</strong> — see <a href="PRIVACY.html">PRIVACY</a>. Key guarantees:</p>
 <ul>
-<li><strong>Zero network APIs</strong> in the library (no <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>sendBeacon</code>, pixies). Tests assert this.</li>
-<li><strong>No persistence</strong>: no cookies/localStorage writes (except a self-cleaning API probe), no IndexedDB usage.</li>
-<li><strong>No external resources</strong>: the library, its demo site and docs load nothing from third-party hosts.</li>
-<li><strong>Graceful failures</strong>: capability probes run in safe mode (<code>try/catch</code>) so a hostile/limited environment never crashes the host page.</li>
-<li><strong>No prototype pollution / no globals leak</strong>: the only global written is the <code>Detector</code> export in the browser bundle; polyfills only add standard-missing methods guarded by existence checks.</li>
-</ul>
+<li><strong>Zero network APIs</strong> in the library (no <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>sendBeacon</code>, pixies). Tests assert this.</li><li><strong>No persistence</strong>: no cookies/localStorage writes (except a self-cleaning API probe), no IndexedDB usage.</li><li><strong>No external resources</strong>: the library, its demo site and docs load nothing from third-party hosts.</li><li><strong>Graceful failures</strong>: capability probes run in safe mode (<code>try/catch</code>) so a hostile/limited environment never crashes the host page.</li><li><strong>No prototype pollution / no globals leak</strong>: the only global written is the <code>Detector</code> export in the browser bundle; polyfills only add standard-missing methods guarded by existence checks.</li></ul>
 <h3>Running untrusted input</h3>
 <p>The main &quot;input&quot; is the User-Agent string (parsed with RegExp only). UA strings are attacker-influenced: the library treats unknown tokens as <code>&#39;n/a&#39;</code> and does not evaluate them. Report any unexpected behavior (e.g., regex ReDoS risk) as a vulnerability.</p>
 <h2>Recommendations for consumers</h2>
 <ul>
-<li>Pin versions (<code>&quot;detector-js&quot;: &quot;^2.0.11&quot;</code> or lockfiles (bump to 3.x after the next release)) for production.</li>
-<li>Don&#39;t place detection output in DOM innerHTML without escaping; it is plain data, treat it as untrusted.</li>
-<li>Follow the <a href="PRIVACY.html">PRIVACY</a> checklist before collecting these attributes about end users.</li>
-</ul>
+<li>Pin versions (<code>&quot;detector-js&quot;: &quot;^2.0.11&quot;</code> or lockfiles (bump to 3.x after the next release)) for production.</li><li>Don&#39;t place detection output in DOM innerHTML without escaping; it is plain data, treat it as untrusted.</li><li>Follow the <a href="PRIVACY.html">PRIVACY</a> checklist before collecting these attributes about end users.</li></ul>
 <h2>Dependency &amp; supply-chain</h2>
 <p>Zero runtime dependencies. Dev toolchain (esbuild, eslint, test/playwright) is pinned by <code>pnpm-lock.yaml</code>; we run pnpm&#39;s supply-chain checks in CI.</p>
 </main>
@@ -83,11 +73,11 @@
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="./docs/getting-started.html">Getting started</a></li>
           <li><a href="./docs/api.html">API reference</a></li>
@@ -99,7 +89,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="./PRIVACY.html">Privacy</a></li>
           <li><a href="./SECURITY.html">Security</a></li>
@@ -108,7 +98,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="./packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="./packages/software/README.html">@detector-js/software</a></li>
