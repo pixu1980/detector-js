@@ -111,7 +111,10 @@
         "object-shorthand": "off",
         "global-require": "off",
         "import/no-extraneous-dependencies": "off",
-        "no-await-in-loop": "off"
+        "no-await-in-loop": "off",
+        "implicit-arrow-linebreak": "off",
+        "function-paren-newline": "off",
+        "no-continue": "off"
       },
       "env": {
         "browser": true,
