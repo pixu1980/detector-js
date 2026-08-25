@@ -6,7 +6,31 @@ function install(overrides = {}) {
   Object.defineProperty(global, 'self', { configurable: true, value: global });
   Object.defineProperty(global, 'window', { configurable: true, value: global });
 
-  const element = () => ({ style: {}, getContext: () => null, canPlayType: () => 'maybe', toDataURL: () => 'data:image/png;base64,x', className: '', width: '', height: '' });
+  const glCtx = overrides.gl ? (() => {
+    const ext = { UNMASKED_VENDOR_WEBGL: 3, UNMASKED_RENDERER_WEBGL: 4 };
+    return {
+      VENDOR: 1,
+      RENDERER: 2,
+      getExtension: (name) => (name === 'WEBGL_debug_renderer_info' ? ext : null),
+      getParameter(p) {
+        if (p === ext.UNMASKED_VENDOR_WEBGL) return overrides.gl.vendor;
+        if (p === ext.UNMASKED_RENDERER_WEBGL) return overrides.gl.renderer;
+        if (p === this.VENDOR) return 'WebKit';
+        if (p === this.RENDERER) return 'WebKit WebGL';
+        return 0;
+      },
+    };
+  })() : null;
+
+  const element = () => ({
+    style: {},
+    getContext: () => glCtx,
+    canPlayType: () => 'maybe',
+    toDataURL: () => 'data:image/png;base64,x',
+    className: '',
+    width: '',
+    height: '',
+  });
 
   Object.defineProperty(global, 'document', {
     configurable: true,
@@ -53,7 +77,7 @@ function install(overrides = {}) {
     userAgentData: {
       platform: 'macOS',
       mobile: false,
-      getHighEntropyValues: async () => ({ platformVersion: '26.6.2' }),
+      getHighEntropyValues: async () => ({ platformVersion: '26.6.2', architecture: 'arm', bitness: '64' }),
     },
     ...(overrides.navigator || {}),
   };

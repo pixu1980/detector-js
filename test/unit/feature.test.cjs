@@ -57,4 +57,29 @@ describe('detector pipeline', () => {
     assert.equal(d.os.versionName, 'Tahoe');
     assert.equal(d.os.version, '26.6.2');
   });
+
+  test('GPU evidence refines Apple Silicon CPU (arm64) even without Client Hints', () => {
+    mock.install({ gl: { vendor: 'Apple Inc.', renderer: 'Apple M1' } });
+    const d = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Safari/605.1.15', true, false);
+    assert.equal(d.cpu.architecture, 'arm64');
+    assert.equal(d.cpu.vendor, 'apple');
+    mock.install(); // restore default
+  });
+
+  test('masked "Apple GPU" renderer still proves Apple Silicon (webkit)', () => {
+    mock.install({ gl: { vendor: 'Apple Inc.', renderer: 'Apple GPU' } });
+    const d = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', true, false);
+    assert.equal(d.cpu.architecture, 'arm64');
+    assert.equal(d.cpu.vendor, 'apple');
+    mock.install(); // restore default
+  });
+
+  test('Detector.upgrade() refreshes cpu via client hints (arm64)', async () => {
+    mock.install({ gl: { vendor: 'Apple Inc.', renderer: 'Apple M1' } });
+    const d = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', true, false);
+    await d.upgrade();
+    assert.equal(d.cpu.architecture, 'arm64');
+    assert.equal(d.cpu.vendor, 'apple');
+    mock.install(); // restore default
+  });
 });

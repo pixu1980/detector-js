@@ -126,4 +126,12 @@ describe('cpu detection', () => {
     assert.ok(cpu.platform.length > 0);
     assert.ok(['x86', 'x64', 'arm', 'arm64'].includes(cpu.architecture));
   });
+
+  test('architecture from UA tokens (arm64 is NOT x64)', () => {
+    // real Apple Silicon Safari/UA keeps the Intel-compat string: no arm token → unknown-safe
+    const appleSiliconUA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15';
+    assert.equal(new CPU(appleSiliconUA, {}, 'cpu').architecture, 'x86');
+    assert.equal(new CPU('Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', {}, 'cpu').architecture, 'arm64');
+    assert.equal(new CPU('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', {}, 'cpu').architecture, 'x64');
+  });
 });

@@ -24,7 +24,12 @@ All classes are plain ES6 classes with **getters** for detections. Two base clas
 
 ## @detector-js/hardware
 - **Platform** — `desktop`, `smartphone`, `tablet`, `tv`, `console`, `bot`, `mobile`
-- **CPU** — `platform`, `cores`, `architecture`, `vendor` (intel/amd/arm/…), vendor flags
+- **CPU** — `platform`, `cores`, `architecture`, `vendor` (intel/amd/arm/apple…), vendor flags.
+  `navigator.platform`/UA strings are **legacy-compat** on macOS (`"MacIntel"` + `"Mac OS X 10_15_7"`
+  appear on both Intel and Apple Silicon), so the real architecture comes from
+  `CPU.upgrade()` (Client Hints `architecture`/`bitness`) and/or the **GPU evidence**
+  (WebGL renderer "Apple M1…" → `arm64 · vendor 'apple'`), refined synchronously by `Detector`
+  — `Detector.upgrade()` re-runs it. `arm64` is no longer misreported as `x64`.
 - **GPU** — `webGLVendor`, `webGLRenderer`, `vendor`, `model`, `renderer` (WebGL-based, safe-mode)
 - **Device** — placeholder base for vendor-specific device flags
 

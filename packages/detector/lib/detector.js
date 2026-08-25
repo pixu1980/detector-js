@@ -50,6 +50,9 @@ export class Detector extends FlagsClass {
     // this.checkDevice();
     this.checkCPU();
     this.checkGPU();
+    // navigator.platform 'MacIntel' is legacy compat on Apple Silicon: infer the real
+    // CPU from the GPU (WebGL) evidence — works even where Client Hints are missing (Safari)
+    this._refineCpuWithGpu();
     this.checkPlatform();
 
     this.setCssFlags();
@@ -152,18 +155,86 @@ export class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  upgrade() {
-    const os = this._os;
+  /**
+   * Refines the CPU detection from the GPU (WebGL) identity — the only reliable
+   * synchronous evidence for Apple Silicon, since UA/platform use the legacy
+   * "MacIntel"/"Mac OS X 10_15_7" strings on both Intel and Apple chips.
+   *
+   * @memberOf Detector
+   */
+  _refineCpuWithGpu() {
+    const { cpu } = this;
 
-    if (!os || typeof os.upgrade !== 'function') {
-      return Promise.resolve(this.os);
+    if (!cpu) return;
+
+    const { vendor, model, renderer } = this.gpu || {};
+    const gpuText = String([vendor, model, renderer].filter(Boolean).join(' '));
+
+    // 'Apple M1..M9/Pro/Max/Ultra' or the masked 'Apple GPU' renderer are Apple Silicon
+    // only (Apple never shipped an Apple GPU on Intel Macs)
+    if (/apple\s+(?:m(?:[1-9]|pro|max|ultra)|gpu)\b/i.test(gpuText)) {
+      this.cpu = {
+        ...cpu,
+        architecture: 'arm64',
+        vendor: 'apple',
+      };
+    } else if (cpu.architecture === 'arm64' && this._isMacOS() && (!cpu.vendor || cpu.vendor === 'arm')) {
+      // arm64 on macOS is, by definition, Apple Silicon
+      this.cpu = {
+        ...cpu,
+        vendor: 'apple',
+      };
+    } else if (/\bintel\b/i.test(gpuText) && (!cpu.architecture || cpu.architecture === 'x86')) {
+      // Intel GPU + macOS: macOS on Intel is x86_64
+      this.cpu = {
+        ...cpu,
+        architecture: 'x64',
+        vendor: 'intel',
+      };
+    }
+  }
+
+  /**
+   *
+   *
+   * @returns {boolean}
+   *
+   * @memberOf Detector
+   */
+  _isMacOS() {
+    const os = this.os || {};
+
+    return os.name === 'macOS' || /mac/i.test(this.ua);
+  }
+
+  /**
+   * Resolves the real OS and CPU versions through User-Agent Client Hints
+   * (high-entropy), then re-runs the GPU-based CPU refinement. Auto-started in
+   * the constructor; await it for determinism. Safe no-op when hints are absent
+   * (Safari/WebKit, Firefox) or denied (Permissions-Policy).
+   *
+   * @returns {Promise<object>}
+   *
+   * @memberOf Detector
+   */
+  upgrade() {
+    const tasks = [];
+
+    if (this._os && typeof this._os.upgrade === 'function') {
+      tasks.push(this._os.upgrade().then((values) => { this.os = values; }));
     }
 
-    this._upgradePromise = os.upgrade().then((values) => {
-      this.os = values;
+    if (this._cpu && typeof this._cpu.upgrade === 'function') {
+      tasks.push(this._cpu.upgrade().then((values) => {
+        this.cpu = values;
+        this._refineCpuWithGpu();
+      }));
+    }
+
+    this._upgradePromise = Promise.all(tasks).then(() => {
       this._upgraded = true;
 
-      return this.os;
+      return this.toFlags ? this.toFlags() : this.os;
     });
 
     return this._upgradePromise;
@@ -194,6 +265,8 @@ export class Detector extends FlagsClass {
    */
   checkCPU() {
     const cpu = new CPU(this._ua, this.toFlags());
+
+    this._cpu = cpu;
 
     if (this._values) {
       this.cpu = cpu.toValues();

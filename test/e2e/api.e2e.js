@@ -69,3 +69,29 @@ test.describe('client-hints upgrade', () => {
     }
   });
 });
+
+test.describe('cpu architecture', () => {
+  test('resolves the real architecture (Apple Silicon via GPU/Client Hints)', async ({ page }) => {
+    await page.goto('/demo.html');
+    const info = await page.evaluate(async () => {
+      const d = new Detector();
+      const gpuText = [d.gpu && d.gpu.vendor, d.gpu && d.gpu.model, d.gpu && d.gpu.renderer].filter(Boolean).join(' ');
+      const beforeArch = d.cpu && d.cpu.architecture;
+      await d.upgrade();
+      return {
+        beforeArch,
+        afterArch: d.cpu && d.cpu.architecture,
+        afterVendor: d.cpu && d.cpu.vendor,
+        gpuText,
+        supportsCH: typeof navigator.userAgentData === 'object'
+          && typeof navigator.userAgentData.getHighEntropyValues === 'function',
+      };
+    });
+    expect(typeof info.afterArch).toBe('string');
+    expect(['x64', 'arm64', 'x86', 'arm']).toContain(info.afterArch);
+    if (/apple\s+m[1-9]/i.test(info.gpuText)) {
+      expect(info.afterArch).toBe('arm64');
+      expect(info.afterVendor).toBe('apple');
+    }
+  });
+});
