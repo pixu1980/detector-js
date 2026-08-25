@@ -339,6 +339,11 @@ export class Detector extends FlagsClass {
   }
 }
 
+//! MDN Web API catalog (probes + mdn urls) — exposed for tooling/UIs
+if (Feature && Feature.APIS) {
+  Detector.PROBES = Feature.APIS;
+}
+
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).
 if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {

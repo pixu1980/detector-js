@@ -300,12 +300,16 @@ var Detector = class extends import_core.FlagsClass {
     }
   }
 };
+if (import_feature.Feature && import_feature.Feature.APIS) {
+  Detector.PROBES = import_feature.Feature.APIS;
+}
 if (typeof process !== "undefined" && process.env && true) {
   console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 //! Features
 //! Hardware
 //! Software
+//! MDN Web API catalog (probes + mdn urls) — exposed for tooling/UIs
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=detector.js.map

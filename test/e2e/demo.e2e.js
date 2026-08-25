@@ -10,7 +10,12 @@ test.describe('live demo layout', () => {
 
     await page.goto('/demo.html');
 
-    const info = await page.evaluate(() => {
+    const info = await page.evaluate(async () => {
+      // default view: only supported; then flip to "all" (full MDN catalog)
+      const supportedCards = Array.from(document.querySelectorAll('#cards-apis .flag-card'));
+      document.getElementById('only-supported').checked = false;
+      document.getElementById('only-supported').dispatchEvent(new Event('change'));
+      await new Promise((r) => setTimeout(r, 50));
       const apiCards = Array.from(document.querySelectorAll('#cards-apis .flag-card'));
       const links = apiCards.filter((a) => a.tagName === 'A');
       const disabled = apiCards.filter((a) => a.tagName === 'DIV');
@@ -28,6 +33,7 @@ test.describe('live demo layout', () => {
         columns: document.querySelectorAll('.demo-grid > *').length,
         softwareCards: document.querySelectorAll('#cards-software .kv-card').length,
         hardwareCards: document.querySelectorAll('#cards-hardware .kv-card').length,
+        supportedApiCards: supportedCards.length,
         apiCards: apiCards.length,
         linked: links.length,
         unmapped: disabled.length,
@@ -51,8 +57,10 @@ test.describe('live demo layout', () => {
     expect(info.columns).toBe(2);
     expect(info.softwareCards).toBeGreaterThanOrEqual(3);
     expect(info.hardwareCards).toBeGreaterThanOrEqual(3);
-    expect(info.apiCards).toBeGreaterThan(50);
-    expect(info.linked).toBeGreaterThan(40);
+    expect(info.supportedApiCards).toBeGreaterThan(20); // supported-only view is usable
+    expect(info.apiCards).toBeGreaterThan(1000); // full MDN catalog (all interfaces)
+    expect(info.apiCards).toBeLessThan(1150);
+    expect(info.linked).toBeGreaterThan(900); // every catalog interface links MDN
     expect(info.allMdn).toBe(true);
     expect(info.allBlank).toBe(true);
     expect(info.unmapped).toBeGreaterThan(0); // some flags have no single MDN page (plain card)

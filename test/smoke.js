@@ -136,6 +136,6 @@ const expectedKeys = ['webGPU', 'webGL2', 'webAuthn', 'wakeLock', 'webShare', 'w
 for (const k of expectedKeys) {
   assert.ok(k in feat, `feature.${k} missing`);
 }
-assert.ok(Object.keys(feat).length >= 87, `feature keys: ${Object.keys(feat).length}`);
+assert.ok(Object.keys(feat).length >= 1000, `feature keys: ${Object.keys(feat).length}`);
 
 console.log('SMOKE OK — monorepo vanillaJS');

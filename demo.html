@@ -82,6 +82,13 @@
     }
     p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
     p.sub code { color: var(--accent2); }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: 0 0 .7rem; }
+    .toolbar input[type=search] {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      border-radius: 999px; padding: .4rem .8rem; font-size: var(--fs-sm); min-width: 200px;
+    }
+    .toolbar label { display: flex; align-items: center; gap: .4rem; font-size: var(--fs-sm); color: var(--muted); cursor: pointer; }
+    .toolbar .count { font-size: var(--fs-xs); color: var(--muted); margin-left: auto; }
   </style>
 </head>
 <body>
@@ -118,6 +125,11 @@
         </section>
         <section class="panel" id="panel-apis">
           <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
+          <div class="toolbar">
+            <label><input type="checkbox" id="only-supported" checked /> only supported</label>
+            <input type="search" id="api-filter" placeholder="Filter APIs…" />
+            <span class="count" id="api-count"></span>
+          </div>
           <div class="cards" id="cards-apis"></div>
         </section>
       </div>
@@ -344,6 +356,26 @@
       online: 'Network connectivity status.'
     };
 
+    // MDN catalog exposed by the bundle (windowGlobal names).
+    // flag = globalName.toCamelCase(); MDN url is deterministic from the name.
+    var GLOBALS = {};
+    var PROBES = (typeof Detector !== 'undefined' && Detector.PROBES) || { globals: [] };
+    for (var pi = 0; pi < PROBES.globals.length; pi++) {
+      GLOBALS[PROBES.globals[pi].toCamelCase()] = PROBES.globals[pi];
+    }
+
+    function autoDesc(flag) {
+      var g = GLOBALS[flag];
+      return g ? 'The ' + pretty(flag) + ' Web API interface (' + g + ').' : '';
+    }
+    function linkFor(flag) {
+      var g = GLOBALS[flag];
+      return MDN_LINKS[flag] || (g ? API(g) : null);
+    }
+    function descFor(flag) {
+      return DESCRIPTIONS[flag] || autoDesc(flag);
+    }
+
     var DISPLAY = {
       webAuthn: 'WebAuthn', webGPU: 'WebGPU', webGL: 'WebGL', webGL2: 'WebGL2',
       webAssembly: 'WebAssembly', webRTC: 'WebRTC', webSocket: 'WebSocket', webXr: 'WebXR',
@@ -403,18 +435,33 @@
       hw.push(kvCard('GPU', [gpu.vendor, gpu.model].filter(function (v) { return v && v !== 'n/a'; }).join(' · ') || 'n/a'));
       document.getElementById('cards-hardware').innerHTML = hw.join('');
 
-      // WEB APIs (top-level non-object flags, alphabetical)
+      // WEB APIs (top-level non-object flags, alphabetical) + filterable list
       var apis = Object.keys(detector.feature || {}).filter(function (k) {
         return typeof detector.feature[k] !== 'object';
       }).sort();
-      var html = apis.map(function (flag) {
-        return card(flag, detector.feature[flag], MDN_LINKS[flag] || null, DESCRIPTIONS[flag]);
+      var onlySupported = document.getElementById('only-supported').checked;
+      var query = (document.getElementById('api-filter').value || '').toLowerCase();
+      var visible = apis.filter(function (flag) {
+        var value = detector.feature[flag];
+        if (onlySupported && value !== true) return false;
+        if (query && pretty(flag).toLowerCase().indexOf(query) === -1 &&
+            String(value).toLowerCase().indexOf(query) === -1) return false;
+        return true;
+      });
+      var html = visible.map(function (flag) {
+        return card(flag, detector.feature[flag], linkFor(flag), descFor(flag));
       }).join('');
       document.getElementById('cards-apis').innerHTML = html;
+      document.getElementById('api-count').textContent = visible.length + ' / ' + apis.length;
 
       // RIGHT: raw output (previous demo content)
       document.getElementById('out').textContent = JSON.stringify(flags, null, 2);
     }
+
+    function rerender() { render(); }
+
+    document.getElementById('only-supported').addEventListener('change', rerender);
+    document.getElementById('api-filter').addEventListener('input', rerender);
 
     var detector = new Detector();
     render();

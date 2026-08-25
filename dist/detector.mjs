@@ -285,6 +285,9 @@ var Detector = class extends FlagsClass {
     }
   }
 };
+if (Feature && Feature.APIS) {
+  Detector.PROBES = Feature.APIS;
+}
 if (typeof process !== "undefined" && process.env && true) {
   console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
@@ -294,6 +297,7 @@ export {
 //! Features
 //! Hardware
 //! Software
+//! MDN Web API catalog (probes + mdn urls) — exposed for tooling/UIs
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=detector.mjs.map
