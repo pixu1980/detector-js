@@ -1,4 +1,4 @@
-# Project specifid ignores
+# Project specific ignores
 uglifyjs-cache.json
 
 # Numerous always-ignore extensions
@@ -35,3 +35,4 @@ bower_components/
 
 # NPM packages folder.
 node_modules/
+packages/*/node_modules

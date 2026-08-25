@@ -39,6 +39,27 @@ npm i {{name}}
 yarn add {{name}}
 ```
 
+## Monorepo structure
+`{{name}}` v3 is a zero-dependency vanillaJS monorepo:
+
+```
+packages/
+  core/       @detector-js/core       asserts, FlagsClass, CssFlagsClass, polyfills
+  feature/    @detector-js/feature    Feature, AudioFeature, VideoFeature (+ modern WebAPIs)
+  software/   @detector-js/software   Browser, Engine, OS
+  hardware/   @detector-js/hardware   Platform, Device, CPU, GPU
+  detector/   @detector-js/detector   Detector (composes everything)
+```
+
+Runtime dependencies are limited to the internal workspaces: **zero external dependencies**.
+
+The scoped packages can be consumed individually:
+
+```js
+import { Browser } from '@detector-js/software';
+import { Detector } from '@detector-js/detector';
+```
+
 ## Usage
 ```js
 import Detector from 'detector-js';

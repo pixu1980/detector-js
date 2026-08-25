@@ -1,3 +1,30 @@
+## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2025-8-25)
+
+### Monorepo (BREAKING CHANGES)
+
+- aligned versioning to the latest npm release (2.0.11) and prepared the next **major 3.0.0**
+- restructured the flat vanillaJS codebase into an npm workspaces **monorepo** mirroring the v2 layout:
+  - `@detector-js/core` (Asserts, FlagsClass, CssFlagsClass, polyfills)
+  - `@detector-js/feature` (Feature, AudioFeature, VideoFeature + modern WebAPIs)
+  - `@detector-js/software` (Browser, Engine, OS)
+  - `@detector-js/hardware` (Platform, Device, CPU, GPU)
+  - `@detector-js/detector` (Detector)
+- all packages are now versioned **3.0.0** (root + scoped), zero external runtime dependencies
+- named exports everywhere: `detector.Detector`, `software.Browser`, `feature.Feature`, ...
+- `Platform` decoupled from `software` (uses the injected `flags` object, like v2)
+- root builds: `dist/detector.js` (CJS), `dist/detector.mjs` (ESM), `dist/detector.browser.js`/`.min.js` (self-contained UMD `Detector`)
+- per-package `dist/*.js` (CJS) + `dist/*.mjs` (ESM) builds with workspace deps external
+- per-package `__tests__` + root `test/smoke.js` (full detection suite)
+
+### Kept from v1.4.0
+
+- vanillaJS (ES6) zero-dependency implementation and all v2.x behavior backports
+- new WebAPI detections (webGPU, webAuthn, wakeLock, webShare, webLocks, ...)
+- new browser detections (DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line)
+- macOS version names up to Sequoia; Electron/SamsungBrowser name-resolution fixes
+
+[...full changes](https://github.com/pixu1980/detector-js/compare/v1.4.0...v3.0.0)
+
 ## [Version 1.4.0](https://github.com/pixu1980/detector-js/releases/tag/v1.4.0) (2025-8-25)
 
 ### Restored

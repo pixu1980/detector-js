@@ -1,0 +1,45 @@
+{
+  "name": "@detector-js/software",
+  "version": "3.0.0",
+  "description": "DetectorJS Software Module",
+  "keywords": [
+    "detector-js",
+    "software",
+    "browser",
+    "engine",
+    "os"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/software.js",
+  "main": "dist/software.js",
+  "module": "dist/software.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node ./__tests__/software.test.js",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*"
+  }
+}

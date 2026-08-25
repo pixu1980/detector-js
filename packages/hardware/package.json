@@ -1,0 +1,45 @@
+{
+  "name": "@detector-js/hardware",
+  "version": "3.0.0",
+  "description": "DetectorJS Hardware Module",
+  "keywords": [
+    "detector-js",
+    "hardware",
+    "cpu",
+    "gpu",
+    "platform"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/hardware.js",
+  "main": "dist/hardware.js",
+  "module": "dist/hardware.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node ./__tests__/hardware.test.js",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*"
+  }
+}

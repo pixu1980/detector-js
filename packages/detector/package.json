@@ -1,0 +1,46 @@
+{
+  "name": "@detector-js/detector",
+  "version": "3.0.0",
+  "description": "DetectorJS Detector Module",
+  "keywords": [
+    "detector-js",
+    "detector",
+    "environment-detector"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/detector.js",
+  "main": "dist/detector.js",
+  "module": "dist/detector.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node ./__tests__/detector.test.js",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*",
+    "@detector-js/feature": "workspace:*",
+    "@detector-js/hardware": "workspace:*",
+    "@detector-js/software": "workspace:*"
+  }
+}

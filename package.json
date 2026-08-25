@@ -1,24 +1,10 @@
 {
   "name": "detector-js",
-  "version": "1.4.0",
+  "version": "3.0.0",
   "description": "DetectorJS, zero-dependency platform/environment detector written in ES6",
-  "main": "dist/detector.min.js",
+  "main": "dist/detector.js",
   "browser": "dist/detector.browser.min.js",
-  "module": "dist/detector.module.min.js",
-  "scripts": {
-    "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
-    "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
-    "git-prepare": "changelog && echo 'CHANGELOG.md file built' && yarn readme && yarn docs",
-    "build:dev": "rollup -c -w",
-    "prebuild": "rm -rf dist",
-    "build": "NODE_ENV=production rollup -c",
-    "release": "yarn build && yarn git-prepare",
-    "test": "echo \"Error: no test specified\" && exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixu1980/detector-js.git"
-  },
+  "module": "dist/detector.mjs",
   "keywords": [
     "detector",
     "detector-js",
@@ -33,12 +19,11 @@
     "os-detection",
     "useragent-parser",
     "zero-dependency",
+    "vanilla",
     "es6",
     "javascript",
-    "module",
-    "npm",
-    "yarn",
-    "rollup-js",
+    "monorepo",
+    "workspaces",
     "webgpu",
     "webauthn",
     "web-share",
@@ -47,21 +32,47 @@
     "webxr",
     "webapi"
   ],
-  "author": "Pixu",
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
   "license": "MIT",
+  "scripts": {
+    "docs": "rm -rf docs && jsdoc -R ./README.md -r -c ./jsdoc.json && echo 'Documentation built in ./docs folder'",
+    "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
+    "test": "pnpm -r test && node test/smoke.js",
+    "prebuild": "rm -rf dist",
+    "build": "pnpm -r build && NODE_ENV=production rollup -c",
+    "build:dev": "rollup -c -w",
+    "clean": "rm -rf dist packages/*/dist node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixu1980/detector-js.git"
+  },
   "bugs": {
     "url": "https://github.com/pixu1980/detector-js/issues"
   },
   "homepage": "https://github.com/pixu1980/detector-js#readme",
-  "documentation": "https://pixu1980.github.io/detector-js/docs/index.html",
+  "documentation": "https://detector.js.org/docs/index.html",
   "todo": "https://github.com/pixu1980/detector-js#todo",
   "files": [
     "dist"
   ],
-  "dependencies": {},
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*",
+    "@detector-js/detector": "workspace:*",
+    "@detector-js/feature": "workspace:*",
+    "@detector-js/hardware": "workspace:*",
+    "@detector-js/software": "workspace:*"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "docdash": "^1.2.0",
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
