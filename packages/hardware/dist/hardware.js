@@ -91,16 +91,20 @@ var Platform = class extends import_core.CssFlagsClass {
    */
   get tv() {
     return import_core.Asserts.one([
-      /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
+      /(?:google|smart(?:-)?|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
       /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua)
     ]) && import_core.Asserts.one([
       !this.mobile,
       !this.bot,
       this._flags.feature.fullscreenKeyboard
     ]) && import_core.Asserts.one([
-      this._flags.os.Android,
-      this._flags.os.Tizen,
-      this._flags.os.WebOS
+      // os is usually the values-mode snapshot ({ name }) from Detector, but a
+      // flags-mode os ({ Android: true, … }) is tolerated too
+      () => {
+        const os = this._flags.os || {};
+        const { name } = os;
+        return name ? /^(android|tizen|webos)/i.test(String(name)) : !!os.Android || !!os.Tizen || !!os.WebOS;
+      }
     ]);
   }
   /**

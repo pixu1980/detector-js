@@ -12,3 +12,5 @@ Every integration mode DetectorJS supports — all zero-dependency, all 100% cli
 > The `node-*` examples declare `"detector-js": "2.0.11"` (baseline; the release script bumps examples to 3.0.0) — the package is published with
 > an `exports` map, so both `import` and `require` resolve to the right build automatically.
 > The nightly/CI examples also work against the workspace copy via `pnpm` (see root `pnpm-workspace.yaml`).
+
+| [devices](devices) | Device gallery | open `examples/devices/index.html` in a browser |

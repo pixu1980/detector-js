@@ -2397,7 +2397,7 @@ var OS = class extends import_core3.CssFlagsClass {
    */
   get WebOS() {
     return this._checkAssertsResult(import_core3.Asserts.one([
-      /(webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
+      /(?:web0s|webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
       /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i.test(this._ua),
       /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua)
     ]));
