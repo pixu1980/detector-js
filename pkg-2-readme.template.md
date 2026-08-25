@@ -48,6 +48,7 @@ yarn add {{name}}
 <script>
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
+  detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
 </script>
 ```
 

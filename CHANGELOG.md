@@ -11,6 +11,12 @@
   usages (`Brave`, `MSStream`) that crashed under Node
 - **fix: Chromium-based Edge mis-detected as Chrome** — UA token is `Edg/` (regex now `(?:edge|edg)`)
 - fix: desktop Opera mis-detected as `OperaMobile` (OPR token now requires a mobile marker)
+- **real OS version via User-Agent Client Hints**: modern macOS always sends the legacy-compat UA
+  `"Mac OS X 10_15_7"` (→ Catalina) even on Sonoma/Sequoia/Tahoe; `OS.upgrade()` /
+  `detector.upgrade()` resolve the high-entropy `platformVersion` and report the real version
+  and name (e.g. `26.6.2 · Tahoe`, Windows 11) — auto-started in the constructor, safe no-op when
+  hints are unavailable (Safari/Firefox) or denied (Permissions-Policy `ch-ua-high-entropy-values`)
+- macOS version names extended to **Tahoe (26)**; Darwin→marketing mapping (20→11 … 26→26)
 
 ### Monorepo & release readiness
 - npm-workspaces monorepo mirroring v2 layout (`@detector-js/{core,feature,software,hardware,detector}`, **3.0.0** each)

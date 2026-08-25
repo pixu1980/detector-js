@@ -72,7 +72,14 @@
     // `new Detector()` — the UMD bundle exposes the Detector class directly as a global.
     const detector = new Detector();
     const out = document.getElementById('out');
-    out.textContent = JSON.stringify(detector.toFlags(), null, 2);
+
+    function render() {
+      out.textContent = JSON.stringify(detector.toFlags(), null, 2);
+    }
+
+    render();
+    // real OS version via User-Agent Client Hints (e.g. macOS 26 'Tahoe')
+    detector.upgrade().then(render);
   </script>
 </body>
 </html>

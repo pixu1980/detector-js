@@ -29,6 +29,7 @@ export declare class OS extends CssFlagsClass {
   name?: string;
   version?: string;
   versionName?: string;
+  upgrade(): Promise<Flags>;
   [os: string]: any;
   Windows: boolean;
   macOS: boolean;

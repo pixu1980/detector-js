@@ -49,4 +49,12 @@ describe('detector pipeline', () => {
     const d = new Detector('n/a');
     assert.ok(d.ua && d.root && d.navigator);
   });
+
+  test('Detector.upgrade() refreshes os with the client-hints version', async () => {
+    const d = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', true, false);
+    assert.equal(d.os.versionName, 'Catalina');
+    await d.upgrade();
+    assert.equal(d.os.versionName, 'Tahoe');
+    assert.equal(d.os.version, '26.6.2');
+  });
 });
