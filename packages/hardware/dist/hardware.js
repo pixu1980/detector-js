@@ -15,6 +15,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // packages/hardware/lib/hardware.js
 var hardware_exports = {};
@@ -221,9 +241,15 @@ var CPU = class extends import_core3.CssFlagsClass {
   getArchitecture() {
     let cpuClass = this._navigator.cpuClass || "x86";
     if (import_core3.Asserts.one([
+      cpuClass === "arm64",
+      this._navigator.platform === "MacARM",
+      /(?:arm64|aarch64|armv\d|(?:^|[\/\s;(])arm(?=[\s;)\/]|$))/i.test(this._ua)
+    ])) {
+      cpuClass = "arm64";
+    } else if (import_core3.Asserts.one([
       cpuClass === "x64",
-      ["Win64", "MacIntel", "Linux x86_64", "Linux i686"].includes(this._navigator.platform),
-      /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)
+      ["Win64", "Linux x86_64", "Linux i686"].includes(this._navigator.platform),
+      /(?:x86_64|x86-64|win64|wow64|x64;|amd64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|powerpc64)/i.test(this._ua)
     ])) {
       cpuClass = "x64";
     }
@@ -300,7 +326,8 @@ var CPU = class extends import_core3.CssFlagsClass {
   getArm() {
     return import_core3.Asserts.one([
       /windows\s(ce|mobile);\sppc;/i.test(this._ua),
-      /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)
+      /(?:arm64|aarch64|armv\d|(?:^|[\/\s;(])arm(?=[\s;)\/]|$))/i.test(this._ua),
+      this._navigator.platform === "MacARM"
     ]);
   }
   /**
@@ -346,7 +373,6 @@ var CPU = class extends import_core3.CssFlagsClass {
       /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
       this._navigator.cpuClass === "x64",
-      this._navigator.platform === "MacIntel",
       this._navigator.platform === "Linux x86_64"
     ]) || import_core3.Asserts.one([
       /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
@@ -354,6 +380,40 @@ var CPU = class extends import_core3.CssFlagsClass {
       /((?:i[346]|x)86)[;\)]/i.test(this._ua),
       this._navigator.cpuClass === "x86"
     ]);
+  }
+  /**
+   * Resolves the true CPU architecture through User-Agent Client Hints
+   * (navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness'])).
+   * High-entropy: async, can be denied; falls back to the UA-based result.
+   *
+   * @returns {Promise<object>}
+   *
+   * @memberOf CPU
+   */
+  upgrade() {
+    return __async(this, null, function* () {
+      const uaData = this._navigator.userAgentData;
+      if (uaData && typeof uaData.getHighEntropyValues === "function") {
+        try {
+          const hints = yield uaData.getHighEntropyValues(["architecture", "bitness"]);
+          const arch = hints && typeof hints.architecture === "string" ? hints.architecture : null;
+          if (arch === "arm") {
+            this.architecture = String(hints.bitness || "64") === "32" ? "arm" : "arm64";
+            this.arm = true;
+            this.intel = false;
+            this.amd = false;
+            this.powerPC = false;
+          } else if (arch === "x86") {
+            this.architecture = String(hints.bitness || "64") === "32" ? "x86" : "x64";
+            this.intel = true;
+            this.amd = false;
+            this.arm = false;
+          }
+        } catch (e) {
+        }
+      }
+      return this.toValues();
+    });
   }
 };
 
