@@ -20,7 +20,32 @@ export default class CssFlagsClass extends FlagsClass {
     super(ua);
 
     this._flags = flags;
+    // NOTE: kept for parity with upstream v2 (`flags` is currently unused downstream)
+    this._flags[1] = true;
     this._cssFlagsPrefix = cssFlagsPrefix;
+  }
+
+  //! Public getters (kept available after construction, like upstream v2)
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf CssFlagsClass
+   */
+  get flags() {
+    return this._flags;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf CssFlagsClass
+   */
+  get cssFlagsPrefix() {
+    return this._cssFlagsPrefix;
   }
 
   /**

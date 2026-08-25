@@ -3,7 +3,7 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2020,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -48,6 +48,8 @@
     "newline-per-chained-call": "off",
     "no-trailing-spaces": "off",
     "no-mixed-operators": "off",
+    "no-restricted-globals": "off",
+    "lines-between-class-members": "off",
     "indent": [
       "error",
       2
@@ -55,6 +57,10 @@
   },
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "self": true,
+    "global": true,
+    "process": true,
+    "__VERSION__": true
   }
 }

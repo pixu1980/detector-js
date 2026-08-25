@@ -1,3 +1,30 @@
+## [Version 1.4.0](https://github.com/pixu1980/detector-js/releases/tag/v1.4.0) (2025-8-25)
+
+### Restored
+
+- restored the historical vanillaJS zero-dependency codebase (v1.3.2) from git history/remote (branch `vanilla`)
+
+### Behavior & fixes backported from upstream v2.x
+
+- fixed Electron detection bug (`process?.type` / `process?.versions?.electron`): [`7fc0ce3`](https://github.com/pixu1980/detector-js/commit/7fc0ce3)
+- fixed `getTypedArray` bug in `getLittleEndian` (`getTypedArray.bind(this)`): [`b2647a6`](https://github.com/pixu1980/detector-js/commit/b2647a6)
+- fixed `pointerEvents` constructor error (`!!this._root.PointerEvent`): [`6a92328`](https://github.com/pixu1980/detector-js/commit/6a92328)
+- fixed Trident detection (`this._document?.documentMode`): [`7fc0ce3`](https://github.com/pixu1980/detector-js/commit/7fc0ce3)
+- reworked debug logging: startup `console.log` now only in development envs ([`a4e3ee6`](https://github.com/pixu1980/detector-js/commit/a4e3ee6))
+- `FlagsClass.root` now also resolves from `self` (workers safe)
+- kept `root` / `process` / `navigator` / `document` / `ua` / `flags` getters available after construction
+- `Asserts._checkAssert` renamed to `Asserts.checkAssert` (public API, upstream v2 naming)
+- `Detector` constructor: `cssFlags` now defaults to `false` (upstream v2 behavior)
+- macOS version names: added Big Sur (11), Monterey (12), Ventura (13), Sonoma (14), Sequoia (15)
+- Electron, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line now win the browser `name` resolution (fixed ordering vs Chrome/Safari)
+
+### New features (WebAPIs)
+
+- added 20+ new WebAPI detectors to `feature`: webAuthn, webGPU, webGL2, webAssembly, fetch, webSocket, webRTC, mediaRecorder, mediaSession, mediaCapabilities, notifications, paymentRequest, indexedDB, webCrypto, clipboard, intersectionObserver, resizeObserver, visualViewport, wakeLock, webShare, speechSynthesis, gamepad, permissions, storage, webLocks, webXr, bluetooth, usb, serial, nfc, credentials, structuredClone, caches, offscreenCanvas, broadcastChannel, online + value getters `deviceMemory`, `touchPoints`
+- new browser detectors: DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line
+
+[...full changes](https://github.com/pixu1980/detector-js/compare/v1.3.2...v1.4.0)
+
 ## [Version 1.3.2](https://github.blackmirror1980/:blackmirror1980/detector-js/releases/tag/v1.3.2) (2021-3-10)
 
 ### Bug fixes

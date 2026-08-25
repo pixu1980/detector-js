@@ -13,11 +13,78 @@ export default class FlagsClass {
    */
   constructor(ua = null) {
     this._booleanFlagsValuePropertyName = 'name';
-    this._root = window || global || {};
+    this._root = self || window || global || {};
     this._process = this._root.process || {};
     this._navigator = this._root.navigator || {};
     this._document = this._root.document || null;
     this._ua = ua || this._navigator.userAgent || 'n/a';
+  }
+
+  //! Public getters (kept available after construction, like upstream v2)
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get booleanFlagsValuePropertyName() {
+    return this._booleanFlagsValuePropertyName;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get root() {
+    return this._root;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get process() {
+    return this._process;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get navigator() {
+    return this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get document() {
+    return this._document;
+  }
+
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf FlagsClass
+   */
+  get ua() {
+    return this._ua;
   }
 
   /**

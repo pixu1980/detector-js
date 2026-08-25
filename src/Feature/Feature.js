@@ -26,23 +26,57 @@ export default class Feature extends CssFlagsClass {
     this.addEventListener = this.getAddEventListener();
     this.asyncScript = this.getAsyncScript();
     this.battery = this.getBattery();
+    this.bluetooth = this.getBluetooth();
+    this.broadcastChannel = this.getBroadcastChannel();
+    this.caches = this.getCaches();
+    this.clipboard = this.getClipboard();
     this.cors = this.getCors();
+    this.credentials = this.getCredentials();
     this.deferScript = this.getDeferScript();
+    this.fetch = this.getFetch();
     this.file = this.getFile();
     this.fileSystem = this.getFileSystem();
     this.fullscreen = this.getFullscreen();
     this.fullscreenKeyboard = this.getFullscreenKeyboard();
+    this.gamepad = this.getGamepad();
     this.geolocation = this.getGeolocation();
     this.historyAPI = this.getHistoryAPI();
+    this.indexedDB = this.getIndexedDB();
+    this.intersectionObserver = this.getIntersectionObserver();
     this.littleEndian = this.getLittleEndian();
     this.localStorage = this.getLocalStorage();
     this.matchMedia = this.getMatchMedia();
+    this.mediaCapabilities = this.getMediaCapabilities();
+    this.mediaRecorder = this.getMediaRecorder();
+    this.mediaSession = this.getMediaSession();
+    this.nfc = this.getNFC();
+    this.notifications = this.getNotifications();
+    this.offscreenCanvas = this.getOffscreenCanvas();
+    this.online = this.getOnline();
+    this.paymentRequest = this.getPaymentRequest();
+    this.permissions = this.getPermissions();
     this.querySelector = this.getQuerySelector();
     this.querySelectorAll = this.getQuerySelectorAll();
+    this.resizeObserver = this.getResizeObserver();
+    this.serial = this.getSerial();
     this.serviceWorker = this.getServiceWorker();
+    this.speechSynthesis = this.getSpeechSynthesis();
+    this.storage = this.getStorage();
+    this.structuredClone = this.getStructuredClone();
     this.typedArray = this.getTypedArray();
+    this.usb = this.getUSB();
     this.userMedia = this.getUserMedia();
     this.vibration = this.getVibration();
+    this.visualViewport = this.getVisualViewport();
+    this.wakeLock = this.getWakeLock();
+    this.webAssembly = this.getWebAssembly();
+    this.webAuthn = this.getWebAuthn();
+    this.webCrypto = this.getWebCrypto();
+    this.webLocks = this.getWebLocks();
+    this.webRTC = this.getWebRTC();
+    this.webShare = this.getWebShare();
+    this.webSocket = this.getWebSocket();
+    this.webXr = this.getWebXr();
     this.worker = this.getWorker();
   }
 
@@ -217,8 +251,63 @@ export default class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
+  getBluetooth() {
+    return 'bluetooth' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getBroadcastChannel() {
+    return 'BroadcastChannel' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getCaches() {
+    return 'caches' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getClipboard() {
+    return 'clipboard' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
   getCors() {
     return 'XMLHttpRequest' in this._root && 'withCredentials' in this._xmlHttpRequest;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getCredentials() {
+    return 'credentials' in this._navigator;
   }
 
   /**
@@ -257,6 +346,17 @@ export default class Feature extends CssFlagsClass {
    */
   getFileSystem() {
     return 'requestFileSystem' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getFetch() {
+    return 'fetch' in this._root && typeof this._root.fetch === 'function';
   }
 
   /**
@@ -306,6 +406,17 @@ export default class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
+  getGamepad() {
+    return 'getGamepads' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
   getHistoryAPI() {
     return Asserts.all([
       () => 'history' in this._root && 'pushState' in this._root.history,
@@ -319,9 +430,31 @@ export default class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
+  getIndexedDB() {
+    return 'indexedDB' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getIntersectionObserver() {
+    return 'IntersectionObserver' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
   getLittleEndian() {
     return Asserts.all([
-      this.getTypedArray,
+      this.getTypedArray.bind(this),
       () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0,
     ], true);
   }
@@ -365,6 +498,105 @@ export default class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
+  getMediaCapabilities() {
+    return 'mediaCapabilities' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getMediaRecorder() {
+    return 'MediaRecorder' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getMediaSession() {
+    return 'mediaSession' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getNFC() {
+    return 'nfc' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getNotifications() {
+    return 'Notification' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getOffscreenCanvas() {
+    return 'OffscreenCanvas' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getOnline() {
+    return 'onLine' in this._navigator && !!this._navigator.onLine;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getPaymentRequest() {
+    return 'PaymentRequest' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getPermissions() {
+    return 'permissions' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
   getQuerySelector() {
     return 'querySelector' in this._document;
   }
@@ -378,6 +610,61 @@ export default class Feature extends CssFlagsClass {
    */
   getQuerySelectorAll() {
     return 'querySelectorAll' in this._document;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getResizeObserver() {
+    return 'ResizeObserver' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getSerial() {
+    return 'serial' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getSpeechSynthesis() {
+    return 'speechSynthesis' in this._navigator && 'SpeechSynthesisUtterance' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getStorage() {
+    return 'storage' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getStructuredClone() {
+    return 'structuredClone' in this._root && typeof this._root.structuredClone === 'function';
   }
 
   /**
@@ -411,6 +698,17 @@ export default class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
+  getUSB() {
+    return 'usb' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
   getUserMedia() {
     return Asserts.one([
       'getUserMedia' in this._navigator,
@@ -434,6 +732,119 @@ export default class Feature extends CssFlagsClass {
       'mozVibrate' in this._navigator,
       'msVibrate' in this._navigator,
     ]);
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getVisualViewport() {
+    return 'visualViewport' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWakeLock() {
+    return 'wakeLock' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebAssembly() {
+    return 'WebAssembly' in this._root && 'compile' in this._root.WebAssembly;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebAuthn() {
+    return 'PublicKeyCredential' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebCrypto() {
+    return Asserts.all([
+      'crypto' in this._root,
+      () => 'subtle' in this._root.crypto,
+    ], true);
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebLocks() {
+    return 'locks' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebRTC() {
+    return 'RTCPeerConnection' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebShare() {
+    return 'share' in this._navigator;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebSocket() {
+    return 'WebSocket' in this._root;
+  }
+
+  /**
+   *
+   *
+   * @returns boolean
+   *
+   * @memberOf Feature
+   */
+  getWebXr() {
+    return 'xr' in this._navigator;
   }
 
   /**
@@ -752,7 +1163,7 @@ export default class Feature extends CssFlagsClass {
    */
   get pointerEvents() {
     return Asserts.all([
-      this._root.PointerEvent,
+      !!this._root.PointerEvent,
     ], true);
   }
 
@@ -802,5 +1213,59 @@ export default class Feature extends CssFlagsClass {
    */
   get dialogElement() {
     return 'HTMLDialogElement' in this._root;
+  }
+
+  // Test if WebGL2 is supported
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Feature
+   */
+  get webGL2() {
+    return Asserts.one([
+      () => this.canvas && 'WebGL2RenderingContext' in this._root && !!this._canvas.getContext('webgl2'),
+    ], true);
+  }
+
+  // Test if WebGPU is supported
+  /**
+   *
+   *
+   * @readonly
+   *
+   * @memberOf Feature
+   */
+  get webGPU() {
+    return Asserts.one([
+      () => 'gpu' in this._navigator && !!this._navigator.gpu && typeof this._navigator.gpu.requestAdapter === 'function',
+    ], true);
+  }
+
+  // Test if the Device Memory API reports a value (in GB)
+  /**
+   *
+   *
+   * @readonly
+   * @returns {number|string}
+   *
+   * @memberOf Feature
+   */
+  get deviceMemory() {
+    return this._navigator.deviceMemory || 'n/a';
+  }
+
+  // Test the maximum number of simultaneous touch contact points
+  /**
+   *
+   *
+   * @readonly
+   * @returns {number}
+   *
+   * @memberOf Feature
+   */
+  get touchPoints() {
+    return this._navigator.maxTouchPoints || 0;
   }
 }

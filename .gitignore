@@ -28,6 +28,7 @@ Thumbs.db
 
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 # Bower Components.
 bower_components/

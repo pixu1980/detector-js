@@ -112,13 +112,13 @@ export default class Platform extends CssFlagsClass {
     ]) && Asserts.one([
       this._flags.feature.touch,
       this._flags.feature.forceTouch,
-      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
+      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile', 'SamsungBrowser', 'DuckDuckGo', 'Facebook', 'Instagram', 'TikTok', 'Kiwi', 'HuaweiBrowser', 'Line'].includes(this._flags.browser.name),
     ]) && Asserts.all([
       !this._flags.feature.pointerEvents,
       this._flags.feature.file,
     ])) || Asserts.all([
       ['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name),
-      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile'].includes(this._flags.browser.name),
+      ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile', 'SamsungBrowser', 'DuckDuckGo', 'Facebook', 'Instagram', 'TikTok', 'Kiwi', 'HuaweiBrowser', 'Line'].includes(this._flags.browser.name),
     ]);
   }
 
