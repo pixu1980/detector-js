@@ -5,7 +5,18 @@
  * @class Asserts
  */
 export class Asserts {
-  static checkAssert(assert, safe = false) {
+  /**
+   * Evaluates a single assert: values are returned as-is, functions are invoked
+   * (in safe mode wrapped in try/catch).
+   *
+   * @static
+   * @param {any} [assert=null]
+   * @param {boolean} [safe=false]
+   * @returns {any}
+   *
+   * @memberOf Asserts
+   */
+  static checkAssert(assert = null, safe = false) {
     if (!!assert) {
       if (assert instanceof Function) {
         if (!!safe) {

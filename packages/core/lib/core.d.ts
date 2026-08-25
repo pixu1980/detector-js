@@ -1,1 +1,3 @@
-export { Asserts, FlagsClass, CssFlagsClass } from '../../types/flags';
+export * from './asserts';
+export * from './flagsClass';
+export * from './cssFlagsClass';

@@ -1,6 +1,6 @@
 # Getting Started
 
-DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
+DetectorJS (next major **3.0.0**, published baseline **2.0.11**) detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
 
 ## Install
 
@@ -8,9 +8,28 @@ DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform
 npm install detector-js
 # or
 pnpm add detector-js
-# or standalone (no install):
-# <script src="https://cdn.jsdelivr.net/npm/detector-js@3/dist/detector.browser.min.js"></script>
+# or standalone via CDN (jsDelivr):
+# <script src="https://cdn.jsdelivr.net/npm/detector-js@3.0.0/detector.browser.min.js"></script>
 ```
+
+### CDN with SRI (pinned integrity)
+
+```html
+<script
+  src="https://cdn.jsdelivr.net/npm/detector-js@<version>/detector.browser.min.js"
+  integrity="sha384-<computed-at-release>"
+  crossorigin="anonymous"></script>
+```
+
+Generate the exact SRI snippets for the built bundles with:
+
+```sh
+pnpm sri     # prints integrity + pinned jsDelivr/unpkg <script> tags
+```
+
+> The integrity hash changes with every version (the bundle embeds `__VERSION__`):
+> run `pnpm sri` at release time (the release script prints it automatically) and pin
+> the published version. Legacy webviews: use `dist/detector.browser.es2015.min.js`.
 
 ## Quick start
 

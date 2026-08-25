@@ -14,8 +14,14 @@ The goal: **detection that is correct and crash-free on as many platforms as pos
 | --- | --- |
 | Modern browsers (Chrome/Edge 80+, Firefox 78+, Safari 14+) | ✅ full |
 | Chrome 52+, Firefox 54+, Safari 10.1+, Edge 14+ (ES2016 feature set) | ✅ full (target) |
-| Older iOS Safari / Android WebView (ES2015) | ✅ most flags (polyfills cover `Reflect`, `Array#includes/map`, `Object.getOwnPropertyDescriptors`, `String#startsWith`, Object `assign/merge`) |
-| IE11-era (ES5) | ⚠️ possible but not officially supported: the bundle stays ES2016; transpiling further needs a ES5 pass — open an ADR/issue if this matters to you |
+| Older iOS Safari / Android WebView (ES2015) | ✅ dedicated legacy bundle `dist/detector.browser.es2015(.min).js` + polyfills (`Reflect`, `Array#includes/map`, `Object.getOwnPropertyDescriptors`, `String#startsWith`, Object `assign/merge`) |
+| IE11-era (ES5) | ⚠️ not provided: esbuild cannot transpile ES6 classes/const/default-args down to ES5 ("not supported yet"). A legacy ES2015 bundle is shipped; a true ES5 pass would need Babel — tracked in docs/roadmap, open an issue if it matters |
+
+## Legacy bundle
+```html
+<script src="dist/detector.browser.es2015.min.js"></script>
+```
+Same global API (`new Detector()`), same polyfills — intended for older iOS Safari/Android WebViews. Modern browsers should use the standard `detector.browser.min.js` (ES2016).
 | Node.js (CJS/ESM), Deno, Bun | ✅ (UA injectable; see examples) |
 | Web Workers | ✅ (`self`-first global root) |
 

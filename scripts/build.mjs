@@ -12,9 +12,6 @@ function pkgJson(dir) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, dir, 'package.json'), 'utf8'));
 }
 
-const VERSION_RE = /__VERSION__/g;
-const VERSION_DEFINE = { __VERSION__: '\"3.0.0\"' };
-
 const common = {
   bundle: true,
   target: TARGET,
@@ -64,18 +61,22 @@ async function buildRoot() {
   console.info('✓ built root dist (cjs + esm)');
 
   // self-contained browser bundles: window.Detector = Detector class
+  //  - detector.browser(.min).js        → target ES2016 (standard, polyfills bundled)
+  //  - detector.browser.es2015(.min).js → lowest esbuild target (legacy webviews).
+  //    NOTE: true ES5 (IE11) exceeds esbuild's transpiler — would need a Babel pass.
   const browserEntry = path.join(ROOT, 'browser/index.js');
   const browserBase = {
     ...common,
     entryPoints: [browserEntry],
     define: { __VERSION__: JSON.stringify(rootPkg.version) },
-    outfile: path.join(ROOT, 'dist/detector.browser.js'),
     format: 'iife',
-    target: ['es2015'],
   };
-  await build({ ...browserBase, minify: false });
-  await build({ ...browserBase, outfile: path.join(ROOT, 'dist/detector.browser.min.js'), minify: true });
-  console.info('✓ built root browser bundles (detector.browser.js/.min.js, global Detector)');
+  for (const [target, suffix] of [['es2016', ''], ['es2015', '.es2015']]) {
+    const base = { ...browserBase, target: [target] };
+    await build({ ...base, outfile: path.join(ROOT, `dist/detector.browser${suffix}.js`), minify: false, sourcemap: true });
+    await build({ ...base, outfile: path.join(ROOT, `dist/detector.browser${suffix}.min.js`), minify: true, sourcemap: true });
+  }
+  console.info('✓ built root browser bundles (es2016 + es5, global Detector)');
 }
 
 async function main() {

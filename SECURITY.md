@@ -37,7 +37,7 @@ DetectorJS runs **entirely client-side** and **never sends data anywhere** — s
 The main "input" is the User-Agent string (parsed with RegExp only). UA strings are attacker-influenced: the library treats unknown tokens as `'n/a'` and does not evaluate them. Report any unexpected behavior (e.g., regex ReDoS risk) as a vulnerability.
 
 ## Recommendations for consumers
-- Pin versions (`"detector-js": "3.0.0"` or lockfiles) for production.
+- Pin versions (`"detector-js": "^2.0.11"` or lockfiles (bump to 3.x after the next release)) for production.
 - Don't place detection output in DOM innerHTML without escaping; it is plain data, treat it as untrusted.
 - Follow the [PRIVACY.md](PRIVACY.md) checklist before collecting these attributes about end users.
 

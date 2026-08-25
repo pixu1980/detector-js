@@ -30,7 +30,8 @@
 <pre><code class="language-sh">pnpm install          # dev toolchain (esbuild, eslint, node:test, playwright)
 pnpm build            # builds all packages + root bundles (dist/)
 pnpm lint             # eslint on packages, test, browser, scripts
-pnpm test             # unit tests (node:test) + e2e (playwright) + smoke
+pnpm types:check      # tsc --noEmit on the generated .d.ts (test-types/usage.ts)
+pnpm test             # unit tests (node:test) + e2e (playwright, chromium+webkit) + smoke
 pnpm serve            # serves the site on the first free port
 </code></pre>
 <h2>Repo layout (monorepo)</h2>
@@ -95,6 +96,8 @@ pnpm exec playwright install chromium   # once, for e2e
           <li><a href="./docs/api.html">API reference</a></li>
           <li><a href="./docs/toolchain.html">Toolchain</a></li>
           <li><a href="./docs/browser-support.html">Browser support</a></li>
+          <li><a href="./docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="./docs/roadmap.html">Roadmap</a></li>
         </ul>
       </div>
       <div>

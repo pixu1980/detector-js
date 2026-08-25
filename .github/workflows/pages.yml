@@ -1,0 +1,37 @@
+# Publish the static site (index.html + generated docs pages) to GitHub Pages
+# at https://detector.js.org (CNAME at repo root). DNS must point the domain
+# to GitHub Pages (4 IPs) — already in place if Pages was used before.
+name: Pages
+
+on:
+  push:
+    branches: [vanilla, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm build          # bundles + static pages (marked) via scripts/build-docs.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: '.' }      # repo root is the site root (index.html, dist/, docs/*.html)
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
