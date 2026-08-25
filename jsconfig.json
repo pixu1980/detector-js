@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@detector-js/core": ["packages/core/lib/core.js"],
+      "@detector-js/feature": ["packages/feature/lib/feature.js"],
+      "@detector-js/software": ["packages/software/lib/software.js"],
+      "@detector-js/hardware": ["packages/hardware/lib/hardware.js"],
+      "@detector-js/detector": ["packages/detector/lib/detector.js"]
+    }
+  },
+  "include": ["packages", "test", "rollup.config.js"]
+}

@@ -1,1 +1,0 @@
-window.Reflect = window.Reflect || {};

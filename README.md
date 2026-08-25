@@ -1,5 +1,5 @@
 # detector-js
-v1.4.0
+v3.0.0
 
 ## Description
 DetectorJS, zero-dependency platform/environment detector written in ES6
@@ -8,7 +8,7 @@ Please feel free to ask for modifications, fixes or do a PR to improve Detector 
 
 {{#author}}
 ## Author
-Pixu
+Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>
 {{/author}}
 
 {{#badges}}
@@ -19,7 +19,7 @@ Pixu
 {{/badges}}
 
 ## Documentation
-Check out the [Latest Documentation](https://pixu1980.github.io/detector-js/docs/index.html) here
+Check out the [Latest Documentation](https://detector.js.org/docs/index.html) here
 
 {{#example}}
 ## Example
@@ -37,6 +37,27 @@ npm i detector-js
 
 ```sh
 yarn add detector-js
+```
+
+## Monorepo structure
+`detector-js` v3 is a zero-dependency vanillaJS monorepo:
+
+```
+packages/
+  core/       @detector-js/core       asserts, FlagsClass, CssFlagsClass, polyfills
+  feature/    @detector-js/feature    Feature, AudioFeature, VideoFeature (+ modern WebAPIs)
+  software/   @detector-js/software   Browser, Engine, OS
+  hardware/   @detector-js/hardware   Platform, Device, CPU, GPU
+  detector/   @detector-js/detector   Detector (composes everything)
+```
+
+Runtime dependencies are limited to the internal workspaces: **zero external dependencies**.
+
+The scoped packages can be consumed individually:
+
+```js
+import { Browser } from '@detector-js/software';
+import { Detector } from '@detector-js/detector';
 ```
 
 ## Usage
