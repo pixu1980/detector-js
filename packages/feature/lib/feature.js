@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign */
 import { Asserts, CssFlagsClass } from '@detector-js/core';
+import { WEB_API_GLOBALS } from './webAPIs';
 
 /**
  *
@@ -77,6 +78,49 @@ export class Feature extends CssFlagsClass {
     this.webSocket = this.getWebSocket();
     this.webXr = this.getWebXr();
     this.worker = this.getWorker();
+
+    //! MDN Web API catalog (auto-generated from the MDN /docs/Web/API index):
+    //! every interface available on the global root becomes a feature flag.
+    //! Existing flags (above) are never shadowed.
+    for (let i = 0; i < WEB_API_GLOBALS.length; i += 1) {
+      const globalName = WEB_API_GLOBALS[i];
+      const flag = globalName.toCamelCase();
+
+      if (!(flag in this)) {
+        this[flag] = this._probeGlobal(globalName);
+      }
+    }
+  }
+
+  /**
+   * Probes whether a Web API interface is exposed on the global root
+   * (window / globalThis / worker global). Safe mode, never throws.
+   *
+   * @param {string} globalName
+   * @returns {boolean}
+   *
+   * @memberOf Feature
+   */
+  _probeGlobal(globalName) {
+    return Asserts.one([
+      () => globalName in this._root && !!this._root[globalName],
+    ], true);
+  }
+
+  /**
+   * The MDN Web API catalog (windowGlobal names) used by the detector,
+   * exposed for tooling/UIs (`featureFlag = globalName.toCamelCase()`,
+   * `mdn = https://developer.mozilla.org/en-US/docs/Web/API/<globalName>`).
+   *
+   * @static
+   * @returns {object}
+   *
+   * @memberOf Feature
+   */
+  static get APIS() {
+    return {
+      globals: WEB_API_GLOBALS,
+    };
   }
 
   /**

@@ -82,7 +82,7 @@ detector.os      // { name: 'macOS', version: '10.15.7', versionName: 'Catalina'
 detector.platform// 'desktop'
 detector.cpu     // { platform: 'MacIntel', cores: 8, architecture: 'x64', vendor: 'intel' }
 detector.gpu     // { webGLVendor: 'WebKit', vendor: 'Apple Inc.', model: 'Apple M1', ... }
-detector.feature // 87+ flags: webGPU, webAuthn, wakeLock, webShare, indexedDB, ...
+detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plus the full MDN /Web/API catalog (abortController, rtcPeerConnection, …)
 ```
 
 ## Using only a slice of the library

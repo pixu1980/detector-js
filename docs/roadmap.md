@@ -4,8 +4,11 @@ Priorities captured from the maintainer interview (3.0.0 release-prep cycle).
 
 ## Next (post-3.0.0)
 
-- **[P1] More platforms / WebAPIs** — expand detection tables (browsers, engines, OSs and
-  WebAPI flags), verified against MDN Browser Compatibility Data before merging
+- **[DONE] Full MDN Web API coverage** — `Feature` now probes the complete MDN `/docs/Web/API`
+  interface index (1021 globals, camelCase flags, never shadowing curated ones); regenerable via
+  `scripts/update-webapis.mjs`. See CHANGELOG "Unreleased".
+- **[P1] More platforms / browsers / OSs** — expand the UA detection tables (browsers, engines,
+  OSs), verified against MDN Browser Compatibility Data before merging
   (see `CONTRIBUTING.md → Adding a new detection`).
 - **[P1] GPU / vendor parsing** — normalize GPU identities: Apple M-series (M1…M5,
   Pro/Max/Ultra), NVIDIA GeForce, AMD Radeon, Intel Iris/Arc; expose structured

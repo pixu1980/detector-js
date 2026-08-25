@@ -98,6 +98,12 @@ function install(overrides = {}) {
     ResizeObserver: fn, structuredClone: (v) => v, caches: {},
     Element: { ALLOW_KEYBOARD_INPUT: true }, history: { pushState: () => {} },
     indexedDB: {}, MediaStream: fn, visualViewport: {}, opera: {}, opr: {},
+    // representative MDN Web API interfaces (catalog coverage, happy path)
+    AbortController: fn, MutationObserver: fn, TextEncoder: fn, TextDecoder: fn,
+    MessageChannel: fn, URLPattern: fn, CompressionStream: fn, DecompressionStream: fn,
+    ReadableStream: fn, WritableStream: fn, TransformStream: fn, Sanitizer: fn,
+    FileSystemHandle: fn, Blob: fn, File: fn, AudioContext: fn,
+    MediaMetadata: fn, XRSession: fn,
     fetch: () => Promise.resolve(),
     getComputedStyle: () => ({ getPropertyValue: () => '1vw' }),
     devicePixelRatio: 2,
