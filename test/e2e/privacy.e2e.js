@@ -11,10 +11,10 @@ test.describe('privacy contract', () => {
 
     await page.goto('/index.html');
 
-    // allow only the page itself and the local bundle
-    const allowedPrefixes = ['http://localhost:3222/index.html', 'http://localhost:3222/dist/detector.browser.min.js'];
-    const unexpected = requests.filter((u) => !allowedPrefixes.some((p) => u.startsWith(p)));
-    expect(unexpected, `unexpected requests: ${JSON.stringify(unexpected)}`).toEqual([]);
+    // every request must stay on the site's own origin (page, bundle, site.css) —
+    // anything pointing elsewhere (CDNs, analytics, telemetry, fonts…) is a violation
+    const unexpected = requests.filter((u) => !u.startsWith('http://localhost:3222/'));
+    expect(unexpected, `external requests: ${JSON.stringify(unexpected)}`).toEqual([]);
     expect(failed, `failed requests: ${JSON.stringify(failed)}`).toEqual([]);
   });
 

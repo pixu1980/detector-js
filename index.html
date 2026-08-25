@@ -8,139 +8,68 @@
   <meta name="theme-color" content="#0b1020" />
   <meta property="og:title" content="DetectorJS — zero-dependency, privacy-first detection" />
   <meta property="og:description" content="87+ capability flags, 0 dependencies, 100% client-side. It detects your environment — and never shares it." />
+  <link rel="stylesheet" href="site.css" />
   <style>
-    :root {
-      --bg: #0b1020;
-      --bg2: #101736;
-      --card: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.1);
-      --text: #eef2ff;
-      --muted: #98a2c3;
-      --accent: #7c5cff;
-      --accent2: #00e5c7;
-      --pink: #ff5c8a;
-      --warn: #ffc94d;
-      --ok: #3ddc97;
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, 0.25), transparent 60%),
-        radial-gradient(1000px 500px at 10% 110%, rgba(0, 229, 199, 0.12), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
-    header.site {
-      position: sticky; top: 0; z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(11, 16, 32, 0.75);
-      border-bottom: 1px solid var(--border);
-    }
-    nav { display: flex; align-items: center; gap: 1.5rem; height: 60px; }
-    .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 1.1rem; }
-    .brand span { color: var(--accent2); }
-    nav .links { margin-left: auto; display: flex; gap: 1.1rem; font-size: 0.92rem; }
-    nav a { color: var(--muted); text-decoration: none; }
-    nav a:hover { color: var(--text); }
-    .btn {
-      display: inline-block; padding: 0.6rem 1.3rem; border-radius: 999px;
-      font-weight: 700; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer;
-    }
+    /* page-specific components only — chrome/type live in site.css */
+    .hero { padding: clamp(3rem, 2rem + 6vw, 5.5rem) 0 clamp(2rem, 1.5rem + 2vw, 3rem); text-align: center; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.4rem; }
+    .badge { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 999px; background: rgba(0, 229, 199, 0.1); color: var(--accent2); border: 1px solid rgba(0, 229, 199, 0.25); }
+    .badge.pink { background: rgba(255, 92, 138, 0.1); color: var(--pink); border-color: rgba(255, 92, 138, 0.25); }
+    .hero h1 { font-size: var(--fs-hero); font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; margin: 0; border: none; padding: 0; }
+    .hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.tag { max-width: 640px; margin: 1.2rem auto 0; color: var(--muted); font-size: var(--fs-md); }
+    .cta { display: flex; gap: 0.9rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 0.6rem 1.3rem; border-radius: 999px; font-weight: 700; font-size: var(--fs-sm); text-decoration: none; border: none; cursor: pointer; }
     .btn-primary { background: linear-gradient(90deg, var(--accent), var(--pink)); color: #fff; box-shadow: 0 8px 30px rgba(124, 92, 255, 0.35); }
     .btn-ghost { color: var(--text); border: 1px solid var(--border); background: transparent; }
-    .hero { padding: 5.5rem 0 3rem; text-align: center; }
-    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.4rem; }
-    .badge {
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
-      padding: 0.35rem 0.8rem; border-radius: 999px;
-      background: rgba(0, 229, 199, 0.1); color: var(--accent2); border: 1px solid rgba(0, 229, 199, 0.25);
-    }
-    .badge.pink { background: rgba(255, 92, 138, 0.1); color: var(--pink); border-color: rgba(255, 92, 138, 0.25); }
-    .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; }
-    .hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero p.tag { max-width: 640px; margin: 1.2rem auto 0; color: var(--muted); font-size: 1.12rem; }
-    .cta { display: flex; gap: 0.9rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
-    .trust { margin-top: 2rem; font-size: 0.8rem; color: var(--muted); }
+    .trust { margin-top: 2rem; font-size: var(--fs-sm); color: var(--muted); }
     .trust b { color: var(--ok); }
-
-    .live {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 1.4rem; margin: 3rem 0; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    }
-    .live h2 { font-size: 1.1rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .live { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; margin: 3rem 0; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+    .live h2 { font-size: var(--fs-md); margin: 0 0 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); display: inline-block; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
-    .live p.sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .live p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
+    .live p.sub code { color: var(--accent2); }
     .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
-    .kv .k { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
-    .kv .k .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
-    .kv .k .value { font-weight: 700; font-size: 0.95rem; margin-top: 0.15rem; word-break: break-word; }
-    pre.code {
-      margin: 2rem 0; background: #070b18; border: 1px solid var(--border); border-radius: 12px;
-      padding: 1.1rem 1.3rem; overflow: auto; font-size: 0.85rem; line-height: 1.55;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
+    .kv .k { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
+    .kv .k .label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .kv .k .value { font-weight: 700; font-size: var(--fs-sm); margin-top: 0.15rem; word-break: break-word; }
+    main { padding-top: 1.5rem; }
+    pre.code { margin: 2rem 0 0; background: #070b18; border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.3rem; overflow: auto; font-size: var(--fs-sm); line-height: 1.55; font-family: var(--font-mono); }
     pre.code .cm { color: #5c6b9a; }
     pre.code .k { color: var(--accent2); }
     pre.code .f { color: #ffd479; }
-
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem; }
-    .card h3 { font-size: 1.02rem; margin-bottom: 0.5rem; }
+    .card h3 { font-size: var(--fs-md); margin: 0 0 0.5rem; }
     .card h3 span { margin-right: 0.5rem; }
-    .card ul { list-style: none; color: var(--muted); font-size: 0.88rem; }
+    .card ul { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: var(--fs-sm); }
     .card ul li { padding: 0.22rem 0; }
     .card ul li::before { content: "✓  "; color: var(--ok); font-weight: 700; }
-
-    section h2.sec { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; letter-spacing: -0.02em; margin: 4rem 0 0.6rem; }
+    section h2.sec { font-size: var(--fs-xl); font-weight: 900; letter-spacing: -0.02em; margin: 4rem 0 0.6rem; }
     section p.sec-sub { color: var(--muted); max-width: 720px; margin-bottom: 1rem; }
-
-    .privacy {
-      border: 1px solid rgba(0, 229, 199, 0.35); background: linear-gradient(180deg, rgba(0,229,199,0.08), transparent);
-      border-radius: var(--radius); padding: 1.8rem; margin: 1rem 0 2.5rem;
-    }
-    .privacy h3 { color: var(--ok); font-size: 1.15rem; margin-bottom: 0.6rem; }
-    .privacy .big { font-size: 1.05rem; font-weight: 700; margin: 0.4rem 0; }
-    .privacy p, .privacy li { color: var(--muted); font-size: 0.9rem; }
-    .privacy ul { margin: 0.6rem 0 0.9rem 1.1rem; }
+    .privacy { border: 1px solid rgba(0, 229, 199, 0.35); background: linear-gradient(180deg, rgba(0, 229, 199, 0.08), transparent); border-radius: var(--radius); padding: 1.8rem; margin: 1rem 0 2.5rem; }
+    .privacy h3 { color: var(--ok); font-size: var(--fs-md); margin: 0 0 0.6rem; }
+    .privacy .big { font-size: var(--fs-md); font-weight: 700; margin: 0.4rem 0; }
+    .privacy p, .privacy li { color: var(--muted); font-size: var(--fs-sm); }
+    .privacy ul { margin: 0.6rem 0 0.9rem 1.1rem; padding: 0; }
     .privacy code { color: var(--accent2); }
-
+    .privacy a { color: var(--accent2); }
     .integrations { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.5rem 0; }
-    .chip { display: flex; align-items: center; gap: 0.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; }
-    .chip .ico { font-size: 1.1rem; }
-
-    footer { border-top: 1px solid var(--border); margin-top: 4rem; padding: 2.5rem 0 3rem; color: var(--muted); font-size: 0.85rem; }
-    footer .cols { display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: space-between; }
-    footer h4 { color: var(--text); margin-bottom: 0.5rem; font-size: 0.9rem; }
-    footer ul { list-style: none; }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-
-    @media (max-width: 700px) {
-      .hero { padding-top: 3rem; }
-      nav .links { display: none; }
-    }
+    .chip { display: flex; align-items: center; gap: 0.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 1rem; font-size: var(--fs-sm); font-weight: 600; }
+    .chip .ico { font-size: var(--fs-md); }
   </style>
-  <script>
-    // This page makes ZERO network requests. Everything — detection — runs locally.
-  </script>
 </head>
 <body>
   <header class="site">
     <div class="wrap">
       <nav>
-        <div class="brand">Detector<span>JS</span></div>
+        <a class="brand" href="index.html">Detector<span>JS</span></a>
         <div class="links">
-          <a href="#live">Live demo</a>
-          <a href="#features">Features</a>
-          <a href="#integrate">Integrate</a>
-          <a href="#privacy">Privacy</a>
+          <a href="index.html">Home</a>
+          <a href="docs/getting-started.html">Docs</a>
+          <a href="demo.html">Live demo</a>
+          <a href="PRIVACY.html">Privacy</a>
           <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
         </div>
       </nav>
@@ -252,16 +181,16 @@
           <li><b>US / international</b> — CCPA/CPRA (California), other U.S. state privacy laws, FTC Section 5 expectations on truthful disclosures; Canada PIPEDA, Brazil LGPD, etc. when applicable to your audience.</li>
           <li><b>Academic background</b> — &ldquo;How Unique Is Your Web Browser?&rdquo; (Eckersley, 2010, EFF) showed ~94% of browsers are uniquely identifiable by fingerprints, and &ldquo;Cookieless Monster&rdquo; (Acar et al., 2013) demonstrated the privacy risks — the best practice is to avoid persistence &amp; linkage, which is exactly what this library does by design.</li>
         </ul>
-        <p class="big" style="margin-top:0.4rem;">→ Read the full <a href="PRIVACY.html" style="color:var(--accent2)">PRIVACY.html</a> for the complete legal walkthrough, checklists and references.</p>
+        <p class="big" style="margin-top:0.4rem;">→ Read the full <a href="PRIVACY.html">PRIVACY</a> for the complete legal walkthrough, checklists and references.</p>
       </div>
     </section>
   </div>
 
-  <footer>
+  <footer class="site">
     <div class="wrap cols">
       <div>
-        <div class="brand">Detector<span>JS</span></div>
-        <p style="margin-top:0.5rem;">Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
         <h4>Docs</h4>
@@ -269,6 +198,7 @@
           <li><a href="docs/getting-started.html">Getting started</a></li>
           <li><a href="docs/api.html">API reference</a></li>
           <li><a href="docs/toolchain.html">Toolchain</a></li>
+          <li><a href="docs/browser-support.html">Browser support</a></li>
         </ul>
       </div>
       <div>
@@ -284,8 +214,8 @@
         <h4>Packages</h4>
         <ul>
           <li><a href="packages/detector/README.html">@detector-js/detector</a></li>
-          <li><a href="packages/core/README.html">@detector-js/core</a></li>
           <li><a href="packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="packages/core/README.html">@detector-js/core</a></li>
           <li><a href="packages/hardware/README.html">@detector-js/hardware</a></li>
           <li><a href="packages/feature/README.html">@detector-js/feature</a></li>
         </ul>
@@ -300,8 +230,7 @@
     var flags = detector.toFlags();
     var browser = detector.browser;
     var os = detector.os;
-    var cpu = detector.cpu;
-    var gpu = detector.gpu;
+    var flags2 = detector.toFlags();
 
     var set = function (id, value) { document.getElementById(id).textContent = value; };
     set('v-browser', browser.name || 'n/a');

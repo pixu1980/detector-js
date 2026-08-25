@@ -4,19 +4,68 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DetectorJS v3.0.0 — live demo</title>
+  <link rel="stylesheet" href="site.css" />
   <style>
-    body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #eef2ff; background: #0b1020; }
-    h1 { font-size: 1.4rem; }
-    .note { color: #98a2c3; font-size: .85rem; }
-    pre { background: #070b18; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 1rem; overflow: auto; font-size: .78rem; color: #d7dff7; }
-    a { color: #00e5c7; }
-    code { color: #ffd479; }
+    main { padding-top: 1.5rem; }
+    pre { background: #070b18; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; overflow: auto; font-size: var(--fs-sm); color: #d7dff7; font-family: var(--font-mono); }
+    a { color: var(--accent2); }
+    code { color: var(--accent2); }
   </style>
 </head>
 <body>
-  <h1>DetectorJS <span id="version">v3.0.0</span> — live demo</h1>
-  <p class="note">Runs entirely in your browser: <code>const detector = new Detector(); detector.toFlags()</code>. <a href="index.html">← Back to the site</a></p>
-  <pre id="out">detecting…</pre>
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <div class="links">
+          <a href="index.html">Home</a>
+          <a href="docs/getting-started.html">Docs</a>
+          <a href="demo.html">Live demo</a>
+          <a href="PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Live demo</h1>
+    <p>Runs entirely in your browser: <code>const detector = new Detector(); detector.toFlags()</code>.</p>
+    <pre id="out">detecting…</pre>
+  </main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="docs/getting-started.html">Getting started</a></li>
+          <li><a href="docs/api.html">API reference</a></li>
+          <li><a href="docs/toolchain.html">Toolchain</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="PRIVACY.html">Privacy</a></li>
+          <li><a href="SECURITY.html">Security</a></li>
+          <li><a href="CONTRIBUTING.html">Contributing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="packages/core/README.html">@detector-js/core</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
   <script src="dist/detector.browser.min.js"></script>
   <script>
