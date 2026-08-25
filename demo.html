@@ -7,9 +7,76 @@
   <link rel="stylesheet" href="site.css" />
   <style>
     main { padding-top: 1.5rem; }
-    pre { background: #070b18; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; overflow: auto; font-size: var(--fs-sm); color: #d7dff7; font-family: var(--font-mono); }
-    a { color: var(--accent2); }
-    code { color: var(--accent2); }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- left column: detection cards ---------- */
+    .panel h2 { font-size: var(--fs-md); margin: 0 0 .6rem; display: flex; align-items: center; gap: .5rem; }
+    .panel { margin-bottom: 1.25rem; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: .5rem;
+    }
+    .flag-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .4rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .5rem .7rem;
+      font-size: var(--fs-sm);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .15s ease, transform .1s ease;
+    }
+    a.flag-card:hover, a.flag-card:focus-visible {
+      border-color: var(--accent2);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    a.flag-card::after { content: "↗"; color: var(--muted); font-size: .72rem; }
+    .flag-card .name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .flag-card .state { font-size: .72rem; font-weight: 800; padding: .08rem .42rem; border-radius: 999px; white-space: nowrap; }
+    .flag-card .state.on { background: rgba(61, 220, 151, .14); color: var(--ok); }
+    .flag-card .state.off { background: rgba(152, 162, 195, .12); color: var(--muted); }
+    .flag-card .state.value { background: rgba(0, 229, 199, .14); color: var(--accent2); }
+
+    .kv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      margin-bottom: .5rem;
+      font-size: var(--fs-sm);
+    }
+    .kv-card .k { color: var(--muted); text-transform: uppercase; letter-spacing: .05em; font-size: var(--fs-xs); }
+    .kv-card .v { font-weight: 700; margin-top: .1rem; word-break: break-word; }
+
+    /* ---------- right column: current JSON dump ---------- */
+    pre {
+      background: #070b18;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      overflow: auto;
+      font-size: var(--fs-sm);
+      color: #d7dff7;
+      font-family: var(--font-mono);
+      margin: 0;
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+      max-height: calc(100vh - var(--header-h) - 2.5rem);
+    }
+    p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
+    p.sub code { color: var(--accent2); }
   </style>
 </head>
 <body>
@@ -30,8 +97,32 @@
 
   <main>
     <h1>Live demo</h1>
-    <p>Runs entirely in your browser: <code>const detector = new Detector(); detector.toFlags()</code>.</p>
-    <pre id="out">detecting…</pre>
+    <p class="sub">Runs entirely in your browser: <code>const detector = new Detector(); detector.upgrade();</code> —
+      WebAPI cards open the matching MDN page (new tab).</p>
+
+    <div class="demo-grid">
+      <!-- LEFT: detection cards -->
+      <div>
+        <section class="panel" id="panel-software">
+          <h2>🌐 Software</h2>
+          <div class="cards" id="cards-software"></div>
+        </section>
+        <section class="panel" id="panel-hardware">
+          <h2>🖥️ Hardware</h2>
+          <div class="cards" id="cards-hardware"></div>
+        </section>
+        <section class="panel" id="panel-apis">
+          <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(click a card → MDN)</span></h2>
+          <div class="cards" id="cards-apis"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT: current demo content -->
+      <div>
+        <h2 style="font-size:var(--fs-md);margin:0 0 .6rem;">Raw output</h2>
+        <pre id="out">detecting…</pre>
+      </div>
+    </div>
   </main>
 
   <footer class="site">
@@ -46,6 +137,7 @@
           <li><a href="docs/getting-started.html">Getting started</a></li>
           <li><a href="docs/api.html">API reference</a></li>
           <li><a href="docs/toolchain.html">Toolchain</a></li>
+          <li><a href="docs/browser-support.html">Browser support</a></li>
         </ul>
       </div>
       <div>
@@ -69,16 +161,167 @@
 
   <script src="dist/detector.browser.min.js"></script>
   <script>
-    // `new Detector()` — the UMD bundle exposes the Detector class directly as a global.
-    const detector = new Detector();
-    const out = document.getElementById('out');
+    // ------------------------------------------------------------------
+    // WebAPI flag -> MDN page (only feature/Web API cards get a link)
+    // ------------------------------------------------------------------
+    var MDN = 'https://developer.mozilla.org/en-US/docs/';
+    var API = function (p) { return MDN + 'Web/API/' + p; };
+    var MDN_LINKS = {
+      addEventListener: API('EventTarget/addEventListener'),
+      asyncScript: MDN + 'Web/HTML/Element/script#async',
+      battery: API('Battery_API'),
+      bluetooth: API('Web_Bluetooth_API'),
+      broadcastChannel: API('BroadcastChannel'),
+      caches: API('Cache'),
+      canvas: API('Canvas_API'),
+      classList: API('Element/classList'),
+      clipboard: API('Clipboard_API'),
+      contextMenu: API('HTMLMenuElement'),
+      cors: MDN + 'Web/HTTP/CORS',
+      credentials: API('Credential_Management_API'),
+      css3D: MDN + 'Web/CSS/transform',
+      cssTransform: MDN + 'Web/CSS/transform',
+      cssTransition: MDN + 'Web/CSS/transition',
+      deferScript: MDN + 'Web/HTML/Element/script#defer',
+      dialogElement: API('HTMLDialogElement'),
+      deviceMemory: API('Navigator/deviceMemory'),
+      deviceMotion: API('DeviceMotionEvent'),
+      deviceOrientation: API('DeviceOrientationEvent'),
+      fetch: API('fetch'),
+      file: MDN + 'Web/API/File_API',
+      fileSystem: MDN + 'Web/API/File_and_Directory_Entries_API',
+      fullscreen: API('Fullscreen_API'),
+      gamepad: API('Gamepad_API'),
+      geolocation: API('Geolocation_API'),
+      historyAPI: API('History_API'),
+      indexedDB: API('IndexedDB_API'),
+      intersectionObserver: API('IntersectionObserver'),
+      littleEndian: API('DataView#byte_order'),
+      localStorage: API('Web_Storage_API'),
+      matchMedia: API('Window/matchMedia'),
+      mediaCapabilities: MDN + 'Web/API/Media_Capabilities_API',
+      mediaRecorder: MDN + 'Web/API/MediaStream_Recording_API',
+      mediaSession: API('MediaSession'),
+      nfc: API('Web_NFC_API'),
+      notifications: API('Notifications_API'),
+      offscreenCanvas: API('OffscreenCanvas'),
+      paymentRequest: API('Payment_Request_API'),
+      permissions: API('Permissions_API'),
+      pictureElement: API('HTMLPictureElement'),
+      pixelRatio: API('Window/devicePixelRatio'),
+      placeholder: API('HTMLInputElement/placeholder'),
+      pointerEnabled: API('Pointer_events'),
+      pointerLock: API('Pointer_Lock_API'),
+      pointerEvents: API('PointerEvent'),
+      querySelector: API('Document/querySelector'),
+      querySelectorAll: API('Document/querySelectorAll'),
+      remUnit: MDN + 'Web/CSS/length#relative_length_units',
+      resizeObserver: API('ResizeObserver'),
+      serial: API('Web_Serial_API'),
+      serviceWorker: API('Service_Worker_API'),
+      sizes: API('HTMLImageElement/sizes'),
+      speechSynthesis: API('SpeechSynthesis'),
+      srcset: API('HTMLImageElement/srcset'),
+      storage: API('Storage_API'),
+      structuredClone: API('structuredClone'),
+      svg: MDN + 'Web/SVG',
+      touch: API('Touch_events'),
+      touchPoints: API('Navigator/maxTouchPoints'),
+      typedArray: API('TypedArray'),
+      usb: API('WebUSB_API'),
+      userMedia: API('MediaDevices/getUserMedia'),
+      vibration: API('Vibration_API'),
+      visualViewport: API('VisualViewport'),
+      wakeLock: API('WakeLock'),
+      webAssembly: API('WebAssembly'),
+      webAuthn: API('PublicKeyCredential'),
+      webCrypto: MDN + 'Web/API/Web_Crypto_API',
+      webGL: API('WebGL_API'),
+      webGL2: API('WebGL2RenderingContext'),
+      webGPU: API('WebGPU_API'),
+      webLocks: API('Web_Locks_API'),
+      webRTC: API('WebRTC_API'),
+      webShare: MDN + 'Web/API/Navigator/share',
+      webSocket: API('WebSockets_API'),
+      webVR: API('WebVR_API'),
+      webXr: API('WebXR_Device_API'),
+      webp: MDN + 'Web/Media/Formats/Image_types',
+      worker: API('Web_Workers_API')
+    };
+    var DISPLAY = {
+      webAuthn: 'WebAuthn', webGPU: 'WebGPU', webGL: 'WebGL', webGL2: 'WebGL2',
+      webAssembly: 'WebAssembly', webRTC: 'WebRTC', webSocket: 'WebSocket', webXr: 'WebXR',
+      indexedDB: 'IndexedDB', localStorage: 'localStorage', querySelector: 'querySelector',
+      querySelectorAll: 'querySelectorAll', matchMedia: 'matchMedia', fetch: 'fetch',
+      online: 'Online status', worker: 'Web Workers', serviceWorker: 'Service Workers',
+      structuredClone: 'structuredClone', deviceMemory: 'Device memory', touchPoints: 'Touch points',
+      pixelRatio: 'Pixel ratio', littleEndian: 'Little-endian', historyAPI: 'History API',
+      userMedia: 'getUserMedia', addEventListener: 'addEventListener', asyncScript: 'Async scripts',
+      deferScript: 'Defer scripts', cors: 'CORS', fileSystem: 'FileSystem API',
+      fullscreenKeyboard: 'Fullscreen keyboard', pointerEnabled: 'Pointer events',
+      quirksMode: 'Quirks mode', webVR: 'WebVR', forceTouch: 'Force Touch',
+      deviceMotion: 'Device motion', deviceOrientation: 'Device orientation'
+    };
 
-    function render() {
-      out.textContent = JSON.stringify(detector.toFlags(), null, 2);
+    function pretty(name) {
+      if (DISPLAY[name]) return DISPLAY[name];
+      return name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
     }
 
+    function card(flag, value, href) {
+      var tag = href ? 'a' : 'div';
+      var state = typeof value === 'boolean' ? (value ? 'on' : 'off') : 'value';
+      var label = typeof value === 'boolean' ? (value ? 'on' : 'off') : String(value);
+      var attrs = href ? ' href="' + href + '" target="_blank" rel="noopener" title="Open on MDN: ' + pretty(flag) + '"' : '';
+      return '<' + tag + ' class="flag-card"' + attrs + '>' +
+        '<span class="name">' + pretty(flag) + '</span>' +
+        '<span class="state ' + state + '">' + label + '</span>' +
+        '</' + tag + '>';
+    }
+
+    function kvCard(label, value) {
+      return '<div class="kv-card"><div class="k">' + label + '</div><div class="v">' + String(value) + '</div></div>';
+    }
+
+    function render() {
+      var flags = detector.toFlags();
+      var browser = detector.browser || {};
+      var os = detector.os || {};
+      var cpu = detector.cpu || {};
+      var gpu = detector.gpu || {};
+
+      // SOFTWARE
+      var soft = [];
+      soft.push(kvCard('Browser', (browser.name || 'n/a') + (browser.version ? ' ' + browser.version : '')));
+      var engine = flags.engine || {};
+      soft.push(kvCard('Engine', (engine.name || 'n/a') + (engine.version && engine.version !== 'n/a' ? ' ' + engine.version : '')));
+      soft.push(kvCard('OS', (os.name || 'n/a') + (os.version ? ' ' + os.version : '') +
+        (os.versionName && os.versionName !== 'n/a' ? ' · ' + os.versionName : '')));
+      document.getElementById('cards-software').innerHTML = soft.join('');
+
+      // HARDWARE
+      var hw = [];
+      hw.push(kvCard('Platform', detector.platform || 'n/a'));
+      hw.push(kvCard('CPU', [cpu.vendor, cpu.architecture, cpu.cores ? cpu.cores + ' cores' : ''].filter(Boolean).join(' · ')));
+      hw.push(kvCard('GPU', [gpu.vendor, gpu.model].filter(function (v) { return v && v !== 'n/a'; }).join(' · ') || 'n/a'));
+      document.getElementById('cards-hardware').innerHTML = hw.join('');
+
+      // WEB APIs (feature flags: flags with a boolean or numeric value, top-level only)
+      var apis = Object.keys(detector.feature || {}).filter(function (k) {
+        return typeof detector.feature[k] !== 'object';
+      }).sort();
+      var html = apis.map(function (flag) {
+        return card(flag, detector.feature[flag], MDN_LINKS[flag] || null);
+      }).join('');
+      document.getElementById('cards-apis').innerHTML = html;
+
+      // RIGHT: raw output (previous demo content)
+      document.getElementById('out').textContent = JSON.stringify(flags, null, 2);
+    }
+
+    var detector = new Detector();
     render();
-    // real OS version via User-Agent Client Hints (e.g. macOS 26 'Tahoe')
+    // real OS/CPU via Client Hints (chromium) or GPU/Safari evidence — then re-render
     detector.upgrade().then(render);
   </script>
 </body>
