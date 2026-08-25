@@ -1,5 +1,43 @@
 ## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2025-8-25)
 
+### Toolchain (esbuild)
+- **esbuild** replaces rollup + babel + plugins (see ADR `docs/adr/001`)
+- builds: per-package CJS/ESM (workspace deps external), root CJS/ESM, self-contained browser bundles
+- **fixed global export**: `dist/detector.browser(.min).js` now assigns the `Detector` **class** to the
+  global — `new Detector()` works with a plain `<script>` tag (previously `window.Detector` was a namespace object)
+- `__VERSION__` injected at build time via esbuild `define`
+- build targets `es2016` + bundled conditional polyfills → old-platform friendly; runtime-agnostic
+  roots (`self`/`window`/`globalThis`/`global` with `typeof` guards — Node-safe), fixed bare-`window`
+  usages (`Brave`, `MSStream`) that crashed under Node
+- **fix: Chromium-based Edge mis-detected as Chrome** — UA token is `Edg/` (regex now `(?:edge|edg)`)
+- fix: desktop Opera mis-detected as `OperaMobile` (OPR token now requires a mobile marker)
+
+### Monorepo & release readiness
+- npm-workspaces monorepo mirroring v2 layout (`@detector-js/{core,feature,software,hardware,detector}`, **3.0.0** each)
+- `exports` map (import/require/types), `types` (`.d.ts`), `sideEffects`, `engines`, `publishConfig`, `unpkg`/`jsdelivr`
+- zero external runtime dependencies; `workspace:*` internally (resolved at publish)
+- `Platform` decoupled from `software` (injected `flags` object, like v2)
+
+### Tests & quality
+- unit tests per package (`node:test`) + shared suite `test/unit` (UA table, WebAPI flags, platform, parity)
+- integration smoke `test/smoke.js`; **e2e with Playwright** (`test/e2e`) in real Chromium
+- **e2e privacy contract**: a page embedding the bundle performs ZERO network requests; output contains no endpoints/telemetry
+- 0 lint errors (eslint airbnb tuned); CI workflow `.github/workflows/ci.yml` (Node 18/20/22)
+
+### Site & community
+- marketing landing page `index.html` (live detection via `new Detector()`, feature grid, integrations, privacy section) + `demo.html`
+- **PRIVACY.md** — full legal walkthrough: GDPR (arts. 4/5/25/30/32/35, recitals 26/30), ePrivacy 2002/58 art. 5(3),
+  Italy D.Lgs. 196/2003 + 101/2018 & Garante practice, US CCPA/CPRA + other state laws + FTC, PIPEDA/LGPD/UK-GDPR & PECR,
+  Eckersley (2010), Acar et al. (2013); developer checklists
+- governance & community: `GOVERNANCE.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, issue/PR templates
+- docs: getting-started, API reference, toolchain, browser-support, ADR
+- examples: node-cjs, node-esm, browser-global, bundler
+- per-package READMEs
+
+[...full changes](https://github.com/pixu1980/detector-js/compare/v1.4.0...v3.0.0)
+
+## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2025-8-25)
+
 ### Monorepo (BREAKING CHANGES)
 
 - aligned versioning to the latest npm release (2.0.11) and prepared the next **major 3.0.0**

@@ -28,9 +28,9 @@
     }
   },
   "scripts": {
-    "test": "node ./__tests__/core.test.js",
-    "build": "rollup -c",
-    "watch": "rollup -c -w"
+    "test": "node --test ./__tests__/core.test.js",
+    "build": "node ../../scripts/build-package.mjs",
+    "watch": "node ../../scripts/build-package.mjs --watch"
   },
   "directories": {
     "dist": "dist",
@@ -40,5 +40,22 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "types": "./lib/core.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -173,7 +173,7 @@ export class Browser extends CssFlagsClass {
    */
   get Brave() {
     return this._checkAssertsResult(Asserts.one([
-      !!window.navigator.brave || !!window.navigator.Brave,
+      !!this._navigator.brave || !!this._navigator.Brave,
       this._reTest('(?:brave)' + this._reStrVerNum),
     ]));
   }
@@ -1211,7 +1211,7 @@ export class Browser extends CssFlagsClass {
   get Edge() {
     return this._checkAssertsResult(Asserts.all([
       !this.IE,
-      this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge)' + this._reStrVerNum),
+      this._reTest('(?:^(?:(?!mobile|android|ios).)*)(?:edge|edg)' + this._reStrVerNum),
     ]));
   }
 
@@ -1336,7 +1336,7 @@ export class Browser extends CssFlagsClass {
       this.OperaMini,
       this.OperaCoast,
       this.OperaTouch,
-      this._reTest('(?:op(?:r|ios))' + this._reStrVerNum),
+      this._reTest('(?:op(?:r|ios))' + this._reStrVerNum) && /(?:mobile|mobi|iphone|ipad|ipod|android|tablet)/i.test(this._ua),
     ]));
   }
 

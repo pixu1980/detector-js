@@ -1,18 +1,14 @@
-import { FlagsClass } from '@detector-js/core';
-import { Feature, AudioFeature, VideoFeature } from '@detector-js/feature';
-import { Device, CPU, GPU, Platform } from '@detector-js/hardware';
-import { Engine, Browser, OS } from '@detector-js/software';
-
-/*jshint expr: true */
-
-/**
- *
- *
- * @export
- * @class Detector
- * @extends {FlagsClass}
- */
-class Detector extends FlagsClass {
+// packages/detector/lib/detector.js
+import { FlagsClass } from "@detector-js/core";
+import { Feature, AudioFeature, VideoFeature } from "@detector-js/feature";
+import {
+  Platform,
+  Device,
+  CPU,
+  GPU
+} from "@detector-js/hardware";
+import { Browser, Engine, OS } from "@detector-js/software";
+var Detector = class extends FlagsClass {
   /**
    * Creates an instance of Detector.
    * @param {boolean} [cssFlags=false]
@@ -21,22 +17,15 @@ class Detector extends FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = 'djs') {
+  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = "djs") {
     super(ua);
     this._values = values;
     this._cssFlags = !!cssFlags ? [] : null;
-    this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
-
-    //! Features
+    this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? "--" : "");
     this.checkFeature();
-
-    //! Software
     this.checkEngine();
     this.checkBrowser();
     this.checkOS();
-
-    //! Hardware
-    // this.checkDevice();
     this.checkCPU();
     this.checkGPU();
     this.checkPlatform();
@@ -61,7 +50,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(feature.toCssFlags(), audio.toCssFlags(), video.toCssFlags());
     }
   }
-
   //! Software
   /**
    *
@@ -80,7 +68,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(engine.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -98,7 +85,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(browser.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -116,7 +102,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(os.toCssFlags());
     }
   }
-
   //! Hardware
   /**
    *
@@ -131,7 +116,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(device.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -149,7 +133,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -163,7 +146,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(gpu.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -181,7 +163,6 @@ class Detector extends FlagsClass {
       this._cssFlags = this._cssFlags.concat(platform.toCssFlags());
     }
   }
-
   //! CSS Flags
   /**
    *
@@ -191,24 +172,26 @@ class Detector extends FlagsClass {
    */
   setCssFlags() {
     if (!!this._cssFlags) {
-      const cssFlagsPrefixed = this._cssFlags.map(cssFlag => {
+      const cssFlagsPrefixed = this._cssFlags.map((cssFlag) => {
         return this._cssFlagsPrefix + cssFlag;
       });
-      const htmlElement = document.documentElement || document.querySelector('html');
-      cssFlagsPrefixed.forEach(cssFlag => {
-        return htmlElement.className.replace(cssFlag, '');
+      const htmlElement = document.documentElement || document.querySelector("html");
+      cssFlagsPrefixed.forEach((cssFlag) => {
+        return htmlElement.className.replace(cssFlag, "");
       });
-      htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+      htmlElement.className += cssFlagsPrefixed.join(" ").trim();
     }
   }
+};
+if (typeof process !== "undefined" && process.env && true) {
+  console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
-
-//! Development-only startup log (upstream v2 behavior). The `"3.0.0"`
-//! placeholder is rewritten at build time by rollup-plugin-replace.
-if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-console
-  console.log('DetectorJS Detector Module v' + ("3.0.0" ) + ' initialized');
-}
-
-export { Detector };
+export {
+  Detector
+};
+//! Features
+//! Hardware
+//! Software
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=detector.mjs.map

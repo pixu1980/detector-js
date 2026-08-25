@@ -13,7 +13,7 @@ export class FlagsClass {
    */
   constructor(ua = null) {
     this._booleanFlagsValuePropertyName = 'name';
-    this._root = self || window || global || {};
+    this._root = (typeof self !== 'undefined' && self) || (typeof window !== 'undefined' && window) || (typeof globalThis !== 'undefined' && globalThis) || (typeof global !== 'undefined' && global) || {};
     this._process = this._root.process || {};
     this._navigator = this._root.navigator || {};
     this._document = this._root.document || null;

@@ -1,13 +1,9 @@
-import { CssFlagsClass, Asserts } from '@detector-js/core';
+// packages/feature/lib/feature.js
+import { Asserts as Asserts3, CssFlagsClass as CssFlagsClass3 } from "@detector-js/core";
 
-/**
- *
- *
- * @export
- * @class AudioFeature
- * @extends {CssFlagsClass}
- */
-class AudioFeature extends CssFlagsClass {
+// packages/feature/lib/audioFeature.js
+import { Asserts, CssFlagsClass } from "@detector-js/core";
+var AudioFeature = class extends CssFlagsClass {
   /**
    * Creates an instance of AudioFeature.
    * @param {any} [ua=null]
@@ -16,7 +12,7 @@ class AudioFeature extends CssFlagsClass {
    *
    * @memberOf AudioFeature
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'audio') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "audio") {
     super(ua, flags, cssFlagsPrefix);
     this._createTestElements();
     this.context = this.getContext();
@@ -29,16 +25,14 @@ class AudioFeature extends CssFlagsClass {
       m4a: this.getM4a()
     };
   }
-
   /**
    *
    *
    * @memberof AudioFeature
    */
   _createTestElements() {
-    this._audioElement = this._document.createElement('audio');
+    this._audioElement = this._document.createElement("audio");
   }
-
   // /**
   //  *
   //  *
@@ -46,10 +40,8 @@ class AudioFeature extends CssFlagsClass {
   //  */
   // _destroyTestElements() {
   //   this._audioElement = null;
-
   //   delete this._audioElement;
   // }
-
   /**
    *
    *
@@ -58,9 +50,13 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   get supported() {
-    return Asserts.all(['Audio' in this._root, 'HTMLAudioElement' in this._root, 'HTMLMediaElement' in this._root, () => !!this._audioElement && 'canPlayType' in this._audioElement && this._audioElement instanceof this._root.HTMLAudioElement && this._audioElement instanceof this._root.HTMLMediaElement], true);
+    return Asserts.all([
+      "Audio" in this._root,
+      "HTMLAudioElement" in this._root,
+      "HTMLMediaElement" in this._root,
+      () => !!this._audioElement && "canPlayType" in this._audioElement && this._audioElement instanceof this._root.HTMLAudioElement && this._audioElement instanceof this._root.HTMLMediaElement
+    ], true);
   }
-
   /**
    *
    *
@@ -69,9 +65,11 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getContext() {
-    return Asserts.one(['AudioContext' in this._root, 'webkitAudioContext' in this._root]);
+    return Asserts.one([
+      "AudioContext" in this._root,
+      "webkitAudioContext" in this._root
+    ]);
   }
-
   /**
    *
    *
@@ -80,9 +78,10 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getMp3() {
-    return Asserts.all([() => this.supported && this._audioElement.canPlayType('audio/mpeg;').replace(/^no$/, '') !== ''], true);
+    return Asserts.all([
+      () => this.supported && this._audioElement.canPlayType("audio/mpeg;").replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -91,9 +90,10 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getWebm() {
-    return Asserts.all([() => this.supported && this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '') !== ''], true);
+    return Asserts.all([
+      () => this.supported && this._audioElement.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -102,9 +102,10 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getOgg() {
-    return Asserts.all([() => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, '') !== ''], true);
+    return Asserts.all([
+      () => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -113,9 +114,10 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getOpus() {
-    return Asserts.all([() => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, '') !== ''], true);
+    return Asserts.all([
+      () => this.supported && this._audioElement.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -124,9 +126,10 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getWav() {
-    return Asserts.all([() => this.supported && this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, '') !== ''], true);
+    return Asserts.all([
+      () => this.supported && this._audioElement.canPlayType('audio/wav; codecs="1"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -135,18 +138,15 @@ class AudioFeature extends CssFlagsClass {
    * @memberOf AudioFeature
    */
   getM4a() {
-    return Asserts.all([() => this.supported && (this._audioElement.canPlayType('audio/x-m4a;').replace(/^no$/, '') || this._audioElement.canPlayType('audio/aac;').replace(/^no$/, '')) !== ''], true);
+    return Asserts.all([
+      () => this.supported && (this._audioElement.canPlayType("audio/x-m4a;").replace(/^no$/, "") || this._audioElement.canPlayType("audio/aac;").replace(/^no$/, "")) !== ""
+    ], true);
   }
-}
+};
 
-/**
- *
- *
- * @export
- * @class VideoFeature
- * @extends {CssFlagsClass}
- */
-class VideoFeature extends CssFlagsClass {
+// packages/feature/lib/videoFeature.js
+import { Asserts as Asserts2, CssFlagsClass as CssFlagsClass2 } from "@detector-js/core";
+var VideoFeature = class extends CssFlagsClass2 {
   /**
    * Creates an instance of VideoFeature.
    * @param {any} [ua=null]
@@ -155,7 +155,7 @@ class VideoFeature extends CssFlagsClass {
    *
    * @memberOf VideoFeature
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'video') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "video") {
     super(ua, flags, cssFlagsPrefix);
     this._createTestElements();
     this.formats = {
@@ -164,16 +164,14 @@ class VideoFeature extends CssFlagsClass {
       webm: this.getWebm()
     };
   }
-
   /**
    *
    *
    * @memberof VideoFeature
    */
   _createTestElements() {
-    this._videoElement = this._document.createElement('video');
+    this._videoElement = this._document.createElement("video");
   }
-
   // /**
   //  *
   //  *
@@ -181,10 +179,8 @@ class VideoFeature extends CssFlagsClass {
   //  */
   // _destroyTestElements() {
   //   this._viewElement = null;
-
   //   delete this._videoElement;
   // }
-
   /**
    *
    *
@@ -193,9 +189,12 @@ class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   get supported() {
-    return Asserts.all(['HTMLVideoElement' in this._root, 'HTMLMediaElement' in this._root, () => !!this._videoElement && 'canPlayType' in this._videoElement && this._videoElement instanceof this._root.HTMLVideoElement && this._videoElement instanceof this._root.HTMLMediaElement], true);
+    return Asserts2.all([
+      "HTMLVideoElement" in this._root,
+      "HTMLMediaElement" in this._root,
+      () => !!this._videoElement && "canPlayType" in this._videoElement && this._videoElement instanceof this._root.HTMLVideoElement && this._videoElement instanceof this._root.HTMLMediaElement
+    ], true);
   }
-
   /**
    *
    *
@@ -204,9 +203,10 @@ class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getMp4() {
-    return Asserts.all([() => this.supported && this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, '') !== ''], true);
+    return Asserts2.all([
+      () => this.supported && this._videoElement.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -215,9 +215,10 @@ class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getOgv() {
-    return Asserts.all([() => this.supported && this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, '') !== ''], true);
+    return Asserts2.all([
+      () => this.supported && this._videoElement.canPlayType('video/ogg; codecs="theora, vorbis"').replace(/^no$/, "") !== ""
+    ], true);
   }
-
   /**
    *
    *
@@ -226,20 +227,14 @@ class VideoFeature extends CssFlagsClass {
    * @memberOf VideoFeature
    */
   getWebm() {
-    return Asserts.all([() => this.supported && this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '') !== ''], true);
+    return Asserts2.all([
+      () => this.supported && this._videoElement.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, "") !== ""
+    ], true);
   }
-}
+};
 
-/* eslint-disable no-return-assign */
-
-/**
- *
- *
- * @export
- * @class Feature
- * @extends {CssFlagsClass}
- */
-class Feature extends CssFlagsClass {
+// packages/feature/lib/feature.js
+var Feature = class extends CssFlagsClass3 {
   /**
    * Creates an instance of Feature.
    * @param {any} [ua=null]
@@ -248,7 +243,7 @@ class Feature extends CssFlagsClass {
    *
    * @memberOf Feature
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'feature') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "feature") {
     super(ua, flags, cssFlagsPrefix);
     this._createTestElements();
     this.addEventListener = this.getAddEventListener();
@@ -307,7 +302,6 @@ class Feature extends CssFlagsClass {
     this.webXr = this.getWebXr();
     this.worker = this.getWorker();
   }
-
   /**
    *
    *
@@ -319,15 +313,10 @@ class Feature extends CssFlagsClass {
    */
   _getCssPrefixedProp(prop, prefixes = this._cssPrefixes) {
     prop = prop.toCamelCase();
-    const prefixedProps = prefixes.map(item => {
-      return (item === 'spec' ? '' : '-' + item + '-') + prop;
+    const prefixedProps = prefixes.map((item) => {
+      return (item === "spec" ? "" : "-" + item + "-") + prop;
     });
-
-    // if ('CSS' in this._root && 'supports' in this._root.CSS) {
-    //   return this._root.CSS.supports(prefixedProps.map(item => '(' + item + ': inherit)').join(' or '));
-    // }
-
-    const prefixedPropsFound = prefixedProps.filter(item => {
+    const prefixedPropsFound = prefixedProps.filter((item) => {
       return item in this._div.style;
     });
     if (prefixedPropsFound.length > 0) {
@@ -335,7 +324,6 @@ class Feature extends CssFlagsClass {
     }
     return null;
   }
-
   /**
    *
    *
@@ -348,7 +336,6 @@ class Feature extends CssFlagsClass {
   _checkCssPrefixedProp(prop, prefixes = this._cssPrefixes) {
     return !!this._getCssPrefixedProp(prop, prefixes);
   }
-
   /**
    *
    *
@@ -365,14 +352,13 @@ class Feature extends CssFlagsClass {
       this._div.style[prefixedProp] = value;
       const computedStylePropValue = this._root.getComputedStyle(this._div).getPropertyValue(prefixedProp);
       this._document.body.removeChild(this._div);
-      if (!!computedStylePropValue && typeof computedStylePropValue === 'string') {
+      if (!!computedStylePropValue && typeof computedStylePropValue === "string") {
         return computedStylePropValue;
       }
       return null;
     }
     return null;
   }
-
   /**
    *
    *
@@ -384,24 +370,22 @@ class Feature extends CssFlagsClass {
    */
   _checkCssPrefixedPropValue(prop, value) {
     const prefixedPropValue = this._getCssPrefixedPropValue(prop, value);
-    return !!prefixedPropValue && prefixedPropValue !== 'none';
+    return !!prefixedPropValue && prefixedPropValue !== "none";
   }
-
   /**
    *
    *
    * @memberof Feature
    */
   _createTestElements() {
-    this._cssPrefixes = ['spec', 'webkit', 'moz', 'ms', 'o'];
-    this._script = this._document.createElement('script');
-    this._canvas = this._document.createElement('canvas');
-    this._div = this._document.createElement('div');
-    this._input = this._document.createElement('input');
-    this._img = this._document.createElement('img');
+    this._cssPrefixes = ["spec", "webkit", "moz", "ms", "o"];
+    this._script = this._document.createElement("script");
+    this._canvas = this._document.createElement("canvas");
+    this._div = this._document.createElement("div");
+    this._input = this._document.createElement("input");
+    this._img = this._document.createElement("img");
     this._xmlHttpRequest = new this._root.XMLHttpRequest();
   }
-
   // /**
   //  *
   //  *
@@ -409,16 +393,13 @@ class Feature extends CssFlagsClass {
   //  */
   // _destroyTestElements() {
   //   this._cssPrefixes = null;
-
   //   this._script = null;
   //   this._canvas = null;
   //   this._div = null;
   //   this._input = null;
   //   this._img = null;
   //   this._xmlHttpRequest = null;
-
   //   delete this._cssPrefixes;
-
   //   delete this._script;
   //   delete this._canvas;
   //   delete this._div;
@@ -426,7 +407,6 @@ class Feature extends CssFlagsClass {
   //   delete this._img;
   //   delete this._xmlHttpRequest;
   // }
-
   /**
    *
    *
@@ -435,9 +415,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getAddEventListener() {
-    return 'addEventListener' in this._root;
+    return "addEventListener" in this._root;
   }
-
   /**
    *
    *
@@ -446,9 +425,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getAsyncScript() {
-    return 'async' in this._script;
+    return "async" in this._script;
   }
-
   /**
    *
    *
@@ -457,9 +435,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getBattery() {
-    return 'battery' in this._navigator;
+    return "battery" in this._navigator;
   }
-
   /**
    *
    *
@@ -468,9 +445,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getBluetooth() {
-    return 'bluetooth' in this._navigator;
+    return "bluetooth" in this._navigator;
   }
-
   /**
    *
    *
@@ -479,9 +455,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getBroadcastChannel() {
-    return 'BroadcastChannel' in this._root;
+    return "BroadcastChannel" in this._root;
   }
-
   /**
    *
    *
@@ -490,9 +465,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getCaches() {
-    return 'caches' in this._root;
+    return "caches" in this._root;
   }
-
   /**
    *
    *
@@ -501,9 +475,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getClipboard() {
-    return 'clipboard' in this._navigator;
+    return "clipboard" in this._navigator;
   }
-
   /**
    *
    *
@@ -512,9 +485,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getCors() {
-    return 'XMLHttpRequest' in this._root && 'withCredentials' in this._xmlHttpRequest;
+    return "XMLHttpRequest" in this._root && "withCredentials" in this._xmlHttpRequest;
   }
-
   /**
    *
    *
@@ -523,9 +495,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getCredentials() {
-    return 'credentials' in this._navigator;
+    return "credentials" in this._navigator;
   }
-
   /**
    *
    *
@@ -534,9 +505,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getDeferScript() {
-    return 'defer' in this._script;
+    return "defer" in this._script;
   }
-
   /**
    *
    *
@@ -545,9 +515,13 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFile() {
-    return Asserts.all(['File' in this._root, 'FileReader' in this._root, 'FileList' in this._root, 'Blob' in this._root]);
+    return Asserts3.all([
+      "File" in this._root,
+      "FileReader" in this._root,
+      "FileList" in this._root,
+      "Blob" in this._root
+    ]);
   }
-
   /**
    *
    *
@@ -556,9 +530,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFileSystem() {
-    return 'requestFileSystem' in this._root;
+    return "requestFileSystem" in this._root;
   }
-
   /**
    *
    *
@@ -567,9 +540,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFetch() {
-    return 'fetch' in this._root && typeof this._root.fetch === 'function';
+    return "fetch" in this._root && typeof this._root.fetch === "function";
   }
-
   /**
    *
    *
@@ -578,9 +550,13 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFullscreen() {
-    return Asserts.one(['requestFullscreen' in this._canvas, 'webkitRequestFullscreen' in this._canvas, 'msRequestFullscreen' in this._canvas, 'mozRequestFullScreen' in this._canvas]);
+    return Asserts3.one([
+      "requestFullscreen" in this._canvas,
+      "webkitRequestFullscreen" in this._canvas,
+      "msRequestFullscreen" in this._canvas,
+      "mozRequestFullScreen" in this._canvas
+    ]);
   }
-
   /**
    *
    *
@@ -589,9 +565,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getFullscreenKeyboard() {
-    return Asserts.all([() => 'Element' in this._root && 'ALLOW_KEYBOARD_INPUT' in this._root.Element], true);
+    return Asserts3.all([
+      () => "Element" in this._root && "ALLOW_KEYBOARD_INPUT" in this._root.Element
+    ], true);
   }
-
   /**
    *
    *
@@ -600,9 +577,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getGeolocation() {
-    return 'geolocation' in this._navigator;
+    return "geolocation" in this._navigator;
   }
-
   /**
    *
    *
@@ -611,9 +587,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getGamepad() {
-    return 'getGamepads' in this._navigator;
+    return "getGamepads" in this._navigator;
   }
-
   /**
    *
    *
@@ -622,9 +597,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getHistoryAPI() {
-    return Asserts.all([() => 'history' in this._root && 'pushState' in this._root.history], true);
+    return Asserts3.all([
+      () => "history" in this._root && "pushState" in this._root.history
+    ], true);
   }
-
   /**
    *
    *
@@ -633,9 +609,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getIndexedDB() {
-    return 'indexedDB' in this._root;
+    return "indexedDB" in this._root;
   }
-
   /**
    *
    *
@@ -644,9 +619,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getIntersectionObserver() {
-    return 'IntersectionObserver' in this._root;
+    return "IntersectionObserver" in this._root;
   }
-
   /**
    *
    *
@@ -655,9 +629,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getLittleEndian() {
-    return Asserts.all([this.getTypedArray.bind(this), () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0], true);
+    return Asserts3.all([
+      this.getTypedArray.bind(this),
+      () => new this._root.Int8Array(new this._root.Int16Array([1]).buffer)[0] > 0
+    ], true);
   }
-
   /**
    *
    *
@@ -666,14 +642,17 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getLocalStorage() {
-    return Asserts.one([() => 'localStorage' in this._root], true) && Asserts.one([() => {
-      const test = 'x';
-      this._root.localStorage.setItem(test, test);
-      this._root.localStorage.removeItem(test);
-      return true;
-    }], true);
+    return Asserts3.one([
+      () => "localStorage" in this._root
+    ], true) && Asserts3.one([
+      () => {
+        const test = "x";
+        this._root.localStorage.setItem(test, test);
+        this._root.localStorage.removeItem(test);
+        return true;
+      }
+    ], true);
   }
-
   /**
    *
    *
@@ -682,9 +661,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getMatchMedia() {
-    return 'matchMedia' in this._root;
+    return "matchMedia" in this._root;
   }
-
   /**
    *
    *
@@ -693,9 +671,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getMediaCapabilities() {
-    return 'mediaCapabilities' in this._navigator;
+    return "mediaCapabilities" in this._navigator;
   }
-
   /**
    *
    *
@@ -704,9 +681,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getMediaRecorder() {
-    return 'MediaRecorder' in this._root;
+    return "MediaRecorder" in this._root;
   }
-
   /**
    *
    *
@@ -715,9 +691,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getMediaSession() {
-    return 'mediaSession' in this._navigator;
+    return "mediaSession" in this._navigator;
   }
-
   /**
    *
    *
@@ -726,9 +701,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getNFC() {
-    return 'nfc' in this._navigator;
+    return "nfc" in this._navigator;
   }
-
   /**
    *
    *
@@ -737,9 +711,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getNotifications() {
-    return 'Notification' in this._root;
+    return "Notification" in this._root;
   }
-
   /**
    *
    *
@@ -748,9 +721,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getOffscreenCanvas() {
-    return 'OffscreenCanvas' in this._root;
+    return "OffscreenCanvas" in this._root;
   }
-
   /**
    *
    *
@@ -759,9 +731,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getOnline() {
-    return 'onLine' in this._navigator && !!this._navigator.onLine;
+    return "onLine" in this._navigator && !!this._navigator.onLine;
   }
-
   /**
    *
    *
@@ -770,9 +741,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getPaymentRequest() {
-    return 'PaymentRequest' in this._root;
+    return "PaymentRequest" in this._root;
   }
-
   /**
    *
    *
@@ -781,9 +751,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getPermissions() {
-    return 'permissions' in this._navigator;
+    return "permissions" in this._navigator;
   }
-
   /**
    *
    *
@@ -792,9 +761,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getQuerySelector() {
-    return 'querySelector' in this._document;
+    return "querySelector" in this._document;
   }
-
   /**
    *
    *
@@ -803,9 +771,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getQuerySelectorAll() {
-    return 'querySelectorAll' in this._document;
+    return "querySelectorAll" in this._document;
   }
-
   /**
    *
    *
@@ -814,9 +781,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getResizeObserver() {
-    return 'ResizeObserver' in this._root;
+    return "ResizeObserver" in this._root;
   }
-
   /**
    *
    *
@@ -825,9 +791,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getSerial() {
-    return 'serial' in this._navigator;
+    return "serial" in this._navigator;
   }
-
   /**
    *
    *
@@ -836,9 +801,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getSpeechSynthesis() {
-    return 'speechSynthesis' in this._navigator && 'SpeechSynthesisUtterance' in this._root;
+    return "speechSynthesis" in this._navigator && "SpeechSynthesisUtterance" in this._root;
   }
-
   /**
    *
    *
@@ -847,9 +811,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getStorage() {
-    return 'storage' in this._navigator;
+    return "storage" in this._navigator;
   }
-
   /**
    *
    *
@@ -858,9 +821,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getStructuredClone() {
-    return 'structuredClone' in this._root && typeof this._root.structuredClone === 'function';
+    return "structuredClone" in this._root && typeof this._root.structuredClone === "function";
   }
-
   /**
    *
    *
@@ -869,9 +831,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getServiceWorker() {
-    return 'serviceWorker' in this._navigator;
+    return "serviceWorker" in this._navigator;
   }
-
   /**
    *
    *
@@ -880,9 +841,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getTypedArray() {
-    return Asserts.all([() => 'Int8Array' in this._root && typeof this._root.Int8Array !== 'undefined'], true);
+    return Asserts3.all([
+      () => "Int8Array" in this._root && typeof this._root.Int8Array !== "undefined"
+    ], true);
   }
-
   /**
    *
    *
@@ -891,9 +853,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getUSB() {
-    return 'usb' in this._navigator;
+    return "usb" in this._navigator;
   }
-
   /**
    *
    *
@@ -902,9 +863,13 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getUserMedia() {
-    return Asserts.one(['getUserMedia' in this._navigator, 'webkitGetUserMedia' in this._navigator, 'mozGetUserMedia' in this._navigator, 'msGetUserMedia' in this._navigator]);
+    return Asserts3.one([
+      "getUserMedia" in this._navigator,
+      "webkitGetUserMedia" in this._navigator,
+      "mozGetUserMedia" in this._navigator,
+      "msGetUserMedia" in this._navigator
+    ]);
   }
-
   /**
    *
    *
@@ -913,9 +878,13 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getVibration() {
-    return Asserts.one(['vibrate' in this._navigator, 'webkitVibrate' in this._navigator, 'mozVibrate' in this._navigator, 'msVibrate' in this._navigator]);
+    return Asserts3.one([
+      "vibrate" in this._navigator,
+      "webkitVibrate" in this._navigator,
+      "mozVibrate" in this._navigator,
+      "msVibrate" in this._navigator
+    ]);
   }
-
   /**
    *
    *
@@ -924,9 +893,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getVisualViewport() {
-    return 'visualViewport' in this._root;
+    return "visualViewport" in this._root;
   }
-
   /**
    *
    *
@@ -935,9 +903,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWakeLock() {
-    return 'wakeLock' in this._navigator;
+    return "wakeLock" in this._navigator;
   }
-
   /**
    *
    *
@@ -946,9 +913,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebAssembly() {
-    return 'WebAssembly' in this._root && 'compile' in this._root.WebAssembly;
+    return "WebAssembly" in this._root && "compile" in this._root.WebAssembly;
   }
-
   /**
    *
    *
@@ -957,9 +923,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebAuthn() {
-    return 'PublicKeyCredential' in this._root;
+    return "PublicKeyCredential" in this._root;
   }
-
   /**
    *
    *
@@ -968,9 +933,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebCrypto() {
-    return Asserts.all(['crypto' in this._root, () => 'subtle' in this._root.crypto], true);
+    return Asserts3.all([
+      "crypto" in this._root,
+      () => "subtle" in this._root.crypto
+    ], true);
   }
-
   /**
    *
    *
@@ -979,9 +946,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebLocks() {
-    return 'locks' in this._navigator;
+    return "locks" in this._navigator;
   }
-
   /**
    *
    *
@@ -990,9 +956,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebRTC() {
-    return 'RTCPeerConnection' in this._root;
+    return "RTCPeerConnection" in this._root;
   }
-
   /**
    *
    *
@@ -1001,9 +966,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebShare() {
-    return 'share' in this._navigator;
+    return "share" in this._navigator;
   }
-
   /**
    *
    *
@@ -1012,9 +976,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebSocket() {
-    return 'WebSocket' in this._root;
+    return "WebSocket" in this._root;
   }
-
   /**
    *
    *
@@ -1023,9 +986,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWebXr() {
-    return 'xr' in this._navigator;
+    return "xr" in this._navigator;
   }
-
   /**
    *
    *
@@ -1034,9 +996,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   getWorker() {
-    return 'Worker' in this._root;
+    return "Worker" in this._root;
   }
-
   /**
    *
    *
@@ -1045,9 +1006,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerEnabled() {
-    return Asserts.one(['pointerEnabled' in this._navigator, 'msPointerEnabled' in this._navigator]);
+    return Asserts3.one([
+      "pointerEnabled" in this._navigator,
+      "msPointerEnabled" in this._navigator
+    ]);
   }
-
   /**
    *
    *
@@ -1058,7 +1021,6 @@ class Feature extends CssFlagsClass {
   get pixelRatio() {
     return this._root.devicePixelRatio || 1;
   }
-
   /**
    *
    *
@@ -1067,9 +1029,12 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerLock() {
-    return Asserts.one(['pointerLockElement' in this._document, 'webkitPointerLockElement' in this._document, 'mozPointerLockElement' in this._document]);
+    return Asserts3.one([
+      "pointerLockElement" in this._document,
+      "webkitPointerLockElement" in this._document,
+      "mozPointerLockElement" in this._document
+    ]);
   }
-
   /**
    *
    *
@@ -1078,9 +1043,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get quirksMode() {
-    return this._document.compatMode !== 'CSS1Compat';
+    return this._document.compatMode !== "CSS1Compat";
   }
-
   /**
    * Test if CSS 3D transforms are supported
    *
@@ -1089,9 +1053,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get css3D() {
-    return Asserts.all([this._checkCssPrefixedPropValue.bind(this, 'transform', 'translate3d(1px,1px,1px)'), this._checkCssPrefixedProp.bind(this, 'perspective')], true);
+    return Asserts3.all([
+      this._checkCssPrefixedPropValue.bind(this, "transform", "translate3d(1px,1px,1px)"),
+      this._checkCssPrefixedProp.bind(this, "perspective")
+    ], true);
   }
-
   // Test if CSS transforms are supported
   /**
    *
@@ -1101,9 +1067,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get cssTransform() {
-    return Asserts.one([this._checkCssPrefixedProp.bind(this, 'transform-origin')], true);
+    return Asserts3.one([
+      this._checkCssPrefixedProp.bind(this, "transform-origin")
+    ], true);
   }
-
   // Test if CSS transitions are supported
   /**
    *
@@ -1113,9 +1080,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get cssTransition() {
-    return Asserts.one([this._checkCssPrefixedProp.bind(this, 'transition')], true);
+    return Asserts3.one([
+      this._checkCssPrefixedProp.bind(this, "transition")
+    ], true);
   }
-
   // Test if Device Motion is supported
   /**
    *
@@ -1125,9 +1093,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get deviceMotion() {
-    return 'DeviceMotionEvent' in this._root;
+    return "DeviceMotionEvent" in this._root;
   }
-
   // Test if Device Orientation is supported
   /**
    *
@@ -1137,9 +1104,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get deviceOrientation() {
-    return 'DeviceOrientationEvent' in this._root;
+    return "DeviceOrientationEvent" in this._root;
   }
-
   // Test if Context Menu is supported
   /**
    *
@@ -1149,9 +1115,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get contextMenu() {
-    return Asserts.all(['contextMenu' in this._document, 'HTMLMenuItemElement' in this._root]);
+    return Asserts3.all([
+      "contextMenu" in this._document,
+      "HTMLMenuItemElement" in this._root
+    ]);
   }
-
   // Test if classList API is supported
   /**
    *
@@ -1161,9 +1129,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get classList() {
-    return 'classList' in this._document;
+    return "classList" in this._document;
   }
-
   // Test if placeholder attribute is supported
   /**
    *
@@ -1173,9 +1140,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get placeholder() {
-    return 'placeholder' in this._input;
+    return "placeholder" in this._input;
   }
-
   // Test if viewport units are supported
   /**
    *
@@ -1185,9 +1151,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get viewportUnit() {
-    return Asserts.all([() => this._img.style.width = this._img.style.width !== ''], true);
+    return Asserts3.all([
+      () => this._img.style.width = this._img.style.width !== ""
+    ], true);
   }
-
   // Test if REM units are supported
   /**
    *
@@ -1197,9 +1164,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get remUnit() {
-    return Asserts.all([() => this._img.style.width = this._img.style.width !== ''], true);
+    return Asserts3.all([
+      () => this._img.style.width = this._img.style.width !== ""
+    ], true);
   }
-
   // Test if Canvas is supported
   /**
    *
@@ -1209,9 +1177,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get canvas() {
-    return Asserts.all([() => 'getContext' in this._canvas && !!this._canvas.getContext('2d')], true);
+    return Asserts3.all([
+      () => "getContext" in this._canvas && !!this._canvas.getContext("2d")
+    ], true);
   }
-
   // Test if SVG is supported
   /**
    *
@@ -1221,9 +1190,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get svg() {
-    return Asserts.all([() => 'createElementNS' in this._document && 'createSVGRect' in this._document.createElementNS('http://www.w3.org/2000/svg', 'svg')], true);
+    return Asserts3.all([
+      () => "createElementNS" in this._document && "createSVGRect" in this._document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    ], true);
   }
-
   // Test if WebP is supported
   /**
    *
@@ -1233,16 +1203,16 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webp() {
-    return Asserts.all([() => {
-      const elem = document.createElement('canvas');
-      if (!!(elem.getContext && elem.getContext('2d'))) {
-        // was able or not to get WebP representation
-        return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    return Asserts3.all([
+      () => {
+        const elem = document.createElement("canvas");
+        if (!!(elem.getContext && elem.getContext("2d"))) {
+          return elem.toDataURL("image/webp").indexOf("data:image/webp") === 0;
+        }
+        return false;
       }
-      return false;
-    }], true);
+    ], true);
   }
-
   // Test if WebGL is supported
   /**
    *
@@ -1252,9 +1222,11 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webGL() {
-    return Asserts.one([() => this.canvas && 'WebGLRenderingContext' in this._root && (this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl')), () => this.canvas && 'WebGL2RenderingContext' in this._root && this._canvas.getContext('webgl2')], true);
+    return Asserts3.one([
+      () => this.canvas && "WebGLRenderingContext" in this._root && (this._canvas.getContext("webgl") || this._canvas.getContext("experimental-webgl")),
+      () => this.canvas && "WebGL2RenderingContext" in this._root && this._canvas.getContext("webgl2")
+    ], true);
   }
-
   // Test if WebVR is supported
   /**
    *
@@ -1264,9 +1236,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webVR() {
-    return Asserts.all(['getVRDisplays' in this._navigator]);
+    return Asserts3.all([
+      "getVRDisplays" in this._navigator
+    ]);
   }
-
   // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
   /**
    *
@@ -1276,9 +1249,15 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get touch() {
-    return Asserts.one([() => 'ontouchstart' in this._root, () => 'ontouchstart' in this._document.documentElement], true) && Asserts.one([() => 'DocumentTouch' in this._root && this._document instanceof this._root.DocumentTouch, () => this.pointerEnabled && 'MSGesture' in this._root, () => 'maxTouchPoints' in this._navigator && this._navigator.maxTouchPoints > 1], true);
+    return Asserts3.one([
+      () => "ontouchstart" in this._root,
+      () => "ontouchstart" in this._document.documentElement
+    ], true) && Asserts3.one([
+      () => "DocumentTouch" in this._root && this._document instanceof this._root.DocumentTouch,
+      () => this.pointerEnabled && "MSGesture" in this._root,
+      () => "maxTouchPoints" in this._navigator && this._navigator.maxTouchPoints > 1
+    ], true);
   }
-
   /**
    *
    *
@@ -1287,9 +1266,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get forceTouch() {
-    return Asserts.all([() => 'MouseEvent' in this._root && 'WEBKIT_FORCE_AT_MOUSE_DOWN' in this._root.MouseEvent && 'WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN' in this._root.MouseEvent], true);
+    return Asserts3.all([
+      () => "MouseEvent" in this._root && "WEBKIT_FORCE_AT_MOUSE_DOWN" in this._root.MouseEvent && "WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN" in this._root.MouseEvent
+    ], true);
   }
-
   /**
    *
    *
@@ -1298,9 +1278,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pointerEvents() {
-    return Asserts.all([!!this._root.PointerEvent], true);
+    return Asserts3.all([
+      !!this._root.PointerEvent
+    ], true);
   }
-
   // Test if img srcset attribute is supported
   /**
    *
@@ -1310,9 +1291,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get srcset() {
-    return 'srcset' in this._img;
+    return "srcset" in this._img;
   }
-
   // Test if img sizes attribute is supported
   /**
    *
@@ -1322,9 +1302,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get sizes() {
-    return 'sizes' in this._img;
+    return "sizes" in this._img;
   }
-
   // Test if Picture element is supported
   /**
    *
@@ -1334,9 +1313,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get pictureElement() {
-    return 'HTMLPictureElement' in this._root;
+    return "HTMLPictureElement" in this._root;
   }
-
   // Test if Picture element is supported
   /**
    *
@@ -1346,9 +1324,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get dialogElement() {
-    return 'HTMLDialogElement' in this._root;
+    return "HTMLDialogElement" in this._root;
   }
-
   // Test if WebGL2 is supported
   /**
    *
@@ -1358,9 +1335,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webGL2() {
-    return Asserts.one([() => this.canvas && 'WebGL2RenderingContext' in this._root && !!this._canvas.getContext('webgl2')], true);
+    return Asserts3.one([
+      () => this.canvas && "WebGL2RenderingContext" in this._root && !!this._canvas.getContext("webgl2")
+    ], true);
   }
-
   // Test if WebGPU is supported
   /**
    *
@@ -1370,9 +1348,10 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get webGPU() {
-    return Asserts.one([() => 'gpu' in this._navigator && !!this._navigator.gpu && typeof this._navigator.gpu.requestAdapter === 'function'], true);
+    return Asserts3.one([
+      () => "gpu" in this._navigator && !!this._navigator.gpu && typeof this._navigator.gpu.requestAdapter === "function"
+    ], true);
   }
-
   // Test if the Device Memory API reports a value (in GB)
   /**
    *
@@ -1383,9 +1362,8 @@ class Feature extends CssFlagsClass {
    * @memberOf Feature
    */
   get deviceMemory() {
-    return this._navigator.deviceMemory || 'n/a';
+    return this._navigator.deviceMemory || "n/a";
   }
-
   // Test the maximum number of simultaneous touch contact points
   /**
    *
@@ -1398,14 +1376,15 @@ class Feature extends CssFlagsClass {
   get touchPoints() {
     return this._navigator.maxTouchPoints || 0;
   }
+};
+if (typeof process !== "undefined" && process.env && true) {
+  console.log("DetectorJS Feature Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
-
-//! Development-only startup log (upstream v2 behavior). The `"3.0.0"`
-//! placeholder is rewritten at build time by rollup-plugin-replace.
-if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-console
-  console.log('DetectorJS Feature Module v' + ("3.0.0" ) + ' initialized');
-}
-
-export { AudioFeature, Feature, VideoFeature };
+export {
+  AudioFeature,
+  Feature,
+  VideoFeature
+};
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=feature.mjs.map

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DetectorJS — browser global example</title>
+</head>
+<body>
+  <h1>DetectorJS browser example</h1>
+  <pre id="out">loading…</pre>
+  <!-- the self-contained bundle exposes the Detector CLASS as a global -->
+  <script src="../../dist/detector.browser.min.js"></script>
+  <script>
+    const detector = new Detector();
+    document.getElementById('out').textContent = JSON.stringify(detector.toFlags(), null, 2);
+  </script>
+</body>
+</html>
