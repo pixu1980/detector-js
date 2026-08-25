@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DetectorJS v1.4.0 — demo</title>
+  <style>
+    body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    h1 { font-size: 1.5rem; }
+    pre { background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 1rem; overflow: auto; font-size: .8rem; }
+    .note { color: #666; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <h1>DetectorJS <span id="version">v1.4.0</span> — zero-dependency platform/environment detector</h1>
+  <p class="note">Reading <code>navigator.userAgent</code> of the current browser.</p>
+  <pre id="out">detecting…</pre>
+
+  <script src="../dist/detector.min.js"></script>
+  <script>
+    // UMD build exposes `window.Detector` in browsers.
+    var D = (typeof Detector !== 'undefined' && Detector) || null;
+    var out = document.getElementById('out');
+    function render() {
+      if (!D) { out.textContent = 'DetectorJS bundle not found. Open /demo.html via the dev server.'; return; }
+      var detector = new D();
+      out.textContent = JSON.stringify(detector.toFlags(), null, 2);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
+  </script>
+</body>
+</html>
