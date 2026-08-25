@@ -78,6 +78,11 @@ describe('software detection (UA table)', () => {
     assert.equal(legacy.toValues().versionName, 'Catalina');
   });
 
+  test('webOS (official "Web0S" token with zero) is detected', () => {
+    const os = new OS('Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36 WebAppManager', {}, 'os');
+    assert.equal(os.toValues().name, 'WebOS');
+  });
+
   test('Android parses current major versions', () => {
     assert.equal(new OS('Mozilla/5.0 (Linux; Android 17; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36', {}, 'os').toValues().version, '17');
     assert.equal(new OS('Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', {}, 'os').toValues().version, '14');
@@ -116,6 +121,12 @@ describe('platform detection', () => {
 
     const tablet = new Platform(UA_TABLE[11][1], flagsFor(UA_TABLE[11][1], true), 'platform');
     assert.equal(tablet.tablet, true);
+
+    // TV detection works with the values-mode os snapshot ({ name: 'webos' })
+    const tvFlags = { ...flagsFor('', false), os: { name: 'WebOS' } };
+    const tv = new Platform('Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36 WebAppManager', tvFlags, 'platform');
+    assert.equal(tv.tv, true);
+    assert.equal(tv.toValues(), 'tv');
   });
 });
 

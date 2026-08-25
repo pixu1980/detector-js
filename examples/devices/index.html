@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Device gallery — DetectorJS examples</title>
+  <link rel="stylesheet" href="../../site.css" />
+  <style>
+    main { padding-top: 1.5rem; }
+    p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
+    p.sub code { color: var(--accent2); }
+
+    .own-ua { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0 0 1.4rem; }
+    .own-ua input[type=text] {
+      flex: 1; min-width: 260px;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      border-radius: 10px; padding: .55rem .9rem; font-size: var(--fs-sm);
+      font-family: var(--font-mono);
+    }
+    .own-ua .btn { padding: .55rem 1.2rem; }
+    .own-result { margin: 0 0 1.4rem; display: none; }
+    .own-result .kv { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; }
+    .own-result .kv b { color: var(--muted); font-weight: 600; }
+    .own-result .kv span { color: var(--text); }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: .9rem;
+    }
+    .dev {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: .95rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+    }
+    .dev .head { display: flex; align-items: center; gap: .6rem; }
+    .dev .head .ico { font-size: 1.35rem; }
+    .dev .head h3 { margin: 0; font-size: var(--fs-md); font-weight: 800; }
+    .dev .head .cat {
+      margin-left: auto; font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: .15rem .5rem; border-radius: 999px;
+      background: rgba(124, 92, 255, .14); color: #b7a6ff; border: 1px solid rgba(124, 92, 255, .35);
+      white-space: nowrap;
+    }
+    .dev .ua {
+      display: flex; gap: .4rem; align-items: flex-start;
+      font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--muted);
+      background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 8px;
+      padding: .45rem .55rem; word-break: break-all; line-height: 1.4;
+    }
+    .dev .ua button {
+      flex-shrink: 0; background: transparent; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 6px; font-size: .65rem; padding: .1rem .4rem; cursor: pointer;
+    }
+    .dev .ua button:hover { color: var(--text); border-color: var(--accent2); }
+    .dev .rows { display: grid; grid-template-columns: auto 1fr; gap: .18rem .8rem; font-size: var(--fs-sm); }
+    .dev .rows .k { color: var(--muted); }
+    .dev .rows .v { font-weight: 650; }
+    .dev .rows .v.pill { justify-self: start; font-size: .66rem; font-weight: 800; padding: .08rem .5rem; border-radius: 999px; }
+    .v.pill.desktop { background: rgba(61,220,151,.14); color: var(--ok); }
+    .v.pill.smartphone, .v.pill.tablet { background: rgba(255,92,138,.14); color: var(--pink); }
+    .v.pill.tv, .v.pill.console, .v.pill.bot { background: rgba(124,92,255,.16); color: #b7a6ff; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <div class="links">
+          <a href="../../index.html">Home</a>
+          <a href="../../docs/getting-started.html">Docs</a>
+          <a href="../../demo.html">Live demo</a>
+          <a href="../../PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Device gallery</h1>
+    <p class="sub">
+      Sample user agents from real devices, parsed live by <code>new Detector(ua)</code>.
+      Everything runs locally — browser, engine, OS (+ version name) and platform. Hardware (CPU/GPU)
+      depends on the runtime environment (WebGL / Client Hints) and is <b>not</b> simulated here.
+    </p>
+
+    <div class="own-ua">
+      <input type="text" id="ua-input" placeholder="Paste any User-Agent and press Analyze…" />
+      <button class="btn btn-primary" id="ua-analyze" type="button">Analyze</button>
+    </div>
+    <div class="own-result" id="own-result">
+      <div class="kv" id="own-kv"></div>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <p class="sub" style="margin-top:1.4rem">
+      → Back to <a href="../">all examples</a> · More in the <a href="../../docs/getting-started.html">getting started</a> guide.
+    </p>
+  </main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="../../docs/getting-started.html">Getting started</a></li>
+          <li><a href="../../docs/api.html">API reference</a></li>
+          <li><a href="../../docs/toolchain.html">Toolchain</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="../../PRIVACY.html">Privacy</a></li>
+          <li><a href="../../SECURITY.html">Security</a></li>
+          <li><a href="../../CONTRIBUTING.html">Contributing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="../../packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="../../packages/core/README.html">@detector-js/core</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../dist/detector.browser.min.js"></script>
+  <script>
+    var DEVICES = [
+      { name: 'MacBook Pro · Apple M1', cat: 'Desktop', ico: '💻', ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.2 Safari/605.1.15' },
+      { name: 'iMac · Apple M4', cat: 'Desktop', ico: '🖥️', ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15' },
+      { name: 'Windows 11 · Edge', cat: 'Desktop', ico: '🪟', ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0' },
+      { name: 'Windows 11 · Firefox', cat: 'Desktop', ico: '🦊', ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0' },
+      { name: 'Windows 10 · Opera', cat: 'Desktop', ico: '🔴', ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 OPR/109.0.0.0' },
+      { name: 'Ubuntu · Firefox', cat: 'Desktop', ico: '🐧', ua: 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:127.0) Gecko/20100101 Firefox/127.0' },
+      { name: 'Fedora · Chrome', cat: 'Desktop', ico: '🐧', ua: 'Mozilla/5.0 (X11; Fedora Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' },
+      { name: 'Chromebook · ChromeOS', cat: 'Desktop', ico: '📘', ua: 'Mozilla/5.0 (X11; CrOS x86_64 15823.125.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36' },
+      { name: 'Electron app', cat: 'Embedded', ico: '⚛️', ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Electron/31.0.0 Safari/537.36' },
+      { name: 'iPhone 15 Pro · Safari', cat: 'Mobile', ico: '📱', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1' },
+      { name: 'iPhone · DuckDuckGo', cat: 'WebView', ico: '🦆', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 DuckDuckGo/7 Safari/605.1.15' },
+      { name: 'iPhone · Facebook app', cat: 'WebView', ico: '👥', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 FBAN/FBIOS' },
+      { name: 'iPhone · TikTok', cat: 'WebView', ico: '🎵', ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 TikTok/36.0.0 Safari/605.1.15' },
+      { name: 'iPad Pro · Safari', cat: 'Tablet', ico: '📐', ua: 'Mozilla/5.0 (iPad; CPU OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1' },
+      { name: 'Kindle Fire · Silk', cat: 'Tablet', ico: '📖', ua: 'Mozilla/5.0 (Linux; U; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Silk/112.0.0.3.0 Safari/537.36 Silk/112.0.0.3.0; Kindle/1.0' },
+      { name: 'Galaxy S24 · Samsung Internet', cat: 'Mobile', ico: '📱', ua: 'Mozilla/5.0 (Linux; Android 14; SM-S921B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/25.0 Chrome/121.0.0.0 Mobile Safari/537.36' },
+      { name: 'Pixel 9 · Chrome', cat: 'Mobile', ico: '🤖', ua: 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36' },
+      { name: 'Xiaomi · MIUI Browser', cat: 'Mobile', ico: '📱', ua: 'Mozilla/5.0 (Linux; Android 13; 2211133C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.120 Mobile Safari/537.36 XiaoMi/MiuiBrowser/15.1.8' },
+      { name: 'Huawei · Browser', cat: 'Mobile', ico: '📱', ua: 'Mozilla/5.0 (Linux; Android 12; VOG-L29) AppleWebKit/537.36 (KHTML, like Gecko) HuaweiBrowser/14.0.0.300 Chrome/84.0.4147.135 Mobile Safari/537.36' },
+      { name: 'Android · Kiwi Browser', cat: 'WebView', ico: '🥝', ua: 'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Mobile Safari/537.36 Kiwi/91.0.4472.101' },
+      { name: 'Android · Facebook app', cat: 'WebView', ico: '👥', ua: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36 FBAN/FB4A;FBAV/457.1.0.15.115' },
+      { name: 'LG webOS TV', cat: 'TV', ico: '📺', ua: 'Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36 WebAppManager' },
+      { name: 'Sony Bravia', cat: 'TV', ico: '📺', ua: 'Mozilla/5.0 (Linux; Sony BRAVIA 4K GB ATV3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36 Netscape/77.0' },
+      { name: 'PlayStation 5', cat: 'Console', ico: '🎮', ua: 'Mozilla/5.0 (PlayStation; PlayStation 5/7.0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15' },
+      { name: 'Xbox Series X', cat: 'Console', ico: '🎮', ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0 Xbox' },
+      { name: 'Nintendo Switch', cat: 'Console', ico: '🎮', ua: 'Mozilla/5.0 (NintendoSwitch; WifiWebAuthApplet) AppleWebKit/601.0 (KHTML, like Gecko) NF/4.0.0.5.9 Mobile Safari/613.0' },
+      { name: 'Googlebot', cat: 'Bot', ico: '🤖', ua: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' }
+    ];
+
+    function esc(s) { return String(s == null ? 'n/a' : s).toUpperCase() === 'N/A' ? 'n/a' : String(s); }
+
+    function detect(ua) {
+      var d = new Detector(ua, true, false);
+      var f = d.toFlags();
+      return {
+        browser: d.browser,
+        engine: (f.engine && f.engine.name) || 'n/a',
+        os: d.os,
+        platform: d.platform || 'n/a'
+      };
+    }
+
+    function cardHTML(name, cat, ico, ua, r) {
+      var osName = (r.os && r.os.name) || 'n/a';
+      var osVer = r.os && r.os.version ? ' ' + r.os.version : '';
+      var osVerName = r.os && r.os.versionName && r.os.versionName !== 'n/a' ? ' · ' + r.os.versionName : '';
+      return '<div class="dev">' +
+        '<div class="head"><span class="ico">' + ico + '</span><h3>' + name + '</h3><span class="cat">' + cat + '</span></div>' +
+        '<div class="ua">' + esc(ua) + '<button type="button" data-copy="' + ua.replace(/"/g, '&quot;') + '">copy</button></div>' +
+        '<div class="rows">' +
+        '<span class="k">Browser</span><span class="v">' + esc(r.browser.name) + ' ' + esc(r.browser.version) + '</span>' +
+        '<span class="k">Engine</span><span class="v">' + esc(r.engine) + '</span>' +
+        '<span class="k">OS</span><span class="v">' + esc(osName + osVer + osVerName) + '</span>' +
+        '<span class="k">Platform</span><span class="v pill ' + esc(r.platform).toLowerCase() + '">' + esc(r.platform) + '</span>' +
+        '</div></div>';
+    }
+
+    function render() {
+      var out = document.getElementById('gallery');
+      var html = '';
+      for (var i = 0; i < DEVICES.length; i++) {
+        var dev = DEVICES[i];
+        html += cardHTML(dev.name, dev.cat, dev.ico, dev.ua, detect(dev.ua));
+      }
+      out.innerHTML = html;
+    }
+
+    function analyzeOwn(ua) {
+      var r = detect(ua);
+      var box = document.getElementById('own-result');
+      document.getElementById('own-kv').innerHTML =
+        '<span><b>Browser</b> ' + esc(r.browser.name + ' ' + r.browser.version) + '</span>' +
+        '<span><b>Engine</b> ' + esc(r.engine) + '</span>' +
+        '<span><b>OS</b> ' + esc((r.os && (r.os.name + ' ' + (r.os.version || '') + (r.os.versionName && r.os.versionName !== 'n/a' ? ' · ' + r.os.versionName : '')).trim()) || 'n/a') + '</span>' +
+        '<span><b>Platform</b> ' + esc(r.platform) + '</span>';
+      box.style.display = 'block';
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('button[data-copy]');
+      if (btn && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(btn.getAttribute('data-copy')).catch(function () {});
+        btn.textContent = 'copied';
+        setTimeout(function () { btn.textContent = 'copy'; }, 1200);
+      }
+    });
+
+    document.getElementById('ua-analyze').addEventListener('click', function () {
+      var ua = document.getElementById('ua-input').value.trim();
+      if (ua) analyzeOwn(ua);
+    });
+    document.getElementById('ua-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && e.target.value.trim()) analyzeOwn(e.target.value.trim());
+    });
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0b1020" />
+<title>example-devices — Device gallery — DetectorJS</title>
+<link rel="stylesheet" href="../../site.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <div class="links">
+          <a href="../../index.html">Home</a>
+          <a href="../../docs/getting-started.html">Docs</a>
+          <a href="../../demo.html">Live demo</a>
+          <a href="../../PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main><h1>example-devices — Device gallery</h1>
+<p>A static page that parses <strong>sample user agents from real devices</strong> (desktop, mobile, tablet,
+TV, consoles, webviews and bots) live with <code>new Detector(ua)</code> and shows what DetectorJS reports:</p>
+<ul>
+<li>browser + version, engine, OS + version name (macOS Tahoe via the Safari token, …), platform class</li>
+<li>paste any User-Agent and press <strong>Analyze</strong> to test your own</li>
+<li>&quot;copy&quot; button per card</li>
+</ul>
+<p>Run from the repo root: open <code>examples/devices/index.html</code> in a browser (or via <code>pnpm serve</code>,
+<code>http://localhost:&lt;port&gt;/examples/devices/</code>).</p>
+<blockquote>
+<p>Hardware (CPU/GPU) is intentionally not simulated: it depends on the runtime environment
+(WebGL / Client Hints) of the browser that runs the page, not on the UA.</p>
+</blockquote>
+</main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="../../docs/getting-started.html">Getting started</a></li>
+          <li><a href="../../docs/api.html">API reference</a></li>
+          <li><a href="../../docs/toolchain.html">Toolchain</a></li>
+          <li><a href="../../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../../docs/roadmap.html">Roadmap</a></li>
+          <li><a href="../../examples/devices/index.html">Device gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="../../PRIVACY.html">Privacy</a></li>
+          <li><a href="../../SECURITY.html">Security</a></li>
+          <li><a href="../../CONTRIBUTING.html">Contributing</a></li>
+          <li><a href="../../docs/adr/README.html">ADR</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="../../packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="../../packages/core/README.html">@detector-js/core</a></li>
+          <li><a href="../../packages/hardware/README.html">@detector-js/hardware</a></li>
+          <li><a href="../../packages/feature/README.html">@detector-js/feature</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

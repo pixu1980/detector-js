@@ -1,3 +1,15 @@
+## [Unreleased] — examples & device detection fixes
+
+### Examples
+- new **Device gallery** page (`examples/devices/`): 27 sample user-agents from real devices
+  (desktop, mobile, tablet, TV, consoles, webviews, bots) parsed live with `new Detector(ua)`,
+  with copy-UA buttons and an "analyze your UA" box; linked from the site footer
+- detection fixes surfaced by the gallery: **webOS** now matches the official "Web0S" token
+  (with zero), and the `tv` platform rule accepts contiguous "SmartTV" (smart- hyphen optional)
+  and values-mode `os.name` — LG webOS TVs now classify as `tv` instead of `desktop`
+- e2e `test/e2e/devices.e2e.js` (chromium + webkit): 27 cards, platform classes
+  (desktop/mobile/tablet/tv/console/bot), Tahoe via Safari token, custom UA analyzer
+
 ## [Unreleased] — coverage expansion
 
 ### Web API coverage (MDN catalog)

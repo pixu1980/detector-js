@@ -2373,7 +2373,7 @@ var OS = class extends CssFlagsClass3 {
    */
   get WebOS() {
     return this._checkAssertsResult(Asserts3.one([
-      /(webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
+      /(?:web0s|webos)[\/\s-]?([\w\.]*)/i.test(this._ua),
       /(?:web|hpw)[o0]s\/(\d+(\.\d+)*)/i.test(this._ua),
       /w(?:eb)?[o0]sbrowser\/(\d+(\.?_?\d+)+)/i.test(this._ua)
     ]));

@@ -53,16 +53,22 @@ export class Platform extends CssFlagsClass {
    */
   get tv() {
     return Asserts.one([
-      /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
+      /(?:google|smart(?:-)?|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
       /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua),
     ]) && Asserts.one([
       !this.mobile,
       !this.bot,
       this._flags.feature.fullscreenKeyboard,
     ]) && Asserts.one([
-      this._flags.os.Android,
-      this._flags.os.Tizen,
-      this._flags.os.WebOS,
+      // os is usually the values-mode snapshot ({ name }) from Detector, but a
+      // flags-mode os ({ Android: true, … }) is tolerated too
+      () => {
+        const os = this._flags.os || {};
+        const { name } = os;
+        return name
+          ? /^(android|tizen|webos)/i.test(String(name))
+          : !!os.Android || !!os.Tizen || !!os.WebOS;
+      },
     ]);
   }
 
