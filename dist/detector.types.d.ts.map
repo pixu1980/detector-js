@@ -1,0 +1,1 @@
+{"mappings":";AAIA,OAAO,EAAE,QAAQ,EAAE,CAAC","sources":["src/src/detector.ts","src/detector.ts"],"sourcesContent":[null,"'use strict';\n\nimport { Detector } from '@detector-js/detector';\n\nexport { Detector };\n"],"names":[],"version":3,"file":"detector.types.d.ts.map"}

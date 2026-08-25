@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["./"],
+  "name": "DetectorJS",
+  "entryPointStrategy": "packages",
+  "tsconfig": "./jsconfig.json",
+  "readme": "README.md",
+  "includeVersion": true,
+  "githubPages": false,
+  "compilerOptions": {
+    "out": "./docs"
+  }
+}

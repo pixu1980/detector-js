@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:packages/hardware/lib/gpu.js
 import { CssFlagsClass } from '@detector-js/core';
+========
+import { Asserts, CssFlagsClass } from '@detector-js/core';
+>>>>>>>> origin/master:packages/hardware/lib/gpu.ts
 
 /**
  *
@@ -8,6 +12,18 @@ import { CssFlagsClass } from '@detector-js/core';
  * @extends {CssFlagsClass}
  */
 export class GPU extends CssFlagsClass {
+<<<<<<<< HEAD:packages/hardware/lib/gpu.js
+========
+  webGLVendor: string;
+  webGLRenderer: string;
+  vendor: string;
+  model: string;
+  renderer: string;
+
+  #canvas: HTMLCanvasElement;
+  #info: { webGLVendor: string; webGLRenderer: string; vendor: string; model: string; renderer: string };
+
+>>>>>>>> origin/master:packages/hardware/lib/gpu.ts
   /**
    * Creates an instance of GPU.
    * @param {any} [ua=null]
@@ -16,16 +32,16 @@ export class GPU extends CssFlagsClass {
    *
    * @memberOf GPU
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'gpu') {
+  constructor(ua: string | null = null, flags = {}, cssFlagsPrefix = 'gpu') {
     super(ua, flags, cssFlagsPrefix);
 
-    this._createTestElements();
+    this.#createTestElements();
 
-    this.webGLVendor = this._info.webGLVendor;
-    this.webGLRenderer = this._info.webGLRenderer;
-    this.vendor = this._info.vendor;
-    this.model = this._info.model;
-    this.renderer = this._info.renderer;
+    this.webGLVendor = this.#info.webGLVendor;
+    this.webGLRenderer = this.#info.webGLRenderer;
+    this.vendor = this.#info.vendor;
+    this.model = this.#info.model;
+    this.renderer = this.#info.renderer;
   }
 
   /**
@@ -34,9 +50,9 @@ export class GPU extends CssFlagsClass {
    *
    * @memberOf GPU
    */
-  _createTestElements() {
-    this._canvas = this._document.createElement('canvas');
-    this._info = this.getInfo();
+  #createTestElements() {
+    this.#canvas = this.document.createElement('canvas');
+    this.#info = this.getInfo();
   }
 
   // /**
@@ -66,29 +82,32 @@ export class GPU extends CssFlagsClass {
       webGLRenderer: 'n/a',
       vendor: 'n/a',
       model: 'n/a',
-      renderer: 'n/a',
+      renderer: 'n/a'
     };
 
     try {
-      const webGLContext = this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl');
+      const webGLContext: WebGLRenderingContext | RenderingContext =
+        this.#canvas.getContext('webgl')! ?? this.#canvas.getContext('experimental-webgl')!;
 
       if (webGLContext) {
         const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
 
         if (dbgRenderInfo != null) {
+          // @ts-ignore
           info.merge({
             vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
             model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
-            renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL),
+            renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL)
           });
         }
 
+        // @ts-ignore
         info.merge({
           webGLVendor: webGLContext.getParameter(webGLContext.VENDOR),
-          webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER),
+          webGLRenderer: webGLContext.getParameter(webGLContext.RENDERER)
         });
       }
-    } catch(e) {
+    } catch (e) {
       console.warn('webGL is not supported', e.message);
     }
 

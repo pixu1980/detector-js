@@ -5,6 +5,7 @@
  * @class Asserts
  */
 export class Asserts {
+<<<<<<<< HEAD:packages/core/lib/asserts.js
   /**
    * Evaluates a single assert: values are returned as-is, functions are invoked
    * (in safe mode wrapped in try/catch).
@@ -17,6 +18,9 @@ export class Asserts {
    * @memberOf Asserts
    */
   static checkAssert(assert = null, safe = false) {
+========
+  static checkAssert(assert, safe = false) {
+>>>>>>>> origin/master:packages/core/lib/asserts.ts
     if (!!assert) {
       if (assert instanceof Function) {
         if (!!safe) {
@@ -46,7 +50,7 @@ export class Asserts {
    *
    * @memberOf Asserts
    */
-  static all(asserts = [], safe = false) {
+  static all(asserts: any[] = [], safe = false) {
     return asserts.every((assert) => {
       return Asserts.checkAssert(assert, safe);
     });
@@ -62,7 +66,7 @@ export class Asserts {
    *
    * @memberOf Asserts
    */
-  static one(asserts = [], safe = false) {
+  static one(asserts: any[] = [], safe = false) {
     return asserts.some((assert) => {
       return Asserts.checkAssert(assert, safe);
     });

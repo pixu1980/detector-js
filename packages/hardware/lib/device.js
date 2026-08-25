@@ -16,7 +16,7 @@ export class Device extends CssFlagsClass {
    *
    * @memberOf Device
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'device') {
+  constructor(ua: string | null = null, flags = {}, cssFlagsPrefix = 'device') {
     super(ua, flags, cssFlagsPrefix);
   }
 }

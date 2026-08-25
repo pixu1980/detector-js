@@ -1,247 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-    <title>Home - Documentation</title>
-
-
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Asserts.html">Asserts</a><ul class='methods'><li data-type='method'><a href="Asserts.html#.all">all</a></li><li data-type='method'><a href="Asserts.html#.one">one</a></li></ul></li><li><a href="AudioFeature.html">AudioFeature</a><ul class='methods'><li data-type='method'><a href="AudioFeature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="AudioFeature.html#.getContext">getContext</a></li><li data-type='method'><a href="AudioFeature.html#.getM4a">getM4a</a></li><li data-type='method'><a href="AudioFeature.html#.getMp3">getMp3</a></li><li data-type='method'><a href="AudioFeature.html#.getOgg">getOgg</a></li><li data-type='method'><a href="AudioFeature.html#.getOpus">getOpus</a></li><li data-type='method'><a href="AudioFeature.html#.getWav">getWav</a></li><li data-type='method'><a href="AudioFeature.html#.getWebm">getWebm</a></li></ul></li><li><a href="AudioFeature.module.exports.html">module.exports</a></li><li><a href="Browser.html">Browser</a><ul class='methods'><li data-type='method'><a href="Browser.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="Browser.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="Browser.html#.setVersion">setVersion</a></li></ul></li><li><a href="Browser.module.exports.html">module.exports</a></li><li><a href="CssFlagsClass.html">CssFlagsClass</a><ul class='methods'><li data-type='method'><a href="CssFlagsClass.html#.toCssFlags">toCssFlags</a></li></ul></li><li><a href="CssFlagsClass.module.exports.html">module.exports</a></li><li><a href="Detector.html">Detector</a><ul class='methods'><li data-type='method'><a href="Detector.html#.checkBrowser">checkBrowser</a></li><li data-type='method'><a href="Detector.html#.checkCPU">checkCPU</a></li><li data-type='method'><a href="Detector.html#.checkDevice">checkDevice</a></li><li data-type='method'><a href="Detector.html#.checkEngine">checkEngine</a></li><li data-type='method'><a href="Detector.html#.checkFeature">checkFeature</a></li><li data-type='method'><a href="Detector.html#.checkGPU">checkGPU</a></li><li data-type='method'><a href="Detector.html#.checkOS">checkOS</a></li><li data-type='method'><a href="Detector.html#.checkPlatform">checkPlatform</a></li><li data-type='method'><a href="Detector.html#.setCssFlags">setCssFlags</a></li></ul></li><li><a href="Detector.module.exports.html">module.exports</a></li><li><a href="Device.html">Device</a></li><li><a href="Device.module.exports.html">module.exports</a></li><li><a href="Engine.html">Engine</a><ul class='methods'><li data-type='method'><a href="Engine.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="Engine.html#.setVersion">setVersion</a></li></ul></li><li><a href="Engine.module.exports.html">module.exports</a></li><li><a href="Feature.html">Feature</a><ul class='methods'><li data-type='method'><a href="Feature.html#._checkCssPrefixedProp">_checkCssPrefixedProp</a></li><li data-type='method'><a href="Feature.html#._checkCssPrefixedPropValue">_checkCssPrefixedPropValue</a></li><li data-type='method'><a href="Feature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="Feature.html#._getCssPrefixedProp">_getCssPrefixedProp</a></li><li data-type='method'><a href="Feature.html#._getCssPrefixedPropValue">_getCssPrefixedPropValue</a></li><li data-type='method'><a href="Feature.html#.getAddEventListener">getAddEventListener</a></li><li data-type='method'><a href="Feature.html#.getAsyncScript">getAsyncScript</a></li><li data-type='method'><a href="Feature.html#.getBattery">getBattery</a></li><li data-type='method'><a href="Feature.html#.getCors">getCors</a></li><li data-type='method'><a href="Feature.html#.getDeferScript">getDeferScript</a></li><li data-type='method'><a href="Feature.html#.getFile">getFile</a></li><li data-type='method'><a href="Feature.html#.getFileSystem">getFileSystem</a></li><li data-type='method'><a href="Feature.html#.getFullscreen">getFullscreen</a></li><li data-type='method'><a href="Feature.html#.getFullscreenKeyboard">getFullscreenKeyboard</a></li><li data-type='method'><a href="Feature.html#.getGeolocation">getGeolocation</a></li><li data-type='method'><a href="Feature.html#.getHistoryAPI">getHistoryAPI</a></li><li data-type='method'><a href="Feature.html#.getLittleEndian">getLittleEndian</a></li><li data-type='method'><a href="Feature.html#.getLocalStorage">getLocalStorage</a></li><li data-type='method'><a href="Feature.html#.getMatchMedia">getMatchMedia</a></li><li data-type='method'><a href="Feature.html#.getQuerySelector">getQuerySelector</a></li><li data-type='method'><a href="Feature.html#.getQuerySelectorAll">getQuerySelectorAll</a></li><li data-type='method'><a href="Feature.html#.getServiceWorker">getServiceWorker</a></li><li data-type='method'><a href="Feature.html#.getTypedArray">getTypedArray</a></li><li data-type='method'><a href="Feature.html#.getUserMedia">getUserMedia</a></li><li data-type='method'><a href="Feature.html#.getVibration">getVibration</a></li><li data-type='method'><a href="Feature.html#.getWorker">getWorker</a></li></ul></li><li><a href="Feature.module.exports.html">module.exports</a></li><li><a href="FlagsClass.html">FlagsClass</a><ul class='methods'><li data-type='method'><a href="FlagsClass.html#.toFlags">toFlags</a></li><li data-type='method'><a href="FlagsClass.html#.toValues">toValues</a></li></ul></li><li><a href="FlagsClass.module.exports.html">module.exports</a></li><li><a href="GPU.html">GPU</a><ul class='methods'><li data-type='method'><a href="GPU.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="GPU.html#.getInfo">getInfo</a></li></ul></li><li><a href="GPU.module.exports.html">module.exports</a></li><li><a href="OS.html">OS</a><ul class='methods'><li data-type='method'><a href="OS.html#._checkAssertsResult">_checkAssertsResult</a></li><li data-type='method'><a href="OS.html#._getAndroidVersionName">_getAndroidVersionName</a></li><li data-type='method'><a href="OS.html#._getLinuxDistroName">_getLinuxDistroName</a></li><li data-type='method'><a href="OS.html#._getMacOSVersionName">_getMacOSVersionName</a></li><li data-type='method'><a href="OS.html#._getUnixDistroName">_getUnixDistroName</a></li><li data-type='method'><a href="OS.html#._getVersionNames">_getVersionNames</a></li><li data-type='method'><a href="OS.html#._getWindowsVersionName">_getWindowsVersionName</a></li><li data-type='method'><a href="OS.html#.setVersion">setVersion</a></li><li data-type='method'><a href="OS.html#.setVersionName">setVersionName</a></li></ul></li><li><a href="OS.module.exports.html">module.exports</a></li><li><a href="Platform.html">Platform</a></li><li><a href="Platform.module.exports.html">module.exports</a></li><li><a href="VideoFeature.html">VideoFeature</a><ul class='methods'><li data-type='method'><a href="VideoFeature.html#._createTestElements">_createTestElements</a></li><li data-type='method'><a href="VideoFeature.html#.getMp4">getMp4</a></li><li data-type='method'><a href="VideoFeature.html#.getOgv">getOgv</a></li><li data-type='method'><a href="VideoFeature.html#.getWebm">getWebm</a></li></ul></li><li><a href="VideoFeature.module.exports.html">module.exports</a></li></ul>
-</nav>
-
-<div id="main">
-
-
-
-
-
-
-
-
-
-    <section class="package">
-        <h3> </h3>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section class="readme usertext">
-        <article><h1>detector-js</h1>
-<p>v1.3.1</p>
-<h2>Description</h2>
-<p>DetectorJS, zero-dependency platform/environment detector written in ES6</p>
-<p>Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules</p>
-<h2>Author</h2>
-<p>Black Mirror</p>
-<h2>Badges</h2>
-<p><a href="https://nodei.co/npm/detector-js/"><img src="https://nodei.co/npm/detector-js.png" alt="NPM"></a></p>
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>DetectorJS - v2.0.11</title><meta name="description" content="Documentation for DetectorJS"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">DetectorJS - v2.0.11</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<h2>DetectorJS - v2.0.11</h2></div>
+<div class="tsd-panel tsd-typography"><a id="md:detector-js" class="tsd-anchor"></a><h1><a href="#md:detector-js">detector-js</a></h1><p>v2.0.11</p>
+<a id="md:description" class="tsd-anchor"></a><h2><a href="#md:description">Description</a></h2><p>DetectorJS, zero-dependency platform/environment detector written in TypeScript</p>
+<p>Please feel free to ask for modifications, fixes or do a PR to improve Detector behaviors or add detection rules</p>
+<a id="md:author" class="tsd-anchor"></a><h2><a href="#md:author">Author</a></h2><p>Emiliano &#39;Pixu&#39; Pisu &lt;<a href="mailto:pisuemiliano.1980@gmail.com">pisuemiliano.1980@gmail.com</a>&gt;</p>
+<a id="md:badges" class="tsd-anchor"></a><h2><a href="#md:badges">Badges</a></h2><p><a href="https://nodei.co/npm/detector-js/"><img src="https://nodei.co/npm/detector-js.png" alt="NPM"></a></p>
 <p><a href="https://img.shields.io/npm/dm/detector-js.svg"><img src="https://img.shields.io/npm/dm/detector-js.svg" alt="NPM downloads/month"></a> <a href="https://github.com/pixu1980/detector-js/stargazers"><img src="https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic" alt="GitHub stars"></a> <a href="https://github.com/pixu1980/detector-js/network"><img src="https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic" alt="GitHub forks"></a> <a href="https://github.com/pixu1980/detector-js/issues"><img src="https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic" alt="GitHub issues"></a> <a href="https://github.com/pixu1980/detector-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic" alt="GitHub license"></a> <a href="https://travis-ci.org/pixu1980/detector-js"><img src="https://travis-ci.org/pixu1980/detector-js.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/pixu1980/detector-js?branch=master"><img src="https://coveralls.io/repos/github/pixu1980/detector-js/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<h2>Documentation</h2>
-<p>Check out the <a href="https://pixu1980.github.io/detector-js/docs/index.html">Latest Documentation</a> here</p>
-<h2>Installation</h2>
-<p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the <a href="https://www.npmjs.com/">npm registry</a>.</p>
+<a id="md:documentation" class="tsd-anchor"></a><h2><a href="#md:documentation">Documentation</a></h2><p>Check out the <a href="https://detector.js.org/docs/index.html">Latest Documentation</a> here</p>
+<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><p>This is a JS/TS module available through the <a href="https://www.npmjs.com/">npm registry</a>. </p>
 <p>It can be installed using either <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a> or <a href="https://yarnpkg.com/en/"><code>yarn</code></a> package managers.</p>
-<pre class="prettyprint source lang-sh"><code>npm i detector-js
-</code></pre>
-<pre class="prettyprint source lang-sh"><code>yarn add detector-js
-</code></pre>
-<h2>Usage</h2>
-<pre class="prettyprint source lang-js"><code>import Detector from 'detector-js';
-
-const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
-
-console.log(detector);
-// {
-//   engine:{
-//     name:'WebKit',
-//     version:'605.1.15'
-//   },
-//   browser:{
-//     name:'Safari',
-//     version:'12.0.3'
-//   },
-//   os:{
-//     name:'macOS',
-//     version:'10.14.3',
-//     versionName:'Mojave'
-//   },
-//   cpu:{
-//     platform:'MacIntel',
-//     cores:1,
-//     architecture:'x64',
-//     vendor:'intel'
-//   },
-//   gpu:{
-//     webGLVendor:'WebKit',
-//     webGLRenderer:'WebKit WebGL',
-//     vendor:'Intel Inc.',
-//     model:'Intel Iris',
-//     renderer:'Intel Iris OpenGL Engine'
-//   },
-//   platform:'desktop',
-//     feature: {
-//     pointerEnabled:false,
-//     pixelRatio:1,
-//     pointerLock:true,
-//     quirksMode:false,
-//     css3D:true,
-//     cssTransform:true,
-//     cssTransition:true,
-//     deviceMotion:false,
-//     deviceOrientation:false,
-//     contextMenu:false,
-//     classList:false,
-//     placeholder:true,
-//     viewportUnit:true,
-//     remUnit:true,
-//     canvas:true,
-//     svg:true,
-//     webGL:true,
-//     webVR:false,
-//     touch:false,
-//     forceTouch:true,
-//     srcset:true,
-//     sizes:true,
-//     pictureElement:true,
-//     dialogElement:false,
-//     addEventListener:true,
-//     asyncScript:true,
-//     battery:false,
-//     cors:true,
-//     deferScript:true,
-//     file:true,
-//     fileSystem:false,
-//     fullscreen:true,
-//     fullscreenKeyboard:true,
-//     geolocation:true,
-//     historyAPI:true,
-//     littleEndian:false,
-//     localStorage:true,
-//     matchMedia:true,
-//     querySelector:true,
-//     querySelectorAll:true,
-//     serviceWorker:true,
-//     typedArray:true,
-//     userMedia:false,
-//     vibration:false,
-//     worker:true,
-//     audio:{
-//       supported:true,
-//       context:true,
-//       formats:{
-//         mp3:true,
-//         webm:false,
-//         ogg:false,
-//         opus:false,
-//         wav:true,
-//         m4a:true
-//       }
-//     },
-//     video:{
-//       supported:true,
-//       formats:{
-//         mp4:true,
-//         ogv:false,
-//         webm:false
-//       }
-//     }
-//   }
-// }
-</code></pre>
-<h2>Todo</h2>
-<ul>
+<pre><code class="language-sh"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">detector-js</span>
+</code><button>Copy</button></pre>
+<pre><code class="language-sh"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">detector-js</span>
+</code><button>Copy</button></pre>
+<a id="md:usage" class="tsd-anchor"></a><h2><a href="#md:usage">Usage</a></h2><pre><code class="language-js"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Detector</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;detector-js&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">detector</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Detector</span><span class="hl-1">();</span><br/><br/><span class="hl-7">// It&#39;s possible to specify a custom userAgent if needed</span><br/><span class="hl-7">// const detector = new Detector(&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15&#39;);</span><br/><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">detector</span><span class="hl-1">);</span><br/><span class="hl-7">// {</span><br/><span class="hl-7">//   engine:{</span><br/><span class="hl-7">//     name:&#39;WebKit&#39;,</span><br/><span class="hl-7">//     version:&#39;605.1.15&#39;</span><br/><span class="hl-7">//   },</span><br/><span class="hl-7">//   browser:{</span><br/><span class="hl-7">//     name:&#39;Safari&#39;,</span><br/><span class="hl-7">//     version:&#39;12.0.3&#39;</span><br/><span class="hl-7">//   },</span><br/><span class="hl-7">//   os:{</span><br/><span class="hl-7">//     name:&#39;macOS&#39;,</span><br/><span class="hl-7">//     version:&#39;10.14.3&#39;,</span><br/><span class="hl-7">//     versionName:&#39;Mojave&#39;</span><br/><span class="hl-7">//   },</span><br/><span class="hl-7">//   cpu:{</span><br/><span class="hl-7">//     platform:&#39;MacIntel&#39;,</span><br/><span class="hl-7">//     cores:1,</span><br/><span class="hl-7">//     architecture:&#39;x64&#39;,</span><br/><span class="hl-7">//     vendor:&#39;intel&#39;</span><br/><span class="hl-7">//   },</span><br/><span class="hl-7">//   gpu:{</span><br/><span class="hl-7">//     webGLVendor:&#39;WebKit&#39;,</span><br/><span class="hl-7">//     webGLRenderer:&#39;WebKit WebGL&#39;,</span><br/><span class="hl-7">//     vendor:&#39;Intel Inc.&#39;,</span><br/><span class="hl-7">//     model:&#39;Intel Iris&#39;,</span><br/><span class="hl-7">//     renderer:&#39;Intel Iris OpenGL Engine&#39;</span><br/><span class="hl-7">//   },</span><br/><span class="hl-7">//   platform:&#39;desktop&#39;,</span><br/><span class="hl-7">//     feature: {</span><br/><span class="hl-7">//     pointerEnabled:false,</span><br/><span class="hl-7">//     pixelRatio:1,</span><br/><span class="hl-7">//     pointerLock:true,</span><br/><span class="hl-7">//     quirksMode:false,</span><br/><span class="hl-7">//     css3D:true,</span><br/><span class="hl-7">//     cssTransform:true,</span><br/><span class="hl-7">//     cssTransition:true,</span><br/><span class="hl-7">//     deviceMotion:false,</span><br/><span class="hl-7">//     deviceOrientation:false,</span><br/><span class="hl-7">//     contextMenu:false,</span><br/><span class="hl-7">//     classList:false,</span><br/><span class="hl-7">//     placeholder:true,</span><br/><span class="hl-7">//     viewportUnit:true,</span><br/><span class="hl-7">//     remUnit:true,</span><br/><span class="hl-7">//     canvas:true,</span><br/><span class="hl-7">//     svg:true,</span><br/><span class="hl-7">//     webGL:true,</span><br/><span class="hl-7">//     webVR:false,</span><br/><span class="hl-7">//     touch:false,</span><br/><span class="hl-7">//     forceTouch:true,</span><br/><span class="hl-7">//     srcset:true,</span><br/><span class="hl-7">//     sizes:true,</span><br/><span class="hl-7">//     pictureElement:true,</span><br/><span class="hl-7">//     dialogElement:false,</span><br/><span class="hl-7">//     addEventListener:true,</span><br/><span class="hl-7">//     asyncScript:true,</span><br/><span class="hl-7">//     battery:false,</span><br/><span class="hl-7">//     cors:true,</span><br/><span class="hl-7">//     deferScript:true,</span><br/><span class="hl-7">//     file:true,</span><br/><span class="hl-7">//     fileSystem:false,</span><br/><span class="hl-7">//     fullscreen:true,</span><br/><span class="hl-7">//     fullscreenKeyboard:true,</span><br/><span class="hl-7">//     geolocation:true,</span><br/><span class="hl-7">//     historyAPI:true,</span><br/><span class="hl-7">//     littleEndian:false,</span><br/><span class="hl-7">//     localStorage:true,</span><br/><span class="hl-7">//     matchMedia:true,</span><br/><span class="hl-7">//     querySelector:true,</span><br/><span class="hl-7">//     querySelectorAll:true,</span><br/><span class="hl-7">//     serviceWorker:true,</span><br/><span class="hl-7">//     typedArray:true,</span><br/><span class="hl-7">//     userMedia:false,</span><br/><span class="hl-7">//     vibration:false,</span><br/><span class="hl-7">//     worker:true,</span><br/><span class="hl-7">//     audio:{</span><br/><span class="hl-7">//       supported:true,</span><br/><span class="hl-7">//       context:true,</span><br/><span class="hl-7">//       formats:{</span><br/><span class="hl-7">//         mp3:true,</span><br/><span class="hl-7">//         webm:false,</span><br/><span class="hl-7">//         ogg:false,</span><br/><span class="hl-7">//         opus:false,</span><br/><span class="hl-7">//         wav:true,</span><br/><span class="hl-7">//         m4a:true</span><br/><span class="hl-7">//       }</span><br/><span class="hl-7">//     },</span><br/><span class="hl-7">//     video:{</span><br/><span class="hl-7">//       supported:true,</span><br/><span class="hl-7">//       formats:{</span><br/><span class="hl-7">//         mp4:true,</span><br/><span class="hl-7">//         ogv:false,</span><br/><span class="hl-7">//         webm:false</span><br/><span class="hl-7">//       }</span><br/><span class="hl-7">//     }</span><br/><span class="hl-7">//   }</span><br/><span class="hl-7">// }</span>
+</code><button>Copy</button></pre>
+<a id="md:todo" class="tsd-anchor"></a><h2><a href="#md:todo">Todo</a></h2><ul>
 <li>refine browsers regexes</li>
 <li>refine documentation</li>
 <li>implement modular custom build feature</li>
 <li>decide to implement or not device infos detection</li>
 </ul>
-<h2>Dependencies</h2>
-<p>None</p>
-<h2>Dev Dependencies</h2>
-<ul>
-<li><a href="https://ghub.io/@babel/core">@babel/core</a>: Babel compiler core.</li>
-<li><a href="https://ghub.io/@babel/preset-env">@babel/preset-env</a>: A Babel preset for each environment.</li>
-<li><a href="https://ghub.io/docdash">docdash</a>: A clean, responsive documentation template theme for JSDoc 3 inspired by lodash and minami</li>
-<li><a href="https://ghub.io/eslint">eslint</a>: An AST-based pattern checker for JavaScript.</li>
-<li><a href="https://ghub.io/eslint-config-airbnb">eslint-config-airbnb</a>: Airbnb's ESLint config, following our styleguide</li>
-<li><a href="https://ghub.io/eslint-plugin-import">eslint-plugin-import</a>: Import with sanity.</li>
-<li><a href="https://ghub.io/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a>: Static AST checker for accessibility rules on JSX elements.</li>
-<li><a href="https://ghub.io/eslint-plugin-react">eslint-plugin-react</a>: React specific linting rules for ESLint</li>
-<li><a href="https://ghub.io/ink-docstrap">ink-docstrap</a>: DetectorJS, zero-dependency platform/environment detector written in ES6</li>
-<li><a href="https://ghub.io/install">install</a>: Minimal JavaScript module loader</li>
-<li><a href="https://ghub.io/jsdoc">jsdoc</a>: An API documentation generator for JavaScript.</li>
-<li><a href="https://ghub.io/jshint">jshint</a>: Static analysis tool for JavaScript</li>
-<li><a href="https://ghub.io/rollup">rollup</a>: Next-generation ES module bundler</li>
-<li><a href="https://ghub.io/rollup-plugin-babel">rollup-plugin-babel</a>: Seamless integration between Rollup and Babel.</li>
-<li><a href="https://ghub.io/rollup-plugin-eslint">rollup-plugin-eslint</a>: Verify entry point and all imported files with ESLint</li>
-<li><a href="https://ghub.io/rollup-plugin-filesize">rollup-plugin-filesize</a>: A rollup plugin to show filesize in the cli</li>
-<li><a href="https://ghub.io/rollup-plugin-json">rollup-plugin-json</a>: DetectorJS, zero-dependency platform/environment detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-replace">rollup-plugin-replace</a>: DetectorJS, zero-dependency platform/environment detector written in ES6</li>
-<li><a href="https://ghub.io/rollup-plugin-uglify">rollup-plugin-uglify</a>: Rollup plugin to minify generated bundle</li>
+<a id="md:dependencies" class="tsd-anchor"></a><h2><a href="#md:dependencies">Dependencies</a></h2><ul>
+<li><a href="https://ghub.io/@detector-js/core">@detector-js/core</a>: DetectorJS Core Module</li>
+<li><a href="https://ghub.io/@detector-js/feature">@detector-js/feature</a>: DetectorJS Feature Module</li>
+<li><a href="https://ghub.io/@detector-js/hardware">@detector-js/hardware</a>: DetectorJS Hardware Module</li>
+<li><a href="https://ghub.io/@detector-js/software">@detector-js/software</a>: DetectorJS Software Module</li>
+<li><a href="https://ghub.io/@detector-js/detector">@detector-js/detector</a>: DetectorJS Detector Module</li>
 </ul>
-<h2>Tests</h2>
-<pre class="prettyprint source lang-sh"><code>npm install
-npm test
-</code></pre>
-<h2>License</h2>
-<p>MIT</p>
-<h2>Powered By</h2>
-<a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+<a id="md:dev-dependencies" class="tsd-anchor"></a><h2><a href="#md:dev-dependencies">Dev Dependencies</a></h2><ul>
+<li><a href="https://ghub.io/@parcel/packager-ts">@parcel/packager-ts</a>: DetectorJS, zero-dependency platform/environment detector written in TypeScript</li>
+<li><a href="https://ghub.io/@parcel/transformer-typescript-types">@parcel/transformer-typescript-types</a>: DetectorJS, zero-dependency platform/environment detector written in TypeScript</li>
+<li><a href="https://ghub.io/@types/node">@types/node</a>: TypeScript definitions for Node.js</li>
+<li><a href="https://ghub.io/lerna">lerna</a>: Lerna is a fast, modern build system for managing and publishing multiple JavaScript/TypeScript packages from the same repository</li>
+<li><a href="https://ghub.io/parcel">parcel</a>: Blazing fast, zero configuration web application bundler</li>
+<li><a href="https://ghub.io/pkg-2-readme">pkg-2-readme</a>: Generate a README.md from package.json contents</li>
+<li><a href="https://ghub.io/standard-version">standard-version</a>: replacement for <code>npm version</code> with automatic CHANGELOG generation</li>
+<li><a href="https://ghub.io/typedoc">typedoc</a>: Create api documentation for TypeScript projects.</li>
+<li><a href="https://ghub.io/typescript">typescript</a>: TypeScript is a language for application scale JavaScript development</li>
+</ul>
+<a id="md:license" class="tsd-anchor"></a><h2><a href="#md:license">License</a></h2><p>MIT</p>
+<a id="md:powered-by" class="tsd-anchor"></a><h2><a href="#md:powered-by">Powered By</a></h2><a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
 <img src="http://logo.js.org/dark_horz.png" width="102" alt="JS.ORG Logo"/></a>
-<!-- alternatives [bright|dark]_[horz|vert|tiny].png (width[horz:102,vert:50,tiny:77]) --></article>
-    </section>
-
-
-
-
-
-
-
-
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Tue Mar 09 2021 11:17:24 GMT+0100 (Ora standard dell’Europa centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-
-
-</body>
-</html>
+<!-- alternatives [bright|dark]_[horz|vert|tiny].png (width[horz:102,vert:50,tiny:77]) --></div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg>On This Page</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li>
+<ul>
+<li><a href="#md:detector-js"><span>detector-<wbr/>js</span></a></li>
+<li>
+<ul>
+<li><a href="#md:description"><span>Description</span></a></li>
+<li><a href="#md:author"><span>Author</span></a></li>
+<li><a href="#md:badges"><span>Badges</span></a></li>
+<li><a href="#md:documentation"><span>Documentation</span></a></li>
+<li><a href="#md:installation"><span>Installation</span></a></li>
+<li><a href="#md:usage"><span>Usage</span></a></li>
+<li><a href="#md:todo"><span>Todo</span></a></li>
+<li><a href="#md:dependencies"><span>Dependencies</span></a></li>
+<li><a href="#md:dev-dependencies"><span>Dev <wbr/>Dependencies</span></a></li>
+<li><a href="#md:license"><span>License</span></a></li>
+<li><a href="#md:powered-by"><span>Powered <wbr/>By</span></a></li></ul></li></ul></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4-path"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)" id="icon-4-text"></path></svg><span>DetectorJS -<wbr/> v2.0.11</span></a>
+<ul class="tsd-small-nested-navigation">
+<li>
+<details class="tsd-index-accordion" data-key="@detector-js/core"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg><a href="modules/_detector_js_core.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4-path"></use><use href="#icon-4-text"></use></svg><span>@detector-<wbr/>js/core -<wbr/> v0.0.6</span></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="classes/_detector_js_core.Asserts.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg><span>Asserts</span></a></li>
+<li><a href="classes/_detector_js_core.CssFlagsClass.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Css<wbr/>Flags<wbr/>Class</span></a></li>
+<li><a href="classes/_detector_js_core.FlagsClass.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Flags<wbr/>Class</span></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="@detector-js/detector"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg><a href="modules/_detector_js_detector.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4-path"></use><use href="#icon-4-text"></use></svg><span>@detector-<wbr/>js/detector -<wbr/> v0.0.7</span></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="classes/_detector_js_detector.Detector.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Detector</span></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="@detector-js/feature"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg><a href="modules/_detector_js_feature.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4-path"></use><use href="#icon-4-text"></use></svg><span>@detector-<wbr/>js/feature -<wbr/> v0.0.6</span></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="classes/_detector_js_feature.AudioFeature.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Audio<wbr/>Feature</span></a></li>
+<li><a href="classes/_detector_js_feature.Feature.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Feature</span></a></li>
+<li><a href="classes/_detector_js_feature.VideoFeature.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Video<wbr/>Feature</span></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="@detector-js/hardware"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg><a href="modules/_detector_js_hardware.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4-path"></use><use href="#icon-4-text"></use></svg><span>@detector-<wbr/>js/hardware -<wbr/> v0.0.6</span></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="classes/_detector_js_hardware.CPU.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>CPU</span></a></li>
+<li><a href="classes/_detector_js_hardware.Device.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Device</span></a></li>
+<li><a href="classes/_detector_js_hardware.GPU.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>GPU</span></a></li>
+<li><a href="classes/_detector_js_hardware.Platform.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Platform</span></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="@detector-js/software"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg><a href="modules/_detector_js_software.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4-path"></use><use href="#icon-4-text"></use></svg><span>@detector-<wbr/>js/software -<wbr/> v0.0.7</span></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="classes/_detector_js_software.Browser.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Browser</span></a></li>
+<li><a href="classes/_detector_js_software.Engine.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>Engine</span></a></li>
+<li><a href="classes/_detector_js_software.OS.html"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg><span>OS</span></a></li></ul></div></details></li></ul></nav></div></div></div>
+<div class="tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div></body></html>
