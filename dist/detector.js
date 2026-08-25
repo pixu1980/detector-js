@@ -301,7 +301,7 @@ var Detector = class extends import_core.FlagsClass {
   }
 };
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 //! Features
 //! Hardware

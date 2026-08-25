@@ -8,7 +8,8 @@ Thanks for helping! This project values **zero external dependencies**, **privac
 pnpm install          # dev toolchain (esbuild, eslint, node:test, playwright)
 pnpm build            # builds all packages + root bundles (dist/)
 pnpm lint             # eslint on packages, test, browser, scripts
-pnpm test             # unit tests (node:test) + e2e (playwright) + smoke
+pnpm types:check      # tsc --noEmit on the generated .d.ts (test-types/usage.ts)
+pnpm test             # unit tests (node:test) + e2e (playwright, chromium+webkit) + smoke
 pnpm serve            # serves the site on the first free port
 ```
 

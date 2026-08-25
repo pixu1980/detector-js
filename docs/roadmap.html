@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0b1020" />
+<title>Roadmap — DetectorJS</title>
+<link rel="stylesheet" href="../site.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <div class="links">
+          <a href="../index.html">Home</a>
+          <a href="../docs/getting-started.html">Docs</a>
+          <a href="../demo.html">Live demo</a>
+          <a href="../PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main><h1>Roadmap</h1>
+<p>Priorities captured from the maintainer interview (3.0.0 release-prep cycle).</p>
+<h2>Next (post-3.0.0)</h2>
+<ul>
+<li><strong>[P1] More platforms / WebAPIs</strong> — expand detection tables (browsers, engines, OSs and
+WebAPI flags), verified against MDN Browser Compatibility Data before merging
+(see <code>CONTRIBUTING.md → Adding a new detection</code>).</li>
+<li><strong>[P1] GPU / vendor parsing</strong> — normalize GPU identities: Apple M-series (M1…M5,
+Pro/Max/Ultra), NVIDIA GeForce, AMD Radeon, Intel Iris/Arc; expose structured
+<code>gpu.family</code>/<code>gpu.generation</code> in addition to the raw WebGL strings.</li>
+<li><strong>[P1] Types generated from JSDoc</strong> — <code>scripts/build-dts.mjs</code> already emits <code>.d.ts</code> from the
+JSDoc comments at build time; harden it (richer <code>@typedef</code>, generics, <code>@memberof</code> mapping)
+and keep <code>pnpm types:check</code> (tsc) green.</li>
+<li><strong>[P2] Maintenance &amp; hardening</strong> — bugfixes, compat, coverage ↑ (currently ~89% lines),
+size budget is enforced in CI (<code>pnpm check:size</code>).</li>
+</ul>
+<h2>Backlog / ideas</h2>
+<ul>
+<li><strong>True ES5 bundle</strong>: esbuild cannot transpile ES6 classes/const/default-args to ES5
+(&quot;not supported yet&quot;); a Babel-based legacy pass would be the only way — weigh size vs
+IE11-era value. Open an issue if needed.</li>
+<li><strong>jsdoc HTML docs</strong>: the committed <code>docs/*.html</code> (jsdoc 1.3.2-era) are stale; regenerate
+with modern jsdoc tooling or retire in favor of the marked static pages.</li>
+<li><strong>Browser scope</strong>: formalize a browser-support matrix per flag (MDN-driven JSON table).</li>
+<li><strong>Benchmarks</strong>: startup/perf micro-benchmark (esbuild metafile + CI chart).</li>
+<li><strong>CSP guide</strong>: document <code>connect-src</code>/<code>script-src</code> recommendations when embedding
+the bundle (the library makes zero network calls by design).</li>
+</ul>
+<h2>Non-goals</h2>
+<ul>
+<li>No runtime dependencies, ever (external network/storage/telemetry = rejected).</li>
+<li>No server-side components; no data collection (see <code>PRIVACY.md</code>).</li>
+</ul>
+</main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="../docs/getting-started.html">Getting started</a></li>
+          <li><a href="../docs/api.html">API reference</a></li>
+          <li><a href="../docs/toolchain.html">Toolchain</a></li>
+          <li><a href="../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../docs/roadmap.html">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="../PRIVACY.html">Privacy</a></li>
+          <li><a href="../SECURITY.html">Security</a></li>
+          <li><a href="../CONTRIBUTING.html">Contributing</a></li>
+          <li><a href="../docs/adr/README.html">ADR</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="../packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="../packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="../packages/core/README.html">@detector-js/core</a></li>
+          <li><a href="../packages/hardware/README.html">@detector-js/hardware</a></li>
+          <li><a href="../packages/feature/README.html">@detector-js/feature</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
