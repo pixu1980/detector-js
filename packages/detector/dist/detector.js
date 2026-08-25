@@ -304,7 +304,7 @@ if (import_feature.Feature && import_feature.Feature.APIS) {
   Detector.PROBES = import_feature.Feature.APIS;
 }
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
+  console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
 //! Features
 //! Hardware

@@ -10,6 +10,6 @@
     "esbuild": "^0.25.0"
   },
   "dependencies": {
-    "detector-js": "2.0.11"
+    "detector-js": "3.0.0"
   }
 }

@@ -1,6 +1,6 @@
 # Getting Started
 
-DetectorJS (next major **3.0.0**, published baseline **2.0.11**) detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
+DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
 
 ## Install
 
