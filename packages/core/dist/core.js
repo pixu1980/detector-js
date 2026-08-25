@@ -683,7 +683,7 @@ var CssFlagsClass = class extends FlagsClass {
 
 // packages/core/lib/core.js
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Core Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
+  console.log("DetectorJS Core Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).

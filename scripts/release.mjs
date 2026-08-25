@@ -199,11 +199,15 @@ async function main() {
   run('pnpm build');
   run('pnpm test');
 
-  // 5) SRI snippets (integrity + CDN pins for this version)
+  // 5) refresh README (version header) and the static docs pages
+  run('pnpm readme');
+  run('node scripts/build-docs.mjs');
+
+  // 6) SRI snippets (integrity + CDN pins for this version)
   console.log('\ncdn / SRI snippets for this version:');
   run('node scripts/sri.mjs');
 
-  // 6) commit + tag
+  // 7) commit + tag
   const msgFile = path.join(os.tmpdir(), `detectorjs-release-${next}.txt`);
   fs.writeFileSync(msgFile, `chore(release): ${next}\n`);
   run(`git add -A -- . ':!.tokensave'`);
@@ -219,7 +223,7 @@ async function main() {
     return;
   }
 
-  // 7) npm publish (best-effort: on failure the release is already prepared/tagged)
+  // 8) npm publish (best-effort: on failure the release is already prepared/tagged)
   console.log('\npublishing @detector-js/* …');
   if (runSafe('pnpm -r publish') == null) {
     console.warn('  ⚠ scoped publish failed (auth/registry?). Packages are prepared & tagged — run `pnpm -r publish` when ready.');
