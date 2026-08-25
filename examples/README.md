@@ -9,6 +9,6 @@ Every integration mode DetectorJS supports — all zero-dependency, all 100% cli
 | [browser](browser) | `<script>` global → `new Detector()` | open `index.html` in a browser |
 | [bundler](bundler) | Any bundler (esbuild shown) | `cd bundler && npm i && npm run build && npm start` |
 
-> The `node-*` examples declare `"detector-js": "2.0.11"` (baseline; the release script bumps examples to 3.0.0) — the package is published with
+> The `node-*` examples declare `"detector-js": "2.0.11"` (baseline; the release script bumps examples to the next version) — the package is published with
 > an `exports` map, so both `import` and `require` resolve to the right build automatically.
 > The nightly/CI examples also work against the workspace copy via `pnpm` (see root `pnpm-workspace.yaml`).

@@ -32,7 +32,7 @@
 <li><strong>Author</strong>: pix-architect</li>
 </ul>
 <h2>Context</h2>
-<p>After the v3 monorepo restructure we need a repeatable release flow: bump root detector-js AND the five @detector-js/* packages to the same version (next major 3.0.0, baseline 2.0.11), generate the changelog from git history, and tag releases. The maintainer runs releases manually, so the tool must prepare everything (bump, changelog, tag, SRI snippets) without publishing.</p>
+<p>After the v3 monorepo restructure we need a repeatable release flow: bump root detector-js AND the five @detector-js/* packages to the same version (next major, baseline 2.0.11), generate the changelog from git history, and tag releases. The maintainer runs releases manually, so the tool must prepare everything (bump, changelog, tag, SRI snippets) without publishing.</p>
 <h2>Decision</h2>
 <p>Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, and (with --publish) prints the CDN/SRI snippets. <code>pnpm release</code> (alias <code>release:dryrun</code>/<code>release:publish</code>).</p>
 <h2>Consequences</h2>

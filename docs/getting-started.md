@@ -9,7 +9,7 @@ npm install detector-js
 # or
 pnpm add detector-js
 # or standalone via CDN (jsDelivr):
-# <script src="https://cdn.jsdelivr.net/npm/detector-js@3.0.0/detector.browser.min.js"></script>
+# <script src="https://cdn.jsdelivr.net/npm/detector-js@2.0.11/detector.browser.min.js"></script>
 ```
 
 ### CDN with SRI (pinned integrity)

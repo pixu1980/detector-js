@@ -1,27 +1,35 @@
-// Release manager — conventional-commits driven, single synced version for the whole monorepo.
-//
-//   pnpm release            → analyze, bump root+packages in sync, generate CHANGELOG, tag vX.Y.Z
-//   pnpm release --dry-run  → print the plan without changing anything
-//   pnpm release --publish  → same as release, then runs `pnpm pack` validation + prints publish commands
+// Release manager — THE release command is just:  pnpm release
+//   pnpm release             → full release: analyze → bump (root+packages in sync) →
+//                              changelog → examples → build → test → commit+tag → npm publish
+//   pnpm release --dry-run   → preview only (no changes, no publish)
+//   pnpm release --skip-publish → prepare the release + tag, but do not upload to npm
 //
 // Version calculus (from the current version in package.json, i.e. the last published one):
-//   any BREAKING CHANGE (subject "!" or "BREAKING CHANGE:" footer)      → MAJOR
-//   else any feat / feature                                              → MINOR
-//   else any fix|perf|refactor|build|test|docs|chore|style (or fallback) → PATCH
-//
-//   e.g. baseline 2.0.11 + breaking commits → 3.0.0 (all packages stay in sync).
+//   any BREAKING CHANGE ("!" in the subject)        → MAJOR
+//   else any feat / feature                         → MINOR
+//   else any fix|perf|refactor|build|test|docs|...  → PATCH
+// e.g. baseline 2.0.11 + breaking commits → next major (all packages stay in sync).
 // Changelog entries are grouped from conventional commits in the analyzed range.
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DRY = process.argv.includes('--dry-run');
-const PUBLISH = process.argv.includes('--publish');
+const SKIP_PUBLISH = process.argv.includes('--skip-publish');
 
 function run(cmd) {
   return execSync(cmd, { cwd: ROOT, encoding: 'utf8' }).trim();
+}
+
+function runSafe(cmd) {
+  try {
+    return run(cmd);
+  } catch (e) {
+    return null;
+  }
 }
 
 function readJson(p) {
@@ -51,7 +59,6 @@ function commitLines(range) {
 
 // ---- conventional commits ---------------------------------------------------
 const COMMIT_RE = /^(?<type>[a-z]+)(?:\((?<scope>[^)]*)\))?(?<breaking>!)?:\s*(?<desc>.+)$/i;
-const BREAKING_FOOTER = /BREAKING[ -]CHANGE:\s*/i;
 
 function parseCommit({ subject }) {
   const m = subject.match(COMMIT_RE);
@@ -62,10 +69,6 @@ function parseCommit({ subject }) {
     breaking: !!m.groups.breaking,
     desc: m.groups.desc,
   };
-}
-
-function computeBumpRange(fromTag) {
-  return fromTag ? `${fromTag}..HEAD` : 'HEAD';
 }
 
 function analyze(commits) {
@@ -80,10 +83,8 @@ function analyze(commits) {
     if (p.type === 'feat') feat = true;
     if (['fix', 'perf', 'refactor', 'build', 'test', 'docs', 'chore', 'style'].includes(p.type)) fix = true;
     if (p.type === 'unknown') continue;
-
-    const key = p.type === 'unknown' ? 'other' : p.type;
-    byType[key] = byType[key] || [];
-    byType[key].push({ desc: p.desc, scope: p.scope, breaking: p.breaking, hash: c.hash });
+    byType[p.type] = byType[p.type] || [];
+    byType[p.type].push({ desc: p.desc, scope: p.scope, breaking: p.breaking, hash: c.hash });
   }
 
   const bump = breaking ? 'major' : (feat ? 'minor' : (fix ? 'patch' : null));
@@ -119,8 +120,8 @@ function groupTitle(type) {
   }[type] || '### Other';
 }
 
-function renderChangelog(version, date, byType, rangeInfo) {
-  const lines = ['', `## [Version ${version}](${rangeInfo}) (${date})`, ''];
+function renderChangelog(version, date, byType) {
+  const lines = ['', `## [Version ${version}](https://github.com/pixu1980/detector-js/releases/tag/v${version}) (${date})`, ''];
   const order = ['feat', 'fix', 'perf', 'refactor', 'build', 'test', 'docs', 'chore', 'style', 'other'];
   for (const type of order) {
     const items = byType[type];
@@ -135,7 +136,7 @@ function renderChangelog(version, date, byType, rangeInfo) {
   if (!lines.some((l) => l.startsWith('- '))) {
     lines.push('- maintenance & minor updates', '');
   }
-  lines.push(`...full changes: ${rangeInfo}`, '');
+  lines.push('...full changes: ' + `https://github.com/pixu1980/detector-js/compare/v${version.substr(0, version.lastIndexOf('.'))}.x...v${version}`, '');
   return lines.join('\n');
 }
 
@@ -144,34 +145,35 @@ async function main() {
   const rootPkg = readJson('package.json');
   const current = rootPkg.version;
   const fromTag = lastAncestorTag();
-  const range = computeBumpRange(fromTag);
+  const range = fromTag ? `${fromTag}..HEAD` : 'HEAD';
   const commits = commitLines(range);
   const { bump, byType, breaking, feat, fix } = analyze(commits);
 
-  console.log(`\n== release plan ==`);
+  console.log(`\n== release: detector-js ==`);
   console.log(`current version : ${current} (${fromTag ? `tag ${fromTag}` : 'no tag'})`);
   console.log(`analysed range  : ${range} (${commits.length} commits)`);
   console.log(`signals         : breaking=${breaking} feat=${feat} fix=${fix}`);
-  console.log(`next version    : ${bump ? `${bump} → ${bumpVersion(current, bump)}` : 'NO VERSION CHANGE (nothing conventional found)'}`);
 
   if (!bump) {
-    console.log('\nnothing to release.');
+    console.log('\nnothing to release (no conventional commits found).');
     return;
   }
 
   const next = bumpVersion(current, bump);
-  const date = new Date().toISOString().slice(0, 10);
+  console.log(`next version    : ${bump} → ${next}`);
 
   if (DRY) {
     console.log('\n[dry-run] would:');
-    console.log(`  - set version ${next} in package.json + packages/*/package.json`);
-    console.log(`  - prepend CHANGELOG.md entry`);
-    console.log(`  - create tag v${next}`);
-    console.log(`  - update examples deps to ${next}`);
+    console.log(`  - set ${next} in package.json + packages/*/package.json`);
+    console.log('  - prepend a grouped CHANGELOG.md entry');
+    console.log('  - update examples deps');
+    console.log('  - build + run tests');
+    console.log(`  - commit + tag v${next}`);
+    console.log(`  - npm publish (root + @detector-js/*)${SKIP_PUBLISH ? ' [skipped]' : ''}`);
     return;
   }
 
-  // sync versions everywhere
+  // 1) sync versions everywhere
   writeJson('package.json', { ...rootPkg, version: next });
   for (const dir of fs.readdirSync(path.join(ROOT, 'packages'))) {
     const p = path.join('packages', dir, 'package.json');
@@ -179,7 +181,8 @@ async function main() {
     const pkg = readJson(p);
     writeJson(p, { ...pkg, version: next });
   }
-  // examples consume the published version
+
+  // 2) examples consume the published version
   for (const ex of ['node-cjs', 'node-esm', 'bundler']) {
     const p = path.join('examples', ex, 'package.json');
     const pkg = readJson(p);
@@ -188,26 +191,44 @@ async function main() {
     }
   }
 
-  // changelog
-  const entry = renderChangelog(next, date, byType, `https://github.com/pixu1980/detector-js/releases/tag/v${next}`);
-  const changelog = fs.readFileSync(path.join(ROOT, 'CHANGELOG.md'), 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'CHANGELOG.md'), entry + '\n' + changelog);
+  // 3) changelog
+  const entry = renderChangelog(next, new Date().toISOString().slice(0, 10), byType);
+  fs.writeFileSync(path.join(ROOT, 'CHANGELOG.md'), entry + '\n' + fs.readFileSync(path.join(ROOT, 'CHANGELOG.md'), 'utf8'));
 
-  // rebuild (version defines) + validate package
+  // 4) build + test
   run('pnpm build');
   run('pnpm test');
 
-  console.log('\n📦 version bumped to', next, '— rebuild + tests OK');
-  if (PUBLISH) {
-    run('pnpm pack --dry-run'); // sanity
-    console.log('\npublish (run as maintainer):');
-    console.log('  pnpm -r publish --filter ./packages --publish-branch=main  # or per-package');
-    console.log('  pnpm publish');
-    console.log('\ncdn / SRI snippets for this version:');
-    run('node scripts/sri.mjs');
+  // 5) SRI snippets (integrity + CDN pins for this version)
+  console.log('\ncdn / SRI snippets for this version:');
+  run('node scripts/sri.mjs');
+
+  // 6) commit + tag
+  const msgFile = path.join(os.tmpdir(), `detectorjs-release-${next}.txt`);
+  fs.writeFileSync(msgFile, `chore(release): ${next}\n`);
+  run(`git add -A -- . ':!.tokensave'`);
+  run(`git commit -q -F "${msgFile}"`);
+  run(`git tag v${next}`);
+  fs.rmSync(msgFile, { force: true });
+  console.log(`\n✓ committed + tagged v${next}`);
+
+  if (SKIP_PUBLISH) {
+    console.log('\npublish skipped (--skip-publish). To publish manually:');
+    console.log('  pnpm -r publish   # @detector-js/*');
+    console.log('  pnpm publish      # detector-js');
+    return;
   }
-  console.log('create tag:');
-  console.log(`  git add -A && git commit -m "chore(release): ${next}" && git tag v${next}`);
+
+  // 7) npm publish (best-effort: on failure the release is already prepared/tagged)
+  console.log('\npublishing @detector-js/* …');
+  if (runSafe('pnpm -r publish') == null) {
+    console.warn('  ⚠ scoped publish failed (auth/registry?). Packages are prepared & tagged — run `pnpm -r publish` when ready.');
+  }
+  console.log('publishing detector-js …');
+  if (runSafe('pnpm publish') == null) {
+    console.warn('  ⚠ root publish failed (auth/registry?). Run `pnpm publish` when ready.');
+  }
+  console.log('\n✅ ' + next + ' released. Remember to: git push && git push --tags');
 }
 
 main();

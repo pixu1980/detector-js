@@ -1,16 +1,16 @@
-# Migration Guide — v1 / v2 → v3 (3.0.0)
+# Migration Guide — v1 / v2 → v3 monorepo
 
 This guide walks every breaking change between the published 1.x/2.x packages and
 **detector-js v3** (monorepo, vanillaJS, esbuild). Each section has a *before/after*.
 
-> The next release is **3.0.0** (baseline 2.0.11 + breaking commits — run `pnpm release`).
+> The next release is **a new major** (baseline 2.0.11 + breaking commits — run `pnpm release`).
 > Types, docs and bundles are built by `pnpm build` (esbuild + marked).
 
 ## 1. Structure & packages
 
 | v1 / v2 | v3 |
 | --- | --- |
-| single `detector-js` (flat, or TS monorepo with `@detector-js/*` 0.0.x) | vanillaJS monorepo: `@detector-js/{core,feature,software,hardware,detector}` all **same version** (e.g. 3.0.0) |
+| single `detector-js` (flat, or TS monorepo with `@detector-js/*` 0.0.x) | vanillaJS monorepo: `@detector-js/{core,feature,software,hardware,detector}` all **same version** (e.g. 2.0.11) |
 | build: rollup + babel / parcel | **esbuild** (`scripts/build.mjs`) — `pnpm build` |
 
 There is **no more TS source**: the implementation is zero-dependency ES6; types are
