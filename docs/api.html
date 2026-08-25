@@ -107,8 +107,14 @@ macOS Sonoma, Sequoia or Tahoe. The real version lives in the high-entropy
 <code>navigator.userAgentData.getHighEntropyValues([&#39;platformVersion&#39;])</code> (User-Agent Client Hints).
 <code>upgrade()</code> (auto-started in the constructor, safe/no-op when hints are absent or denied by
 Permissions-Policy) refreshes <code>detector.os</code> with the real version and name — e.g.
-<code>{ name: &#39;macOS&#39;, version: &#39;26.6.2&#39;, versionName: &#39;Tahoe&#39; }</code>. Version names are maintained for
-macOS (Tempo → Tahoe 26), Windows (7 → 11 via hints), Android (Cupcake → Pie).</p>
+<code>{ name: &#39;macOS&#39;, version: &#39;26.6.2&#39;, versionName: &#39;Tahoe&#39; }</code>.</p>
+<p><strong>Safari (and WebKit)</strong>: no Client Hints exist, and the UA keeps the legacy-compat
+<code>&quot;Mac OS X 10_15_7&quot;</code>. Since Safari 26 is bundled 1:1 with macOS 26 (Apple renumbered in 2025),
+the UA <code>Version/26.x</code> token reveals the real version synchronously (no async needed) → Tahoe.
+Older Safari majors were back-ported across multiple macOS releases, so pre-26 values stay UA-based.</p>
+<p><strong>macOS version names</strong> (Tempo → Tahoe): 10.0–10.15, 11 Big Sur, 12 Monterey, 13 Ventura,
+14 Sonoma, 15 Sequoia — then <strong>26 Tahoe</strong> (versions 16–25 do not exist; Apple jumped 15 → 26).
+Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then numerical (10–17+).</p>
 <h2>Versioning &amp; release</h2>
 <p>SemVer; latest release <strong>3.x</strong>; current dev version <strong>3.0.0</strong>. See <a href="../GOVERNANCE.html">GOVERNANCE</a>.</p>
 </main>

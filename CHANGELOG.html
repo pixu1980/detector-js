@@ -37,6 +37,17 @@ roots (<code>self</code>/<code>window</code>/<code>globalThis</code>/<code>globa
 usages (<code>Brave</code>, <code>MSStream</code>) that crashed under Node</li>
 <li><strong>fix: Chromium-based Edge mis-detected as Chrome</strong> — UA token is <code>Edg/</code> (regex now <code>(?:edge|edg)</code>)</li>
 <li>fix: desktop Opera mis-detected as <code>OperaMobile</code> (OPR token now requires a mobile marker)</li>
+<li><strong>real OS version via User-Agent Client Hints</strong>: modern macOS always sends the legacy-compat UA
+<code>&quot;Mac OS X 10_15_7&quot;</code> (→ Catalina) even on Sonoma/Sequoia/Tahoe; <code>OS.upgrade()</code> /
+<code>detector.upgrade()</code> resolve the high-entropy <code>platformVersion</code> and report the real version
+and name (e.g. <code>26.6.2 · Tahoe</code>, Windows 11) — auto-started in the constructor, safe no-op when
+hints are unavailable (Safari/Firefox) or denied (Permissions-Policy <code>ch-ua-high-entropy-values</code>)</li>
+<li>macOS version names extended to <strong>Tahoe (26)</strong> — versions 16–25 do not exist (Apple jumped
+15 → 26 in 2025); Darwin→marketing mapping (20→11 … 26→26)</li>
+<li><strong>Safari/WebKit fallback</strong>: no Client Hints there, and the UA keeps the legacy
+<code>&quot;Mac OS X 10_15_7&quot;</code>; since Safari 26 is 1:1 with macOS 26, the <code>Version/26.x</code> token now
+reveals the real version synchronously (e.g. <code>26.5 · Tahoe</code>); pre-26 Safari stays UA-based</li>
+<li>Android current majors (10–17) parse correctly (numerical naming since Android 10)</li>
 </ul>
 <h3>Monorepo &amp; release readiness</h3>
 <ul>
