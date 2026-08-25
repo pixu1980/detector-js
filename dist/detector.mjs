@@ -30,6 +30,7 @@ var Detector = class extends FlagsClass {
     this.checkGPU();
     this.checkPlatform();
     this.setCssFlags();
+    this.upgrade();
   }
   //! Feature
   /**
@@ -93,6 +94,7 @@ var Detector = class extends FlagsClass {
    */
   checkOS() {
     const os = new OS(this._ua, this.toFlags());
+    this._os = os;
     if (this._values) {
       this.os = os.toValues();
     } else {
@@ -101,6 +103,28 @@ var Detector = class extends FlagsClass {
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(os.toCssFlags());
     }
+  }
+  /**
+   * Resolves the real OS version through User-Agent Client Hints (high-entropy)
+   * and refreshes `os` (e.g. modern macOS reports a legacy-compat UA "Mac OS X
+   * 10_15_7" while the real version is, say, 26.6.2 "Tahoe").
+   * Already kicked off automatically in the constructor; call it again to await.
+   *
+   * @returns {Promise<object>}
+   *
+   * @memberOf Detector
+   */
+  upgrade() {
+    const os = this._os;
+    if (!os || typeof os.upgrade !== "function") {
+      return Promise.resolve(this.os);
+    }
+    this._upgradePromise = os.upgrade().then((values) => {
+      this.os = values;
+      this._upgraded = true;
+      return this.os;
+    });
+    return this._upgradePromise;
   }
   //! Hardware
   /**

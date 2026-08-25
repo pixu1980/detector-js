@@ -49,7 +49,16 @@ Read-only getters: `pointerEnabled`, `pixelRatio`, `pointerLock`, `quirksMode`, 
 | `gpu` | `GPU.toFlags()` |
 | `platform` | `Platform…` |
 
-Methods: `toFlags()`, `toValues()`, `setCssFlags()`. Getters: `ua`, `root`, `process`, `navigator`, `document`, `booleanFlagsValuePropertyName`.
+Methods: `toFlags()`, `toValues()`, `setCssFlags()`, `upgrade()` (async). Getters: `ua`, `root`, `process`, `navigator`, `document`, `booleanFlagsValuePropertyName`.
+
+### `await detector.upgrade()` — real OS version via Client Hints
+Modern macOS browsers keep the legacy-compat UA `"Mac OS X 10_15_7"` (→ Catalina) even on
+macOS Sonoma, Sequoia or Tahoe. The real version lives in the high-entropy
+`navigator.userAgentData.getHighEntropyValues(['platformVersion'])` (User-Agent Client Hints).
+`upgrade()` (auto-started in the constructor, safe/no-op when hints are absent or denied by
+Permissions-Policy) refreshes `detector.os` with the real version and name — e.g.
+`{ name: 'macOS', version: '26.6.2', versionName: 'Tahoe' }`. Version names are maintained for
+macOS (Tempo → Tahoe 26), Windows (7 → 11 via hints), Android (Cupcake → Pie).
 
 ## Versioning & release
 SemVer; latest release **3.x**; current dev version **3.0.0**. See [GOVERNANCE.md](../GOVERNANCE.md).

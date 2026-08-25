@@ -1,3 +1,43 @@
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
 // packages/software/lib/browser.js
 import { Asserts, CssFlagsClass } from "@detector-js/core";
 var Browser = class extends CssFlagsClass {
@@ -1794,8 +1834,117 @@ var OS = class extends CssFlagsClass3 {
       "Monterey": /^12(\.+\d)(\.+\d)?$/i.test(version),
       "Ventura": /^13(\.+\d)(\.+\d)?$/i.test(version),
       "Sonoma": /^14(\.+\d)(\.+\d)?$/i.test(version),
-      "Sequoia": /^15(\.+\d)(\.+\d)?$/i.test(version)
+      "Sequoia": /^15(\.+\d)(\.+\d)?$/i.test(version),
+      "Tahoe": /^26(\.+\d)(\.+\d)?$/i.test(version)
     }, version);
+  }
+  //! Client Hints (User-Agent Client Hints) — real OS version when the UA legacy-compat
+  //! string hides it (modern macOS always reports "Mac OS X 10_15_7" while the real
+  //! version is, e.g., 26.6.2 "Tahoe"). platformVersion is high-entropy: only available
+  //! through the async getHighEntropyValues() and can be denied (Permissions-Policy).
+  /**
+   *
+   *
+   * @param {any} [hints=null]
+   * @returns {string|null}
+   *
+   * @memberOf OS
+   */
+  _getClientHintsPlatformVersion(hints = null) {
+    const pv = hints && hints.platformVersion != null ? String(hints.platformVersion) : null;
+    if (!pv) return null;
+    const version = pv.replace(/_/g, ".");
+    return /^\d+(\.\d+){0,2}$/.test(version) ? version : null;
+  }
+  /**
+   * Maps a client-hints platform version to the marketing macOS version.
+   * Handles both marketing-style values (11..15, 26) and Darwin-style values
+   * (20..26, e.g. Chrome on macOS reports 24.4.0 for Sequoia 15).
+   *
+   * @param {string} clientHintsVersion
+   * @returns {string|null}
+   *
+   * @memberOf OS
+   */
+  _mapMacOSVersion(clientHintsVersion) {
+    const major = parseInt(clientHintsVersion.split(".")[0], 10);
+    if (Number.isNaN(major)) return null;
+    if (major >= 20) {
+      const darwinToMarketing = {
+        19: "10.15",
+        20: "11",
+        21: "12",
+        22: "13",
+        23: "14",
+        24: "15",
+        25: "26",
+        26: "26"
+      }[major];
+      if (!darwinToMarketing) return null;
+      const rest = clientHintsVersion.split(".").slice(1).join(".");
+      return rest ? `${darwinToMarketing}.${rest}` : darwinToMarketing;
+    }
+    if (major >= 11) {
+      return clientHintsVersion;
+    }
+    return null;
+  }
+  /**
+   * Best-effort Windows version name from client hints
+   * (Chromium reports 15.0.0 for Windows 11, 10.0.0/1.0.0 for Windows 10).
+   *
+   * @param {string} clientHintsVersion
+   * @returns {string|null}
+   *
+   * @memberOf OS
+   */
+  _getWindowsVersionNameFromHints(clientHintsVersion) {
+    if (clientHintsVersion.startsWith("15.")) return "11";
+    if (clientHintsVersion.startsWith("10.") || clientHintsVersion.startsWith("1.")) return "10";
+    return null;
+  }
+  /**
+   * Resolves the real OS version through User-Agent Client Hints and refreshes
+   * the values (used by Detector.upgrade()). Falls back to the UA-based result
+   * when hints are unavailable or denied.
+   *
+   * @returns {Promise<object>}
+   *
+   * @memberOf OS
+   */
+  upgrade() {
+    return __async(this, null, function* () {
+      const uaData = this._navigator.userAgentData;
+      if (!uaData || typeof uaData.getHighEntropyValues !== "function") {
+        return this.toValues();
+      }
+      try {
+        const hints = yield uaData.getHighEntropyValues(["platformVersion"]);
+        const pv = this._getClientHintsPlatformVersion(hints);
+        if (!pv) {
+          return this.toValues();
+        }
+        const values = this.toValues();
+        if (this.macOS) {
+          const macVersion = this._mapMacOSVersion(pv);
+          if (macVersion && macVersion !== values.version) {
+            const version = macVersion.replace(/_/gi, ".");
+            return __spreadProps(__spreadValues({}, values), {
+              version,
+              versionName: this._getMacOSVersionName(version)
+            });
+          }
+        }
+        if (this.Windows) {
+          const windowsName = this._getWindowsVersionNameFromHints(pv);
+          if (windowsName && windowsName !== values.versionName) {
+            return __spreadProps(__spreadValues({}, values), { versionName: windowsName });
+          }
+        }
+      } catch (e) {
+      }
+      return this.toValues();
+    });
   }
   /**
    *
@@ -1805,6 +1954,8 @@ var OS = class extends CssFlagsClass3 {
    * @memberOf OS
    */
   get macOS() {
+    const ch = this._getClientHintsPlatformVersion(this._navigator.userAgentData);
+    const chMac = ch ? this._mapMacOSVersion(ch) : null;
     return this._checkAssertsResult(Asserts3.all([
       !this.iOS,
       !/mobile\//i.test(this._ua),
@@ -1817,7 +1968,7 @@ var OS = class extends CssFlagsClass3 {
       /Mac[ +]OS[ +]X(?:[ /](?:Version )?(\d+(?:[_\.]\d+)+))?/i.test(this._ua),
       /Mac (\d+(?:[_\.]\d+)+)/i.test(this._ua),
       /mac os x (\d+(\.?_?\d+)+)/i.test(this._ua)
-    ]), null, this._getMacOSVersionName);
+    ]), chMac, this._getMacOSVersionName);
   }
   /**
    *

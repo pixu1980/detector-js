@@ -50,9 +50,27 @@ describe('software detection (UA table)', () => {
     });
   }
 
-  test('macOS version names', () => {
+  test('macOS version names (UA-based)', () => {
     assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15', {}, 'os').toValues().versionName, 'Catalina');
     assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15', {}, 'os').toValues().versionName, 'Ventura');
+    assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 26_6_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15', {}, 'os').toValues().versionName, 'Tahoe');
+  });
+
+  test('client-hints mapping (marketing + Darwin style)', () => {
+    const os = new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', {}, 'os');
+    assert.equal(os._mapMacOSVersion('26.6.2'), '26.6.2'); // macOS 26 Tahoe (26 == Darwin 26)
+    assert.equal(os._mapMacOSVersion('24.4.0'), '15.4.0'); // Darwin 24 → Sequoia 15
+    assert.equal(os._mapMacOSVersion('23.4.0'), '14.4.0'); // Darwin 23 → Sonoma 14
+    assert.equal(os._mapMacOSVersion('15.1'), '15.1'); // marketing-style
+    assert.equal(os._mapMacOSVersion('10.15.7'), null); // same legacy as UA — ignore
+  });
+
+  test('client hints upgrade reveals the real macOS version (Tahoe)', async () => {
+    const os = new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', {}, 'os');
+    assert.equal(os.toValues().versionName, 'Catalina'); // UA fallback first
+    const upgraded = await os.upgrade();
+    assert.equal(upgraded.version, '26.6.2');
+    assert.equal(upgraded.versionName, 'Tahoe');
   });
 
   test('engine detection', () => {

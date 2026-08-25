@@ -100,7 +100,15 @@
 <td><code>Platform…</code></td>
 </tr>
 </tbody></table>
-<p>Methods: <code>toFlags()</code>, <code>toValues()</code>, <code>setCssFlags()</code>. Getters: <code>ua</code>, <code>root</code>, <code>process</code>, <code>navigator</code>, <code>document</code>, <code>booleanFlagsValuePropertyName</code>.</p>
+<p>Methods: <code>toFlags()</code>, <code>toValues()</code>, <code>setCssFlags()</code>, <code>upgrade()</code> (async). Getters: <code>ua</code>, <code>root</code>, <code>process</code>, <code>navigator</code>, <code>document</code>, <code>booleanFlagsValuePropertyName</code>.</p>
+<h3><code>await detector.upgrade()</code> — real OS version via Client Hints</h3>
+<p>Modern macOS browsers keep the legacy-compat UA <code>&quot;Mac OS X 10_15_7&quot;</code> (→ Catalina) even on
+macOS Sonoma, Sequoia or Tahoe. The real version lives in the high-entropy
+<code>navigator.userAgentData.getHighEntropyValues([&#39;platformVersion&#39;])</code> (User-Agent Client Hints).
+<code>upgrade()</code> (auto-started in the constructor, safe/no-op when hints are absent or denied by
+Permissions-Policy) refreshes <code>detector.os</code> with the real version and name — e.g.
+<code>{ name: &#39;macOS&#39;, version: &#39;26.6.2&#39;, versionName: &#39;Tahoe&#39; }</code>. Version names are maintained for
+macOS (Tempo → Tahoe 26), Windows (7 → 11 via hints), Android (Cupcake → Pie).</p>
 <h2>Versioning &amp; release</h2>
 <p>SemVer; latest release <strong>3.x</strong>; current dev version <strong>3.0.0</strong>. See <a href="../GOVERNANCE.html">GOVERNANCE</a>.</p>
 </main>

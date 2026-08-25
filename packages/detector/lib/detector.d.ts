@@ -23,4 +23,5 @@ export declare class Detector extends FlagsClass {
   platform: string;
   toValues(): Flags;
   toFlags(): Flags;
+  upgrade(): Promise<Flags>;
 }
