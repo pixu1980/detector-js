@@ -1,6 +1,11 @@
 packages:
   - 'packages/*'
 
+allowBuilds:
+  esbuild: true
+  playwright: true
+  '@playwright/test': true
+
 onlyBuiltDependencies:
   - esbuild
   - playwright
