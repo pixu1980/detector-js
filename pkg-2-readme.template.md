@@ -40,6 +40,69 @@ yarn add {{name}}
 ```
 
 ## Usage
+
+### Browser (script tag)
+
+```html
+<script src="dist/detector.browser.min.js"></script>
+<script>
+  const detector = new Detector();          // global class, no wrapper needed
+  console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
+</script>
+```
+
+### npm (ESM / CJS)
+
+```sh
+npm i detector-js
+```
+
+```js
+import { Detector } from 'detector-js';      // ESM
+const { Detector } = require('detector-js'); // CJS
+```
+
+### TypeScript
+
+Types ship with the package (`index.d.ts` + per-package `.d.ts`).
+
+## Privacy
+**100% client-side — zero network calls, zero storage, zero telemetry.**
+DetectorJS never registers or sends anything anywhere; the data stays in the hands of whoever executes the library.
+Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in [PRIVACY.md](PRIVACY.md).
+
+## Documentation
+- [Getting started](docs/getting-started.md)
+- [API reference](docs/api.md)
+- [Toolchain (esbuild)](docs/toolchain.md)
+- [Browser support](docs/browser-support.md)
+- [Examples](examples/)
+
+## Governance & community
+[CONTRIBUTING.md](CONTRIBUTING.md) · [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [SECURITY.md](SECURITY.md) · [GOVERNANCE.md](GOVERNANCE.md)
+
+## Monorepo structure
+`{{name}}` v3 is a zero-dependency vanillaJS monorepo:
+
+```
+packages/
+  core/       @detector-js/core       asserts, FlagsClass, CssFlagsClass, polyfills
+  feature/    @detector-js/feature    Feature, AudioFeature, VideoFeature (+ modern WebAPIs)
+  software/   @detector-js/software   Browser, Engine, OS
+  hardware/   @detector-js/hardware   Platform, Device, CPU, GPU
+  detector/   @detector-js/detector   Detector (composes everything)
+```
+
+Runtime dependencies are limited to the internal workspaces: **zero external dependencies**.
+
+The scoped packages can be consumed individually:
+
+```js
+import { Browser } from '@detector-js/software';
+import { Detector } from '@detector-js/detector';
+```
+
+## Usage
 ```js
 import Detector from 'detector-js';
 

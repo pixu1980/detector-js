@@ -1,0 +1,61 @@
+{
+  "name": "@detector-js/core",
+  "version": "2.0.11",
+  "description": "DetectorJS Core Module",
+  "keywords": [
+    "detector-js",
+    "core",
+    "asserts",
+    "flags",
+    "css-flags",
+    "polyfills"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/core.js",
+  "main": "dist/core.js",
+  "module": "dist/core.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node --test ./__tests__/core.test.js",
+    "build": "node ../../scripts/build-package.mjs",
+    "watch": "node ../../scripts/build-package.mjs --watch"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {},
+  "types": "./lib/core.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

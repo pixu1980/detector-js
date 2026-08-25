@@ -1,0 +1,15 @@
+{
+  "name": "detector-js-example-bundler",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --outfile=dist/app.mjs",
+    "start": "node dist/app.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "dependencies": {
+    "detector-js": "2.0.11"
+  }
+}

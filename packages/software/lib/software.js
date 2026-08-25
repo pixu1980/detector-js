@@ -1,0 +1,10 @@
+export * from './browser';
+export * from './engine';
+export * from './os';
+
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time (esbuild `define`).
+if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line no-console
+  console.log('DetectorJS Software Module v' + (typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0') + ' initialized');
+}

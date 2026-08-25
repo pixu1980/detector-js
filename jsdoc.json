@@ -7,7 +7,7 @@
   },
   "source": {
     "include": [
-      "./src"
+      "./packages"
     ],
     "includePattern": ".+\\.js$",
     "excludePattern": "(docs)"
@@ -18,7 +18,7 @@
     "monospaceLinks": true,
     "systemName": "DetectorJS",
     "footer": "",
-    "copyright": "2017-2021 &copy; Created by Pixu",
+    "copyright": "2017-2025 \u00a9 Created by Pixu",
     "navType": "vertical",
     "theme": "spacelab",
     "linenums": true,

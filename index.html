@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-detector-capabilities>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DetectorJS — zero-dependency, privacy-first device &amp; browser detection</title>
+  <meta name="description" content="DetectorJS is a zero-dependency, vanillaJS platform/environment detector. 87+ capability flags, 50+ browsers, everything runs locally: no tracking, no telemetry, no data leaves the page." />
+  <meta name="theme-color" content="#0b1020" />
+  <meta property="og:title" content="DetectorJS — zero-dependency, privacy-first detection" />
+  <meta property="og:description" content="87+ capability flags, 0 dependencies, 100% client-side. It detects your environment — and never shares it." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #101736;
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #98a2c3;
+      --accent: #7c5cff;
+      --accent2: #00e5c7;
+      --pink: #ff5c8a;
+      --warn: #ffc94d;
+      --ok: #3ddc97;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, 0.25), transparent 60%),
+        radial-gradient(1000px 500px at 10% 110%, rgba(0, 229, 199, 0.12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+    header.site {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 16, 32, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { display: flex; align-items: center; gap: 1.5rem; height: 60px; }
+    .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 1.1rem; }
+    .brand span { color: var(--accent2); }
+    nav .links { margin-left: auto; display: flex; gap: 1.1rem; font-size: 0.92rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--text); }
+    .btn {
+      display: inline-block; padding: 0.6rem 1.3rem; border-radius: 999px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer;
+    }
+    .btn-primary { background: linear-gradient(90deg, var(--accent), var(--pink)); color: #fff; box-shadow: 0 8px 30px rgba(124, 92, 255, 0.35); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: transparent; }
+    .hero { padding: 5.5rem 0 3rem; text-align: center; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.4rem; }
+    .badge {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+      padding: 0.35rem 0.8rem; border-radius: 999px;
+      background: rgba(0, 229, 199, 0.1); color: var(--accent2); border: 1px solid rgba(0, 229, 199, 0.25);
+    }
+    .badge.pink { background: rgba(255, 92, 138, 0.1); color: var(--pink); border-color: rgba(255, 92, 138, 0.25); }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; }
+    .hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.tag { max-width: 640px; margin: 1.2rem auto 0; color: var(--muted); font-size: 1.12rem; }
+    .cta { display: flex; gap: 0.9rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+    .trust { margin-top: 2rem; font-size: 0.8rem; color: var(--muted); }
+    .trust b { color: var(--ok); }
+
+    .live {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.4rem; margin: 3rem 0; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    .live h2 { font-size: 1.1rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .live p.sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
+    .kv .k { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
+    .kv .k .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .kv .k .value { font-weight: 700; font-size: 0.95rem; margin-top: 0.15rem; word-break: break-word; }
+    pre.code {
+      margin: 2rem 0; background: #070b18; border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.1rem 1.3rem; overflow: auto; font-size: 0.85rem; line-height: 1.55;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre.code .cm { color: #5c6b9a; }
+    pre.code .k { color: var(--accent2); }
+    pre.code .f { color: #ffd479; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem; }
+    .card h3 { font-size: 1.02rem; margin-bottom: 0.5rem; }
+    .card h3 span { margin-right: 0.5rem; }
+    .card ul { list-style: none; color: var(--muted); font-size: 0.88rem; }
+    .card ul li { padding: 0.22rem 0; }
+    .card ul li::before { content: "✓  "; color: var(--ok); font-weight: 700; }
+
+    section h2.sec { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; letter-spacing: -0.02em; margin: 4rem 0 0.6rem; }
+    section p.sec-sub { color: var(--muted); max-width: 720px; margin-bottom: 1rem; }
+
+    .privacy {
+      border: 1px solid rgba(0, 229, 199, 0.35); background: linear-gradient(180deg, rgba(0,229,199,0.08), transparent);
+      border-radius: var(--radius); padding: 1.8rem; margin: 1rem 0 2.5rem;
+    }
+    .privacy h3 { color: var(--ok); font-size: 1.15rem; margin-bottom: 0.6rem; }
+    .privacy .big { font-size: 1.05rem; font-weight: 700; margin: 0.4rem 0; }
+    .privacy p, .privacy li { color: var(--muted); font-size: 0.9rem; }
+    .privacy ul { margin: 0.6rem 0 0.9rem 1.1rem; }
+    .privacy code { color: var(--accent2); }
+
+    .integrations { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.5rem 0; }
+    .chip { display: flex; align-items: center; gap: 0.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; }
+    .chip .ico { font-size: 1.1rem; }
+
+    footer { border-top: 1px solid var(--border); margin-top: 4rem; padding: 2.5rem 0 3rem; color: var(--muted); font-size: 0.85rem; }
+    footer .cols { display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: space-between; }
+    footer h4 { color: var(--text); margin-bottom: 0.5rem; font-size: 0.9rem; }
+    footer ul { list-style: none; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 700px) {
+      .hero { padding-top: 3rem; }
+      nav .links { display: none; }
+    }
+  </style>
+  <script>
+    // This page makes ZERO network requests. Everything — detection — runs locally.
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <div class="brand">Detector<span>JS</span></div>
+        <div class="links">
+          <a href="#live">Live demo</a>
+          <a href="#features">Features</a>
+          <a href="#integrate">Integrate</a>
+          <a href="#privacy">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="badges">
+        <span class="badge">0 dependencies</span>
+        <span class="badge pink">100% local</span>
+        <span class="badge">87+ capability flags</span>
+        <span class="badge pink">~51 KB min</span>
+        <span class="badge">vanillaJS · ES2016</span>
+        <span class="badge">MIT</span>
+      </div>
+      <h1>Know the environment.<br /><em>Nothing leaves the page.</em></h1>
+      <p class="tag">
+        DetectorJS identifies browser, engine, OS, CPU, GPU, platform and 87+ modern WebAPIs —
+        with <b>zero dependencies</b> and <b>zero telemetry</b>. No servers. No cookies. No tracking.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#live">Try it right now ↓</a>
+        <a class="btn btn-ghost" href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">★ Star on GitHub</a>
+      </div>
+      <p class="trust"><b>Privacy by design:</b> DetectorJS collects nothing and sends nothing. The output stays in the hands of whoever runs it.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="live" id="live">
+      <h2><span class="dot"></span> Your environment, detected in your browser</h2>
+      <p class="sub">Run by <code>new Detector()</code> below — the script tag above is the only asset on this page.</p>
+      <div class="kv" id="kv">
+        <div class="k"><div class="label">Browser</div><div class="value" id="v-browser">…</div></div>
+        <div class="k"><div class="label">Version</div><div class="value" id="v-version">…</div></div>
+        <div class="k"><div class="label">OS</div><div class="value" id="v-os">…</div></div>
+        <div class="k"><div class="label">OS version / name</div><div class="value" id="v-osver">…</div></div>
+        <div class="k"><div class="label">Platform</div><div class="value" id="v-platform">…</div></div>
+        <div class="k"><div class="label">Engine</div><div class="value" id="v-engine">…</div></div>
+        <div class="k"><div class="label">CPU</div><div class="value" id="v-cpu">…</div></div>
+        <div class="k"><div class="label">GPU</div><div class="value" id="v-gpu">…</div></div>
+        <div class="k"><div class="label">Capability flags</div><div class="value" id="v-feat">…</div></div>
+      </div>
+      <pre class="code"><span class="cm">// the entire live panel above is this:</span>
+<span class="k">const</span> <span class="f">detector</span> = <span class="f">new</span> <span class="f">Detector</span>();
+<span class="f">detector</span>.toFlags(); <span class="cm">// { browser, engine, os, cpu, gpu, feature: { 87+ flags } }</span></pre>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="features">
+      <h2 class="sec">One tiny library. Every corner of the environment.</h2>
+      <p class="sec-sub">DetectorJS runs a curated suite of UA parsing and API probes, wrapped in a simple class. No build step required.</p>
+      <div class="grid">
+        <div class="card">
+          <h3><span>🌐</span>Software</h3>
+          <ul>
+            <li>60+ browsers, incl. modern: DuckDuckGo, Kiwi, TikTok, Facebook, Line, Huawei</li>
+            <li>Layout engines &amp; webviews: Blink, Gecko, WebKit, Trident, EdgeHTML…</li>
+            <li>OS + version names: Windows, macOS (Tempo → Sequoia), iOS, Android, Linux…</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span>🖥️</span>Hardware</h3>
+          <ul>
+            <li>CPU vendor, architecture, cores</li>
+            <li>GPU vendor / model / renderer (via WebGL)</li>
+            <li>Platform: desktop / smartphone / tablet / tv / console / bot</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span>⚡</span>Modern WebAPIs</h3>
+          <ul>
+            <li>WebGPU, WebGL2, WebAssembly, WebAuthn</li>
+            <li>Wake Lock, Web Share, Web Locks, WebXR, WebRTC</li>
+            <li>+30 more: Clipboard, IndexedDB, NFC, USB, BroadcastChannel…</li>
+          </ul>
+        </div>
+      </div>
+      <div class="integrations" id="integrate">
+        <span class="chip"><span class="ico">📦</span>npm install detector-js</span>
+        <span class="chip"><span class="ico">🚀</span>import { Detector } from 'detector-js'</span>
+        <span class="chip"><span class="ico">🧩</span>const { Detector } = require('detector-js')</span>
+        <span class="chip"><span class="ico">🌍</span>&lt;script src="detector.browser.min.js"&gt; → new Detector()</span>
+        <span class="chip"><span class="ico">🕸️</span>Works with every bundler (Webpack, Vite, esbuild, Rollup)</span>
+        <span class="chip"><span class="ico">📜</span>TypeScript types included</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="privacy">
+      <h2 class="sec">Privacy &amp; legality</h2>
+      <p class="sec-sub">Because fingerprint-grade attributes can be personal data, we take this seriously — and we think you should too.</p>
+      <div class="privacy">
+        <h3>🔒 DetectorJS never registers, never transmits, never stores anything.</h3>
+        <p class="big">100% client-side. Zero network calls, zero cookies, zero analytics, zero third-party requests.</p>
+        <p>
+          The attributes DetectorJS computes <b>stay in the memory of the code that runs it</b> — yours, if you run the demo,
+          or your users&rsquo;, if you embed it. Only <b>you</b> decide what to do with the output. There is no backend, no
+          account, no telemetry endpoint, not even a tracking pixel — this page makes zero network requests.
+        </p>
+        <p style="margin-top:0.6rem;">However, if you use these attributes about your users you carry responsibilities:</p>
+        <ul>
+          <li><b>GDPR (EU) 2016/679</b> — device identifiers and environment fingerprints can be <i>personal data</i> (Art. 4(1); Recitals 26, 30): handle them under a lawful basis, purpose limitation, data minimisation, storage limitation, transparency (privacy policy) and appropriate security (Art. 5, 25, 32).</li>
+          <li><b>ePrivacy Directive 2002/58/EC</b>, Art. 5(3) — storing/accessing info on &ldquo;user equipment&rdquo; (the essence of fingerprinting) generally requires informed consent; national implementations apply.</li>
+          <li><b>Italy</b> — D.Lgs. 196/2003 (Codice Privacy) and D.Lgs. 101/2018; Garante provvedimenti on cookies/tracing; plus the national cookie-consent rules.</li>
+          <li><b>US / international</b> — CCPA/CPRA (California), other U.S. state privacy laws, FTC Section 5 expectations on truthful disclosures; Canada PIPEDA, Brazil LGPD, etc. when applicable to your audience.</li>
+          <li><b>Academic background</b> — &ldquo;How Unique Is Your Web Browser?&rdquo; (Eckersley, 2010, EFF) showed ~94% of browsers are uniquely identifiable by fingerprints, and &ldquo;Cookieless Monster&rdquo; (Acar et al., 2013) demonstrated the privacy risks — the best practice is to avoid persistence &amp; linkage, which is exactly what this library does by design.</li>
+        </ul>
+        <p class="big" style="margin-top:0.4rem;">→ Read the full <a href="PRIVACY.md" style="color:var(--accent2)">PRIVACY.md</a> for the complete legal walkthrough, checklists and references.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap cols">
+      <div>
+        <div class="brand">Detector<span>JS</span></div>
+        <p style="margin-top:0.5rem;">Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="docs/getting-started.md">Getting started</a></li>
+          <li><a href="docs/api.md">API reference</a></li>
+          <li><a href="docs/toolchain.md">Toolchain</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="PRIVACY.md">Privacy</a></li>
+          <li><a href="SECURITY.md">Security</a></li>
+          <li><a href="CONTRIBUTING.md">Contributing</a></li>
+          <li><a href="LICENSE">License</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="packages/detector/README.md">@detector-js/detector</a></li>
+          <li><a href="packages/core/README.md">@detector-js/core</a></li>
+          <li><a href="packages/software/README.md">@detector-js/software</a></li>
+          <li><a href="packages/hardware/README.md">@detector-js/hardware</a></li>
+          <li><a href="packages/feature/README.md">@detector-js/feature</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="dist/detector.browser.min.js"></script>
+  <script>
+    // The whole page is driven by the library itself. `new Detector()` — no wrapper needed.
+    var detector = new Detector();
+    var flags = detector.toFlags();
+    var browser = detector.browser;
+    var os = detector.os;
+    var cpu = detector.cpu;
+    var gpu = detector.gpu;
+
+    var set = function (id, value) { document.getElementById(id).textContent = value; };
+    set('v-browser', browser.name || 'n/a');
+    set('v-version', browser.version || 'n/a');
+    set('v-os', os && os.name ? os.name : 'n/a');
+    set('v-osver', (os && os.version ? os.version : '') + (os && os.versionName && os.versionName !== 'n/a' ? ' · ' + os.versionName : ''));
+    set('v-platform', detector.platform || 'n/a');
+    set('v-engine', flags.engine && flags.engine.name ? flags.engine.name : 'n/a');
+    set('v-cpu', flags.cpu && flags.cpu.vendor ? flags.cpu.vendor : 'n/a');
+    set('v-gpu', flags.gpu && flags.gpu.vendor && flags.gpu.vendor !== 'n/a' ? flags.gpu.vendor : 'n/a');
+    set('v-feat', Object.keys(detector.feature || {}).length + ' (webGPU: ' + !!detector.feature.webGPU + ' · webAuthn: ' + !!detector.feature.webAuthn + ' · wakeLock: ' + !!detector.feature.wakeLock + ')');
+  </script>
+</body>
+</html>

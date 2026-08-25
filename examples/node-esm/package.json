@@ -1,0 +1,11 @@
+{
+  "name": "detector-js-example-node-esm",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "detector-js": "2.0.11"
+  }
+}

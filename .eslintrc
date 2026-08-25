@@ -50,6 +50,7 @@
     "no-mixed-operators": "off",
     "no-restricted-globals": "off",
     "lines-between-class-members": "off",
+    "import/prefer-default-export": "off",
     "indent": [
       "error",
       2
@@ -61,6 +62,66 @@
     "self": true,
     "global": true,
     "process": true,
-    "__VERSION__": true
-  }
+    "__VERSION__": true,
+    "globalThis": true
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "**/dist/**",
+    "docs",
+    "*.min.js",
+    "package.json",
+    "pnpm-workspace.yaml"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "test/**/*.js",
+        "test/**/*.cjs",
+        "packages/*/__tests__/*.js",
+        "scripts/**/*.mjs",
+        "browser/**/*.js",
+        "examples/**/*.js",
+        "playwright.config.mjs",
+        "rollup.config.js",
+        "packages/*/rollup.config.js"
+      ],
+      "rules": {
+        "strict": "off",
+        "eol-last": "off",
+        "no-var": "off",
+        "vars-on-top": "off",
+        "arrow-parens": "off",
+        "object-curly-newline": "off",
+        "object-property-newline": "off",
+        "comma-dangle": "off",
+        "quotes": "off",
+        "no-useless-concat": "off",
+        "space-in-parens": "off",
+        "indent": "off",
+        "no-nested-ternary": "off",
+        "no-restricted-syntax": "off",
+        "import/extensions": "off",
+        "lines-around-directive": "off",
+        "no-console": "off",
+        "import/no-unresolved": "off",
+        "max-classes-per-file": "off",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "global-require": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-await-in-loop": "off"
+      },
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "globals": {
+        "Detector": "readonly",
+        "navigator": "readonly",
+        "window": "readonly"
+      }
+    }
+  ]
 }

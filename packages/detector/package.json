@@ -1,0 +1,63 @@
+{
+  "name": "@detector-js/detector",
+  "version": "2.0.11",
+  "description": "DetectorJS Detector Module",
+  "keywords": [
+    "detector-js",
+    "detector",
+    "environment-detector"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/detector.js",
+  "main": "dist/detector.js",
+  "module": "dist/detector.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node --test ./__tests__/detector.test.js",
+    "build": "node ../../scripts/build-package.mjs",
+    "watch": "node ../../scripts/build-package.mjs --watch"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*",
+    "@detector-js/feature": "workspace:*",
+    "@detector-js/hardware": "workspace:*",
+    "@detector-js/software": "workspace:*"
+  },
+  "types": "./lib/detector.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/detector.d.ts",
+      "import": "./dist/detector.mjs",
+      "require": "./dist/detector.js",
+      "default": "./dist/detector.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

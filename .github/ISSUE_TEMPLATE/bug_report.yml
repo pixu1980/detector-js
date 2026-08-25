@@ -1,0 +1,37 @@
+name: 🐛 Bug report
+description: Report a broken or incorrect detection
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: DetectorJS version
+      placeholder: e.g. 2.0.11
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: Browser + OS + platform where detection was wrong
+      placeholder: e.g. Chrome 120 on macOS Sonoma (Apple Silicon)
+    validations:
+      required: true
+  - type: textarea
+    id: ua
+    attributes:
+      label: User-Agent string (if relevant)
+      description: Copy from navigator.userAgent, redacting anything you prefer to keep private.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual output
+      description: What toFlags()/toValues() returned vs what you expected
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Verification
+      options:
+        - label: I confirm this is about a detection *result* (not a request to track users — see PRIVACY.md)

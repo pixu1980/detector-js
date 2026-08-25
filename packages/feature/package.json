@@ -1,0 +1,61 @@
+{
+  "name": "@detector-js/feature",
+  "version": "2.0.11",
+  "description": "DetectorJS Feature Module",
+  "keywords": [
+    "detector-js",
+    "feature",
+    "webapi",
+    "feature-detection"
+  ],
+  "author": "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>",
+  "contributors": [
+    "Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "source": "lib/feature.js",
+  "main": "dist/feature.js",
+  "module": "dist/feature.mjs",
+  "targets": {
+    "main": {
+      "optimize": true
+    },
+    "module": {
+      "optimize": true
+    }
+  },
+  "scripts": {
+    "test": "node --test ./__tests__/feature.test.js",
+    "build": "node ../../scripts/build-package.mjs",
+    "watch": "node ../../scripts/build-package.mjs --watch"
+  },
+  "directories": {
+    "dist": "dist",
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@detector-js/core": "workspace:*"
+  },
+  "types": "./lib/feature.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/feature.d.ts",
+      "import": "./dist/feature.mjs",
+      "require": "./dist/feature.js",
+      "default": "./dist/feature.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
