@@ -49,8 +49,6 @@
     "clean": "rm -rf dist packages/*/dist node_modules",
     "build:site": "node scripts/build-docs.mjs",
     "release": "node scripts/release.mjs",
-    "release:dryrun": "node scripts/release.mjs --dry-run",
-    "release:publish": "node scripts/release.mjs --publish",
     "check:size": "node scripts/check-size.mjs",
     "test:coverage": "node scripts/test-coverage.mjs",
     "sri": "node scripts/sri.mjs",
