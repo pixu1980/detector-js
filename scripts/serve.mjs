@@ -34,21 +34,29 @@ function firstFreePort(from = 3000, to = 6000) {
   });
 }
 
+function resolveFile(urlPath) {
+  let p = decodeURIComponent(urlPath).split('?')[0];
+  if (p === '/') p = '/index.html';
+  const file = path.normalize(path.join(ROOT, p));
+  if (!file.startsWith(ROOT)) return null;
+  if (!fs.existsSync(file)) return null;
+  if (fs.statSync(file).isDirectory()) {
+    const idx = path.join(file, 'index.html');
+    return fs.existsSync(idx) ? idx : null; // directory listing → its index.html
+  }
+  return file;
+}
+
 async function main() {
   const server = http.createServer((req, res) => {
-    let urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
-    if (urlPath === '/') urlPath = '/index.html';
-    const file = path.normalize(path.join(ROOT, urlPath));
-    if (!file.startsWith(ROOT)) {
-      res.writeHead(403);
-      res.end('Forbidden');
-      return;
-    }
-    if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+    const file = resolveFile(req.url || '/');
+
+    if (!file) {
       res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
       res.end('404 Not Found');
       return;
     }
+
     res.writeHead(200, { 'content-type': MIME[path.extname(file)] || 'application/octet-stream' });
     fs.createReadStream(file).pipe(res);
   });
