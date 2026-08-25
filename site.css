@@ -75,11 +75,24 @@ nav {
   height: var(--header-h);
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   font-size: var(--fs-md);
   color: var(--text);
   text-decoration: none;
+}
+.brand img.logo,
+.nav img.logo {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
 }
 .brand span { color: var(--accent2); }
 nav .links {
@@ -112,7 +125,7 @@ footer.site .cols {
   justify-content: space-between;
   align-items: flex-start;
 }
-footer.site h4 {
+footer.site h3 {
   color: var(--text);
   margin: 0 0 0.5rem;
   font-size: var(--fs-sm);
