@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>001: Use esbuild as the build toolchain (replace rollup + babel) — DetectorJS</title>
-<link rel="stylesheet" href="../../site.css" />
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="../../index.html">Home</a>
           <a href="../../docs/getting-started.html">Docs</a>
@@ -26,11 +29,7 @@
   </header>
 <main><h1>001: Use esbuild as the build toolchain (replace rollup + babel)</h1>
 <ul>
-<li><strong>Date</strong>: 2026-08-25</li>
-<li><strong>Status</strong>: accepted</li>
-<li><strong>Tags</strong>: toolchain, build, esbuild</li>
-<li><strong>Author</strong>: pix-architect</li>
-</ul>
+<li><strong>Date</strong>: 2026-08-25</li><li><strong>Status</strong>: accepted</li><li><strong>Tags</strong>: toolchain, build, esbuild</li><li><strong>Author</strong>: pix-architect</li></ul>
 <h2>Context</h2>
 <p>The mono-repo was restored to a vanillaJS zero-dependency codebase but the build still used the historical rollup 2 + rollup-plugin-babel + babel preset-env + rollup-plugin-replace + rollup-plugin-uglify stack. The UMD browser bundle exposed window.Detector as a namespace object ({ Detector }) instead of the class, forcing consumers to call new D() wrappers; the stack was deprecated and unmaintained, and it could not inject <strong>VERSION</strong> cleanly without plugin hacks.</p>
 <h2>Decision</h2>
@@ -39,20 +38,17 @@
 <p>Positive: one fast binary instead of 8 deprecated packages; deterministic define-based version injection; correct global export (new Detector()); simpler scripts; esbuild target es2016 + bundled polyfills keeps legacy support. Negative: esbuild does not emit .d.ts (types are hand-written and maintained per package); iife output replaces UMD (AMD/CommonJS-in-browser consumers should use the CJS/ESM exports or the global). CI must run pnpm approve-builds for esbuild/playwright postinstall.</p>
 <h2>Alternatives Considered</h2>
 <ol>
-<li>Keep rollup 2 + plugins (deprecated, namespace-object UMD bug, slow, growing config)</li>
-<li>Switch to Vite library mode (pulls in heavier tooling and node-version constraints)</li>
-<li>Parcel (used by v2, but heavier install and less deterministic define injection)</li>
-</ol>
+<li>Keep rollup 2 + plugins (deprecated, namespace-object UMD bug, slow, growing config)</li><li>Switch to Vite library mode (pulls in heavier tooling and node-version constraints)</li><li>Parcel (used by v2, but heavier install and less deterministic define injection)</li></ol>
 </main>
 
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="../../docs/getting-started.html">Getting started</a></li>
           <li><a href="../../docs/api.html">API reference</a></li>
@@ -64,7 +60,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="../../PRIVACY.html">Privacy</a></li>
           <li><a href="../../SECURITY.html">Security</a></li>
@@ -73,7 +69,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="../../packages/software/README.html">@detector-js/software</a></li>

@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>Browser Support &amp; Legacy Platforms — DetectorJS</title>
-<link rel="stylesheet" href="../site.css" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="../index.html">Home</a>
           <a href="../docs/getting-started.html">Docs</a>
@@ -28,10 +31,7 @@
 <p>The goal: <strong>detection that is correct and crash-free on as many platforms as possible</strong>, from evergreen browsers back to decade-old webviews — while still only requiring a single vanilla JS file.</p>
 <h2>Build targets</h2>
 <ul>
-<li>The browser bundle is compiled by <strong>esbuild with <code>--target=es2016</code></strong> and includes the library&#39;s own polyfills (guarded, spec-shaped).</li>
-<li>Every environment-probe runs in <strong>safe mode</strong> (<code>Asserts.one/all(..., true)</code>), so a hostile or unusual environment can&#39;t crash the host page.</li>
-<li>Capability checks are <strong>read-only or self-cleaning</strong>: no network, no persistent storage (see <a href="../PRIVACY.html">PRIVACY</a>).</li>
-</ul>
+<li>The browser bundle is compiled by <strong>esbuild with <code>--target=es2016</code></strong> and includes the library&#39;s own polyfills (guarded, spec-shaped).</li><li>Every environment-probe runs in <strong>safe mode</strong> (<code>Asserts.one/all(..., true)</code>), so a hostile or unusual environment can&#39;t crash the host page.</li><li>Capability checks are <strong>read-only or self-cleaning</strong>: no network, no persistent storage (see <a href="../PRIVACY.html">PRIVACY</a>).</li></ul>
 <h2>Compatibility matrix (practical)</h2>
 <table>
 <thead>
@@ -58,18 +58,12 @@
 </tr>
 </tbody></table>
 <h2>Legacy bundle</h2>
-<pre><code class="language-html">&lt;script src=&quot;dist/detector.browser.es2015.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<p>Same global API (<code>new Detector()</code>), same polyfills — intended for older iOS Safari/Android WebViews. Modern browsers should use the standard <code>detector.browser.min.js</code> (ES2016).
+<pre tabindex="0"><code class="language-html"><script src="dist/detector.browser.es2015.min.js"></script></code></pre><p>Same global API (<code>new Detector()</code>), same polyfills — intended for older iOS Safari/Android WebViews. Modern browsers should use the standard <code>detector.browser.min.js</code> (ES2016).
 | Node.js (CJS/ESM), Deno, Bun | ✅ (UA injectable; see examples) |
 | Web Workers | ✅ (<code>self</code>-first global root) |</p>
 <h2>How we keep old platforms &quot;correct&quot;</h2>
 <ol>
-<li><strong>UA-first detection</strong> — browser/OS/engine rules follow the classic <code>useragent</code>-parsing patterns; version parsing is regex-captured and falls back to <code>&#39;n/a&#39;</code>.</li>
-<li><strong>Feature probes never throw</strong> — <code>safe</code> mode everywhere; every probe that creates a DOM node cleans up after itself.</li>
-<li><strong>Polyfills are conditional</strong> — only installed when missing, matching standard semantics.</li>
-<li><strong>No modern-API dependence for detection</strong> — new WebAPIs are <em>detected</em>, not required: e.g. <code>webGPU</code> is <code>&#39;gpu&#39; in navigator</code>, not used as <code>navigator.gpu.requestAdapter()</code>.</li>
-</ol>
+<li><strong>UA-first detection</strong> — browser/OS/engine rules follow the classic <code>useragent</code>-parsing patterns; version parsing is regex-captured and falls back to <code>&#39;n/a&#39;</code>.</li><li><strong>Feature probes never throw</strong> — <code>safe</code> mode everywhere; every probe that creates a DOM node cleans up after itself.</li><li><strong>Polyfills are conditional</strong> — only installed when missing, matching standard semantics.</li><li><strong>No modern-API dependence for detection</strong> — new WebAPIs are <em>detected</em>, not required: e.g. <code>webGPU</code> is <code>&#39;gpu&#39; in navigator</code>, not used as <code>navigator.gpu.requestAdapter()</code>.</li></ol>
 <h2>Note on &quot;oldest&quot; vs &quot;largest&quot;</h2>
 <p>Supporting truly ancient engines (IE10/11) means transpiling classes and <code>?.</code> — doable with an ES5 target, but it grows the bundle. If you need that, we recommend the standalone global bundle (polyfills included) and we accept contributions/ADRs for an ES5 build variant.</p>
 </main>
@@ -77,11 +71,11 @@
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="../docs/getting-started.html">Getting started</a></li>
           <li><a href="../docs/api.html">API reference</a></li>
@@ -93,7 +87,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="../PRIVACY.html">Privacy</a></li>
           <li><a href="../SECURITY.html">Security</a></li>
@@ -102,7 +96,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="../packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="../packages/software/README.html">@detector-js/software</a></li>

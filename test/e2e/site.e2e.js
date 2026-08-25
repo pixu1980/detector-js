@@ -72,6 +72,17 @@ test.describe('static site', () => {
       expect(info.cols, `${pathname}: footer cols`).toBe(true);
       const mdHrefs = await page.evaluate(() => Array.from(document.querySelectorAll('a[href$=".md"]')).length);
       expect(mdHrefs, `${pathname}: no .md links`).toBe(0);
+      // logo + favicon present on every page
+      const brandLogo = await page.evaluate(() => {
+        const img = document.querySelector('a.brand img.logo, header.site img.logo');
+        return img && img.getAttribute('src');
+      });
+      expect(brandLogo, `${pathname}: brand logo`).toBeTruthy();
+      const favicon = await page.evaluate(() => {
+        const link = document.querySelector('link[rel="icon"][href$=".svg"]');
+        return link ? link.getAttribute('href') : null;
+      });
+      expect(favicon, `${pathname}: svg favicon`).toBeTruthy();
     }
   });
 });

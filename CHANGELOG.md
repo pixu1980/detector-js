@@ -1,3 +1,19 @@
+## [Unreleased] — a11y, logo & demo semantics
+
+### Accessibility & semantic HTML (axe-core, per pix-styleguide a11y)
+- **logo + favicon**: `logo.svg`/`favicon.svg` (radar mark) + PNG favicon + Apple touch icon (generated
+  via Playwright), in the brand on every page (index, demo, devices, generated docs) and page heads
+- landmark structure: `index.html` now has a real `<main>`; task-list checkboxes in generated docs
+  carry `aria-label` and focusable `<pre>`s got `tabindex="0"` (marked renderer `code`/`listitem`/`checkbox`)
+- footer headings `h4 → h3` (no heading-level skips), `.cm` comment color contrast fixed,
+  card descriptions are HTML-escaped (a `placeholder` description containing "`<input> fields`"
+  was injecting an unlabelled `<input>`), search/filter inputs labelled, `aria-live` on the UA analyzer
+- **demo raw output**: `position: sticky` moved onto the containing `<aside class="raw-panel">`
+  (title + JSON scroll inside the panel) — compact title kept
+- e2e: `test/e2e/a11y.e2e.js` (axe: **0 violations** on /, demo, devices, getting-started, PRIVACY;
+  single h1, no skipped headings, <main>, lang), chrome test asserts logo + favicon on every page;
+  **47 e2e passed** (chromium + webkit)
+
 ## [Unreleased] — examples & device detection fixes
 
 ### Examples

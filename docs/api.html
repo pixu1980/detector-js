@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>API Reference — DetectorJS</title>
-<link rel="stylesheet" href="../site.css" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="../index.html">Home</a>
           <a href="../docs/getting-started.html">Docs</a>
@@ -28,40 +31,24 @@
 <p>All classes are plain ES6 classes with <strong>getters</strong> for detections. Two base classes provide the serialization:</p>
 <h2>FlagsClass</h2>
 <ul>
-<li><code>get ua</code> → the UA string in use</li>
-<li><code>get root</code> / <code>process</code> / <code>navigator</code> / <code>document</code> → the relevant environment roots (kept available after construction)</li>
-<li><code>toFlags()</code> → flattened object of every truthy getter + own data properties</li>
-<li><code>toValues()</code> → compact object: booleans collapse into the class &quot;name&quot; key (<code>{ name: &#39;Chrome&#39; }</code>), other values kept</li>
-</ul>
+<li><code>get ua</code> → the UA string in use</li><li><code>get root</code> / <code>process</code> / <code>navigator</code> / <code>document</code> → the relevant environment roots (kept available after construction)</li><li><code>toFlags()</code> → flattened object of every truthy getter + own data properties</li><li><code>toValues()</code> → compact object: booleans collapse into the class &quot;name&quot; key (<code>{ name: &#39;Chrome&#39; }</code>), other values kept</li></ul>
 <h2>CssFlagsClass</h2>
 <ul>
-<li><code>get flags</code>, <code>get cssFlagsPrefix</code></li>
-<li><code>toCssFlags()</code> → <code>[&#39;&lt;prefix&gt;--&lt;flag&gt;--&lt;value&gt;&#39;]</code> strings (used only when <code>cssFlags</code> is enabled)</li>
-</ul>
+<li><code>get flags</code>, <code>get cssFlagsPrefix</code></li><li><code>toCssFlags()</code> → <code>[&#39;&lt;prefix&gt;--&lt;flag&gt;--&lt;value&gt;&#39;]</code> strings (used only when <code>cssFlags</code> is enabled)</li></ul>
 <h2>Asserts</h2>
 <ul>
-<li><code>Asserts.checkAssert(assert, safe?)</code> — runs a value or function (try/catch when <code>safe</code>)</li>
-<li><code>Asserts.all(list, safe?)</code> — every element truthy</li>
-<li><code>Asserts.one(list, safe?)</code> — at least one element truthy</li>
-</ul>
+<li><code>Asserts.checkAssert(assert, safe?)</code> — runs a value or function (try/catch when <code>safe</code>)</li><li><code>Asserts.all(list, safe?)</code> — every element truthy</li><li><code>Asserts.one(list, safe?)</code> — at least one element truthy</li></ul>
 <h2>@detector-js/software</h2>
 <ul>
-<li><strong>Browser</strong> — getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (<code>ChromeMobile</code>, <code>SafariMobile</code>, …); <code>name</code>/<code>version</code> after <code>toValues()</code>.</li>
-<li><strong>Engine</strong> — <code>Blink</code>, <code>Gecko</code>, <code>WebKit</code>, <code>Trident</code>, <code>EdgeHTML</code>, <code>Presto</code>, <code>KHTML</code>, <code>Goanna</code>, …</li>
-<li><strong>OS</strong> — <code>Windows</code>, <code>macOS</code> (+ version names Tempo→Sequoia), <code>iOS</code>, <code>Android</code> (+ Cupcake→Pie), <code>Linux</code> (+ distro names), <code>Unix</code>, <code>ChromiumOS</code>, plus legacy/mobile/TV OSs; <code>versionName</code> from <code>toValues()</code>.</li>
-</ul>
+<li><strong>Browser</strong> — getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (<code>ChromeMobile</code>, <code>SafariMobile</code>, …); <code>name</code>/<code>version</code> after <code>toValues()</code>.</li><li><strong>Engine</strong> — <code>Blink</code>, <code>Gecko</code>, <code>WebKit</code>, <code>Trident</code>, <code>EdgeHTML</code>, <code>Presto</code>, <code>KHTML</code>, <code>Goanna</code>, …</li><li><strong>OS</strong> — <code>Windows</code>, <code>macOS</code> (+ version names Tempo→Sequoia), <code>iOS</code>, <code>Android</code> (+ Cupcake→Pie), <code>Linux</code> (+ distro names), <code>Unix</code>, <code>ChromiumOS</code>, plus legacy/mobile/TV OSs; <code>versionName</code> from <code>toValues()</code>.</li></ul>
 <h2>@detector-js/hardware</h2>
 <ul>
-<li><strong>Platform</strong> — <code>desktop</code>, <code>smartphone</code>, <code>tablet</code>, <code>tv</code>, <code>console</code>, <code>bot</code>, <code>mobile</code></li>
-<li><strong>CPU</strong> — <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/apple…), vendor flags.
+<li><strong>Platform</strong> — <code>desktop</code>, <code>smartphone</code>, <code>tablet</code>, <code>tv</code>, <code>console</code>, <code>bot</code>, <code>mobile</code></li><li><strong>CPU</strong> — <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/apple…), vendor flags.
 <code>navigator.platform</code>/UA strings are <strong>legacy-compat</strong> on macOS (<code>&quot;MacIntel&quot;</code> + <code>&quot;Mac OS X 10_15_7&quot;</code>
 appear on both Intel and Apple Silicon), so the real architecture comes from
 <code>CPU.upgrade()</code> (Client Hints <code>architecture</code>/<code>bitness</code>) and/or the <strong>GPU evidence</strong>
 (WebGL renderer &quot;Apple M1…&quot; → <code>arm64 · vendor &#39;apple&#39;</code>), refined synchronously by <code>Detector</code>
-— <code>Detector.upgrade()</code> re-runs it. <code>arm64</code> is no longer misreported as <code>x64</code>.</li>
-<li><strong>GPU</strong> — <code>webGLVendor</code>, <code>webGLRenderer</code>, <code>vendor</code>, <code>model</code>, <code>renderer</code> (WebGL-based, safe-mode)</li>
-<li><strong>Device</strong> — placeholder base for vendor-specific device flags</li>
-</ul>
+— <code>Detector.upgrade()</code> re-runs it. <code>arm64</code> is no longer misreported as <code>x64</code>.</li><li><strong>GPU</strong> — <code>webGLVendor</code>, <code>webGLRenderer</code>, <code>vendor</code>, <code>model</code>, <code>renderer</code> (WebGL-based, safe-mode)</li><li><strong>Device</strong> — placeholder base for vendor-specific device flags</li></ul>
 <h2>@detector-js/feature</h2>
 <blockquote>
 <p><strong>MDN Web API catalog</strong>: beyond the curated flags below, <code>Feature</code> probes <strong>every interface
@@ -136,11 +123,11 @@ Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then n
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="../docs/getting-started.html">Getting started</a></li>
           <li><a href="../docs/api.html">API reference</a></li>
@@ -152,7 +139,7 @@ Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then n
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="../PRIVACY.html">Privacy</a></li>
           <li><a href="../SECURITY.html">Security</a></li>
@@ -161,7 +148,7 @@ Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then n
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="../packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="../packages/software/README.html">@detector-js/software</a></li>

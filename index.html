@@ -8,6 +8,9 @@
   <meta name="theme-color" content="#0b1020" />
   <meta property="og:title" content="DetectorJS — zero-dependency, privacy-first detection" />
   <meta property="og:description" content="1100+ Web API flags, 0 dependencies, 100% client-side. It detects your environment — and never shares it." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="site.css" />
   <style>
     /* page-specific components only — chrome/type live in site.css */
@@ -34,9 +37,9 @@
     .kv .k { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
     .kv .k .label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
     .kv .k .value { font-weight: 700; font-size: var(--fs-sm); margin-top: 0.15rem; word-break: break-word; }
-    main { padding-top: 1.5rem; }
+    main { padding-top: 1.5rem; max-width: none; padding-inline: 0; }
     pre.code { margin: 2rem 0 0; background: #070b18; border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.3rem; overflow: auto; font-size: var(--fs-sm); line-height: 1.55; font-family: var(--font-mono); }
-    pre.code .cm { color: #5c6b9a; }
+    pre.code .cm { color: #8a9bd8; }
     pre.code .k { color: var(--accent2); }
     pre.code .f { color: #ffd479; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
@@ -64,7 +67,7 @@
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="index.html">Home</a>
           <a href="docs/getting-started.html">Docs</a>
@@ -76,6 +79,7 @@
     </div>
   </header>
 
+  <main>
   <section class="hero">
     <div class="wrap">
       <div class="badges">
@@ -186,14 +190,16 @@
     </section>
   </div>
 
+  </main>
+
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="index.html">Detector<span>JS</span></a>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="docs/getting-started.html">Getting started</a></li>
           <li><a href="docs/api.html">API reference</a></li>
@@ -205,7 +211,7 @@
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="PRIVACY.html">Privacy</a></li>
           <li><a href="SECURITY.html">Security</a></li>
@@ -214,7 +220,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="packages/software/README.html">@detector-js/software</a></li>

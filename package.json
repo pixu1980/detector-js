@@ -78,6 +78,7 @@
     "@detector-js/software": "workspace:*"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.62.1",
     "docdash": "^1.2.0",
     "esbuild": "^0.28.2",
