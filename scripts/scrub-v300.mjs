@@ -54,6 +54,8 @@ const RULES = [
   ['v1 / v2 → v3 (3.0.0)', 'v1 / v2 → v3 monorepo'],         // migration title
   ['The next release is **3.0.0**', 'The next release is **a new major**'], // migration body
   ['(e.g. 3.0.0)', '(e.g. 2.0.11)'],                         // migration table
+  ['__VERSION__: "3.0.0"', '__VERSION__: "2.0.11"'],                     // historic build.mjs hardcoded define
+  ["pkg.version, '3.0.0'", "pkg.version, '2.0.11'"],                       // test/unit/parity.test.cjs
   ['being on "3.0.0"', 'being on the next major'],           // migration prose (if any)
   ['all **same version** (e.g. 3.0.0)', 'all **same version** (e.g. 2.0.11)'], // migration table
 ];

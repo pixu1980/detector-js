@@ -227,13 +227,14 @@
   <script>
     // The whole page is driven by the library itself. `new Detector()` — no wrapper needed.
     var detector = new Detector();
-    var flags = detector.toFlags();
-    var browser = detector.browser;
-    var os = detector.os;
-    var flags2 = detector.toFlags();
 
-    var set = function (id, value) { document.getElementById(id).textContent = value; };
-    set('v-browser', browser.name || 'n/a');
+    function render() {
+      var flags = detector.toFlags();
+      var browser = detector.browser;
+      var os = detector.os;
+
+      var set = function (id, value) { document.getElementById(id).textContent = value; };
+      set('v-browser', browser.name || 'n/a');
     set('v-version', browser.version || 'n/a');
     set('v-os', os && os.name ? os.name : 'n/a');
     set('v-osver', (os && os.version ? os.version : '') + (os && os.versionName && os.versionName !== 'n/a' ? ' · ' + os.versionName : ''));
@@ -241,7 +242,13 @@
     set('v-engine', flags.engine && flags.engine.name ? flags.engine.name : 'n/a');
     set('v-cpu', flags.cpu && flags.cpu.vendor ? flags.cpu.vendor : 'n/a');
     set('v-gpu', flags.gpu && flags.gpu.vendor && flags.gpu.vendor !== 'n/a' ? flags.gpu.vendor : 'n/a');
-    set('v-feat', Object.keys(detector.feature || {}).length + ' (webGPU: ' + !!detector.feature.webGPU + ' · webAuthn: ' + !!detector.feature.webAuthn + ' · wakeLock: ' + !!detector.feature.wakeLock + ')');
+      set('v-feat', Object.keys(detector.feature || {}).length + ' (webGPU: ' + !!detector.feature.webGPU + ' · webAuthn: ' + !!detector.feature.webAuthn + ' · wakeLock: ' + !!detector.feature.wakeLock + ')');
+    }
+
+    render();
+    // resolve the real OS version via User-Agent Client Hints (e.g. macOS 26 'Tahoe'
+    // instead of the legacy-compat UA '10.15.7 · Catalina') and re-render
+    detector.upgrade().then(render);
   </script>
 </body>
 </html>

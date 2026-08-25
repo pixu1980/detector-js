@@ -50,6 +50,11 @@ function install(overrides = {}) {
     serial: {},
     credentials: {},
     xr: {},
+    userAgentData: {
+      platform: 'macOS',
+      mobile: false,
+      getHighEntropyValues: async () => ({ platformVersion: '26.6.2' }),
+    },
     ...(overrides.navigator || {}),
   };
   Object.defineProperty(global, 'navigator', { configurable: true, writable: true, value: navigatorBase });
