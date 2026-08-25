@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0b1020" />
+<title>002: Conventional-commits driven in-house release script (pnpm release) — DetectorJS</title>
+<link rel="stylesheet" href="../../site.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <div class="links">
+          <a href="../../index.html">Home</a>
+          <a href="../../docs/getting-started.html">Docs</a>
+          <a href="../../demo.html">Live demo</a>
+          <a href="../../PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main><h1>002: Conventional-commits driven in-house release script (pnpm release)</h1>
+<ul>
+<li><strong>Date</strong>: 2026-08-25</li>
+<li><strong>Status</strong>: accepted</li>
+<li><strong>Tags</strong>: release, tooling, versioning</li>
+<li><strong>Author</strong>: pix-architect</li>
+</ul>
+<h2>Context</h2>
+<p>After the v3 monorepo restructure we need a repeatable release flow: bump root detector-js AND the five @detector-js/* packages to the same version (next major 3.0.0, baseline 2.0.11), generate the changelog from git history, and tag releases. The maintainer runs releases manually, so the tool must prepare everything (bump, changelog, tag, SRI snippets) without publishing.</p>
+<h2>Decision</h2>
+<p>Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, and (with --publish) prints the CDN/SRI snippets. <code>pnpm release</code> (alias <code>release:dryrun</code>/<code>release:publish</code>).</p>
+<h2>Consequences</h2>
+<p>Positive: zero new dependencies (fits the 0-dep ethos); single synced version for root + all @detector-js/* packages; version + changelog derived deterministically from conventional commits; dry-run mode; prints CDN/SRI snippets at release time. Negative: in-house parser is simpler than full conventional-commits spec (no footer parsing for &#39;BREAKING CHANGE&#39; bodies yet); maintainers must follow Conventional Commits discipline; publishing itself stays manual (by design: the maintainer runs npm publish).</p>
+<h2>Alternatives Considered</h2>
+<ol>
+<li>semantic-release (heavy, external bot, auth requirements)</li>
+<li>changesets (per-package changelogs, more files to maintain)</li>
+<li>Manual bump + manual CHANGELOG + manual tag</li>
+</ol>
+</main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="../../index.html">Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="../../docs/getting-started.html">Getting started</a></li>
+          <li><a href="../../docs/api.html">API reference</a></li>
+          <li><a href="../../docs/toolchain.html">Toolchain</a></li>
+          <li><a href="../../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../../docs/roadmap.html">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="../../PRIVACY.html">Privacy</a></li>
+          <li><a href="../../SECURITY.html">Security</a></li>
+          <li><a href="../../CONTRIBUTING.html">Contributing</a></li>
+          <li><a href="../../docs/adr/README.html">ADR</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Packages</h4>
+        <ul>
+          <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="../../packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="../../packages/core/README.html">@detector-js/core</a></li>
+          <li><a href="../../packages/hardware/README.html">@detector-js/hardware</a></li>
+          <li><a href="../../packages/feature/README.html">@detector-js/feature</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

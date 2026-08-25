@@ -1,3 +1,5 @@
+
+
 ## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2025-8-25)
 
 ### Toolchain (esbuild)
@@ -52,7 +54,6 @@
 - per-package READMEs
 
 [...full changes](https://github.com/pixu1980/detector-js/compare/v1.4.0...v3.0.0)
-
 ## [Version 3.0.0](https://github.com/pixu1980/detector-js/releases/tag/v3.0.0) (2025-8-25)
 
 ### Monorepo (BREAKING CHANGES)

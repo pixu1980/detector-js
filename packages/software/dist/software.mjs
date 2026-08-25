@@ -2447,7 +2447,7 @@ var OS = class extends CssFlagsClass3 {
 
 // packages/software/lib/software.js
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Software Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Software Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 export {
   Browser,

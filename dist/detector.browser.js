@@ -452,7 +452,18 @@
 
   // packages/core/lib/asserts.js
   var Asserts = class _Asserts {
-    static checkAssert(assert, safe = false) {
+    /**
+     * Evaluates a single assert: values are returned as-is, functions are invoked
+     * (in safe mode wrapped in try/catch).
+     *
+     * @static
+     * @param {any} [assert=null]
+     * @param {boolean} [safe=false]
+     * @returns {any}
+     *
+     * @memberOf Asserts
+     */
+    static checkAssert(assert = null, safe = false) {
       if (!!assert) {
         if (assert instanceof Function) {
           if (!!safe) {
@@ -686,7 +697,7 @@
 
   // packages/core/lib/core.js
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Core Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Core Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // packages/feature/lib/audioFeature.js
@@ -2064,7 +2075,7 @@
     }
   };
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Feature Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Feature Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // packages/hardware/lib/platform.js
@@ -5177,7 +5188,7 @@
     }
   };
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // browser/index.js

@@ -25,14 +25,28 @@
     </div>
   </header>
 <main><h1>Getting Started</h1>
-<p>DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and <strong>without ever sending data anywhere</strong> (<a href="../PRIVACY.html">PRIVACY</a>).</p>
+<p>DetectorJS (next major <strong>3.0.0</strong>, published baseline <strong>2.0.11</strong>) detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and <strong>without ever sending data anywhere</strong> (<a href="../PRIVACY.html">PRIVACY</a>).</p>
 <h2>Install</h2>
 <pre><code class="language-sh">npm install detector-js
 # or
 pnpm add detector-js
-# or standalone (no install):
-# &lt;script src=&quot;https://cdn.jsdelivr.net/npm/detector-js@3/dist/detector.browser.min.js&quot;&gt;&lt;/script&gt;
+# or standalone via CDN (jsDelivr):
+# &lt;script src=&quot;https://cdn.jsdelivr.net/npm/detector-js@3.0.0/detector.browser.min.js&quot;&gt;&lt;/script&gt;
 </code></pre>
+<h3>CDN with SRI (pinned integrity)</h3>
+<pre><code class="language-html">&lt;script
+  src=&quot;https://cdn.jsdelivr.net/npm/detector-js@&lt;version&gt;/detector.browser.min.js&quot;
+  integrity=&quot;sha384-&lt;computed-at-release&gt;&quot;
+  crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Generate the exact SRI snippets for the built bundles with:</p>
+<pre><code class="language-sh">pnpm sri     # prints integrity + pinned jsDelivr/unpkg &lt;script&gt; tags
+</code></pre>
+<blockquote>
+<p>The integrity hash changes with every version (the bundle embeds <code>__VERSION__</code>):
+run <code>pnpm sri</code> at release time (the release script prints it automatically) and pin
+the published version. Legacy webviews: use <code>dist/detector.browser.es2015.min.js</code>.</p>
+</blockquote>
 <h2>Quick start</h2>
 <h3>Browser (script tag)</h3>
 <pre><code class="language-html">&lt;script src=&quot;dist/detector.browser.min.js&quot;&gt;&lt;/script&gt;
@@ -125,6 +139,8 @@ const feature = new Feature();
           <li><a href="../docs/api.html">API reference</a></li>
           <li><a href="../docs/toolchain.html">Toolchain</a></li>
           <li><a href="../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../docs/roadmap.html">Roadmap</a></li>
         </ul>
       </div>
       <div>

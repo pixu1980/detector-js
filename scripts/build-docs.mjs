@@ -74,6 +74,8 @@ function layout() {
           <li><a href="${rel}docs/api.html">API reference</a></li>
           <li><a href="${rel}docs/toolchain.html">Toolchain</a></li>
           <li><a href="${rel}docs/browser-support.html">Browser support</a></li>
+          <li><a href="${rel}docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="${rel}docs/roadmap.html">Roadmap</a></li>
         </ul>
       </div>
       <div>

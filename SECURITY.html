@@ -72,7 +72,7 @@
 <p>The main &quot;input&quot; is the User-Agent string (parsed with RegExp only). UA strings are attacker-influenced: the library treats unknown tokens as <code>&#39;n/a&#39;</code> and does not evaluate them. Report any unexpected behavior (e.g., regex ReDoS risk) as a vulnerability.</p>
 <h2>Recommendations for consumers</h2>
 <ul>
-<li>Pin versions (<code>&quot;detector-js&quot;: &quot;3.0.0&quot;</code> or lockfiles) for production.</li>
+<li>Pin versions (<code>&quot;detector-js&quot;: &quot;^2.0.11&quot;</code> or lockfiles (bump to 3.x after the next release)) for production.</li>
 <li>Don&#39;t place detection output in DOM innerHTML without escaping; it is plain data, treat it as untrusted.</li>
 <li>Follow the <a href="PRIVACY.html">PRIVACY</a> checklist before collecting these attributes about end users.</li>
 </ul>
@@ -93,6 +93,8 @@
           <li><a href="./docs/api.html">API reference</a></li>
           <li><a href="./docs/toolchain.html">Toolchain</a></li>
           <li><a href="./docs/browser-support.html">Browser support</a></li>
+          <li><a href="./docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="./docs/roadmap.html">Roadmap</a></li>
         </ul>
       </div>
       <div>

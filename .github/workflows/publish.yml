@@ -1,0 +1,28 @@
+# Release validation (dry-run) — triggered after a tagged release (v3.0.0+):
+# packs every workspace package and runs the full suite. Actual `npm publish`
+# is executed by the maintainer (see GOVERNANCE.md / scripts/release.mjs).
+name: Publish check
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile=false
+      - run: pnpm build
+      - run: pnpm test
+      - name: Pack root package (dry-run)
+        run: pnpm pack --dry-run
+      - name: Pack workspace packages (dry-run)
+        run: pnpm -r pack --dry-run

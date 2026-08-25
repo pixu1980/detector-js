@@ -50,21 +50,19 @@
 </tr>
 <tr>
 <td>Older iOS Safari / Android WebView (ES2015)</td>
-<td>✅ most flags (polyfills cover <code>Reflect</code>, <code>Array#includes/map</code>, <code>Object.getOwnPropertyDescriptors</code>, <code>String#startsWith</code>, Object <code>assign/merge</code>)</td>
+<td>✅ dedicated legacy bundle <code>dist/detector.browser.es2015(.min).js</code> + polyfills (<code>Reflect</code>, <code>Array#includes/map</code>, <code>Object.getOwnPropertyDescriptors</code>, <code>String#startsWith</code>, Object <code>assign/merge</code>)</td>
 </tr>
 <tr>
 <td>IE11-era (ES5)</td>
-<td>⚠️ possible but not officially supported: the bundle stays ES2016; transpiling further needs a ES5 pass — open an ADR/issue if this matters to you</td>
-</tr>
-<tr>
-<td>Node.js (CJS/ESM), Deno, Bun</td>
-<td>✅ (UA injectable; see examples)</td>
-</tr>
-<tr>
-<td>Web Workers</td>
-<td>✅ (<code>self</code>-first global root)</td>
+<td>⚠️ not provided: esbuild cannot transpile ES6 classes/const/default-args down to ES5 (&quot;not supported yet&quot;). A legacy ES2015 bundle is shipped; a true ES5 pass would need Babel — tracked in docs/roadmap, open an issue if it matters</td>
 </tr>
 </tbody></table>
+<h2>Legacy bundle</h2>
+<pre><code class="language-html">&lt;script src=&quot;dist/detector.browser.es2015.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Same global API (<code>new Detector()</code>), same polyfills — intended for older iOS Safari/Android WebViews. Modern browsers should use the standard <code>detector.browser.min.js</code> (ES2016).
+| Node.js (CJS/ESM), Deno, Bun | ✅ (UA injectable; see examples) |
+| Web Workers | ✅ (<code>self</code>-first global root) |</p>
 <h2>How we keep old platforms &quot;correct&quot;</h2>
 <ol>
 <li><strong>UA-first detection</strong> — browser/OS/engine rules follow the classic <code>useragent</code>-parsing patterns; version parsing is regex-captured and falls back to <code>&#39;n/a&#39;</code>.</li>
@@ -89,6 +87,8 @@
           <li><a href="../docs/api.html">API reference</a></li>
           <li><a href="../docs/toolchain.html">Toolchain</a></li>
           <li><a href="../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../docs/roadmap.html">Roadmap</a></li>
         </ul>
       </div>
       <div>

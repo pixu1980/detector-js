@@ -2471,7 +2471,7 @@ var OS = class extends import_core3.CssFlagsClass {
 
 // packages/software/lib/software.js
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Software Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Software Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).

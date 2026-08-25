@@ -1378,7 +1378,7 @@ var Feature = class extends CssFlagsClass3 {
   }
 };
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Feature Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Feature Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 export {
   AudioFeature,

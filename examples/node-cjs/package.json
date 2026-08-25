@@ -2,6 +2,10 @@
   "name": "detector-js-example-node-cjs",
   "private": true,
   "main": "index.js",
-  "scripts": { "start": "node index.js" },
-  "dependencies": { "detector-js": "3.0.0" }
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "detector-js": "2.0.11"
+  }
 }
