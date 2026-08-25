@@ -1,13 +1,6 @@
-import { CssFlagsClass, Asserts } from '@detector-js/core';
-
-/**
- *
- *
- * @export
- * @class Platform
- * @extends {CssFlagsClass}
- */
-class Platform extends CssFlagsClass {
+// packages/hardware/lib/platform.js
+import { Asserts, CssFlagsClass } from "@detector-js/core";
+var Platform = class extends CssFlagsClass {
   /**
    * Creates an instance of Platform.
    * @param {any} [ua=null]
@@ -16,10 +9,9 @@ class Platform extends CssFlagsClass {
    *
    * @memberOf Platform
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'platform') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "platform") {
     super(ua, flags, cssFlagsPrefix);
   }
-
   /**
    *
    *
@@ -27,9 +19,10 @@ class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get bot() {
-    return Asserts.one([/googlebot/i.test(this._ua)]);
+    return Asserts.one([
+      /googlebot/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -37,9 +30,11 @@ class Platform extends CssFlagsClass {
    * @memberof Platform
    */
   get console() {
-    return Asserts.all([/(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua), !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua)]);
+    return Asserts.all([
+      /(?:xbox|playstation|nintendo|archos.*gamepad([2]?))/i.test(this._ua),
+      !/(?:xbmc|kodi|nexbox|newfoxbox)/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -47,9 +42,19 @@ class Platform extends CssFlagsClass {
    * @memberof Platform
    */
   get tv() {
-    return Asserts.one([/(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua), /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua)]) && Asserts.one([!this.mobile, !this.bot, this._flags.feature.fullscreenKeyboard]) && Asserts.one([this._flags.os.Android, this._flags.os.Tizen, this._flags.os.WebOS]);
+    return Asserts.one([
+      /(?:google|smart(?:-)|internet\.|(?:i)net|apple|(?:pov|aoc)\_|hbb|web|sonyd|vs|cloud)tv/i.test(this._ua),
+      /(?:viera|bravia|bangolufsen|humax|airties|netcast|owb|grundig|thom(?:son)|arcelik|telefunken|panasonic|hisense|boxee|kylo|dlnadoc|ce-html|tb-pO1|netbox|tv(\s?:box|build))/i.test(this._ua)
+    ]) && Asserts.one([
+      !this.mobile,
+      !this.bot,
+      this._flags.feature.fullscreenKeyboard
+    ]) && Asserts.one([
+      this._flags.os.Android,
+      this._flags.os.Tizen,
+      this._flags.os.WebOS
+    ]);
   }
-
   /**
    *
    *
@@ -58,9 +63,11 @@ class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get tablet() {
-    return Asserts.all([this.mobile, /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)]);
+    return Asserts.all([
+      this.mobile,
+      /(ipad|tab(?:let)|kindle|playbook|vega|sm-t|lenovo\st(?:a)b)/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -69,9 +76,11 @@ class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get smartphone() {
-    return Asserts.all([this.mobile, !this.tablet]);
+    return Asserts.all([
+      this.mobile,
+      !this.tablet
+    ]);
   }
-
   /**
    *
    *
@@ -80,9 +89,22 @@ class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get mobile() {
-    return Asserts.one([this._flags.feature.deviceMotion, this._flags.feature.deviceOrientation, this._flags.feature.pixelRatio > 1]) && Asserts.one([this._flags.feature.touch, this._flags.feature.forceTouch, ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile', 'SamsungBrowser', 'DuckDuckGo', 'Facebook', 'Instagram', 'TikTok', 'Kiwi', 'HuaweiBrowser', 'Line'].includes(this._flags.browser.name)]) && Asserts.all([!this._flags.feature.pointerEvents, this._flags.feature.file]) || Asserts.all([['Android', 'iOS', 'WindowsPhone', 'Bada', 'Blackberry', 'Contiki', 'MeeGo', 'RIM', 'QNX', 'Palm', 'Symbian', 'WebOS'].includes(this._flags.os.name), ['ChromeMobile', 'EdgeMobile', 'IEMobile', 'FirefoxMobile', 'MaxthonMobile', 'OperaMobile', 'SafariMobile', 'SamsungBrowser', 'DuckDuckGo', 'Facebook', 'Instagram', 'TikTok', 'Kiwi', 'HuaweiBrowser', 'Line'].includes(this._flags.browser.name)]);
+    return Asserts.one([
+      this._flags.feature.deviceMotion,
+      this._flags.feature.deviceOrientation,
+      this._flags.feature.pixelRatio > 1
+    ]) && Asserts.one([
+      this._flags.feature.touch,
+      this._flags.feature.forceTouch,
+      ["ChromeMobile", "EdgeMobile", "IEMobile", "FirefoxMobile", "MaxthonMobile", "OperaMobile", "SafariMobile", "SamsungBrowser", "DuckDuckGo", "Facebook", "Instagram", "TikTok", "Kiwi", "HuaweiBrowser", "Line"].includes(this._flags.browser.name)
+    ]) && Asserts.all([
+      !this._flags.feature.pointerEvents,
+      this._flags.feature.file
+    ]) || Asserts.all([
+      ["Android", "iOS", "WindowsPhone", "Bada", "Blackberry", "Contiki", "MeeGo", "RIM", "QNX", "Palm", "Symbian", "WebOS"].includes(this._flags.os.name),
+      ["ChromeMobile", "EdgeMobile", "IEMobile", "FirefoxMobile", "MaxthonMobile", "OperaMobile", "SafariMobile", "SamsungBrowser", "DuckDuckGo", "Facebook", "Instagram", "TikTok", "Kiwi", "HuaweiBrowser", "Line"].includes(this._flags.browser.name)
+    ]);
   }
-
   /**
    *
    *
@@ -90,25 +112,25 @@ class Platform extends CssFlagsClass {
    * @memberOf Platform
    */
   get desktop() {
-    return Asserts.all([!this.bot, !this.console, !this.mobile, !this.tv]);
+    return Asserts.all([
+      !this.bot,
+      !this.console,
+      !this.mobile,
+      !this.tv
+    ]);
   }
   toValues() {
     const proto = Object.getPrototypeOf(this);
-    const protoProperties = Object.getOwnPropertyNames(proto).filter(prop => {
+    const protoProperties = Object.getOwnPropertyNames(proto).filter((prop) => {
       return !!Object.getOwnPropertyDescriptors(proto)[prop].get && !!this[prop];
     });
-    return protoProperties[0] || 'n/a';
+    return protoProperties[0] || "n/a";
   }
-}
+};
 
-/**
- *
- *
- * @export
- * @class Device
- * @extends {CssFlagsClass}
- */
-class Device extends CssFlagsClass {
+// packages/hardware/lib/device.js
+import { Asserts as Asserts2, CssFlagsClass as CssFlagsClass2 } from "@detector-js/core";
+var Device = class extends CssFlagsClass2 {
   /**
    * Creates an instance of Device.
    * @param {any} [ua=null]
@@ -117,15 +139,17 @@ class Device extends CssFlagsClass {
    *
    * @memberOf Device
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'device') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "device") {
     super(ua, flags, cssFlagsPrefix);
   }
-}
+};
 
-class CPU extends CssFlagsClass {
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'cpu') {
+// packages/hardware/lib/cpu.js
+import { Asserts as Asserts3, CssFlagsClass as CssFlagsClass3 } from "@detector-js/core";
+var CPU = class extends CssFlagsClass3 {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "cpu") {
     super(ua, flags, cssFlagsPrefix);
-    this._booleanFlagsValuePropertyName = 'vendor';
+    this._booleanFlagsValuePropertyName = "vendor";
     this.platform = this.getPlatform();
     this.cores = this.getCores();
     this.architecture = this.getArchitecture();
@@ -139,7 +163,6 @@ class CPU extends CssFlagsClass {
     this.amd = this.getAmd();
     this.intel = this.getIntel();
   }
-
   /**
    *
    *
@@ -150,7 +173,6 @@ class CPU extends CssFlagsClass {
   getCores() {
     return this._navigator.hardwareConcurrency || 1;
   }
-
   /**
    *
    *
@@ -159,9 +181,8 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getPlatform() {
-    return this._navigator.platform || 'Win32';
+    return this._navigator.platform || "Win32";
   }
-
   /**
    *
    *
@@ -170,13 +191,16 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getArchitecture() {
-    let cpuClass = this._navigator.cpuClass || 'x86';
-    if (Asserts.one([cpuClass === 'x64', ['Win64', 'MacIntel', 'Linux x86_64', 'Linux i686'].includes(this._navigator.platform), /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)])) {
-      cpuClass = 'x64';
+    let cpuClass = this._navigator.cpuClass || "x86";
+    if (Asserts3.one([
+      cpuClass === "x64",
+      ["Win64", "MacIntel", "Linux x86_64", "Linux i686"].includes(this._navigator.platform),
+      /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)
+    ])) {
+      cpuClass = "x64";
     }
     return cpuClass;
   }
-
   /**
    *
    *
@@ -185,9 +209,11 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getSparc() {
-    return Asserts.one([/(sun4\w)[;\)]/i.test(this._ua), /sparc(?:64)?(?=;);/i.test(this._ua)]);
+    return Asserts3.one([
+      /(sun4\w)[;\)]/i.test(this._ua),
+      /sparc(?:64)?(?=;);/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -196,9 +222,10 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getIrix() {
-    return Asserts.all([/irix(?:64)?(?=;);/i.test(this._ua)]);
+    return Asserts3.all([
+      /irix(?:64)?(?=;);/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -207,9 +234,10 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getMips() {
-    return Asserts.all([/mips(?:64)?(?=;);/i.test(this._ua)]);
+    return Asserts3.all([
+      /mips(?:64)?(?=;);/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -218,9 +246,10 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getRisc() {
-    return Asserts.all([/pa-risc(?:64)?(?=;);/i.test(this._ua)]);
+    return Asserts3.all([
+      /pa-risc(?:64)?(?=;);/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -229,9 +258,10 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getAvr() {
-    return Asserts.all([/(?=atmel\s)avr/i.test(this._ua)]);
+    return Asserts3.all([
+      /(?=atmel\s)avr/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -240,9 +270,11 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getArm() {
-    return Asserts.one([/windows\s(ce|mobile);\sppc;/i.test(this._ua), /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)]);
+    return Asserts3.one([
+      /windows\s(ce|mobile);\sppc;/i.test(this._ua),
+      /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)
+    ]);
   }
-
   /**
    *
    *
@@ -251,9 +283,11 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getPowerPC() {
-    return Asserts.one([/((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua), this._navigator.platform === 'MacPPC']);
+    return Asserts3.one([
+      /((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i.test(this._ua),
+      this._navigator.platform === "MacPPC"
+    ]);
   }
-
   /**
    *
    *
@@ -262,9 +296,16 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getAmd() {
-    return Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
+    return Asserts3.one([
+      /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
+      this._navigator.cpuClass === "x64",
+      this._navigator.platform === "Linux x86_64"
+    ]) || Asserts3.one([
+      /(?:(amd(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
+      /((?:i[346]|x)86)[;\)]/i.test(this._ua),
+      this._navigator.cpuClass === "x86"
+    ]);
   }
-
   /**
    *
    *
@@ -273,18 +314,24 @@ class CPU extends CssFlagsClass {
    * @memberOf CPU
    */
   getIntel() {
-    return Asserts.one([/(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua), /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x64', this._navigator.platform === 'MacIntel', this._navigator.platform === 'Linux x86_64']) || Asserts.one([/(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua), /(ia32(?=;))/i.test(this._ua), /((?:i[346]|x)86)[;\)]/i.test(this._ua), this._navigator.cpuClass === 'x86']);
+    return Asserts3.one([
+      /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
+      /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
+      this._navigator.cpuClass === "x64",
+      this._navigator.platform === "MacIntel",
+      this._navigator.platform === "Linux x86_64"
+    ]) || Asserts3.one([
+      /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
+      /(ia32(?=;))/i.test(this._ua),
+      /((?:i[346]|x)86)[;\)]/i.test(this._ua),
+      this._navigator.cpuClass === "x86"
+    ]);
   }
-}
+};
 
-/**
- *
- *
- * @export
- * @class GPU
- * @extends {CssFlagsClass}
- */
-class GPU extends CssFlagsClass {
+// packages/hardware/lib/gpu.js
+import { CssFlagsClass as CssFlagsClass4 } from "@detector-js/core";
+var GPU = class extends CssFlagsClass4 {
   /**
    * Creates an instance of GPU.
    * @param {any} [ua=null]
@@ -293,7 +340,7 @@ class GPU extends CssFlagsClass {
    *
    * @memberOf GPU
    */
-  constructor(ua = null, flags = {}, cssFlagsPrefix = 'gpu') {
+  constructor(ua = null, flags = {}, cssFlagsPrefix = "gpu") {
     super(ua, flags, cssFlagsPrefix);
     this._createTestElements();
     this.webGLVendor = this._info.webGLVendor;
@@ -302,7 +349,6 @@ class GPU extends CssFlagsClass {
     this.model = this._info.model;
     this.renderer = this._info.renderer;
   }
-
   /**
    *
    *
@@ -310,10 +356,9 @@ class GPU extends CssFlagsClass {
    * @memberOf GPU
    */
   _createTestElements() {
-    this._canvas = this._document.createElement('canvas');
+    this._canvas = this._document.createElement("canvas");
     this._info = this.getInfo();
   }
-
   // /**
   //  *
   //  *
@@ -323,11 +368,9 @@ class GPU extends CssFlagsClass {
   // _destroyTestElements() {
   //   this._canvas = null;
   //   this._info = null;
-
   //   delete this._canvas;
   //   delete this._info;
   // }
-
   /**
    *
    *
@@ -337,20 +380,20 @@ class GPU extends CssFlagsClass {
    */
   getInfo() {
     const info = {
-      webGLVendor: 'n/a',
-      webGLRenderer: 'n/a',
-      vendor: 'n/a',
-      model: 'n/a',
-      renderer: 'n/a'
+      webGLVendor: "n/a",
+      webGLRenderer: "n/a",
+      vendor: "n/a",
+      model: "n/a",
+      renderer: "n/a"
     };
     try {
-      const webGLContext = this._canvas.getContext('webgl') || this._canvas.getContext('experimental-webgl');
+      const webGLContext = this._canvas.getContext("webgl") || this._canvas.getContext("experimental-webgl");
       if (webGLContext) {
-        const dbgRenderInfo = webGLContext.getExtension('WEBGL_debug_renderer_info');
+        const dbgRenderInfo = webGLContext.getExtension("WEBGL_debug_renderer_info");
         if (dbgRenderInfo != null) {
           info.merge({
             vendor: webGLContext.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL),
-            model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(' OpenGL Engine', ''),
+            model: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL).replace(" OpenGL Engine", ""),
             renderer: webGLContext.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL)
           });
         }
@@ -360,18 +403,22 @@ class GPU extends CssFlagsClass {
         });
       }
     } catch (e) {
-      console.warn('webGL is not supported', e.message);
+      console.warn("webGL is not supported", e.message);
     }
     return info;
   }
-}
+};
 
-//! Development-only startup log (upstream v2 behavior). The `"3.0.0"`
-//! placeholder is rewritten at build time by rollup-plugin-replace.
-if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-console
-  console.log('DetectorJS Hardware Module v' + ("3.0.0" ) + ' initialized');
+// packages/hardware/lib/hardware.js
+if (typeof process !== "undefined" && process.env && true) {
+  console.log("DetectorJS Hardware Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
-
-export { CPU, Device, GPU, Platform };
+export {
+  CPU,
+  Device,
+  GPU,
+  Platform
+};
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=hardware.mjs.map

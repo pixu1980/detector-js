@@ -27,9 +27,9 @@
     }
   },
   "scripts": {
-    "test": "node ./__tests__/software.test.js",
-    "build": "rollup -c",
-    "watch": "rollup -c -w"
+    "test": "node --test ./__tests__/software.test.js",
+    "build": "node ../../scripts/build-package.mjs",
+    "watch": "node ../../scripts/build-package.mjs --watch"
   },
   "directories": {
     "dist": "dist",
@@ -41,5 +41,22 @@
   ],
   "dependencies": {
     "@detector-js/core": "workspace:*"
+  },
+  "types": "./lib/software.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/software.d.ts",
+      "import": "./dist/software.mjs",
+      "require": "./dist/software.js",
+      "default": "./dist/software.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

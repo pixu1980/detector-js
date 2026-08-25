@@ -1,0 +1,23 @@
+name: ✨ Feature request
+description: Propose a new flag, browser, OS or WebAPI detection
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should be detected?
+      description: Name and behavior of the new flag/value
+    validations:
+      required: true
+  - type: input
+    id: mdn
+    attributes:
+      label: MDN / spec reference (for WebAPIs)
+      description: Link to MDN Browser Compatibility Data or the spec
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      options:
+        - label: It can be implemented with zero runtime dependencies
+        - label: It requires no network requests, storage or telemetry (PRIVACY.md)

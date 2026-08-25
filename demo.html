@@ -3,30 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DetectorJS v3.0.0 — demo</title>
+  <title>DetectorJS v3.0.0 — live demo</title>
   <style>
-    body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    h1 { font-size: 1.5rem; }
-    pre { background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 1rem; overflow: auto; font-size: .8rem; }
-    .note { color: #666; font-size: .85rem; }
+    body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #eef2ff; background: #0b1020; }
+    h1 { font-size: 1.4rem; }
+    .note { color: #98a2c3; font-size: .85rem; }
+    pre { background: #070b18; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 1rem; overflow: auto; font-size: .78rem; color: #d7dff7; }
+    a { color: #00e5c7; }
+    code { color: #ffd479; }
   </style>
 </head>
 <body>
-  <h1>DetectorJS <span id="version">v3.0.0</span> — zero-dependency monorepo platform/environment detector</h1>
-  <p class="note">Reading <code>navigator.userAgent</code> of the current browser.</p>
+  <h1>DetectorJS <span id="version">v3.0.0</span> — live demo</h1>
+  <p class="note">Runs entirely in your browser: <code>const detector = new Detector(); detector.toFlags()</code>. <a href="index.html">← Back to the site</a></p>
   <pre id="out">detecting…</pre>
 
   <script src="dist/detector.browser.min.js"></script>
   <script>
-    // UMD build exposes `window.Detector` in browsers.
-    var D = (typeof Detector !== 'undefined' && Detector) || null;
-    var out = document.getElementById('out');
-    function render() {
-      if (!D) { out.textContent = 'DetectorJS bundle not found. Open /demo.html via the dev server.'; return; }
-      var detector = new D();
-      out.textContent = JSON.stringify(detector.toFlags(), null, 2);
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
+    // `new Detector()` — the UMD bundle exposes the Detector class directly as a global.
+    const detector = new Detector();
+    const out = document.getElementById('out');
+    out.textContent = JSON.stringify(detector.toFlags(), null, 2);
   </script>
 </body>
 </html>

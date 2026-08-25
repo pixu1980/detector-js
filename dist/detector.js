@@ -1,22 +1,32 @@
-'use strict';
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var core = require('@detector-js/core');
-var feature = require('@detector-js/feature');
-var hardware = require('@detector-js/hardware');
-var software = require('@detector-js/software');
-
-/*jshint expr: true */
-
-/**
- *
- *
- * @export
- * @class Detector
- * @extends {FlagsClass}
- */
-class Detector extends core.FlagsClass {
+// packages/detector/lib/detector.js
+var detector_exports = {};
+__export(detector_exports, {
+  Detector: () => Detector
+});
+module.exports = __toCommonJS(detector_exports);
+var import_core = require("@detector-js/core");
+var import_feature = require("@detector-js/feature");
+var import_hardware = require("@detector-js/hardware");
+var import_software = require("@detector-js/software");
+var Detector = class extends import_core.FlagsClass {
   /**
    * Creates an instance of Detector.
    * @param {boolean} [cssFlags=false]
@@ -25,22 +35,15 @@ class Detector extends core.FlagsClass {
    *
    * @memberOf Detector
    */
-  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = 'djs') {
+  constructor(ua = null, values = true, cssFlags = false, cssFlagsPrefix = "djs") {
     super(ua);
     this._values = values;
     this._cssFlags = !!cssFlags ? [] : null;
-    this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? '--' : '');
-
-    //! Features
+    this._cssFlagsPrefix = cssFlagsPrefix + (!!cssFlagsPrefix ? "--" : "");
     this.checkFeature();
-
-    //! Software
     this.checkEngine();
     this.checkBrowser();
     this.checkOS();
-
-    //! Hardware
-    // this.checkDevice();
     this.checkCPU();
     this.checkGPU();
     this.checkPlatform();
@@ -54,18 +57,17 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkFeature() {
-    const feature$1 = new feature.Feature(this._ua);
-    const audio = new feature.AudioFeature(this._ua);
-    const video = new feature.VideoFeature(this._ua);
-    this.feature = feature$1.toFlags().merge({
+    const feature = new import_feature.Feature(this._ua);
+    const audio = new import_feature.AudioFeature(this._ua);
+    const video = new import_feature.VideoFeature(this._ua);
+    this.feature = feature.toFlags().merge({
       audio: audio.toFlags(),
       video: video.toFlags()
     });
     if (!!this._cssFlags) {
-      this._cssFlags = this._cssFlags.concat(feature$1.toCssFlags(), audio.toCssFlags(), video.toCssFlags());
+      this._cssFlags = this._cssFlags.concat(feature.toCssFlags(), audio.toCssFlags(), video.toCssFlags());
     }
   }
-
   //! Software
   /**
    *
@@ -74,7 +76,7 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkEngine() {
-    const engine = new software.Engine(this._ua, this.toFlags());
+    const engine = new import_software.Engine(this._ua, this.toFlags());
     if (this._values) {
       this.engine = engine.toValues();
     } else {
@@ -84,7 +86,6 @@ class Detector extends core.FlagsClass {
       this._cssFlags = this._cssFlags.concat(engine.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -92,7 +93,7 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkBrowser() {
-    const browser = new software.Browser(this._ua, this.toFlags());
+    const browser = new import_software.Browser(this._ua, this.toFlags());
     if (this._values) {
       this.browser = browser.toValues();
     } else {
@@ -102,7 +103,6 @@ class Detector extends core.FlagsClass {
       this._cssFlags = this._cssFlags.concat(browser.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -110,7 +110,7 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkOS() {
-    const os = new software.OS(this._ua, this.toFlags());
+    const os = new import_software.OS(this._ua, this.toFlags());
     if (this._values) {
       this.os = os.toValues();
     } else {
@@ -120,7 +120,6 @@ class Detector extends core.FlagsClass {
       this._cssFlags = this._cssFlags.concat(os.toCssFlags());
     }
   }
-
   //! Hardware
   /**
    *
@@ -129,13 +128,12 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkDevice() {
-    const device = new hardware.Device(this._ua, this.toFlags());
+    const device = new import_hardware.Device(this._ua, this.toFlags());
     this.device = device.toFlags();
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(device.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -143,7 +141,7 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkCPU() {
-    const cpu = new hardware.CPU(this._ua, this.toFlags());
+    const cpu = new import_hardware.CPU(this._ua, this.toFlags());
     if (this._values) {
       this.cpu = cpu.toValues();
     } else {
@@ -153,7 +151,6 @@ class Detector extends core.FlagsClass {
       this._cssFlags = this._cssFlags.concat(cpu.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -161,13 +158,12 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkGPU() {
-    const gpu = new hardware.GPU(this._ua, this.toFlags());
+    const gpu = new import_hardware.GPU(this._ua, this.toFlags());
     this.gpu = gpu.toFlags();
     if (!!this._cssFlags) {
       this._cssFlags = this._cssFlags.concat(gpu.toCssFlags());
     }
   }
-
   /**
    *
    *
@@ -175,7 +171,7 @@ class Detector extends core.FlagsClass {
    * @memberOf Detector
    */
   checkPlatform() {
-    const platform = new hardware.Platform(this._ua, this.toFlags());
+    const platform = new import_hardware.Platform(this._ua, this.toFlags());
     if (this._values) {
       this.platform = platform.toValues();
     } else {
@@ -185,7 +181,6 @@ class Detector extends core.FlagsClass {
       this._cssFlags = this._cssFlags.concat(platform.toCssFlags());
     }
   }
-
   //! CSS Flags
   /**
    *
@@ -195,24 +190,23 @@ class Detector extends core.FlagsClass {
    */
   setCssFlags() {
     if (!!this._cssFlags) {
-      const cssFlagsPrefixed = this._cssFlags.map(cssFlag => {
+      const cssFlagsPrefixed = this._cssFlags.map((cssFlag) => {
         return this._cssFlagsPrefix + cssFlag;
       });
-      const htmlElement = document.documentElement || document.querySelector('html');
-      cssFlagsPrefixed.forEach(cssFlag => {
-        return htmlElement.className.replace(cssFlag, '');
+      const htmlElement = document.documentElement || document.querySelector("html");
+      cssFlagsPrefixed.forEach((cssFlag) => {
+        return htmlElement.className.replace(cssFlag, "");
       });
-      htmlElement.className += cssFlagsPrefixed.join(' ').trim();
+      htmlElement.className += cssFlagsPrefixed.join(" ").trim();
     }
   }
+};
+if (typeof process !== "undefined" && process.env && true) {
+  console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
 }
-
-//! Development-only startup log (upstream v2 behavior). The `"3.0.0"`
-//! placeholder is rewritten at build time by rollup-plugin-replace.
-if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-console
-  console.log('DetectorJS Detector Module v' + ("3.0.0" ) + ' initialized');
-}
-
-exports.Detector = Detector;
+//! Features
+//! Hardware
+//! Software
+//! Development-only startup log (upstream v2 behavior). The `__VERSION__`
+//! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=detector.js.map

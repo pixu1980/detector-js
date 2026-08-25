@@ -70,13 +70,20 @@
     "dist",
     "**/dist/**",
     "docs",
-    "*.min.js"
+    "*.min.js",
+    "package.json",
+    "pnpm-workspace.yaml"
   ],
   "overrides": [
     {
       "files": [
         "test/**/*.js",
+        "test/**/*.cjs",
         "packages/*/__tests__/*.js",
+        "scripts/**/*.mjs",
+        "browser/**/*.js",
+        "examples/**/*.js",
+        "playwright.config.mjs",
         "rollup.config.js",
         "packages/*/rollup.config.js"
       ],
@@ -96,7 +103,24 @@
         "no-nested-ternary": "off",
         "no-restricted-syntax": "off",
         "import/extensions": "off",
-        "lines-around-directive": "off"
+        "lines-around-directive": "off",
+        "no-console": "off",
+        "import/no-unresolved": "off",
+        "max-classes-per-file": "off",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "global-require": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-await-in-loop": "off"
+      },
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "globals": {
+        "Detector": "readonly",
+        "navigator": "readonly",
+        "window": "readonly"
       }
     }
   ]

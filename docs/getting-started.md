@@ -1,0 +1,89 @@
+# Getting Started
+
+DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
+
+## Install
+
+```sh
+npm install detector-js
+# or
+pnpm add detector-js
+# or standalone (no install):
+# <script src="https://cdn.jsdelivr.net/npm/detector-js@3/dist/detector.browser.min.js"></script>
+```
+
+## Quick start
+
+### Browser (script tag)
+
+```html
+<script src="dist/detector.browser.min.js"></script>
+<script>
+  const detector = new Detector();          // uses the real navigator.userAgent
+  const flags   = detector.toFlags();       // full tree
+  const values  = detector.toValues();      // compact summary
+  document.body.dataset.platform = detector.platform;
+</script>
+```
+
+### ESM
+
+```js
+import { Detector } from 'detector-js';
+
+const detector = new Detector();
+console.log(detector.browser, detector.os, detector.platform);
+```
+
+### CommonJS
+
+```js
+const { Detector } = require('detector-js');
+const detector = new Detector(null, true, false);
+```
+
+## Constructor options
+
+```js
+new Detector(ua, values, cssFlags, cssFlagsPrefix)
+```
+
+| param | default | meaning |
+| --- | --- | --- |
+| `ua` | `navigator.userAgent` | UA string to parse (injectable for testing) |
+| `values` | `true` | compact `{ name, version, … }` objects (vs full `toFlags()` tree) |
+| `cssFlags` | `false` | add `djs--…` classes to `<html>` (intentionally **off** by default) |
+| `cssFlagsPrefix` | `'djs'` | prefix used with `cssFlags` |
+
+## Typical output
+
+```js
+detector.browser // { name: 'Chrome', version: '120.0.0.0' }
+detector.os      // { name: 'macOS', version: '10.15.7', versionName: 'Catalina' }
+detector.platform// 'desktop'
+detector.cpu     // { platform: 'MacIntel', cores: 8, architecture: 'x64', vendor: 'intel' }
+detector.gpu     // { webGLVendor: 'WebKit', vendor: 'Apple Inc.', model: 'Apple M1', ... }
+detector.feature // 87+ flags: webGPU, webAuthn, wakeLock, webShare, indexedDB, ...
+```
+
+## Using only a slice of the library
+
+The monorepo ships scoped packages — use exactly what you need:
+
+```js
+import { Browser } from '@detector-js/software';
+import { Feature } from '@detector-js/feature';
+const browser = new Browser();
+const feature = new Feature();
+```
+
+## TypeScript
+
+Types are included (`detector-js` ships `index.d.ts`, each `@detector-js/*` package ships its own). You get typed `Detector`, `Browser`, `OS`, `CPU`, `GPU`, `Feature`… out of the box.
+
+## Next steps
+- [API reference](./api.md)
+- [Toolchain & build](./toolchain.md)
+- [Browser support & legacy platforms](./browser-support.md)
+- [Privacy & legal notes](../PRIVACY.md)
+- [Examples](../examples/)

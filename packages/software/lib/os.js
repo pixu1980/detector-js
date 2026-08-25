@@ -417,7 +417,7 @@ export class OS extends CssFlagsClass {
    */
   get iOS() {
     return this._checkAssertsResult(Asserts.all([
-      !window.MSStream,
+      !this._root.MSStream,
       /iP(?:ad|hone|od)/.test(this._ua),
     ]) && Asserts.one([
       /os\s((\d+([_\s]\d+)*)|(\d+(?:[_\.]\d+)*)) like mac os x/i.test(this._ua),
