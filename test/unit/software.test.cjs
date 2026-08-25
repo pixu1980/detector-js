@@ -51,9 +51,36 @@ describe('software detection (UA table)', () => {
   }
 
   test('macOS version names (UA-based)', () => {
-    assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15', {}, 'os').toValues().versionName, 'Catalina');
-    assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15', {}, 'os').toValues().versionName, 'Ventura');
-    assert.equal(new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 26_6_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15', {}, 'os').toValues().versionName, 'Tahoe');
+    const names = {
+      '10_15_7': 'Catalina',
+      '11_5': 'Big Sur',
+      '12_6': 'Monterey',
+      '13_5_1': 'Ventura',
+      '14_6': 'Sonoma',
+      '15_3': 'Sequoia',
+      '26_6_2': 'Tahoe',
+    };
+    for (const [maj, expected] of Object.entries(names)) {
+      const os = new OS(`Mozilla/5.0 (Macintosh; Intel Mac OS X ${maj}) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15`, {}, 'os');
+      assert.equal(os.toValues().versionName, expected, `macOS ${maj}`);
+    }
+    // macOS 16–25 do not exist (Apple jumped 15 → 26 in 2025): nothing to map
+  });
+
+  test('Safari infers the real macOS version from the Version token (no Client Hints)', () => {
+    // modern Safari keeps the legacy-compat UA but Version/26.x == macOS 26.x
+    const safari = new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.2 Safari/605.1.15', {}, 'os');
+    assert.equal(safari.toValues().version, '26.6.2');
+    assert.equal(safari.toValues().versionName, 'Tahoe');
+    // pre-26 Safari majors were back-ported across macOS releases: stay UA-based
+    const legacy = new OS('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Safari/605.1.15', {}, 'os');
+    assert.equal(legacy.toValues().version, '10.15.7');
+    assert.equal(legacy.toValues().versionName, 'Catalina');
+  });
+
+  test('Android parses current major versions', () => {
+    assert.equal(new OS('Mozilla/5.0 (Linux; Android 17; Pixel 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36', {}, 'os').toValues().version, '17');
+    assert.equal(new OS('Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', {}, 'os').toValues().version, '14');
   });
 
   test('client-hints mapping (marketing + Darwin style)', () => {

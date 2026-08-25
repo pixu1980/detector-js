@@ -21,6 +21,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile=false
+      - run: pnpm exec playwright install --with-deps chromium webkit
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm test

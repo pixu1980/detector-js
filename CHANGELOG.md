@@ -16,7 +16,12 @@
   `detector.upgrade()` resolve the high-entropy `platformVersion` and report the real version
   and name (e.g. `26.6.2 · Tahoe`, Windows 11) — auto-started in the constructor, safe no-op when
   hints are unavailable (Safari/Firefox) or denied (Permissions-Policy `ch-ua-high-entropy-values`)
-- macOS version names extended to **Tahoe (26)**; Darwin→marketing mapping (20→11 … 26→26)
+- macOS version names extended to **Tahoe (26)** — versions 16–25 do not exist (Apple jumped
+  15 → 26 in 2025); Darwin→marketing mapping (20→11 … 26→26)
+- **Safari/WebKit fallback**: no Client Hints there, and the UA keeps the legacy
+  `"Mac OS X 10_15_7"`; since Safari 26 is 1:1 with macOS 26, the `Version/26.x` token now
+  reveals the real version synchronously (e.g. `26.5 · Tahoe`); pre-26 Safari stays UA-based
+- Android current majors (10–17) parse correctly (numerical naming since Android 10)
 
 ### Monorepo & release readiness
 - npm-workspaces monorepo mirroring v2 layout (`@detector-js/{core,feature,software,hardware,detector}`, **3.0.0** each)
