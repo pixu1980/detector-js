@@ -36,6 +36,7 @@ export declare class CPU extends CssFlagsClass {
   getCores(): number;
   getPlatform(): string;
   getArchitecture(): string;
+  upgrade(): Promise<Flags>;
 }
 
 export declare class GPU extends CssFlagsClass {

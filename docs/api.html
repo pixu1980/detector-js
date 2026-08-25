@@ -53,7 +53,12 @@
 <h2>@detector-js/hardware</h2>
 <ul>
 <li><strong>Platform</strong> — <code>desktop</code>, <code>smartphone</code>, <code>tablet</code>, <code>tv</code>, <code>console</code>, <code>bot</code>, <code>mobile</code></li>
-<li><strong>CPU</strong> — <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/…), vendor flags</li>
+<li><strong>CPU</strong> — <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/apple…), vendor flags.
+<code>navigator.platform</code>/UA strings are <strong>legacy-compat</strong> on macOS (<code>&quot;MacIntel&quot;</code> + <code>&quot;Mac OS X 10_15_7&quot;</code>
+appear on both Intel and Apple Silicon), so the real architecture comes from
+<code>CPU.upgrade()</code> (Client Hints <code>architecture</code>/<code>bitness</code>) and/or the <strong>GPU evidence</strong>
+(WebGL renderer &quot;Apple M1…&quot; → <code>arm64 · vendor &#39;apple&#39;</code>), refined synchronously by <code>Detector</code>
+— <code>Detector.upgrade()</code> re-runs it. <code>arm64</code> is no longer misreported as <code>x64</code>.</li>
 <li><strong>GPU</strong> — <code>webGLVendor</code>, <code>webGLRenderer</code>, <code>vendor</code>, <code>model</code>, <code>renderer</code> (WebGL-based, safe-mode)</li>
 <li><strong>Device</strong> — placeholder base for vendor-specific device flags</li>
 </ul>

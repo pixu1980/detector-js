@@ -22,6 +22,12 @@
   `"Mac OS X 10_15_7"`; since Safari 26 is 1:1 with macOS 26, the `Version/26.x` token now
   reveals the real version synchronously (e.g. `26.5 · Tahoe`); pre-26 Safari stays UA-based
 - Android current majors (10–17) parse correctly (numerical naming since Android 10)
+- **CPU architecture fixed for Apple Silicon**: `navigator.platform "MacIntel"` is a legacy
+  compat string shown on ARM Macs too — it no longer forces `x64`/`intel`; the `arm64` UA token
+  is no longer mapped to `x64` (upstream bug). Real architecture from Client Hints
+  (`architecture`/`bitness`, via `CPU.upgrade()`/`detector.upgrade()`) or from **GPU evidence**
+  (WebGL "Apple M1…" → `arm64 · apple`), refined synchronously at construction — MacBook Pro
+  M1 now reports `{ architecture: 'arm64', vendor: 'apple' }` instead of `x64/intel`
 
 ### Monorepo & release readiness
 - npm-workspaces monorepo mirroring v2 layout (`@detector-js/{core,feature,software,hardware,detector}`, **3.0.0** each)

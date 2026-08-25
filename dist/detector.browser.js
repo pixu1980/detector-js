@@ -2259,9 +2259,15 @@
     getArchitecture() {
       let cpuClass = this._navigator.cpuClass || "x86";
       if (Asserts.one([
+        cpuClass === "arm64",
+        this._navigator.platform === "MacARM",
+        /(?:arm64|aarch64|armv\d|(?:^|[\/\s;(])arm(?=[\s;)\/]|$))/i.test(this._ua)
+      ])) {
+        cpuClass = "arm64";
+      } else if (Asserts.one([
         cpuClass === "x64",
-        ["Win64", "MacIntel", "Linux x86_64", "Linux i686"].includes(this._navigator.platform),
-        /(?:x86_64|x86-64|win64|wow64|x64;|amd64|arm64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|ppc64|powerpc64)/i.test(this._ua)
+        ["Win64", "Linux x86_64", "Linux i686"].includes(this._navigator.platform),
+        /(?:x86_64|x86-64|win64|wow64|x64;|amd64|ia64|sparc64|ppc64|mips64|pa-risc64|irix64|powerpc64)/i.test(this._ua)
       ])) {
         cpuClass = "x64";
       }
@@ -2338,7 +2344,8 @@
     getArm() {
       return Asserts.one([
         /windows\s(ce|mobile);\sppc;/i.test(this._ua),
-        /arm(?:64|(?=v\d+[;l]))/i.test(this._ua)
+        /(?:arm64|aarch64|armv\d|(?:^|[\/\s;(])arm(?=[\s;)\/]|$))/i.test(this._ua),
+        this._navigator.platform === "MacARM"
       ]);
     }
     /**
@@ -2384,7 +2391,6 @@
         /(?:avr32|ia64(?=;))|68k(?=\))/i.test(this._ua),
         /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
         this._navigator.cpuClass === "x64",
-        this._navigator.platform === "MacIntel",
         this._navigator.platform === "Linux x86_64"
       ]) || Asserts.one([
         /(?:(x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i.test(this._ua),
@@ -2392,6 +2398,40 @@
         /((?:i[346]|x)86)[;\)]/i.test(this._ua),
         this._navigator.cpuClass === "x86"
       ]);
+    }
+    /**
+     * Resolves the true CPU architecture through User-Agent Client Hints
+     * (navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness'])).
+     * High-entropy: async, can be denied; falls back to the UA-based result.
+     *
+     * @returns {Promise<object>}
+     *
+     * @memberOf CPU
+     */
+    upgrade() {
+      return __async(this, null, function* () {
+        const uaData = this._navigator.userAgentData;
+        if (uaData && typeof uaData.getHighEntropyValues === "function") {
+          try {
+            const hints = yield uaData.getHighEntropyValues(["architecture", "bitness"]);
+            const arch = hints && typeof hints.architecture === "string" ? hints.architecture : null;
+            if (arch === "arm") {
+              this.architecture = String(hints.bitness || "64") === "32" ? "arm" : "arm64";
+              this.arm = true;
+              this.intel = false;
+              this.amd = false;
+              this.powerPC = false;
+            } else if (arch === "x86") {
+              this.architecture = String(hints.bitness || "64") === "32" ? "x86" : "x64";
+              this.intel = true;
+              this.amd = false;
+              this.arm = false;
+            }
+          } catch (e) {
+          }
+        }
+        return this.toValues();
+      });
     }
   };
 
@@ -4899,6 +4939,7 @@
       this.checkOS();
       this.checkCPU();
       this.checkGPU();
+      this._refineCpuWithGpu();
       this.checkPlatform();
       this.setCssFlags();
       this.upgrade();
@@ -4985,15 +5026,71 @@
      *
      * @memberOf Detector
      */
-    upgrade() {
-      const os = this._os;
-      if (!os || typeof os.upgrade !== "function") {
-        return Promise.resolve(this.os);
+    /**
+     * Refines the CPU detection from the GPU (WebGL) identity — the only reliable
+     * synchronous evidence for Apple Silicon, since UA/platform use the legacy
+     * "MacIntel"/"Mac OS X 10_15_7" strings on both Intel and Apple chips.
+     *
+     * @memberOf Detector
+     */
+    _refineCpuWithGpu() {
+      const { cpu } = this;
+      if (!cpu) return;
+      const { vendor, model, renderer } = this.gpu || {};
+      const gpuText = String([vendor, model, renderer].filter(Boolean).join(" "));
+      if (/apple\s+(?:m(?:[1-9]|pro|max|ultra)|gpu)\b/i.test(gpuText)) {
+        this.cpu = __spreadProps(__spreadValues({}, cpu), {
+          architecture: "arm64",
+          vendor: "apple"
+        });
+      } else if (cpu.architecture === "arm64" && this._isMacOS() && (!cpu.vendor || cpu.vendor === "arm")) {
+        this.cpu = __spreadProps(__spreadValues({}, cpu), {
+          vendor: "apple"
+        });
+      } else if (/\bintel\b/i.test(gpuText) && (!cpu.architecture || cpu.architecture === "x86")) {
+        this.cpu = __spreadProps(__spreadValues({}, cpu), {
+          architecture: "x64",
+          vendor: "intel"
+        });
       }
-      this._upgradePromise = os.upgrade().then((values) => {
-        this.os = values;
+    }
+    /**
+     *
+     *
+     * @returns {boolean}
+     *
+     * @memberOf Detector
+     */
+    _isMacOS() {
+      const os = this.os || {};
+      return os.name === "macOS" || /mac/i.test(this.ua);
+    }
+    /**
+     * Resolves the real OS and CPU versions through User-Agent Client Hints
+     * (high-entropy), then re-runs the GPU-based CPU refinement. Auto-started in
+     * the constructor; await it for determinism. Safe no-op when hints are absent
+     * (Safari/WebKit, Firefox) or denied (Permissions-Policy).
+     *
+     * @returns {Promise<object>}
+     *
+     * @memberOf Detector
+     */
+    upgrade() {
+      const tasks = [];
+      if (this._os && typeof this._os.upgrade === "function") {
+        tasks.push(this._os.upgrade().then((values) => {
+          this.os = values;
+        }));
+      }
+      if (this._cpu && typeof this._cpu.upgrade === "function") {
+        tasks.push(this._cpu.upgrade().then((values) => {
+          this.cpu = values;
+          this._refineCpuWithGpu();
+        }));
+      }
+      this._upgradePromise = Promise.all(tasks).then(() => {
         this._upgraded = true;
-        return this.os;
+        return this.toFlags ? this.toFlags() : this.os;
       });
       return this._upgradePromise;
     }
@@ -5019,6 +5116,7 @@
      */
     checkCPU() {
       const cpu = new CPU(this._ua, this.toFlags());
+      this._cpu = cpu;
       if (this._values) {
         this.cpu = cpu.toValues();
       } else {

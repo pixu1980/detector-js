@@ -48,6 +48,12 @@ hints are unavailable (Safari/Firefox) or denied (Permissions-Policy <code>ch-ua
 <code>&quot;Mac OS X 10_15_7&quot;</code>; since Safari 26 is 1:1 with macOS 26, the <code>Version/26.x</code> token now
 reveals the real version synchronously (e.g. <code>26.5 · Tahoe</code>); pre-26 Safari stays UA-based</li>
 <li>Android current majors (10–17) parse correctly (numerical naming since Android 10)</li>
+<li><strong>CPU architecture fixed for Apple Silicon</strong>: <code>navigator.platform &quot;MacIntel&quot;</code> is a legacy
+compat string shown on ARM Macs too — it no longer forces <code>x64</code>/<code>intel</code>; the <code>arm64</code> UA token
+is no longer mapped to <code>x64</code> (upstream bug). Real architecture from Client Hints
+(<code>architecture</code>/<code>bitness</code>, via <code>CPU.upgrade()</code>/<code>detector.upgrade()</code>) or from <strong>GPU evidence</strong>
+(WebGL &quot;Apple M1…&quot; → <code>arm64 · apple</code>), refined synchronously at construction — MacBook Pro
+M1 now reports <code>{ architecture: &#39;arm64&#39;, vendor: &#39;apple&#39; }</code> instead of <code>x64/intel</code></li>
 </ul>
 <h3>Monorepo &amp; release readiness</h3>
 <ul>
