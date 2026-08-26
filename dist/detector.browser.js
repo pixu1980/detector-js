@@ -697,7 +697,7 @@
 
   // packages/core/lib/core.js
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Core Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Core Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // packages/feature/lib/webAPIs.js
@@ -3136,7 +3136,7 @@
     }
   };
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Feature Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Feature Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // packages/hardware/lib/platform.js
@@ -4819,7 +4819,13 @@
     get OperaMobile() {
       return this._checkAssertsResult(Asserts.one([
         !!this._root.opera,
-        !!this._root.opr
+        !!this._root.opr,
+        this.OperaMini,
+        // UA-only, e.g. Opera Mini (no window.opera on every build)
+        this.OperaCoast,
+        // UA-only: Coast/ token
+        this.OperaTouch
+        // UA-only: OPT/ token — Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
       ]) && Asserts.one([
         this.OperaMini,
         this.OperaCoast,
@@ -4856,7 +4862,9 @@
         /iphone|ipad|ipod/i.test(this._ua),
         !this.AndroidBrowser,
         !this.Chrome,
-        !this.PhantomJS
+        !this.PhantomJS,
+        !this.OperaMobile
+        // Opera for iOS (OPT/) must not fall back to SafariMobile
       ]) && Asserts.one([
         /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
         /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
@@ -4876,6 +4884,7 @@
         /safari|applewebkit/i.test(this._ua),
         !this.AndroidBrowser,
         !this.SafariMobile,
+        !this.OperaMobile,
         !this.Chrome,
         !this.PhantomJS
       ]) && Asserts.one([
@@ -6256,7 +6265,7 @@
     Detector.PROBES = Feature.APIS;
   }
   if (typeof process !== "undefined" && process.env && true) {
-    console.log("DetectorJS Detector Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+    console.log("DetectorJS Detector Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
   }
 
   // browser/index.js

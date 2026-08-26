@@ -476,7 +476,7 @@ var GPU = class extends CssFlagsClass4 {
 
 // packages/hardware/lib/hardware.js
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Hardware Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Hardware Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 export {
   CPU,

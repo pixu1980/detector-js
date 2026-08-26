@@ -1268,7 +1268,13 @@ var Browser = class extends CssFlagsClass {
   get OperaMobile() {
     return this._checkAssertsResult(Asserts.one([
       !!this._root.opera,
-      !!this._root.opr
+      !!this._root.opr,
+      this.OperaMini,
+      // UA-only, e.g. Opera Mini (no window.opera on every build)
+      this.OperaCoast,
+      // UA-only: Coast/ token
+      this.OperaTouch
+      // UA-only: OPT/ token — Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
     ]) && Asserts.one([
       this.OperaMini,
       this.OperaCoast,
@@ -1305,7 +1311,9 @@ var Browser = class extends CssFlagsClass {
       /iphone|ipad|ipod/i.test(this._ua),
       !this.AndroidBrowser,
       !this.Chrome,
-      !this.PhantomJS
+      !this.PhantomJS,
+      !this.OperaMobile
+      // Opera for iOS (OPT/) must not fall back to SafariMobile
     ]) && Asserts.one([
       /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
       /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
@@ -1325,6 +1333,7 @@ var Browser = class extends CssFlagsClass {
       /safari|applewebkit/i.test(this._ua),
       !this.AndroidBrowser,
       !this.SafariMobile,
+      !this.OperaMobile,
       !this.Chrome,
       !this.PhantomJS
     ]) && Asserts.one([
@@ -2447,7 +2456,7 @@ var OS = class extends CssFlagsClass3 {
 
 // packages/software/lib/software.js
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Software Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Software Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 export {
   Browser,

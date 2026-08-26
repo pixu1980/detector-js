@@ -2464,7 +2464,7 @@ var Feature = class extends import_core3.CssFlagsClass {
   }
 };
 if (typeof process !== "undefined" && process.env && true) {
-  console.log("DetectorJS Feature Module v" + (true ? "3.0.0" : "0.0.0") + " initialized");
+  console.log("DetectorJS Feature Module v" + (true ? "2.0.11" : "0.0.0") + " initialized");
 }
 //! MDN Web API catalog (auto-generated from the MDN /docs/Web/API index):
 //! every interface available on the global root becomes a feature flag.

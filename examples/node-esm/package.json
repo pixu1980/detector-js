@@ -6,6 +6,6 @@
     "start": "node index.mjs"
   },
   "dependencies": {
-    "detector-js": "3.0.0"
+    "detector-js": "2.0.11"
   }
 }

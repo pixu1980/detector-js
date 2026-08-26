@@ -1332,6 +1332,9 @@ export class Browser extends CssFlagsClass {
     return this._checkAssertsResult(Asserts.one([
       !!this._root.opera,
       !!this._root.opr,
+      this.OperaMini, // UA-only, e.g. Opera Mini (no window.opera on every build)
+      this.OperaCoast, // UA-only: Coast/ token
+      this.OperaTouch, // UA-only: OPT/ token — Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
     ]) && Asserts.one([
       this.OperaMini,
       this.OperaCoast,
@@ -1371,6 +1374,7 @@ export class Browser extends CssFlagsClass {
       !this.AndroidBrowser,
       !this.Chrome,
       !this.PhantomJS,
+      !this.OperaMobile, // Opera for iOS (OPT/) must not fall back to SafariMobile
     ]) && Asserts.one([
       /version\/([\w\.]+).+?mobile\/\w+\s(safari)/i.test(this._ua),
       /(?:Version\/(\d+[\.\d]+).*)?Mobile.*Safari\//i.test(this._ua),
@@ -1391,6 +1395,7 @@ export class Browser extends CssFlagsClass {
       /safari|applewebkit/i.test(this._ua),
       !this.AndroidBrowser,
       !this.SafariMobile,
+      !this.OperaMobile,
       !this.Chrome,
       !this.PhantomJS,
     ]) && Asserts.one([

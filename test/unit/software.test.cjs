@@ -21,6 +21,7 @@ const UA_TABLE = [
   ['fb-ios', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 FBAN/FBIOS', 'Facebook', 'iOS', 'smartphone', 'WebKit'],
   ['electron', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/117.0.0.0 Electron/28.0.0 Safari/537.36', 'Electron', 'macOS', 'desktop', 'Blink'],
   ['opera', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 OPR/106.0.0.0', 'Opera', 'Windows', 'desktop', 'Blink'],
+  ['opera-ios', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1 OPT/4.6.1', 'OperaMobile', 'iOS', 'smartphone', 'WebKit'],
   ['linux-firefox', 'Mozilla/5.0 (X11; Linux x86_64; rv:115.0) Gecko/20100101 Firefox/115.0', 'Firefox', 'Linux', 'desktop', 'Gecko'],
   ['ipad-safari', 'Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1', 'SafariMobile', 'iOS', 'tablet', 'WebKit'],
 ];
@@ -105,6 +106,29 @@ describe('software detection (UA table)', () => {
     assert.equal(upgraded.versionName, 'Tahoe');
   });
 
+  test('Opera for iOS (OPT/ token, no window.opera/opr) is detected', () => {
+    // Opera for iOS is a WKWebView wrapper: it never sets window.opera/opr,
+    // only the UA token OPT/<version> (e.g. iOS 17.4, UA from issue #25).
+    const ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1 OPT/4.6.1';
+    const saved = { opera: 'opera' in global ? global.opera : undefined, opr: 'opr' in global ? global.opr : undefined };
+    delete global.opera;
+    delete global.opr;
+    try {
+      const b = new Browser(ua, {}, 'browser');
+      assert.equal(b.OperaTouch, true);
+      assert.equal(b.OperaMobile, true);
+      assert.equal(b.SafariMobile, false);
+      assert.equal(b.Safari, false);
+      assert.equal(b.toValues().name, 'OperaMobile');
+      assert.equal(b.toValues().version, '4.6.1');
+    } finally {
+      for (const k of ['opera', 'opr']) {
+        if (saved[k] === undefined) delete global[k];
+        else global[k] = saved[k];
+      }
+    }
+  });
+
   test('engine detection', () => {
     const engine = new Engine('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', {}, 'engine');
     assert.equal(engine.toValues().name, 'Blink');
@@ -113,13 +137,15 @@ describe('software detection (UA table)', () => {
 
 describe('platform detection', () => {
   test('desktop / smartphone / tablet', () => {
-    const desktop = new Platform(UA_TABLE[0][1], flagsFor(UA_TABLE[0][1], false), 'platform');
+    const row = (name) => UA_TABLE.find((r) => r[0] === name)[1];
+
+    const desktop = new Platform(row('chrome-mac'), flagsFor(row('chrome-mac'), false), 'platform');
     assert.equal(desktop.toValues(), 'desktop');
 
-    const phone = new Platform(UA_TABLE[4][1], flagsFor(UA_TABLE[4][1], true), 'platform');
+    const phone = new Platform(row('samsung'), flagsFor(row('samsung'), true), 'platform');
     assert.equal(phone.smartphone, true);
 
-    const tablet = new Platform(UA_TABLE[11][1], flagsFor(UA_TABLE[11][1], true), 'platform');
+    const tablet = new Platform(row('ipad-safari'), flagsFor(row('ipad-safari'), true), 'platform');
     assert.equal(tablet.tablet, true);
 
     // TV detection works with the values-mode os snapshot ({ name: 'webos' })

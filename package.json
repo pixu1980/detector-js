@@ -1,6 +1,6 @@
 {
   "name": "detector-js",
-  "version": "3.0.0",
+  "version": "2.0.11",
   "description": "DetectorJS, zero-dependency platform/environment detector written in ES6",
   "main": "dist/detector.js",
   "browser": "dist/detector.browser.min.js",

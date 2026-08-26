@@ -12,7 +12,7 @@ describe('@detector-js/software', () => {
   });
 
   test('prototypes expose detection getters', () => {
-    for (const name of ['Chrome', 'Firefox', 'Safari', 'Edge', 'SamsungBrowser', 'DuckDuckGo', 'Electron']) {
+    for (const name of ['Chrome', 'Firefox', 'Safari', 'SafariMobile', 'Edge', 'Opera', 'OperaMobile', 'OperaTouch', 'SamsungBrowser', 'DuckDuckGo', 'Electron']) {
       const desc = Object.getOwnPropertyDescriptor(software.Browser.prototype, name);
       assert.ok(desc && desc.get, `missing getter Browser.${name}`);
     }
