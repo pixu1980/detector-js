@@ -86,7 +86,7 @@
         <span class="badge">0 dependencies</span>
         <span class="badge pink">100% local</span>
         <span class="badge">1100+ Web API flags</span>
-        <span class="badge pink">~76 KB min</span>
+        <span class="badge pink"><span id="sz-min">–</span> KB min · <span id="sz-gz">–</span> gz · <span id="sz-br">–</span> br</span>
         <span class="badge">vanillaJS · ES2016</span>
         <span class="badge">MIT</span>
       </div>
@@ -151,6 +151,14 @@
             <li>WebGPU, WebGL2, WebAssembly, WebAuthn</li>
             <li>Wake Lock, Web Share, Web Locks, WebXR, WebRTC</li>
             <li>+30 more: Clipboard, IndexedDB, NFC, USB, BroadcastChannel…</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span>📦</span>Tiny build</h3>
+          <ul>
+            <li>Minified raw: <b id="sz-min2">–</b> KB</li>
+            <li>gzip: <b id="sz-gz2">–</b> KB · brotli: <b id="sz-br2">–</b> KB</li>
+            <li>Version v2.0.11 · zero dependencies</li>
           </ul>
         </div>
       </div>
@@ -258,6 +266,24 @@
     // resolve the real OS version via User-Agent Client Hints (e.g. macOS 26 'Tahoe'
     // instead of the legacy-compat UA '10.15.7 · Catalina') and re-render
     detector.upgrade().then(render);
+  </script>
+  <script>
+    // fill the build-size badges/card from dist/sizes.json (min bytes · gzip · brotli)
+    (async () => {
+      try {
+        const s = await (await fetch('dist/sizes.json')).json();
+        const m = s['dist/detector.browser.min.js'];
+        if (!m) return;
+        const kb = (n) => (n / 1024).toFixed(1);
+        const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        set('sz-min', kb(m.bytes));
+        set('sz-min2', kb(m.bytes));
+        set('sz-gz', kb(m.gzip));
+        set('sz-gz2', kb(m.gzip));
+        set('sz-br', kb(m.brotli));
+        set('sz-br2', kb(m.brotli));
+      } catch (_) { /* served without dist/sizes.json → placeholders stay */ }
+    })();
   </script>
 </body>
 </html>

@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>Getting Started — DetectorJS</title>
-<link rel="stylesheet" href="../site.css" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="../index.html">Home</a>
           <a href="../docs/getting-started.html">Docs</a>
@@ -27,50 +30,36 @@
 <main><h1>Getting Started</h1>
 <p>DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and <strong>without ever sending data anywhere</strong> (<a href="../PRIVACY.html">PRIVACY</a>).</p>
 <h2>Install</h2>
-<pre><code class="language-sh">npm install detector-js
+<pre tabindex="0"><code class="language-sh">npm install detector-js
 # or
 pnpm add detector-js
 # or standalone via CDN (jsDelivr):
-# &lt;script src=&quot;https://cdn.jsdelivr.net/npm/detector-js@2.0.11/detector.browser.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<h3>CDN with SRI (pinned integrity)</h3>
-<pre><code class="language-html">&lt;script
-  src=&quot;https://cdn.jsdelivr.net/npm/detector-js@&lt;version&gt;/detector.browser.min.js&quot;
-  integrity=&quot;sha384-&lt;computed-at-release&gt;&quot;
-  crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
-</code></pre>
-<p>Generate the exact SRI snippets for the built bundles with:</p>
-<pre><code class="language-sh">pnpm sri     # prints integrity + pinned jsDelivr/unpkg &lt;script&gt; tags
-</code></pre>
-<blockquote>
+# <script src="https://cdn.jsdelivr.net/npm/detector-js@2.0.11/detector.browser.min.js"></script></code></pre><h3>CDN with SRI (pinned integrity)</h3>
+<pre tabindex="0"><code class="language-html"><script
+  src="https://cdn.jsdelivr.net/npm/detector-js@<version>/detector.browser.min.js"
+  integrity="sha384-<computed-at-release>"
+  crossorigin="anonymous"></script></code></pre><p>Generate the exact SRI snippets for the built bundles with:</p>
+<pre tabindex="0"><code class="language-sh">pnpm sri     # prints integrity + pinned jsDelivr/unpkg <script> tags</code></pre><blockquote>
 <p>The integrity hash changes with every version (the bundle embeds <code>__VERSION__</code>):
 run <code>pnpm sri</code> at release time (the release script prints it automatically) and pin
 the published version. Legacy webviews: use <code>dist/detector.browser.es2015.min.js</code>.</p>
 </blockquote>
 <h2>Quick start</h2>
 <h3>Browser (script tag)</h3>
-<pre><code class="language-html">&lt;script src=&quot;dist/detector.browser.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
+<pre tabindex="0"><code class="language-html"><script src="dist/detector.browser.min.js"></script>
+<script>
   const detector = new Detector();          // uses the real navigator.userAgent
   const flags   = detector.toFlags();       // full tree
   const values  = detector.toValues();      // compact summary
   document.body.dataset.platform = detector.platform;
-&lt;/script&gt;
-</code></pre>
-<h3>ESM</h3>
-<pre><code class="language-js">import { Detector } from &#39;detector-js&#39;;
+</script></code></pre><h3>ESM</h3>
+<pre tabindex="0"><code class="language-js">import { Detector } from 'detector-js';
 
 const detector = new Detector();
-console.log(detector.browser, detector.os, detector.platform);
-</code></pre>
-<h3>CommonJS</h3>
-<pre><code class="language-js">const { Detector } = require(&#39;detector-js&#39;);
-const detector = new Detector(null, true, false);
-</code></pre>
-<h2>Constructor options</h2>
-<pre><code class="language-js">new Detector(ua, values, cssFlags, cssFlagsPrefix)
-</code></pre>
-<table>
+console.log(detector.browser, detector.os, detector.platform);</code></pre><h3>CommonJS</h3>
+<pre tabindex="0"><code class="language-js">const { Detector } = require('detector-js');
+const detector = new Detector(null, true, false);</code></pre><h2>Constructor options</h2>
+<pre tabindex="0"><code class="language-js">new Detector(ua, values, cssFlags, cssFlagsPrefix)</code></pre><table>
 <thead>
 <tr>
 <th>param</th>
@@ -100,40 +89,31 @@ const detector = new Detector(null, true, false);
 </tr>
 </tbody></table>
 <h2>Typical output</h2>
-<pre><code class="language-js">detector.browser // { name: &#39;Chrome&#39;, version: &#39;120.0.0.0&#39; }
-detector.os      // { name: &#39;macOS&#39;, version: &#39;10.15.7&#39;, versionName: &#39;Catalina&#39; }
-detector.platform// &#39;desktop&#39;
-detector.cpu     // { platform: &#39;MacIntel&#39;, cores: 8, architecture: &#39;x64&#39;, vendor: &#39;intel&#39; }
-detector.gpu     // { webGLVendor: &#39;WebKit&#39;, vendor: &#39;Apple Inc.&#39;, model: &#39;Apple M1&#39;, ... }
-detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plus the full MDN /Web/API catalog (abortController, rtcPeerConnection, …)
-</code></pre>
-<h2>Using only a slice of the library</h2>
+<pre tabindex="0"><code class="language-js">detector.browser // { name: 'Chrome', version: '120.0.0.0' }
+detector.os      // { name: 'macOS', version: '10.15.7', versionName: 'Catalina' }
+detector.platform// 'desktop'
+detector.cpu     // { platform: 'MacIntel', cores: 8, architecture: 'x64', vendor: 'intel' }
+detector.gpu     // { webGLVendor: 'WebKit', vendor: 'Apple Inc.', model: 'Apple M1', ... }
+detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plus the full MDN /Web/API catalog (abortController, rtcPeerConnection, …)</code></pre><h2>Using only a slice of the library</h2>
 <p>The monorepo ships scoped packages — use exactly what you need:</p>
-<pre><code class="language-js">import { Browser } from &#39;@detector-js/software&#39;;
-import { Feature } from &#39;@detector-js/feature&#39;;
+<pre tabindex="0"><code class="language-js">import { Browser } from '@detector-js/software';
+import { Feature } from '@detector-js/feature';
 const browser = new Browser();
-const feature = new Feature();
-</code></pre>
-<h2>TypeScript</h2>
+const feature = new Feature();</code></pre><h2>TypeScript</h2>
 <p>Types are included (<code>detector-js</code> ships <code>index.d.ts</code>, each <code>@detector-js/*</code> package ships its own). You get typed <code>Detector</code>, <code>Browser</code>, <code>OS</code>, <code>CPU</code>, <code>GPU</code>, <code>Feature</code>… out of the box.</p>
 <h2>Next steps</h2>
 <ul>
-<li><a href="./api.html">API reference</a></li>
-<li><a href="./toolchain.html">Toolchain &amp; build</a></li>
-<li><a href="./browser-support.html">Browser support &amp; legacy platforms</a></li>
-<li><a href="../PRIVACY.html">Privacy &amp; legal notes</a></li>
-<li><a href="../examples/">Examples</a></li>
-</ul>
+<li><a href="./api.html">API reference</a></li><li><a href="./toolchain.html">Toolchain &amp; build</a></li><li><a href="./browser-support.html">Browser support &amp; legacy platforms</a></li><li><a href="../PRIVACY.html">Privacy &amp; legal notes</a></li><li><a href="../examples/">Examples</a></li></ul>
 </main>
 
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="../index.html">Detector<span>JS</span></a>
+        <a class="brand" href="../index.html"><img class="logo" src="../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="../docs/getting-started.html">Getting started</a></li>
           <li><a href="../docs/api.html">API reference</a></li>
@@ -145,7 +125,7 @@ const feature = new Feature();
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="../PRIVACY.html">Privacy</a></li>
           <li><a href="../SECURITY.html">Security</a></li>
@@ -154,7 +134,7 @@ const feature = new Feature();
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="../packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="../packages/software/README.html">@detector-js/software</a></li>

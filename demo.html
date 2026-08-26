@@ -3,30 +3,487 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DetectorJS v2.0.11 — demo</title>
+  <title>DetectorJS — live demo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="site.css" />
   <style>
-    body { font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    h1 { font-size: 1.5rem; }
-    pre { background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 1rem; overflow: auto; font-size: .8rem; }
-    .note { color: #666; font-size: .85rem; }
+    main { padding-top: 1.5rem; }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    @media (max-width: 1100px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- left column: detection cards ---------- */
+    .panel h2 { font-size: var(--fs-md); margin: 0 0 .6rem; display: flex; align-items: center; gap: .5rem; }
+    .panel { margin-bottom: 1.25rem; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: .6rem;
+    }
+    .flag-card {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .7rem .85rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .15s ease, transform .1s ease;
+    }
+    .flag-card .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+    a.flag-card:hover, a.flag-card:focus-visible {
+      border-color: var(--accent2);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    a.flag-card .name::after { content: " ↗"; color: var(--muted); font-size: .75rem; }
+    .flag-card .name { font-weight: 700; font-size: var(--fs-md); line-height: 1.25; }
+    .flag-card .state { font-size: .7rem; font-weight: 800; padding: .1rem .5rem; border-radius: 999px; white-space: nowrap; }
+    .flag-card .state.on { background: rgba(61, 220, 151, .14); color: var(--ok); }
+    .flag-card .state.off { background: rgba(152, 162, 195, .12); color: var(--muted); }
+    .flag-card .state.value { background: rgba(0, 229, 199, .14); color: var(--accent2); }
+    .flag-card .desc { color: var(--muted); font-size: var(--fs-sm); line-height: 1.45; }
+
+    .kv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      margin-bottom: .5rem;
+      font-size: var(--fs-sm);
+    }
+    .kv-card .k { color: var(--muted); text-transform: uppercase; letter-spacing: .05em; font-size: var(--fs-xs); }
+    .kv-card .v { font-weight: 700; margin-top: .1rem; word-break: break-word; }
+
+    /* ---------- right column: current JSON dump ---------- */
+    .raw-panel {
+      position: sticky;               /* sticky on the container, not title/pre */
+      top: calc(var(--header-h) + 1rem);
+      z-index: 1;
+    }
+    .raw-title {
+      font-size: var(--fs-sm);
+      font-weight: 800;
+      letter-spacing: .02em;
+      line-height: 1.25;
+      margin: 0 0 .45rem;
+    }
+    pre {
+      background: #070b18;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      overflow: auto;
+      font-size: var(--fs-sm);
+      color: #d7dff7;
+      font-family: var(--font-mono);
+      margin: 0;
+      max-height: calc(100vh - var(--header-h) - 5rem);
+    }
+    p.sub { color: var(--muted); font-size: var(--fs-sm); margin: 0 0 1rem; }
+    p.sub code { color: var(--accent2); }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: 0 0 .7rem; }
+    .toolbar input[type=search] {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      border-radius: 999px; padding: .4rem .8rem; font-size: var(--fs-sm); min-width: 200px;
+    }
+    .toolbar label { display: flex; align-items: center; gap: .4rem; font-size: var(--fs-sm); color: var(--muted); cursor: pointer; }
+    .toolbar .count { font-size: var(--fs-xs); color: var(--muted); margin-left: auto; }
   </style>
 </head>
 <body>
-  <h1>DetectorJS <span id="version">v2.0.11</span> — zero-dependency monorepo platform/environment detector</h1>
-  <p class="note">Reading <code>navigator.userAgent</code> of the current browser.</p>
-  <pre id="out">detecting…</pre>
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
+        <div class="links">
+          <a href="index.html">Home</a>
+          <a href="docs/getting-started.html">Docs</a>
+          <a href="demo.html">Live demo</a>
+          <a href="PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Live demo</h1>
+    <p class="sub">Runs entirely in your browser: <code>const detector = new Detector(); detector.upgrade();</code> —
+      WebAPI cards with a ↗ open the matching MDN page in a new tab; every card shows a short description.</p>
+
+    <div class="demo-grid">
+      <!-- LEFT: detection cards -->
+      <div>
+        <section class="panel" id="panel-software">
+          <h2>🌐 Software</h2>
+          <div class="cards" id="cards-software"></div>
+        </section>
+        <section class="panel" id="panel-hardware">
+          <h2>🖥️ Hardware</h2>
+          <div class="cards" id="cards-hardware"></div>
+        </section>
+        <section class="panel" id="panel-apis">
+          <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
+          <div class="toolbar">
+            <label><input type="checkbox" id="only-supported" checked /> only supported</label>
+            <input type="search" id="api-filter" aria-label="Filter APIs" placeholder="Filter APIs…" />
+            <span class="count" id="api-count"></span>
+          </div>
+          <div class="cards" id="cards-apis"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT: current demo content — the <aside> panel is sticky -->
+      <aside class="raw-panel" aria-label="Raw output">
+        <h2 class="raw-title">Raw output</h2>
+        <pre id="out" role="region" aria-label="Raw detected environment output" tabindex="0">detecting…</pre>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="index.html"><img class="logo" src="logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h3>Docs</h3>
+        <ul>
+          <li><a href="docs/getting-started.html">Getting started</a></li>
+          <li><a href="docs/api.html">API reference</a></li>
+          <li><a href="docs/toolchain.html">Toolchain</a></li>
+          <li><a href="docs/browser-support.html">Browser support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Project</h3>
+        <ul>
+          <li><a href="PRIVACY.html">Privacy</a></li>
+          <li><a href="SECURITY.html">Security</a></li>
+          <li><a href="CONTRIBUTING.html">Contributing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Packages</h3>
+        <ul>
+          <li><a href="packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="packages/core/README.html">@detector-js/core</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
   <script src="dist/detector.browser.min.js"></script>
   <script>
-    // UMD build exposes `window.Detector` in browsers.
-    var D = (typeof Detector !== 'undefined' && Detector) || null;
-    var out = document.getElementById('out');
-    function render() {
-      if (!D) { out.textContent = 'DetectorJS bundle not found. Open /demo.html via the dev server.'; return; }
-      var detector = new D();
-      out.textContent = JSON.stringify(detector.toFlags(), null, 2);
+    // ------------------------------------------------------------------
+    // WebAPI flag -> MDN page (feature/Web API cards only)
+    // ------------------------------------------------------------------
+    var MDN = 'https://developer.mozilla.org/en-US/docs/';
+    var API = function (p) { return MDN + 'Web/API/' + p; };
+    var MDN_LINKS = {
+      addEventListener: API('EventTarget/addEventListener'),
+      asyncScript: MDN + 'Web/HTML/Element/script#async',
+      battery: API('Battery_API'),
+      bluetooth: API('Web_Bluetooth_API'),
+      broadcastChannel: API('BroadcastChannel'),
+      caches: API('Cache'),
+      canvas: API('Canvas_API'),
+      classList: API('Element/classList'),
+      clipboard: API('Clipboard_API'),
+      contextMenu: API('HTMLMenuElement'),
+      cors: MDN + 'Web/HTTP/CORS',
+      credentials: API('Credential_Management_API'),
+      css3D: MDN + 'Web/CSS/transform',
+      cssTransform: MDN + 'Web/CSS/transform',
+      cssTransition: MDN + 'Web/CSS/transition',
+      deferScript: MDN + 'Web/HTML/Element/script#defer',
+      dialogElement: API('HTMLDialogElement'),
+      deviceMemory: API('Navigator/deviceMemory'),
+      deviceMotion: API('DeviceMotionEvent'),
+      deviceOrientation: API('DeviceOrientationEvent'),
+      fetch: API('fetch'),
+      file: MDN + 'Web/API/File_API',
+      fileSystem: MDN + 'Web/API/File_and_Directory_Entries_API',
+      fullscreen: API('Fullscreen_API'),
+      gamepad: API('Gamepad_API'),
+      geolocation: API('Geolocation_API'),
+      historyAPI: API('History_API'),
+      indexedDB: API('IndexedDB_API'),
+      intersectionObserver: API('IntersectionObserver'),
+      littleEndian: API('DataView#byte_order'),
+      localStorage: API('Web_Storage_API'),
+      matchMedia: API('Window/matchMedia'),
+      mediaCapabilities: MDN + 'Web/API/Media_Capabilities_API',
+      mediaRecorder: MDN + 'Web/API/MediaStream_Recording_API',
+      mediaSession: API('MediaSession'),
+      nfc: API('Web_NFC_API'),
+      notifications: API('Notifications_API'),
+      offscreenCanvas: API('OffscreenCanvas'),
+      paymentRequest: API('Payment_Request_API'),
+      permissions: API('Permissions_API'),
+      pictureElement: API('HTMLPictureElement'),
+      pixelRatio: API('Window/devicePixelRatio'),
+      placeholder: API('HTMLInputElement/placeholder'),
+      pointerEnabled: API('Pointer_events'),
+      pointerLock: API('Pointer_Lock_API'),
+      pointerEvents: API('PointerEvent'),
+      querySelector: API('Document/querySelector'),
+      querySelectorAll: API('Document/querySelectorAll'),
+      remUnit: MDN + 'Web/CSS/length#relative_length_units',
+      resizeObserver: API('ResizeObserver'),
+      serial: API('Web_Serial_API'),
+      serviceWorker: API('Service_Worker_API'),
+      sizes: API('HTMLImageElement/sizes'),
+      speechSynthesis: API('SpeechSynthesis'),
+      srcset: API('HTMLImageElement/srcset'),
+      storage: API('Storage_API'),
+      structuredClone: API('structuredClone'),
+      svg: MDN + 'Web/SVG',
+      touch: API('Touch_events'),
+      touchPoints: API('Navigator/maxTouchPoints'),
+      typedArray: API('TypedArray'),
+      usb: API('WebUSB_API'),
+      userMedia: API('MediaDevices/getUserMedia'),
+      vibration: API('Vibration_API'),
+      visualViewport: API('VisualViewport'),
+      wakeLock: API('WakeLock'),
+      webAssembly: API('WebAssembly'),
+      webAuthn: API('PublicKeyCredential'),
+      webCrypto: MDN + 'Web/API/Web_Crypto_API',
+      webGL: API('WebGL_API'),
+      webGL2: API('WebGL2RenderingContext'),
+      webGPU: API('WebGPU_API'),
+      webLocks: API('Web_Locks_API'),
+      webRTC: API('WebRTC_API'),
+      webShare: MDN + 'Web/API/Navigator/share',
+      webSocket: API('WebSockets_API'),
+      webVR: API('WebVR_API'),
+      webXr: API('WebXR_Device_API'),
+      webp: MDN + 'Web/Media/Formats/Image_types',
+      worker: API('Web_Workers_API')
+    };
+
+    // ------------------------------------------------------------------
+    // Short description for EVERY detected API (also the ones without MDN)
+    // ------------------------------------------------------------------
+    var DESCRIPTIONS = {
+      addEventListener: 'Attaches event handlers to elements and the window.',
+      asyncScript: 'Loads scripts asynchronously without blocking parsing.',
+      battery: 'Exposes the device battery status (Battery Manager).',
+      bluetooth: 'Connects to and interacts with Bluetooth devices.',
+      broadcastChannel: 'Cross-context messaging between tabs and workers.',
+      caches: 'Stores network responses for offline use (Cache API).',
+      canvas: '2D drawing surface via the Canvas API.',
+      classList: 'Toggles and reads CSS classes on elements.',
+      clipboard: 'Reads and writes text/images to the system clipboard.',
+      contextMenu: 'Custom context menus on elements (legacy).',
+      cors: 'Cross-Origin Resource Sharing — HTTP requests across origins.',
+      credentials: 'Credential Management — password/federated login flows.',
+      css3D: '3D CSS transforms (transform + perspective).',
+      cssTransform: '2D/3D CSS transforms support.',
+      cssTransition: 'Animated CSS property changes (transitions).',
+      deferScript: 'Loads scripts after parsing, in document order.',
+      dialogElement: 'Native modal/non-modal <dialog> element.',
+      deviceMemory: 'Approximate device RAM in GB (coarse values).',
+      deviceMotion: 'Position/rotation events from accelerometer and gyroscope.',
+      deviceOrientation: 'Compass/orientation events (alpha/beta/gamma).',
+      fetch: 'Modern promise-based network requests API.',
+      file: 'File, FileReader, FileList and Blob objects.',
+      fileSystem: 'Read/write to a sandboxed file system (legacy).',
+      forceTouch: 'Trackpad force/3D Touch pressure on mouse events.',
+      fullscreen: 'Shows elements/content in fullscreen mode.',
+      fullscreenKeyboard: 'Fullscreen with keyboard input enabled.',
+      gamepad: 'Reads state from connected game controllers.',
+      geolocation: 'Device GPS/location access.',
+      historyAPI: 'pushState/replaceState — SPA routing without reload.',
+      indexedDB: 'Local structured data storage (IndexedDB).',
+      intersectionObserver: 'Efficient scroll/spacing visibility tracking.',
+      littleEndian: 'Byte order of the platform (low-bytes-first).',
+      localStorage: 'Persistent key/value storage per origin.',
+      matchMedia: 'Evaluates CSS media queries in JavaScript.',
+      mediaCapabilities: 'WebRTC/decoding capabilities of the device.',
+      mediaRecorder: 'Records canvas/media streams (MediaStream Recording).',
+      mediaSession: 'Media controls in the OS lock screen/media widgets.',
+      nfc: 'Near-Field Communication — read/write NFC tags (experimental).',
+      notifications: 'OS-level push-style notifications (web notifications).',
+      offscreenCanvas: 'Canvas rendering off the main thread (workers).',
+      paymentRequest: 'In-browser payment flow with the OS payment sheets.',
+      permissions: 'Queries and manages permission states.',
+      pictureElement: 'Responsive <picture> element.',
+      pixelRatio: 'devicePixelRatio — physical vs CSS pixels.',
+      placeholder: 'Placeholder hint inside <input> fields.',
+      pointerEnabled: 'Pointer events support (legacy flag).',
+      pointerLock: 'Locks the mouse pointer for games/apps (Pointer Lock).',
+      pointerEvents: 'Unified mouse/touch/pen event model (Pointer Events).',
+      quirksMode: 'Rendering mode: quirks vs standards (compatMode).',
+      querySelector: 'CSS selector lookup — first match.',
+      querySelectorAll: 'CSS selector lookup — all matches.',
+      remUnit: 'Relative font-size unit cascading from <html>.',
+      resizeObserver: 'Observers that fire on element size changes.',
+      serial: 'Serial ports access (Web Serial API).',
+      serviceWorker: 'Background script for offline/caching/PWA.',
+      sizes: 'Declares image slot sizes for responsive images.',
+      speechSynthesis: 'Text-to-speech voices and playback.',
+      srcset: 'Candidate image sources for responsive images.',
+      storage: 'Storage Manager — estimate/persist quota info.',
+      structuredClone: 'Deep-clones objects including Dates, Maps, typed arrays.',
+      svg: 'Scalable Vector Graphics rendering.',
+      touch: 'Touch events on the device.',
+      touchPoints: 'Maximum simultaneous touch contact points.',
+      typedArray: 'Typed arrays (Int8Array, Float32Array…) for binary data.',
+      usb: 'Access to USB devices (WebUSB).',
+      userMedia: 'Camera/microphone capture (getUserMedia).',
+      vibration: 'Vibration patterns for mobile devices.',
+      visualViewport: 'Viewport metrics accounting for pinch/keyboard (Visual Viewport).',
+      wakeLock: 'Keeps the screen on (Screen Wake Lock).',
+      webAssembly: 'Compiled binary code running near-native speed.',
+      webAuthn: 'Passwordless/factor auth with security keys and biometrics.',
+      webCrypto: 'Cryptographic primitives (subtle crypto) in the browser.',
+      webGL: 'GPU-accelerated 2D/3D graphics (WebGL 1).',
+      webGL2: 'WebGL 2 — modern GPU pipeline and features.',
+      webGPU: 'Next-generation GPU API (compute + rendering).',
+      webLocks: 'Coordination locks shared across tabs/workers.',
+      webRTC: 'Real-time audio/video/data peer connections.',
+      webShare: 'Native share sheet (navigator.share).',
+      webSocket: 'Full-duplex real-time connection over TCP.',
+      webVR: 'Virtual reality headsets (legacy WebVR).',
+      webXr: 'VR/AR experiences (WebXR Device API).',
+      webp: 'WebP image format support.',
+      worker: 'Scripts running on background threads (Web Workers).',
+      online: 'Network connectivity status.'
+    };
+
+    // MDN catalog exposed by the bundle (windowGlobal names).
+    // flag = globalName.toCamelCase(); MDN url is deterministic from the name.
+    var GLOBALS = {};
+    var PROBES = (typeof Detector !== 'undefined' && Detector.PROBES) || { globals: [] };
+    for (var pi = 0; pi < PROBES.globals.length; pi++) {
+      GLOBALS[PROBES.globals[pi].toCamelCase()] = PROBES.globals[pi];
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
+
+    function autoDesc(flag) {
+      var g = GLOBALS[flag];
+      return g ? 'The ' + pretty(flag) + ' Web API interface (' + g + ').' : '';
+    }
+    function linkFor(flag) {
+      var g = GLOBALS[flag];
+      return MDN_LINKS[flag] || (g ? API(g) : null);
+    }
+    function descFor(flag) {
+      return DESCRIPTIONS[flag] || autoDesc(flag);
+    }
+
+    var DISPLAY = {
+      webAuthn: 'WebAuthn', webGPU: 'WebGPU', webGL: 'WebGL', webGL2: 'WebGL2',
+      webAssembly: 'WebAssembly', webRTC: 'WebRTC', webSocket: 'WebSocket', webXr: 'WebXR',
+      indexedDB: 'IndexedDB', localStorage: 'localStorage', querySelector: 'querySelector',
+      querySelectorAll: 'querySelectorAll', matchMedia: 'matchMedia', fetch: 'fetch',
+      online: 'Online status', worker: 'Web Workers', serviceWorker: 'Service Workers',
+      structuredClone: 'structuredClone', deviceMemory: 'Device memory', touchPoints: 'Touch points',
+      pixelRatio: 'Pixel ratio', littleEndian: 'Little-endian', historyAPI: 'History API',
+      userMedia: 'getUserMedia', addEventListener: 'addEventListener', asyncScript: 'Async scripts',
+      deferScript: 'Defer scripts', cors: 'CORS', fileSystem: 'FileSystem API',
+      fullscreenKeyboard: 'Fullscreen keyboard', pointerEnabled: 'Pointer events',
+      quirksMode: 'Quirks mode', webVR: 'WebVR', forceTouch: 'Force Touch',
+      deviceMotion: 'Device motion', deviceOrientation: 'Device orientation'
+    };
+
+    function pretty(name) {
+      return DISPLAY[name] ||
+        name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
+    }
+
+    function escHtml(v) {
+      return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function card(flag, value, href, desc) {
+      var tag = href ? 'a' : 'div';
+      var state = typeof value === 'boolean' ? (value ? 'on' : 'off') : 'value';
+      var label = typeof value === 'boolean' ? (value ? 'on' : 'off') : String(value);
+      var attrs = href ? ' href="' + href + '" target="_blank" rel="noopener" title="Open on MDN: ' + escHtml(pretty(flag)) + '"' : '';
+      return '<' + tag + ' class="flag-card"' + attrs + '>' +
+        '<span class="top"><span class="name">' + escHtml(pretty(flag)) + '</span>' +
+        '<span class="state ' + state + '">' + escHtml(label) + '</span></span>' +
+        '<span class="desc">' + escHtml(desc || 'No description available for this flag.') + '</span>' +
+        '</' + tag + '>';
+    }
+
+    function kvCard(label, value) {
+      return '<div class="kv-card"><div class="k">' + label + '</div><div class="v">' + String(value) + '</div></div>';
+    }
+
+    function render() {
+      var flags = detector.toFlags();
+      var browser = detector.browser || {};
+      var os = detector.os || {};
+      var cpu = detector.cpu || {};
+      var gpu = detector.gpu || {};
+
+      // SOFTWARE
+      var soft = [];
+      soft.push(kvCard('Browser', (browser.name || 'n/a') + (browser.version ? ' ' + browser.version : '')));
+      var engine = flags.engine || {};
+      soft.push(kvCard('Engine', (engine.name || 'n/a') + (engine.version && engine.version !== 'n/a' ? ' ' + engine.version : '')));
+      soft.push(kvCard('OS', (os.name || 'n/a') + (os.version ? ' ' + os.version : '') +
+        (os.versionName && os.versionName !== 'n/a' ? ' · ' + os.versionName : '')));
+      document.getElementById('cards-software').innerHTML = soft.join('');
+
+      // HARDWARE
+      var hw = [];
+      hw.push(kvCard('Platform', detector.platform || 'n/a'));
+      hw.push(kvCard('CPU', [cpu.vendor, cpu.architecture, cpu.cores ? cpu.cores + ' cores' : ''].filter(Boolean).join(' · ')));
+      hw.push(kvCard('GPU', [gpu.vendor, gpu.model].filter(function (v) { return v && v !== 'n/a'; }).join(' · ') || 'n/a'));
+      document.getElementById('cards-hardware').innerHTML = hw.join('');
+
+      // WEB APIs (top-level non-object flags, alphabetical) + filterable list
+      var apis = Object.keys(detector.feature || {}).filter(function (k) {
+        return typeof detector.feature[k] !== 'object';
+      }).sort();
+      var onlySupported = document.getElementById('only-supported').checked;
+      var query = (document.getElementById('api-filter').value || '').toLowerCase();
+      var visible = apis.filter(function (flag) {
+        var value = detector.feature[flag];
+        if (onlySupported && value !== true) return false;
+        if (query && pretty(flag).toLowerCase().indexOf(query) === -1 &&
+            String(value).toLowerCase().indexOf(query) === -1) return false;
+        return true;
+      });
+      var html = visible.map(function (flag) {
+        return card(flag, detector.feature[flag], linkFor(flag), descFor(flag));
+      }).join('');
+      document.getElementById('cards-apis').innerHTML = html;
+      document.getElementById('api-count').textContent = visible.length + ' / ' + apis.length;
+
+      // RIGHT: raw output (previous demo content)
+      document.getElementById('out').textContent = JSON.stringify(flags, null, 2);
+    }
+
+    function rerender() { render(); }
+
+    document.getElementById('only-supported').addEventListener('change', rerender);
+    document.getElementById('api-filter').addEventListener('input', rerender);
+
+    var detector = new Detector();
+    render();
+    // real OS/CPU via Client Hints (chromium) or GPU/Safari evidence — then re-render
+    detector.upgrade().then(render);
   </script>
 </body>
 </html>

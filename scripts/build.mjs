@@ -3,10 +3,26 @@
 import { build } from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TARGET = 'es2016';
+
+// brotli quality: best ratio (11) — emitted once, served as-is
+const BR = { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } };
+
+function precompress(rel) {
+  const p = path.join(ROOT, rel);
+  if (!fs.existsSync(p)) return null;
+  const buf = fs.readFileSync(p);
+  const gzip = zlib.gzipSync(buf).length;
+  const brotli = zlib.brotliCompressSync(buf, BR).length;
+  fs.writeFileSync(p + '.gz', zlib.gzipSync(buf));
+  fs.writeFileSync(p + '.br', zlib.brotliCompressSync(buf, BR));
+  console.info(`  ${rel}  ${(buf.length / 1024).toFixed(1)} KB · gz ${(gzip / 1024).toFixed(1)} · br ${(brotli / 1024).toFixed(1)}`);
+  return { bytes: buf.length, gzip, brotli };
+}
 
 function pkgJson(dir) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, dir, 'package.json'), 'utf8'));
@@ -74,9 +90,22 @@ async function buildRoot() {
   for (const [target, suffix] of [['es2016', ''], ['es2015', '.es2015']]) {
     const base = { ...browserBase, target: [target] };
     await build({ ...base, outfile: path.join(ROOT, `dist/detector.browser${suffix}.js`), minify: false, sourcemap: true });
-    await build({ ...base, outfile: path.join(ROOT, `dist/detector.browser${suffix}.min.js`), minify: true, sourcemap: true });
+    await build({ ...base, outfile: path.join(ROOT, `dist/detector.browser${suffix}.min.js`), minify: true, drop: ['debugger'], sourcemap: true });
   }
   console.info('✓ built root browser bundles (es2016 + es5, global Detector)');
+  console.info('✓ pre-compressing artifacts (gzip + brotli-11):');
+  const sizes = {};
+  for (const rel of [
+    'dist/detector.browser.min.js',
+    'dist/detector.browser.es2015.min.js',
+    'dist/detector.js',
+    'dist/detector.mjs',
+  ]) {
+    const s = precompress(rel);
+    if (s) sizes[rel] = s;
+  }
+  fs.writeFileSync(path.join(ROOT, 'dist/sizes.json'), JSON.stringify(sizes, null, 2) + '\n');
+  console.info('✓ wrote dist/sizes.json (bytes/gzip/brotli per artifact)');
 }
 
 async function main() {

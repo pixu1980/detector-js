@@ -6,14 +6,17 @@
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
 <title>CHANGELOG — DetectorJS</title>
-<link rel="stylesheet" href="./site.css" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
   <header class="site">
     <div class="wrap">
       <nav>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <div class="links">
           <a href="./index.html">Home</a>
           <a href="./docs/getting-started.html">Docs</a>
@@ -24,337 +27,247 @@
       </nav>
     </div>
   </header>
-<h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v1.4.0">Version 1.4.0</a> (2025-8-25)</h2>
+<main><h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v1.4.0">Version 1.4.0</a> (2025-8-25)</h2>
 <h3>Restored</h3>
 <ul>
-<li>restored the historical vanillaJS zero-dependency codebase (v1.3.2) from git history/remote (branch <code>vanilla</code>)</li>
-</ul>
+<li>restored the historical vanillaJS zero-dependency codebase (v1.3.2) from git history/remote (branch <code>vanilla</code>)</li></ul>
 <h3>Behavior &amp; fixes backported from upstream v2.x</h3>
 <ul>
-<li>fixed Electron detection bug (<code>process?.type</code> / <code>process?.versions?.electron</code>): <a href="https://github.com/pixu1980/detector-js/commit/7fc0ce3"><code>7fc0ce3</code></a></li>
-<li>fixed <code>getTypedArray</code> bug in <code>getLittleEndian</code> (<code>getTypedArray.bind(this)</code>): <a href="https://github.com/pixu1980/detector-js/commit/b2647a6"><code>b2647a6</code></a></li>
-<li>fixed <code>pointerEvents</code> constructor error (<code>!!this._root.PointerEvent</code>): <a href="https://github.com/pixu1980/detector-js/commit/6a92328"><code>6a92328</code></a></li>
-<li>fixed Trident detection (<code>this._document?.documentMode</code>): <a href="https://github.com/pixu1980/detector-js/commit/7fc0ce3"><code>7fc0ce3</code></a></li>
-<li>reworked debug logging: startup <code>console.log</code> now only in development envs (<a href="https://github.com/pixu1980/detector-js/commit/a4e3ee6"><code>a4e3ee6</code></a>)</li>
-<li><code>FlagsClass.root</code> now also resolves from <code>self</code> (workers safe)</li>
-<li>kept <code>root</code> / <code>process</code> / <code>navigator</code> / <code>document</code> / <code>ua</code> / <code>flags</code> getters available after construction</li>
-<li><code>Asserts._checkAssert</code> renamed to <code>Asserts.checkAssert</code> (public API, upstream v2 naming)</li>
-<li><code>Detector</code> constructor: <code>cssFlags</code> now defaults to <code>false</code> (upstream v2 behavior)</li>
-<li>macOS version names: added Big Sur (11), Monterey (12), Ventura (13), Sonoma (14), Sequoia (15)</li>
-<li>Electron, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line now win the browser <code>name</code> resolution (fixed ordering vs Chrome/Safari)</li>
-</ul>
+<li>fixed Electron detection bug (<code>process?.type</code> / <code>process?.versions?.electron</code>): <a href="https://github.com/pixu1980/detector-js/commit/7fc0ce3"><code>7fc0ce3</code></a></li><li>fixed <code>getTypedArray</code> bug in <code>getLittleEndian</code> (<code>getTypedArray.bind(this)</code>): <a href="https://github.com/pixu1980/detector-js/commit/b2647a6"><code>b2647a6</code></a></li><li>fixed <code>pointerEvents</code> constructor error (<code>!!this._root.PointerEvent</code>): <a href="https://github.com/pixu1980/detector-js/commit/6a92328"><code>6a92328</code></a></li><li>fixed Trident detection (<code>this._document?.documentMode</code>): <a href="https://github.com/pixu1980/detector-js/commit/7fc0ce3"><code>7fc0ce3</code></a></li><li>reworked debug logging: startup <code>console.log</code> now only in development envs (<a href="https://github.com/pixu1980/detector-js/commit/a4e3ee6"><code>a4e3ee6</code></a>)</li><li><code>FlagsClass.root</code> now also resolves from <code>self</code> (workers safe)</li><li>kept <code>root</code> / <code>process</code> / <code>navigator</code> / <code>document</code> / <code>ua</code> / <code>flags</code> getters available after construction</li><li><code>Asserts._checkAssert</code> renamed to <code>Asserts.checkAssert</code> (public API, upstream v2 naming)</li><li><code>Detector</code> constructor: <code>cssFlags</code> now defaults to <code>false</code> (upstream v2 behavior)</li><li>macOS version names: added Big Sur (11), Monterey (12), Ventura (13), Sonoma (14), Sequoia (15)</li><li>Electron, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line now win the browser <code>name</code> resolution (fixed ordering vs Chrome/Safari)</li></ul>
 <h3>New features (WebAPIs)</h3>
 <ul>
-<li>added 20+ new WebAPI detectors to <code>feature</code>: webAuthn, webGPU, webGL2, webAssembly, fetch, webSocket, webRTC, mediaRecorder, mediaSession, mediaCapabilities, notifications, paymentRequest, indexedDB, webCrypto, clipboard, intersectionObserver, resizeObserver, visualViewport, wakeLock, webShare, speechSynthesis, gamepad, permissions, storage, webLocks, webXr, bluetooth, usb, serial, nfc, credentials, structuredClone, caches, offscreenCanvas, broadcastChannel, online + value getters <code>deviceMemory</code>, <code>touchPoints</code></li>
-<li>new browser detectors: DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line</li>
-</ul>
+<li>added 20+ new WebAPI detectors to <code>feature</code>: webAuthn, webGPU, webGL2, webAssembly, fetch, webSocket, webRTC, mediaRecorder, mediaSession, mediaCapabilities, notifications, paymentRequest, indexedDB, webCrypto, clipboard, intersectionObserver, resizeObserver, visualViewport, wakeLock, webShare, speechSynthesis, gamepad, permissions, storage, webLocks, webXr, bluetooth, usb, serial, nfc, credentials, structuredClone, caches, offscreenCanvas, broadcastChannel, online + value getters <code>deviceMemory</code>, <code>touchPoints</code></li><li>new browser detectors: DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line</li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v1.3.2...v1.4.0">...full changes</a></p>
 <h2><a href="https://github.blackmirror1980/:blackmirror1980/detector-js/releases/tag/v1.3.2">Version 1.3.2</a> (2021-3-10)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>updated license and package infos: <a href="https://github.blackmirror1980/:blackmirror1980/detector-js/commit/35957e6"><code>35957e6</code></a></li>
-</ul>
+<li>updated license and package infos: <a href="https://github.blackmirror1980/:blackmirror1980/detector-js/commit/35957e6"><code>35957e6</code></a></li></ul>
 <p><a href="https://github.blackmirror1980/:blackmirror1980/detector-js/compare/v1.3.1...v1.3.2">...full changes</a></p>
 <h2><a href="https://github.pixu1980/:pixu1980/detector-js/releases/tag/v1.3.1">Version 1.3.1</a> (2021-3-9)</h2>
 <h3>Bug fixes</h3>
 <ul>
 <li><ul>
-<li>dumped dependencies - fix Brave false positive wip: <a href="https://github.pixu1980/:pixu1980/detector-js/commit/312d2e2"><code>312d2e2</code></a></li>
-</ul>
-</li>
-<li><ul>
-<li>added lock files to gitignore - fixing Brave false positive wip: <a href="https://github.pixu1980/:pixu1980/detector-js/commit/310c049"><code>310c049</code></a></li>
-</ul>
-</li>
-</ul>
+<li>dumped dependencies - fix Brave false positive wip: <a href="https://github.pixu1980/:pixu1980/detector-js/commit/312d2e2"><code>312d2e2</code></a></li></ul>
+</li><li><ul>
+<li>added lock files to gitignore - fixing Brave false positive wip: <a href="https://github.pixu1980/:pixu1980/detector-js/commit/310c049"><code>310c049</code></a></li></ul>
+</li></ul>
 <p><a href="https://github.pixu1980/:pixu1980/detector-js/compare/v1.3.0...v1.3.1">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.3.0">Version 1.3.0</a> (2021-3-3)</h2>
 <h3>New features</h3>
 <ul>
-<li>added webp and brave support: <a href="https://github.com/:pixu1980/detector-js/commit/f4ac0e7"><code>f4ac0e7</code></a></li>
-</ul>
+<li>added webp and brave support: <a href="https://github.com/:pixu1980/detector-js/commit/f4ac0e7"><code>f4ac0e7</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.2.2...v1.3.0">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.2.2">Version 1.2.2</a> (2020-12-11)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>added Reflect polyfill to fix IE issues: <a href="https://github.com/:pixu1980/detector-js/commit/de55e59"><code>de55e59</code></a></li>
-<li>bumped dev dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/2ed0df3"><code>2ed0df3</code></a></li>
-<li>build v1.2.2: <a href="https://github.com/:pixu1980/detector-js/commit/1ff15a9"><code>1ff15a9</code></a></li>
-</ul>
+<li>added Reflect polyfill to fix IE issues: <a href="https://github.com/:pixu1980/detector-js/commit/de55e59"><code>de55e59</code></a></li><li>bumped dev dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/2ed0df3"><code>2ed0df3</code></a></li><li>build v1.2.2: <a href="https://github.com/:pixu1980/detector-js/commit/1ff15a9"><code>1ff15a9</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.2.1...v1.2.2">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.2.1">Version 1.2.1</a> (2020-9-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
 <li><ul>
-<li>added prettierrc configuration - bumped devDependencies to latest versions - linting fixes: <a href="https://github.com/:pixu1980/detector-js/commit/b0fffa2"><code>b0fffa2</code></a></li>
-</ul>
-</li>
-</ul>
+<li>added prettierrc configuration - bumped devDependencies to latest versions - linting fixes: <a href="https://github.com/:pixu1980/detector-js/commit/b0fffa2"><code>b0fffa2</code></a></li></ul>
+</li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.2.0...v1.2.1">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.2.0">Version 1.2.0</a> (2020-2-6)</h2>
 <h3>New features</h3>
 <ul>
 <li><ul>
-<li>bumped dependencies - reworked polyfills - fixed IE 9+ bug for Reflect.ownKeys: <a href="https://github.com/:pixu1980/detector-js/commit/c39650e"><code>c39650e</code></a></li>
-</ul>
-</li>
-</ul>
+<li>bumped dependencies - reworked polyfills - fixed IE 9+ bug for Reflect.ownKeys: <a href="https://github.com/:pixu1980/detector-js/commit/c39650e"><code>c39650e</code></a></li></ul>
+</li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.12...v1.2.0">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.12">Version 1.1.12</a> (2019-11-8)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/c002042"><code>c002042</code></a></li>
-</ul>
+<li>fixed dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/c002042"><code>c002042</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.11...v1.1.12">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.11">Version 1.1.11</a> (2019-11-8)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>removed sourcemaps from min builds: <a href="https://github.com/:pixu1980/detector-js/commit/6256341"><code>6256341</code></a></li>
-</ul>
+<li>removed sourcemaps from min builds: <a href="https://github.com/:pixu1980/detector-js/commit/6256341"><code>6256341</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.10...v1.1.11">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.10">Version 1.1.10</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix tablet platform: <a href="https://github.com/:pixu1980/detector-js/commit/67093b9"><code>67093b9</code></a></li>
-<li>build v1.1.10: <a href="https://github.com/:pixu1980/detector-js/commit/96c1985"><code>96c1985</code></a></li>
-</ul>
+<li>fix tablet platform: <a href="https://github.com/:pixu1980/detector-js/commit/67093b9"><code>67093b9</code></a></li><li>build v1.1.10: <a href="https://github.com/:pixu1980/detector-js/commit/96c1985"><code>96c1985</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.9...v1.1.10">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.9">Version 1.1.9</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix tablet platform: <a href="https://github.com/:pixu1980/detector-js/commit/a39f611"><code>a39f611</code></a></li>
-</ul>
+<li>fix tablet platform: <a href="https://github.com/:pixu1980/detector-js/commit/a39f611"><code>a39f611</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.8...v1.1.9">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.8">Version 1.1.8</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix platform tablet: <a href="https://github.com/:pixu1980/detector-js/commit/0e845ff"><code>0e845ff</code></a></li>
-<li>build v1.1.8: <a href="https://github.com/:pixu1980/detector-js/commit/01afff1"><code>01afff1</code></a></li>
-</ul>
+<li>fix platform tablet: <a href="https://github.com/:pixu1980/detector-js/commit/0e845ff"><code>0e845ff</code></a></li><li>build v1.1.8: <a href="https://github.com/:pixu1980/detector-js/commit/01afff1"><code>01afff1</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.7...v1.1.8">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.7">Version 1.1.7</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>implementing proper feedback ordering: <a href="https://github.com/:pixu1980/detector-js/commit/ef959c5"><code>ef959c5</code></a></li>
-</ul>
+<li>implementing proper feedback ordering: <a href="https://github.com/:pixu1980/detector-js/commit/ef959c5"><code>ef959c5</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.6...v1.1.7">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.6">Version 1.1.6</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix for platform detection: <a href="https://github.com/:pixu1980/detector-js/commit/f2fe3f2"><code>f2fe3f2</code></a></li>
-<li>build v.1.1.6: <a href="https://github.com/:pixu1980/detector-js/commit/2f1512d"><code>2f1512d</code></a></li>
-</ul>
+<li>fix for platform detection: <a href="https://github.com/:pixu1980/detector-js/commit/f2fe3f2"><code>f2fe3f2</code></a></li><li>build v.1.1.6: <a href="https://github.com/:pixu1980/detector-js/commit/2f1512d"><code>2f1512d</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.5...v1.1.6">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.5">Version 1.1.5</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>platform os and browser fix: <a href="https://github.com/:pixu1980/detector-js/commit/62c13cb"><code>62c13cb</code></a></li>
-<li>build v1.1.5: <a href="https://github.com/:pixu1980/detector-js/commit/19a24cc"><code>19a24cc</code></a></li>
-</ul>
+<li>platform os and browser fix: <a href="https://github.com/:pixu1980/detector-js/commit/62c13cb"><code>62c13cb</code></a></li><li>build v1.1.5: <a href="https://github.com/:pixu1980/detector-js/commit/19a24cc"><code>19a24cc</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.4...v1.1.5">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.4">Version 1.1.4</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>hotfix module export: <a href="https://github.com/:pixu1980/detector-js/commit/7e573d0"><code>7e573d0</code></a></li>
-<li>build v1.1.4: <a href="https://github.com/:pixu1980/detector-js/commit/afca080"><code>afca080</code></a></li>
-</ul>
+<li>hotfix module export: <a href="https://github.com/:pixu1980/detector-js/commit/7e573d0"><code>7e573d0</code></a></li><li>build v1.1.4: <a href="https://github.com/:pixu1980/detector-js/commit/afca080"><code>afca080</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.3...v1.1.4">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.3">Version 1.1.3</a> (2019-11-7)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>dumped dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/f4557bf"><code>f4557bf</code></a></li>
-<li>fix for no css flags: <a href="https://github.com/:pixu1980/detector-js/commit/310441e"><code>310441e</code></a></li>
-</ul>
+<li>dumped dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/f4557bf"><code>f4557bf</code></a></li><li>fix for no css flags: <a href="https://github.com/:pixu1980/detector-js/commit/310441e"><code>310441e</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.2...v1.1.3">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.2">Version 1.1.2</a> (2019-8-28)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>dumped dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/d39ca93"><code>d39ca93</code></a></li>
-</ul>
+<li>dumped dependencies: <a href="https://github.com/:pixu1980/detector-js/commit/d39ca93"><code>d39ca93</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.1...v1.1.2">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.1">Version 1.1.1</a> (2019-2-4)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed html css flags on IE: <a href="https://github.com/:pixu1980/detector-js/commit/8b81bd8"><code>8b81bd8</code></a></li>
-</ul>
+<li>fixed html css flags on IE: <a href="https://github.com/:pixu1980/detector-js/commit/8b81bd8"><code>8b81bd8</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.1.0...v1.1.1">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.1.0">Version 1.1.0</a> (2019-2-4)</h2>
 <h3>New features</h3>
 <ul>
-<li>fix IE regex: <a href="https://github.com/:pixu1980/detector-js/commit/885ccd4"><code>885ccd4</code></a></li>
-</ul>
+<li>fix IE regex: <a href="https://github.com/:pixu1980/detector-js/commit/885ccd4"><code>885ccd4</code></a></li></ul>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix cpuClass on IE: <a href="https://github.com/:pixu1980/detector-js/commit/106c03c"><code>106c03c</code></a></li>
-</ul>
+<li>fix cpuClass on IE: <a href="https://github.com/:pixu1980/detector-js/commit/106c03c"><code>106c03c</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.9...v1.1.0">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.9">Version 1.0.9</a> (2019-2-4)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed polyfills and added polyfill for IE getOwnPropertyDescriptors: <a href="https://github.com/:pixu1980/detector-js/commit/d44f484"><code>d44f484</code></a></li>
-</ul>
+<li>fixed polyfills and added polyfill for IE getOwnPropertyDescriptors: <a href="https://github.com/:pixu1980/detector-js/commit/d44f484"><code>d44f484</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.8...v1.0.9">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.8">Version 1.0.8</a> (2019-2-4)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix polyfills object.prototype.merge: <a href="https://github.com/:pixu1980/detector-js/commit/d2cf93e"><code>d2cf93e</code></a></li>
-</ul>
+<li>fix polyfills object.prototype.merge: <a href="https://github.com/:pixu1980/detector-js/commit/d2cf93e"><code>d2cf93e</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.7...v1.0.8">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.7">Version 1.0.7</a> (2019-2-4)</h2>
 <h3>Bug fixes</h3>
 <ul>
 <li><ul>
-<li>updated safe env Assert checking - fixed Electron detection bug on windows: <a href="https://github.com/:pixu1980/detector-js/commit/bd2c025"><code>bd2c025</code></a></li>
-</ul>
-</li>
-</ul>
+<li>updated safe env Assert checking - fixed Electron detection bug on windows: <a href="https://github.com/:pixu1980/detector-js/commit/bd2c025"><code>bd2c025</code></a></li></ul>
+</li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.6...v1.0.7">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.6">Version 1.0.6</a> (2019-1-31)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>separated indexes per build mode: <a href="https://github.com/:pixu1980/detector-js/commit/fcf591a"><code>fcf591a</code></a></li>
-</ul>
+<li>separated indexes per build mode: <a href="https://github.com/:pixu1980/detector-js/commit/fcf591a"><code>fcf591a</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.5...v1.0.6">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.5">Version 1.0.5</a> (2019-1-31)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>builds with module check: <a href="https://github.com/:pixu1980/detector-js/commit/f3815cb"><code>f3815cb</code></a></li>
-</ul>
+<li>builds with module check: <a href="https://github.com/:pixu1980/detector-js/commit/f3815cb"><code>f3815cb</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.4...v1.0.5">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.4">Version 1.0.4</a> (2019-1-31)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>disabled minified mangling: <a href="https://github.com/:pixu1980/detector-js/commit/924256d"><code>924256d</code></a></li>
-</ul>
+<li>disabled minified mangling: <a href="https://github.com/:pixu1980/detector-js/commit/924256d"><code>924256d</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.3...v1.0.4">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.3">Version 1.0.3</a> (2019-1-31)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>updated electron version detection with a safe try catch: <a href="https://github.com/:pixu1980/detector-js/commit/0cf7161"><code>0cf7161</code></a></li>
-<li>testing uglify compression options: <a href="https://github.com/:pixu1980/detector-js/commit/75bda1b"><code>75bda1b</code></a></li>
-<li>implemented main (UMD), browser (IIFE) and module (CJS) builds: <a href="https://github.com/:pixu1980/detector-js/commit/37745a4"><code>37745a4</code></a></li>
-<li>implemented normal and minified builds: <a href="https://github.com/:pixu1980/detector-js/commit/dc57920"><code>dc57920</code></a></li>
-</ul>
+<li>updated electron version detection with a safe try catch: <a href="https://github.com/:pixu1980/detector-js/commit/0cf7161"><code>0cf7161</code></a></li><li>testing uglify compression options: <a href="https://github.com/:pixu1980/detector-js/commit/75bda1b"><code>75bda1b</code></a></li><li>implemented main (UMD), browser (IIFE) and module (CJS) builds: <a href="https://github.com/:pixu1980/detector-js/commit/37745a4"><code>37745a4</code></a></li><li>implemented normal and minified builds: <a href="https://github.com/:pixu1980/detector-js/commit/dc57920"><code>dc57920</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.2...v1.0.3">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.2">Version 1.0.2</a> (2019-1-30)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix electron detection: <a href="https://github.com/:pixu1980/detector-js/commit/66ab6b8"><code>66ab6b8</code></a></li>
-<li>fix electron detection: <a href="https://github.com/:pixu1980/detector-js/commit/3772d4f"><code>3772d4f</code></a></li>
-</ul>
+<li>fix electron detection: <a href="https://github.com/:pixu1980/detector-js/commit/66ab6b8"><code>66ab6b8</code></a></li><li>fix electron detection: <a href="https://github.com/:pixu1980/detector-js/commit/3772d4f"><code>3772d4f</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.1...v1.0.2">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.1">Version 1.0.1</a> (2019-1-30)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fix process variable: <a href="https://github.com/:pixu1980/detector-js/commit/881a0d0"><code>881a0d0</code></a></li>
-</ul>
+<li>fix process variable: <a href="https://github.com/:pixu1980/detector-js/commit/881a0d0"><code>881a0d0</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v1.0.0...v1.0.1">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v1.0.0">Version 1.0.0</a> (2019-1-30)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>reworking regexes for browsers: <a href="https://github.com/:pixu1980/detector-js/commit/640185a"><code>640185a</code></a></li>
-<li>added toValues support: <a href="https://github.com/:pixu1980/detector-js/commit/2e4d851"><code>2e4d851</code></a></li>
-<li>preparing first release: <a href="https://github.com/:pixu1980/detector-js/commit/4805f1f"><code>4805f1f</code></a></li>
-<li>optimizations &amp; regex rewriting: <a href="https://github.com/:pixu1980/detector-js/commit/ac053e7"><code>ac053e7</code></a></li>
-<li>fix asserts flags &amp; all browsers regex failure: <a href="https://github.com/:pixu1980/detector-js/commit/14d2dc2"><code>14d2dc2</code></a></li>
-<li>preparing release 1.0: <a href="https://github.com/:pixu1980/detector-js/commit/5b64cde"><code>5b64cde</code></a></li>
-</ul>
+<li>reworking regexes for browsers: <a href="https://github.com/:pixu1980/detector-js/commit/640185a"><code>640185a</code></a></li><li>added toValues support: <a href="https://github.com/:pixu1980/detector-js/commit/2e4d851"><code>2e4d851</code></a></li><li>preparing first release: <a href="https://github.com/:pixu1980/detector-js/commit/4805f1f"><code>4805f1f</code></a></li><li>optimizations &amp; regex rewriting: <a href="https://github.com/:pixu1980/detector-js/commit/ac053e7"><code>ac053e7</code></a></li><li>fix asserts flags &amp; all browsers regex failure: <a href="https://github.com/:pixu1980/detector-js/commit/14d2dc2"><code>14d2dc2</code></a></li><li>preparing release 1.0: <a href="https://github.com/:pixu1980/detector-js/commit/5b64cde"><code>5b64cde</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v0.2.1...v1.0.0">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v0.2.1">Version 0.2.1</a> (2019-1-28)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed docs returns: <a href="https://github.com/:pixu1980/detector-js/commit/4fabd3e"><code>4fabd3e</code></a></li>
-</ul>
+<li>fixed docs returns: <a href="https://github.com/:pixu1980/detector-js/commit/4fabd3e"><code>4fabd3e</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v0.2.0...v0.2.1">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v0.2.0">Version 0.2.0</a> (2019-1-28)</h2>
 <h3>Breaking changes</h3>
 <ul>
-<li>refactoring: <a href="https://github.com/:pixu1980/detector-js/commit/b851b66"><code>b851b66</code></a></li>
-</ul>
+<li>refactoring: <a href="https://github.com/:pixu1980/detector-js/commit/b851b66"><code>b851b66</code></a></li></ul>
 <h3>Bug fixes</h3>
 <ul>
-<li>added asserts class: <a href="https://github.com/:pixu1980/detector-js/commit/9f35718"><code>9f35718</code></a></li>
-<li>first refactoring completed: <a href="https://github.com/:pixu1980/detector-js/commit/eb45021"><code>eb45021</code></a></li>
-</ul>
+<li>added asserts class: <a href="https://github.com/:pixu1980/detector-js/commit/9f35718"><code>9f35718</code></a></li><li>first refactoring completed: <a href="https://github.com/:pixu1980/detector-js/commit/eb45021"><code>eb45021</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v0.1.8...v0.2.0">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v0.1.8">Version 0.1.8</a> (2019-1-15)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed output file: <a href="https://github.com/:pixu1980/detector-js/commit/1655c34"><code>1655c34</code></a></li>
-<li>fixed release script: <a href="https://github.com/:pixu1980/detector-js/commit/6dfb73a"><code>6dfb73a</code></a></li>
-</ul>
+<li>fixed output file: <a href="https://github.com/:pixu1980/detector-js/commit/1655c34"><code>1655c34</code></a></li><li>fixed release script: <a href="https://github.com/:pixu1980/detector-js/commit/6dfb73a"><code>6dfb73a</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v0.1.7...v0.1.8">...full changes</a></p>
 <h2><a href="https://github.com/:pixu1980/detector-js/releases/tag/v0.1.7">Version 0.1.7</a> (2019-1-15)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>replaced webpack with rollup: <a href="https://github.com/:pixu1980/detector-js/commit/2425bb6"><code>2425bb6</code></a></li>
-</ul>
+<li>replaced webpack with rollup: <a href="https://github.com/:pixu1980/detector-js/commit/2425bb6"><code>2425bb6</code></a></li></ul>
 <p><a href="https://github.com/:pixu1980/detector-js/compare/v0.1.6...v0.1.7">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.6">Version 0.1.6</a> (2018-5-17)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>pkg-2-readme template updated: <a href="https://github.com/pixu1980/detector-js/commit/cee6fe2"><code>cee6fe2</code></a></li>
-</ul>
+<li>pkg-2-readme template updated: <a href="https://github.com/pixu1980/detector-js/commit/cee6fe2"><code>cee6fe2</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.5...v0.1.6">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.5">Version 0.1.5</a> (2018-5-17)</h2>
 <h3>New features</h3>
 <ul>
-<li>added webVR detection flag bumped dependencies: <a href="https://github.com/pixu1980/detector-js/commit/626e7e8"><code>626e7e8</code></a></li>
-</ul>
+<li>added webVR detection flag bumped dependencies: <a href="https://github.com/pixu1980/detector-js/commit/626e7e8"><code>626e7e8</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.4...v0.1.5">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.4">Version 0.1.4</a> (2018-3-20)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>fixed global detector export: <a href="https://github.com/pixu1980/detector-js/commit/bb06ac3"><code>bb06ac3</code></a></li>
-</ul>
+<li>fixed global detector export: <a href="https://github.com/pixu1980/detector-js/commit/bb06ac3"><code>bb06ac3</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.3...v0.1.4">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.3">Version 0.1.3</a> (2018-3-20)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>added lodash dependency: <a href="https://github.com/pixu1980/detector-js/commit/fa38af3"><code>fa38af3</code></a></li>
-<li>fixed engine css flags: <a href="https://github.com/pixu1980/detector-js/commit/445de93"><code>445de93</code></a></li>
-<li>fixed detector export: <a href="https://github.com/pixu1980/detector-js/commit/6231490"><code>6231490</code></a></li>
-</ul>
+<li>added lodash dependency: <a href="https://github.com/pixu1980/detector-js/commit/fa38af3"><code>fa38af3</code></a></li><li>fixed engine css flags: <a href="https://github.com/pixu1980/detector-js/commit/445de93"><code>445de93</code></a></li><li>fixed detector export: <a href="https://github.com/pixu1980/detector-js/commit/6231490"><code>6231490</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.2...v0.1.3">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.2">Version 0.1.2</a> (2018-3-20)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>remove flavor-js dependency in order to make it work with angular5 router: <a href="https://github.com/pixu1980/detector-js/commit/fe510d0"><code>fe510d0</code></a></li>
-</ul>
+<li>remove flavor-js dependency in order to make it work with angular5 router: <a href="https://github.com/pixu1980/detector-js/commit/fe510d0"><code>fe510d0</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.1...v0.1.2">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.1">Version 0.1.1</a> (2018-3-20)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>added css flags by default: <a href="https://github.com/pixu1980/detector-js/commit/07ffc88"><code>07ffc88</code></a></li>
-</ul>
+<li>added css flags by default: <a href="https://github.com/pixu1980/detector-js/commit/07ffc88"><code>07ffc88</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.1.0...v0.1.1">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.1.0">Version 0.1.0</a> (2018-3-20)</h2>
 <h3>Breaking changes</h3>
 <ul>
-<li>updated version/build stuff added html css classes feature updated dependencies: <a href="https://github.com/pixu1980/detector-js/commit/9cc3932"><code>9cc3932</code></a></li>
-</ul>
+<li>updated version/build stuff added html css classes feature updated dependencies: <a href="https://github.com/pixu1980/detector-js/commit/9cc3932"><code>9cc3932</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.0.11...v0.1.0">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.0.11">Version 0.0.11</a> (2018-3-8)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>v0.0.10: <a href="https://github.com/pixu1980/detector-js/commit/ce37a3f"><code>ce37a3f</code></a></li>
-<li>bumped ssri to v5.2.4 in order to fix the security vulnerability issue: <a href="https://github.com/pixu1980/detector-js/commit/0db5264"><code>0db5264</code></a></li>
-</ul>
+<li>v0.0.10: <a href="https://github.com/pixu1980/detector-js/commit/ce37a3f"><code>ce37a3f</code></a></li><li>bumped ssri to v5.2.4 in order to fix the security vulnerability issue: <a href="https://github.com/pixu1980/detector-js/commit/0db5264"><code>0db5264</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.0.10...v0.0.11">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.0.10">Version 0.0.10</a> (2018-1-26)</h2>
 <h3>New features</h3>
 <ul>
-<li>added battery feature detection: <a href="https://github.com/pixu1980/detector-js/commit/3f3afb1"><code>3f3afb1</code></a></li>
-</ul>
+<li>added battery feature detection: <a href="https://github.com/pixu1980/detector-js/commit/3f3afb1"><code>3f3afb1</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.0.9...v0.0.10">...full changes</a></p>
 <h2><a href="https://github.com/pixu1980/detector-js/releases/tag/v0.0.9">Version 0.0.9</a> (2018-1-26)</h2>
 <h3>Bug fixes</h3>
 <ul>
-<li>v0.0.8: <a href="https://github.com/pixu1980/detector-js/commit/73cc62c"><code>73cc62c</code></a></li>
-<li>Set theme jekyll-theme-cayman: <a href="https://github.com/pixu1980/detector-js/commit/56a7a05"><code>56a7a05</code></a></li>
-<li>Delete CNAME: <a href="https://github.com/pixu1980/detector-js/commit/ae04f85"><code>ae04f85</code></a></li>
-<li>Create CNAME: <a href="https://github.com/pixu1980/detector-js/commit/068f782"><code>068f782</code></a></li>
-</ul>
+<li>v0.0.8: <a href="https://github.com/pixu1980/detector-js/commit/73cc62c"><code>73cc62c</code></a></li><li>Set theme jekyll-theme-cayman: <a href="https://github.com/pixu1980/detector-js/commit/56a7a05"><code>56a7a05</code></a></li><li>Delete CNAME: <a href="https://github.com/pixu1980/detector-js/commit/ae04f85"><code>ae04f85</code></a></li><li>Create CNAME: <a href="https://github.com/pixu1980/detector-js/commit/068f782"><code>068f782</code></a></li></ul>
 <p><a href="https://github.com/pixu1980/detector-js/compare/v0.0.8...v0.0.9">...full changes</a></p>
 <hr>
 <p>Generated by <a href="https://github.com/egoist/changelog.md">changelog</a></p>
@@ -363,11 +276,11 @@
   <footer class="site">
     <div class="wrap cols">
       <div>
-        <a class="brand" href="./index.html">Detector<span>JS</span></a>
+        <a class="brand" href="./index.html"><img class="logo" src="./logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
         <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
       </div>
       <div>
-        <h4>Docs</h4>
+        <h3>Docs</h3>
         <ul>
           <li><a href="./docs/getting-started.html">Getting started</a></li>
           <li><a href="./docs/api.html">API reference</a></li>
@@ -375,10 +288,11 @@
           <li><a href="./docs/browser-support.html">Browser support</a></li>
           <li><a href="./docs/migration.html">Migrate v1/v2 → v3</a></li>
           <li><a href="./docs/roadmap.html">Roadmap</a></li>
+          <li><a href="./examples/devices/index.html">Device gallery</a></li>
         </ul>
       </div>
       <div>
-        <h4>Project</h4>
+        <h3>Project</h3>
         <ul>
           <li><a href="./PRIVACY.html">Privacy</a></li>
           <li><a href="./SECURITY.html">Security</a></li>
@@ -387,7 +301,7 @@
         </ul>
       </div>
       <div>
-        <h4>Packages</h4>
+        <h3>Packages</h3>
         <ul>
           <li><a href="./packages/detector/README.html">@detector-js/detector</a></li>
           <li><a href="./packages/software/README.html">@detector-js/software</a></li>
