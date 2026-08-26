@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0b1020" />
+<title>003: README statico, card flex senza shrink, HTML semantico e convenzione no-em-dash - DetectorJS</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="../../favicon.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <link rel="stylesheet" href="../../site.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
+        <div class="links">
+          <a href="../../index.html">Home</a>
+          <a href="../../docs/getting-started.html">Docs</a>
+          <a href="../../demo.html">Live demo</a>
+          <a href="../../PRIVACY.html">Privacy</a>
+          <a href="https://github.com/pixu1980/detector-js" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+<main><h1>003: README statico, card flex senza shrink, HTML semantico e convenzione no-em-dash</h1>
+<ul>
+<li><strong>Date</strong>: 2026-08-26</li><li><strong>Status</strong>: accepted</li><li><strong>Tags</strong>: frontend, documentation, accessibility, git-hygiene, css</li><li><strong>Author</strong>: pix-galaxy-mcp</li></ul>
+<h2>Context</h2>
+<p>detector-js v2.0.11: il README era generato da pkg-2-readme.template.md tramite scripts/build-readme.mjs, che esegue solo sostituzioni di variabili semplici; i blocchi handlebars ({{#badges}}, {{#depDetails}}...) restavano quindi letterali nell&#39;output, con sezioni Documentation/Usage duplicate e link Codepen vuoto. La home page usava display:grid per le feature card e markup non semantico (div per coppie label/valore, span per chip, div per colonne footer). Inoltre em-dash <code>—</code> era diffuso in documentazione, commenti e messaggi di commit.</p>
+<h2>Decision</h2>
+<p>Il template del README resta markdown statico senza blocchi handlebars non processati; le feature card della home page usano flex layout con flex-grow: 1 e flex-shrink: 0 (mai shrink); la home page adotta HTML semantico (dl/dt/dd per il pannello live, article per le card, ul/li per i chip, nav[aria-label] per le colonne footer); gli em-dash sono vietati in codice, documentazione e messaggi di commit (sostituiti con virgola o trattino).</p>
+<h2>Consequences</h2>
+<p>Positivi: README pubblicato pulito, card che riempiono lo spazio senza collassare, pannello dati navigabile da screen reader, cronologia git coerente senza caratteri tipografici problematici. Negativi: hash dei commit cambiati (force push su main e tag), chi ha clonato deve re-allineare; i guardrail design-system di pix (data-part, adoptedStyleSheets) restano non applicati perché incompatibili con un sito statico multipagina.</p>
+<h2>Alternatives Considered</h2>
+<ol>
+<li>Mantenere display:grid con auto-fit minmax</li><li>Riscrivere il sito secondo i guardrail design-system pix (adoptedStyleSheets, data-part, zero classi CSS)</li><li>Mantenere gli em-dash tipografici</li></ol>
+</main>
+
+  <footer class="site">
+    <div class="wrap cols">
+      <div>
+        <a class="brand" href="../../index.html"><img class="logo" src="../../logo.svg" width="24" height="24" alt="" aria-hidden="true" />Detector<span>JS</span></a>
+        <p>Zero-dependency platform/environment detector.<br />VanillaJS · monorepo · MIT License.</p>
+      </div>
+      <div>
+        <h3>Docs</h3>
+        <ul>
+          <li><a href="../../docs/getting-started.html">Getting started</a></li>
+          <li><a href="../../docs/api.html">API reference</a></li>
+          <li><a href="../../docs/toolchain.html">Toolchain</a></li>
+          <li><a href="../../docs/browser-support.html">Browser support</a></li>
+          <li><a href="../../docs/migration.html">Migrate v1/v2 → v3</a></li>
+          <li><a href="../../docs/roadmap.html">Roadmap</a></li>
+          <li><a href="../../examples/devices/index.html">Device gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Project</h3>
+        <ul>
+          <li><a href="../../PRIVACY.html">Privacy</a></li>
+          <li><a href="../../SECURITY.html">Security</a></li>
+          <li><a href="../../CONTRIBUTING.html">Contributing</a></li>
+          <li><a href="../../docs/adr/README.html">ADR</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Packages</h3>
+        <ul>
+          <li><a href="../../packages/detector/README.html">@detector-js/detector</a></li>
+          <li><a href="../../packages/software/README.html">@detector-js/software</a></li>
+          <li><a href="../../packages/core/README.html">@detector-js/core</a></li>
+          <li><a href="../../packages/hardware/README.html">@detector-js/hardware</a></li>
+          <li><a href="../../packages/feature/README.html">@detector-js/feature</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,4 +1,3 @@
-/*jshint expr: true */
 import { FlagsClass } from '@detector-js/core';
 
 //! Features

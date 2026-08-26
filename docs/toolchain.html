@@ -67,8 +67,7 @@ pnpm build          # build all packages + root bundles via scripts/build.mjs
 pnpm lint           # eslint on packages, test, browser, scripts
 pnpm test           # unit (per-package + shared) → smoke → e2e (scripts/test.mjs)
 pnpm serve          # static site on the first free port
-pnpm readme         # regenerate README.md from pkg-2-readme.template.md
-pnpm docs           # regenerate jsdoc docs/</code></pre><h2>Build matrix</h2>
+pnpm readme         # regenerate README.md from pkg-2-readme.template.md</code></pre><h2>Build matrix</h2>
 <p><code>scripts/build.mjs</code> produces (esbuild, target <code>es2016</code>, sourcemaps, <code>__VERSION__</code> injected via <code>define</code>):</p>
 <ul>
 <li><strong>per package</strong> (<code>packages/*</code>): <code>dist/&lt;name&gt;.js</code> (CJS) + <code>dist/&lt;name&gt;.mjs</code> (ESM), <code>@detector-js/*</code> kept <strong>external</strong> (resolved via node_modules/workspaces at runtime);</li><li><strong>root node builds</strong>: <code>dist/detector.js</code> (CJS) + <code>dist/detector.mjs</code> (ESM), externals external;</li><li><strong>root browser builds</strong>: <code>dist/detector.browser.js</code> + <code>.min.js</code> - <strong>self-contained IIFE</strong> (everything bundled) that assigns the <code>Detector</code> <strong>class</strong> to the global (entry: <code>browser/index.js</code>), so <code>new Detector()</code> works with a plain <code>&lt;script&gt;</code> tag.</li></ul>

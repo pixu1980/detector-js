@@ -20,7 +20,6 @@ pnpm lint           # eslint on packages, test, browser, scripts
 pnpm test           # unit (per-package + shared) → smoke → e2e (scripts/test.mjs)
 pnpm serve          # static site on the first free port
 pnpm readme         # regenerate README.md from pkg-2-readme.template.md
-pnpm docs           # regenerate jsdoc docs/
 ```
 
 ## Build matrix

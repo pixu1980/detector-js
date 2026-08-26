@@ -71,7 +71,7 @@ DetectorJS never registers or sends anything anywhere; the data stays in the han
 Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in [PRIVACY.md](PRIVACY.md).
 
 ## Documentation
-Check out the [Latest Documentation](https://detector.js.org/docs/index.html)
+Check out the [Latest Documentation](https://detector.js.org/docs/getting-started.html)
 
 - [Getting started](docs/getting-started.md)
 - [API reference](docs/api.md)

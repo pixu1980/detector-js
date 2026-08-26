@@ -102,6 +102,12 @@ test.describe('static site', () => {
     expect(sem.footerNavCount, 'footer columns are <nav aria-label>').toBeGreaterThanOrEqual(3);
   });
 
+  test('docs landing page redirects to getting-started', async ({ page }) => {
+    const res = await page.goto('/docs/index.html');
+    expect(res.status(), 'docs index responds').toBe(200);
+    expect(page.url(), 'docs index redirects to getting-started').toContain('docs/getting-started.html');
+  });
+
   test('every page shares the same chrome (site.css, header.site, footer.site)', async ({ page }) => {
     for (const pathname of SITE_PAGES) {
       await page.goto(pathname);

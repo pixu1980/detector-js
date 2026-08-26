@@ -13,5 +13,5 @@
       "@detector-js/detector": ["packages/detector/lib/detector.js"]
     }
   },
-  "include": ["packages", "test", "rollup.config.js"]
+  "include": ["packages", "test", "scripts", "browser"]
 }

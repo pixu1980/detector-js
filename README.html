@@ -32,23 +32,16 @@
 <h2>Description</h2>
 <p>DetectorJS, zero-dependency platform/environment detector written in ES6</p>
 <p>Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules</p>
-<p>{{#author}}</p>
 <h2>Author</h2>
-<p>Emiliano &#39;Pixu&#39; Pisu <a href="mailto:pisuemiliano.1980@gmail.com">pisuemiliano.1980@gmail.com</a>
-{{/author}}</p>
-<p>{{#badges}}</p>
+<p>Emiliano &#39;Pixu&#39; Pisu <a href="mailto:pisuemiliano.1980@gmail.com">pisuemiliano.1980@gmail.com</a></p>
 <h2>Badges</h2>
-<p>{{#add_nodeico}}<a href="https://nodei.co/npm/detector-js/"><img src="https://nodei.co/npm/detector-js.png" alt="NPM"></a>{{/add_nodeico}}</p>
-<p><a href="https://img.shields.io/npm/dm/detector-js.svg"><img src="https://img.shields.io/npm/dm/detector-js.svg" alt="NPM downloads/month"></a>{{#add_github_badges}} {{#add_github_stars}}<a href="https://github.com/pixu1980/detector-js/stargazers"><img src="https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic" alt="GitHub stars"></a>{{/add_github_stars}} {{#add_github_forks}}<a href="https://github.com/pixu1980/detector-js/network"><img src="https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic" alt="GitHub forks"></a>{{/add_github_forks}} {{#add_github_issues}}<a href="https://github.com/pixu1980/detector-js/issues"><img src="https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic" alt="GitHub issues"></a>{{/add_github_issues}} {{#add_github_license}}<a href="https://github.com/pixu1980/detector-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic" alt="GitHub license"></a>{{/add_github_license}}{{/add_github_badges}} {{#add_travis}}<a href="https://travis-ci.org/pixu1980/detector-js"><img src="https://travis-ci.org/pixu1980/detector-js.svg?branch=master" alt="Build Status"></a>{{/add_travis}} {{#add_coverage}}<a href="https://coveralls.io/github/pixu1980/detector-js?branch=master"><img src="https://coveralls.io/repos/github/pixu1980/detector-js/badge.svg?branch=master" alt="Coverage Status"></a>{{/add_coverage}}
-{{/badges}}</p>
-<h2>Documentation</h2>
-<p>Check out the <a href="https://detector.js.org/docs/index.html">Latest Documentation</a> here</p>
-<p>{{#example}}</p>
-<h2>Example</h2>
-<p>Check out this <a href="">Codepen</a> example
-{{/example}}</p>
+<p><a href="https://img.shields.io/npm/dm/detector-js.svg"><img src="https://img.shields.io/npm/dm/detector-js.svg" alt="NPM downloads/month"></a>
+<a href="https://github.com/pixu1980/detector-js/stargazers"><img src="https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic" alt="GitHub stars"></a>
+<a href="https://github.com/pixu1980/detector-js/network"><img src="https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic" alt="GitHub forks"></a>
+<a href="https://github.com/pixu1980/detector-js/issues"><img src="https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic" alt="GitHub issues"></a>
+<a href="https://github.com/pixu1980/detector-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic" alt="GitHub license"></a></p>
 <h2>Installation</h2>
-<p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the <a href="https://www.npmjs.com/">npm registry</a>. </p>
+<p>This is a <a href="https://nodejs.org/">Node.js</a> module available through the <a href="https://www.npmjs.com/">npm registry</a>.</p>
 <p>It can be installed using either <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a> or <a href="https://yarnpkg.com/en/"><code>yarn</code></a> package managers.</p>
 <pre tabindex="0"><code class="language-sh">npm i detector-js</code></pre><pre tabindex="0"><code class="language-sh">yarn add detector-js</code></pre><h2>Usage</h2>
 <h3>Browser (script tag)</h3>
@@ -60,7 +53,7 @@
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
   detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
-</script></code></pre><p>No build step, no bundler, no wrapper - <code>dist/detector.browser.min.js</code> (and the
+</script></code></pre><p>No build step, no bundler, no wrapper: <code>dist/detector.browser.min.js</code> (and the
 ES2015 build <code>dist/detector.browser.es2015.min.js</code> for legacy webviews) expose a
 <code>Detector</code> global that reads <code>navigator.userAgent</code> directly. For SRI-pinned CDN
 snippets run <code>pnpm sri</code> (integrity hashes change per version).</p>
@@ -73,6 +66,7 @@ const { Detector } = require('detector-js'); // CJS</code></pre><h3>TypeScript</
 DetectorJS never registers or sends anything anywhere; the data stays in the hands of whoever executes the library.
 Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in <a href="PRIVACY.html">PRIVACY</a>.</p>
 <h2>Documentation</h2>
+<p>Check out the <a href="https://detector.js.org/docs/getting-started.html">Latest Documentation</a></p>
 <ul>
 <li><a href="docs/getting-started.html">Getting started</a></li><li><a href="docs/api.html">API reference</a></li><li><a href="docs/toolchain.html">Toolchain (esbuild)</a></li><li><a href="docs/browser-support.html">Browser support</a></li><li><a href="examples/">Examples</a></li></ul>
 <h2>Governance &amp; community</h2>
@@ -87,7 +81,7 @@ Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) 
   detector/   @detector-js/detector   Detector (composes everything)</code></pre><p>Runtime dependencies are limited to the internal workspaces: <strong>zero external dependencies</strong>.</p>
 <p>The scoped packages can be consumed individually:</p>
 <pre tabindex="0"><code class="language-js">import { Browser } from '@detector-js/software';
-import { Detector } from '@detector-js/detector';</code></pre><h2>Usage</h2>
+import { Detector } from '@detector-js/detector';</code></pre><h3>Full example output</h3>
 <pre tabindex="0"><code class="language-js">import Detector from 'detector-js';
 
 const detector = new Detector('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15');
@@ -230,31 +224,13 @@ console.log(detector);
 <ul>
 <li>refine browsers regexes</li><li>refine documentation</li><li>implement modular custom build feature</li><li>decide to implement or not device infos detection</li></ul>
 <h2>Dependencies</h2>
-<p>{{#depDetails}}</p>
-<ul>
-<li><a href="https://github.com/pixu1980/detector-js">detector-js</a>: DetectorJS, zero-dependency platform/environment detector written in ES6
-{{/depDetails}}
-{{^depDetails}}
-None
-{{/depDetails}}</li></ul>
+<p>None</p>
 <h2>Dev Dependencies</h2>
-<p>{{#devDepDetails}}</p>
-<ul>
-<li><a href="https://github.com/pixu1980/detector-js">detector-js</a>: DetectorJS, zero-dependency platform/environment detector written in ES6
-{{/devDepDetails}}
-{{^devDepDetails}}
-None
-{{/devDepDetails}}</li></ul>
-<p>{{#scripts.test}}</p>
+<p>None</p>
 <h2>Tests</h2>
 <pre tabindex="0"><code class="language-sh">npm install
-npm test</code></pre><p>{{/scripts.test}}</p>
-<p>{{#testOutput}}</p>
-<pre tabindex="0"><code>{{{testOutput}}}</code></pre><p>{{/testOutput}}</p>
-<p>{{#license}}</p>
-<h2>License</h2>
-<p>MIT
-{{/license}}</p>
+npm test</code></pre><h2>License</h2>
+<p>MIT</p>
 <h2>Powered By</h2>
 <a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
 <img src="http://logo.js.org/dark_horz.png" width="102" alt="JS.ORG Logo"/></a>

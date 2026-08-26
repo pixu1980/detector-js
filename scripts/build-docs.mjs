@@ -191,6 +191,28 @@ async function main() {
     fs.writeFileSync(path.join(ROOT, out), page);
     count += 1;
   }
+  // docs landing page: redirect to the getting-started guide (keeps the
+  // historical https://detector.js.org/docs/index.html URL working)
+  fs.writeFileSync(
+    path.join(ROOT, 'docs', 'index.html'),
+    `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>DetectorJS Docs</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<meta http-equiv="refresh" content="0; url=getting-started.html" />
+<link rel="canonical" href="getting-started.html" />
+</head>
+<body>
+<script>location.replace('getting-started.html');</script>
+<p>Redirecting to <a href="getting-started.html">Getting started</a>…</p>
+</body>
+</html>
+`,
+  );
   console.log(`✓ built ${count} static pages from markdown`);
 }
 

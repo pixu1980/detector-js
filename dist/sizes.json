@@ -1,22 +1,22 @@
 {
   "dist/detector.browser.min.js": {
-    "bytes": 76204,
-    "gzip": 19750,
-    "brotli": 17534
+    "bytes": 76202,
+    "gzip": 19739,
+    "brotli": 17542
   },
   "dist/detector.browser.es2015.min.js": {
-    "bytes": 76211,
-    "gzip": 19756,
-    "brotli": 17577
+    "bytes": 76209,
+    "gzip": 19746,
+    "brotli": 17517
   },
   "dist/detector.js": {
-    "bytes": 9307,
-    "gzip": 2697,
-    "brotli": 2352
+    "bytes": 9303,
+    "gzip": 2687,
+    "brotli": 2350
   },
   "dist/detector.mjs": {
-    "bytes": 8334,
-    "gzip": 2471,
-    "brotli": 2123
+    "bytes": 8330,
+    "gzip": 2461,
+    "brotli": 2127
   }
 }
