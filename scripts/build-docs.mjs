@@ -32,7 +32,7 @@ const renderer = {
     return `<pre tabindex="0"><code${langAttr}>${text}</code></pre>`;
   },
   listitem({ checked, tokens }) {
-    // tokens may contain block-level tokens (nested lists, paragraphs) — use parse()
+    // tokens may contain block-level tokens (nested lists, paragraphs) - use parse()
     const content = this.parser.parse(tokens);
     if (typeof checked === 'boolean') {
       const label = checked ? 'Checked' : 'Unchecked';
@@ -124,7 +124,7 @@ const shared = layout();
 
 function wrapHtml({ title, body, rel }) {
   const rawTitle = String(title || 'Docs').replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const safeTitle = rawTitle.includes('DetectorJS') ? rawTitle : `${rawTitle} — DetectorJS`;
+  const safeTitle = rawTitle.includes('DetectorJS') ? rawTitle : `${rawTitle} - DetectorJS`;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>

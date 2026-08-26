@@ -34,4 +34,4 @@ body:
     attributes:
       label: Verification
       options:
-        - label: I confirm this is about a detection *result* (not a request to track users — see PRIVACY.md)
+        - label: I confirm this is about a detection *result* (not a request to track users - see PRIVACY.md)

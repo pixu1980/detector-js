@@ -1,5 +1,5 @@
 // E2E (webkit engine): real Safari-like UA has no Client Hints and keeps the
-// legacy-compat "Mac OS X 10_15_7" — the real version is inferred from the
+// legacy-compat "Mac OS X 10_15_7" - the real version is inferred from the
 // Safari Version token (1:1 with macOS since Safari 26 / macOS 26).
 const { test, expect } = require('@playwright/test');
 

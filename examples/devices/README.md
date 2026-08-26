@@ -1,4 +1,4 @@
-# example-devices — Device gallery
+# example-devices - Device gallery
 
 A static page that parses **sample user agents from real devices** (desktop, mobile, tablet,
 TV, consoles, webviews and bots) live with `new Detector(ua)` and shows what DetectorJS reports:

@@ -18,7 +18,7 @@ const LIMITS = {
 
 const sizesPath = path.join(ROOT, 'dist/sizes.json');
 if (!fs.existsSync(sizesPath)) {
-  console.error('✗ dist/sizes.json missing — run pnpm build first');
+  console.error('✗ dist/sizes.json missing - run pnpm build first');
   process.exit(1);
 }
 const sizes = JSON.parse(fs.readFileSync(sizesPath, 'utf8'));

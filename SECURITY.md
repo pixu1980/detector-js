@@ -5,7 +5,7 @@
 | Version | Supported |
 | --- | --- |
 | 3.x (current major, monorepo) | ✅ actively maintained |
-| 2.x (TypeScript monorepo) | ⚠️ legacy — fixes on request |
+| 2.x (TypeScript monorepo) | ⚠️ legacy - fixes on request |
 | 1.x (plain vanillaJS) | ❌ end-of-life |
 
 ## Reporting a vulnerability
@@ -19,13 +19,13 @@ You can expect:
 
 - an acknowledgement within **72 hours**;
 - a triage/impact assessment within **5 business days**;
-- coordinated disclosure — we prefer a fix to be ready before public details are shared.
+- coordinated disclosure - we prefer a fix to be ready before public details are shared.
 
 If you responsibly disclose, we're happy to credit you (unless you prefer anonymity).
 
 ## Security model
 
-DetectorJS runs **entirely client-side** and **never sends data anywhere** — see [PRIVACY.md](PRIVACY.md). Key guarantees:
+DetectorJS runs **entirely client-side** and **never sends data anywhere** - see [PRIVACY.md](PRIVACY.md). Key guarantees:
 
 - **Zero network APIs** in the library (no `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, pixies). Tests assert this.
 - **No persistence**: no cookies/localStorage writes (except a self-cleaning API probe), no IndexedDB usage.

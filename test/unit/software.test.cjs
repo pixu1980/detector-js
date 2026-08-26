@@ -95,7 +95,7 @@ describe('software detection (UA table)', () => {
     assert.equal(os._mapMacOSVersion('24.4.0'), '15.4.0'); // Darwin 24 → Sequoia 15
     assert.equal(os._mapMacOSVersion('23.4.0'), '14.4.0'); // Darwin 23 → Sonoma 14
     assert.equal(os._mapMacOSVersion('15.1'), '15.1'); // marketing-style
-    assert.equal(os._mapMacOSVersion('10.15.7'), null); // same legacy as UA — ignore
+    assert.equal(os._mapMacOSVersion('10.15.7'), null); // same legacy as UA - ignore
   });
 
   test('client hints upgrade reveals the real macOS version (Tahoe)', async () => {

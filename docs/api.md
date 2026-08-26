@@ -13,25 +13,25 @@ All classes are plain ES6 classes with **getters** for detections. Two base clas
 - `toCssFlags()` → `['<prefix>--<flag>--<value>']` strings (used only when `cssFlags` is enabled)
 
 ## Asserts
-- `Asserts.checkAssert(assert, safe?)` — runs a value or function (try/catch when `safe`)
-- `Asserts.all(list, safe?)` — every element truthy
-- `Asserts.one(list, safe?)` — at least one element truthy
+- `Asserts.checkAssert(assert, safe?)` - runs a value or function (try/catch when `safe`)
+- `Asserts.all(list, safe?)` - every element truthy
+- `Asserts.one(list, safe?)` - at least one element truthy
 
 ## @detector-js/software
-- **Browser** — getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (`ChromeMobile`, `SafariMobile`, …); `name`/`version` after `toValues()`.
-- **Engine** — `Blink`, `Gecko`, `WebKit`, `Trident`, `EdgeHTML`, `Presto`, `KHTML`, `Goanna`, …
-- **OS** — `Windows`, `macOS` (+ version names Tempo→Sequoia), `iOS`, `Android` (+ Cupcake→Pie), `Linux` (+ distro names), `Unix`, `ChromiumOS`, plus legacy/mobile/TV OSs; `versionName` from `toValues()`.
+- **Browser** - getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (`ChromeMobile`, `SafariMobile`, …); `name`/`version` after `toValues()`.
+- **Engine** - `Blink`, `Gecko`, `WebKit`, `Trident`, `EdgeHTML`, `Presto`, `KHTML`, `Goanna`, …
+- **OS** - `Windows`, `macOS` (+ version names Tempo→Sequoia), `iOS`, `Android` (+ Cupcake→Pie), `Linux` (+ distro names), `Unix`, `ChromiumOS`, plus legacy/mobile/TV OSs; `versionName` from `toValues()`.
 
 ## @detector-js/hardware
-- **Platform** — `desktop`, `smartphone`, `tablet`, `tv`, `console`, `bot`, `mobile`
-- **CPU** — `platform`, `cores`, `architecture`, `vendor` (intel/amd/arm/apple…), vendor flags.
+- **Platform** - `desktop`, `smartphone`, `tablet`, `tv`, `console`, `bot`, `mobile`
+- **CPU** - `platform`, `cores`, `architecture`, `vendor` (intel/amd/arm/apple…), vendor flags.
   `navigator.platform`/UA strings are **legacy-compat** on macOS (`"MacIntel"` + `"Mac OS X 10_15_7"`
   appear on both Intel and Apple Silicon), so the real architecture comes from
   `CPU.upgrade()` (Client Hints `architecture`/`bitness`) and/or the **GPU evidence**
   (WebGL renderer "Apple M1…" → `arm64 · vendor 'apple'`), refined synchronously by `Detector`
-  — `Detector.upgrade()` re-runs it. `arm64` is no longer misreported as `x64`.
-- **GPU** — `webGLVendor`, `webGLRenderer`, `vendor`, `model`, `renderer` (WebGL-based, safe-mode)
-- **Device** — placeholder base for vendor-specific device flags
+  - `Detector.upgrade()` re-runs it. `arm64` is no longer misreported as `x64`.
+- **GPU** - `webGLVendor`, `webGLRenderer`, `vendor`, `model`, `renderer` (WebGL-based, safe-mode)
+- **Device** - placeholder base for vendor-specific device flags
 
 ## @detector-js/feature
 
@@ -46,11 +46,11 @@ Constructor-computed flags (instance properties): `addEventListener`, `asyncScri
 
 Read-only getters: `pointerEnabled`, `pixelRatio`, `pointerLock`, `quirksMode`, `css3D`, `cssTransform`, `cssTransition`, `deviceMotion`, `deviceOrientation`, `contextMenu`, `classList`, `placeholder`, `viewportUnit`, `remUnit`, `canvas`, `svg`, `webp`, `webGL`, `webGL2`, `webGPU`, `webVR`, `touch`, `forceTouch`, `pointerEvents`, `srcset`, `sizes`, `pictureElement`, `dialogElement`, `deviceMemory` (value), `touchPoints` (value).
 
-**AudioFeature** — `supported`, `context`, `formats.{mp3,webm,ogg,opus,wav,m4a}`.
-**VideoFeature** — `supported`, `formats.{mp4,ogv,webm}`.
+**AudioFeature** - `supported`, `context`, `formats.{mp3,webm,ogg,opus,wav,m4a}`.
+**VideoFeature** - `supported`, `formats.{mp4,ogv,webm}`.
 
 ## @detector-js/detector
-`Detector extends FlagsClass` — composes everything:
+`Detector extends FlagsClass` - composes everything:
 
 | property | source |
 | --- | --- |
@@ -64,12 +64,12 @@ Read-only getters: `pointerEnabled`, `pixelRatio`, `pointerLock`, `quirksMode`, 
 
 Methods: `toFlags()`, `toValues()`, `setCssFlags()`, `upgrade()` (async). Getters: `ua`, `root`, `process`, `navigator`, `document`, `booleanFlagsValuePropertyName`.
 
-### `await detector.upgrade()` — real OS version via Client Hints
+### `await detector.upgrade()` - real OS version via Client Hints
 Modern macOS browsers keep the legacy-compat UA `"Mac OS X 10_15_7"` (→ Catalina) even on
 macOS Sonoma, Sequoia or Tahoe. The real version lives in the high-entropy
 `navigator.userAgentData.getHighEntropyValues(['platformVersion'])` (User-Agent Client Hints).
 `upgrade()` (auto-started in the constructor, safe/no-op when hints are absent or denied by
-Permissions-Policy) refreshes `detector.os` with the real version and name — e.g.
+Permissions-Policy) refreshes `detector.os` with the real version and name - e.g.
 `{ name: 'macOS', version: '26.6.2', versionName: 'Tahoe' }`.
 
 **Safari (and WebKit)**: no Client Hints exist, and the UA keeps the legacy-compat
@@ -78,7 +78,7 @@ the UA `Version/26.x` token reveals the real version synchronously (no async nee
 Older Safari majors were back-ported across multiple macOS releases, so pre-26 values stay UA-based.
 
 **macOS version names** (Tempo → Tahoe): 10.0–10.15, 11 Big Sur, 12 Monterey, 13 Ventura,
-14 Sonoma, 15 Sequoia — then **26 Tahoe** (versions 16–25 do not exist; Apple jumped 15 → 26).
+14 Sonoma, 15 Sequoia - then **26 Tahoe** (versions 16–25 do not exist; Apple jumped 15 → 26).
 Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then numerical (10–17+).
 
 ## Versioning & release

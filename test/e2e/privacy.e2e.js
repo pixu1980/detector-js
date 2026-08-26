@@ -1,4 +1,4 @@
-// E2E — privacy contract (PRIVACY.md): a page embedding DetectorJS makes ZERO network requests
+// E2E - privacy contract (PRIVACY.md): a page embedding DetectorJS makes ZERO network requests
 // beyond the page itself and the local bundle.
 const { test, expect } = require('@playwright/test');
 
@@ -11,7 +11,7 @@ test.describe('privacy contract', () => {
 
     await page.goto('/index.html');
 
-    // every request must stay on the site's own origin (page, bundle, site.css) —
+    // every request must stay on the site's own origin (page, bundle, site.css) -
     // anything pointing elsewhere (CDNs, analytics, telemetry, fonts…) is a violation
     const unexpected = requests.filter((u) => !u.startsWith('http://localhost:3222/'));
     expect(unexpected, `external requests: ${JSON.stringify(unexpected)}`).toEqual([]);

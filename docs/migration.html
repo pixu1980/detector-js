@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>Migration Guide — v1 / v2 → v3 monorepo — DetectorJS</title>
+<title>Migration Guide - v1 / v2 → v3 monorepo - DetectorJS</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
@@ -27,11 +27,11 @@
       </nav>
     </div>
   </header>
-<main><h1>Migration Guide — v1 / v2 → v3 monorepo</h1>
+<main><h1>Migration Guide - v1 / v2 → v3 monorepo</h1>
 <p>This guide walks every breaking change between the published 1.x/2.x packages and
 <strong>detector-js v3</strong> (monorepo, vanillaJS, esbuild). Each section has a <em>before/after</em>.</p>
 <blockquote>
-<p>The next release is <strong>a new major</strong> (baseline 2.0.11 + breaking commits — run <code>pnpm release</code>).
+<p>The next release is <strong>a new major</strong> (baseline 2.0.11 + breaking commits - run <code>pnpm release</code>).
 Types, docs and bundles are built by <code>pnpm build</code> (esbuild + marked).</p>
 </blockquote>
 <h2>1. Structure &amp; packages</h2>
@@ -48,12 +48,12 @@ Types, docs and bundles are built by <code>pnpm build</code> (esbuild + marked).
 </tr>
 <tr>
 <td>build: rollup + babel / parcel</td>
-<td><strong>esbuild</strong> (<code>scripts/build.mjs</code>) — <code>pnpm build</code></td>
+<td><strong>esbuild</strong> (<code>scripts/build.mjs</code>) - <code>pnpm build</code></td>
 </tr>
 </tbody></table>
 <p>There is <strong>no more TS source</strong>: the implementation is zero-dependency ES6; types are
 <strong>generated from the JSDoc comments</strong> (<code>scripts/build-dts.mjs</code>, wired in <code>pnpm build</code>).</p>
-<h2>2. Exports — named everywhere</h2>
+<h2>2. Exports - named everywhere</h2>
 <p>Browser global (dist <code>detector.browser.min.js</code>):</p>
 <pre tabindex="0"><code class="language-html"><!-- v2 (broken namespace) --> <script src="..."></script><script>new Detector.Detector() /* or new D() wrapper */</script>
 <!-- v3 --> <script src="dist/detector.browser.min.js"></script><script>const d = new Detector()</script></code></pre><p>CommonJS / ESM:</p>
@@ -76,7 +76,7 @@ d.os   // { name: 'macOS', version: '26.6.2', versionName: 'Tahoe' }
 d.cpu  // { platform: 'MacIntel', cores: 10, architecture: 'arm64', vendor: 'apple' }</code></pre><ul>
 <li><code>upgrade()</code> is auto-started by the constructor (non-blocking); safe no-op when hints are
 unavailable (Safari/Firefox) or denied (<code>Permissions-Policy: ch-ua-high-entropy-values</code>).</li><li>macOS version names run <strong>Tempo → Tahoe (26)</strong> (11 Big Sur, 12 Monterey, 13 Ventura,
-14 Sonoma, 15 Sequoia — <strong>16–25 do not exist</strong>, Apple renumbered 15→26 in 2025).</li><li>Apple Silicon: detected from Client Hints <code>architecture</code> or the WebGL GPU identity
+14 Sonoma, 15 Sequoia - <strong>16–25 do not exist</strong>, Apple renumbered 15→26 in 2025).</li><li>Apple Silicon: detected from Client Hints <code>architecture</code> or the WebGL GPU identity
 (&quot;Apple M1 …&quot; / &quot;Apple GPU&quot;).</li></ul>
 <h2>5. Detection fixes that change results</h2>
 <table>
@@ -123,8 +123,8 @@ plus ~90 feature flags (WebGPU, WebAuthn, Wake Lock, Web Share, Web Locks, WebXR
 <h2>6. Public API changes</h2>
 <ul>
 <li><code>Asserts._checkAssert</code> → <strong><code>Asserts.checkAssert</code></strong> (now public, upstream v2 naming).</li><li>Environment roots (<code>ua</code>, <code>root</code>, <code>process</code>, <code>navigator</code>, <code>document</code>, <code>flags</code>, <code>cssFlagsPrefix</code>)
-are <strong>getters kept after construction</strong> (v2 parity).</li><li><code>Platform</code> no longer imports <code>OS</code>/<code>Browser</code> — it reads the injected <code>flags</code> object
-(call it with the Detector output as before — no consumer change).</li><li><code>Device</code> remains a base placeholder.</li><li><code>index.d.ts</code> / per-package <code>.d.ts</code>: generated from JSDoc — run <code>pnpm build</code> to refresh;
+are <strong>getters kept after construction</strong> (v2 parity).</li><li><code>Platform</code> no longer imports <code>OS</code>/<code>Browser</code> - it reads the injected <code>flags</code> object
+(call it with the Detector output as before - no consumer change).</li><li><code>Device</code> remains a base placeholder.</li><li><code>index.d.ts</code> / per-package <code>.d.ts</code>: generated from JSDoc - run <code>pnpm build</code> to refresh;
 <code>tsc</code>-checked via <code>pnpm types:check</code>.</li></ul>
 <h2>7. Build &amp; contribution toolchain</h2>
 <pre tabindex="0"><code class="language-sh"># v1: yarn + rollup / v2: parcel + lerna
@@ -158,7 +158,7 @@ pnpm sri          # CDN integrity snippets</code></pre><h2>8. Browser support</h
 <td>Node / bundlers (CJS + ESM via <code>exports</code>)</td>
 </tr>
 </tbody></table>
-<p>True ES5 (IE11) is not shipped (esbuild limitation) — see <a href="roadmap.html">docs/roadmap</a>.</p>
+<p>True ES5 (IE11) is not shipped (esbuild limitation) - see <a href="roadmap.html">docs/roadmap</a>.</p>
 <h2>9. Migration checklist</h2>
 <ul>
 <li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> replace <code>new Detector.Detector()</code> / <code>Detector.detector</code>-style globals with <code>new Detector()</code></li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> update imports to named exports (<code>const { Detector } = require(...)</code>)</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> pass <code>cssFlags: true</code> explicitly if you relied on auto CSS classes</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> <code>await detector.upgrade()</code> when you need the real OS/CPU (else UA-based values are returned)</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> re-check any hardcoded expectations for Edge/Opera/Samsung/Electron/cpu.architecture</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> update <code>&lt;script&gt;</code> to the pinned CDN + SRI (<code>pnpm sri</code>)</li><li><input type="checkbox" disabled aria-label="Unchecked checklist item" /> run <code>pnpm build &amp;&amp; pnpm test &amp;&amp; pnpm release</code></li></ul>

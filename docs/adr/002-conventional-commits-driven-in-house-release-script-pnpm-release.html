@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>002: Conventional-commits driven in-house release script (pnpm release) — DetectorJS</title>
+<title>002: Conventional-commits driven in-house release script (pnpm release) - DetectorJS</title>
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="../../favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
@@ -33,7 +33,7 @@
 <h2>Context</h2>
 <p>After the v3 monorepo restructure we need a repeatable release flow: bump root detector-js AND the five @detector-js/* packages to the same version (next major, baseline 2.0.11), generate the changelog from git history, and tag releases. The maintainer runs releases manually, so the tool must prepare everything (bump, changelog, tag, SRI snippets) without publishing.</p>
 <h2>Decision</h2>
-<p>Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, prints the CDN/SRI snippets, commits + tags the release and publishes to npm. <strong><code>pnpm release</code> is the only release command</strong> — optional flags of the same command: <code>--dry-run</code> (preview only) and <code>--skip-publish</code> (prepare + tag, no upload).</p>
+<p>Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, prints the CDN/SRI snippets, commits + tags the release and publishes to npm. <strong><code>pnpm release</code> is the only release command</strong> - optional flags of the same command: <code>--dry-run</code> (preview only) and <code>--skip-publish</code> (prepare + tag, no upload).</p>
 <h2>Consequences</h2>
 <p>Positive: zero new dependencies (fits the 0-dep ethos); single synced version for root + all @detector-js/* packages; version + changelog derived deterministically from conventional commits; dry-run mode; prints CDN/SRI snippets at release time. Negative: in-house parser is simpler than full conventional-commits spec (no footer parsing for &#39;BREAKING CHANGE&#39; bodies yet); maintainers must follow Conventional Commits discipline; publishing is executed by the script (use <code>--skip-publish</code> or <code>--dry-run</code> to preview).</p>
 <h2>Alternatives Considered</h2>

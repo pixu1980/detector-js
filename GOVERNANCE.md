@@ -4,7 +4,7 @@ DetectorJS is an open-source project with a light, transparent governance model.
 
 ## Project owner & maintainers
 
-- **Owner / lead maintainer:** Emiliano "Pixu" Pisu — <pisuemiliano.1980@gmail.com>
+- **Owner / lead maintainer:** Emiliano "Pixu" Pisu - <pisuemiliano.1980@gmail.com>
 - Maintainers are listed in `package.json` (`author`, `contributors`) and on the GitHub team.
 
 ## Decision-making
@@ -18,7 +18,7 @@ DetectorJS is an open-source project with a light, transparent governance model.
 
 - **Semantic Versioning (SemVer 2.0.0).** Current major: **3.x**.
 - Releases are cut from the default branch; tagged (`vX.Y.Z`), changelog updated (`CHANGELOG.md`), `dist/` rebuilt and verified by CI tests before tagging.
-- Zero external runtime dependencies is a **hard contract** — new majors justify exceptions via ADR.
+- Zero external runtime dependencies is a **hard contract** - new majors justify exceptions via ADR.
 
 ## Contribution flow
 

@@ -1,6 +1,6 @@
 # Getting Started
 
-DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
+DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities - in pure vanillaJS, with zero runtime dependencies, and **without ever sending data anywhere** ([PRIVACY.md](../PRIVACY.md)).
 
 ## Install
 
@@ -87,7 +87,7 @@ detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plu
 
 ## Using only a slice of the library
 
-The monorepo ships scoped packages — use exactly what you need:
+The monorepo ships scoped packages - use exactly what you need:
 
 ```js
 import { Browser } from '@detector-js/software';

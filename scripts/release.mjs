@@ -1,4 +1,4 @@
-// Release manager — THE release command is just:  pnpm release
+// Release manager - THE release command is just:  pnpm release
 //   pnpm release             → full release: analyze → bump (root+packages in sync) →
 //                              changelog → examples → build → test → commit+tag → npm publish
 //   pnpm release --dry-run   → preview only (no changes, no publish)
@@ -226,7 +226,7 @@ async function main() {
   // 8) npm publish (best-effort: on failure the release is already prepared/tagged)
   console.log('\npublishing @detector-js/* …');
   if (runSafe('pnpm -r publish') == null) {
-    console.warn('  ⚠ scoped publish failed (auth/registry?). Packages are prepared & tagged — run `pnpm -r publish` when ready.');
+    console.warn('  ⚠ scoped publish failed (auth/registry?). Packages are prepared & tagged - run `pnpm -r publish` when ready.');
   }
   console.log('publishing detector-js …');
   if (runSafe('pnpm publish') == null) {

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>detector-js — DetectorJS</title>
+<title>detector-js - DetectorJS</title>
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -60,7 +60,7 @@
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
   detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
-</script></code></pre><p>No build step, no bundler, no wrapper — <code>dist/detector.browser.min.js</code> (and the
+</script></code></pre><p>No build step, no bundler, no wrapper - <code>dist/detector.browser.min.js</code> (and the
 ES2015 build <code>dist/detector.browser.es2015.min.js</code> for legacy webviews) expose a
 <code>Detector</code> global that reads <code>navigator.userAgent</code> directly. For SRI-pinned CDN
 snippets run <code>pnpm sri</code> (integrity hashes change per version).</p>
@@ -69,7 +69,7 @@ snippets run <code>pnpm sri</code> (integrity hashes change per version).</p>
 const { Detector } = require('detector-js'); // CJS</code></pre><h3>TypeScript</h3>
 <p>Types ship with the package (<code>index.d.ts</code> + per-package <code>.d.ts</code>).</p>
 <h2>Privacy</h2>
-<p><strong>100% client-side — zero network calls, zero storage, zero telemetry.</strong>
+<p><strong>100% client-side - zero network calls, zero storage, zero telemetry.</strong>
 DetectorJS never registers or sends anything anywhere; the data stays in the hands of whoever executes the library.
 Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in <a href="PRIVACY.html">PRIVACY</a>.</p>
 <h2>Documentation</h2>

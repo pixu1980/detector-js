@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>API Reference — DetectorJS</title>
+<title>API Reference - DetectorJS</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
@@ -37,18 +37,18 @@
 <li><code>get flags</code>, <code>get cssFlagsPrefix</code></li><li><code>toCssFlags()</code> → <code>[&#39;&lt;prefix&gt;--&lt;flag&gt;--&lt;value&gt;&#39;]</code> strings (used only when <code>cssFlags</code> is enabled)</li></ul>
 <h2>Asserts</h2>
 <ul>
-<li><code>Asserts.checkAssert(assert, safe?)</code> — runs a value or function (try/catch when <code>safe</code>)</li><li><code>Asserts.all(list, safe?)</code> — every element truthy</li><li><code>Asserts.one(list, safe?)</code> — at least one element truthy</li></ul>
+<li><code>Asserts.checkAssert(assert, safe?)</code> - runs a value or function (try/catch when <code>safe</code>)</li><li><code>Asserts.all(list, safe?)</code> - every element truthy</li><li><code>Asserts.one(list, safe?)</code> - at least one element truthy</li></ul>
 <h2>@detector-js/software</h2>
 <ul>
-<li><strong>Browser</strong> — getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (<code>ChromeMobile</code>, <code>SafariMobile</code>, …); <code>name</code>/<code>version</code> after <code>toValues()</code>.</li><li><strong>Engine</strong> — <code>Blink</code>, <code>Gecko</code>, <code>WebKit</code>, <code>Trident</code>, <code>EdgeHTML</code>, <code>Presto</code>, <code>KHTML</code>, <code>Goanna</code>, …</li><li><strong>OS</strong> — <code>Windows</code>, <code>macOS</code> (+ version names Tempo→Sequoia), <code>iOS</code>, <code>Android</code> (+ Cupcake→Pie), <code>Linux</code> (+ distro names), <code>Unix</code>, <code>ChromiumOS</code>, plus legacy/mobile/TV OSs; <code>versionName</code> from <code>toValues()</code>.</li></ul>
+<li><strong>Browser</strong> - getters for 60+ browsers (Chrome, Firefox, Safari, Edge, Opera, Brave, Vivaldi, Samsung Internet, DuckDuckGo, Facebook, Instagram, TikTok, Kiwi, HuaweiBrowser, Line, Electron, …) + mobile variants (<code>ChromeMobile</code>, <code>SafariMobile</code>, …); <code>name</code>/<code>version</code> after <code>toValues()</code>.</li><li><strong>Engine</strong> - <code>Blink</code>, <code>Gecko</code>, <code>WebKit</code>, <code>Trident</code>, <code>EdgeHTML</code>, <code>Presto</code>, <code>KHTML</code>, <code>Goanna</code>, …</li><li><strong>OS</strong> - <code>Windows</code>, <code>macOS</code> (+ version names Tempo→Sequoia), <code>iOS</code>, <code>Android</code> (+ Cupcake→Pie), <code>Linux</code> (+ distro names), <code>Unix</code>, <code>ChromiumOS</code>, plus legacy/mobile/TV OSs; <code>versionName</code> from <code>toValues()</code>.</li></ul>
 <h2>@detector-js/hardware</h2>
 <ul>
-<li><strong>Platform</strong> — <code>desktop</code>, <code>smartphone</code>, <code>tablet</code>, <code>tv</code>, <code>console</code>, <code>bot</code>, <code>mobile</code></li><li><strong>CPU</strong> — <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/apple…), vendor flags.
+<li><strong>Platform</strong> - <code>desktop</code>, <code>smartphone</code>, <code>tablet</code>, <code>tv</code>, <code>console</code>, <code>bot</code>, <code>mobile</code></li><li><strong>CPU</strong> - <code>platform</code>, <code>cores</code>, <code>architecture</code>, <code>vendor</code> (intel/amd/arm/apple…), vendor flags.
 <code>navigator.platform</code>/UA strings are <strong>legacy-compat</strong> on macOS (<code>&quot;MacIntel&quot;</code> + <code>&quot;Mac OS X 10_15_7&quot;</code>
 appear on both Intel and Apple Silicon), so the real architecture comes from
 <code>CPU.upgrade()</code> (Client Hints <code>architecture</code>/<code>bitness</code>) and/or the <strong>GPU evidence</strong>
 (WebGL renderer &quot;Apple M1…&quot; → <code>arm64 · vendor &#39;apple&#39;</code>), refined synchronously by <code>Detector</code>
-— <code>Detector.upgrade()</code> re-runs it. <code>arm64</code> is no longer misreported as <code>x64</code>.</li><li><strong>GPU</strong> — <code>webGLVendor</code>, <code>webGLRenderer</code>, <code>vendor</code>, <code>model</code>, <code>renderer</code> (WebGL-based, safe-mode)</li><li><strong>Device</strong> — placeholder base for vendor-specific device flags</li></ul>
+- <code>Detector.upgrade()</code> re-runs it. <code>arm64</code> is no longer misreported as <code>x64</code>.</li><li><strong>GPU</strong> - <code>webGLVendor</code>, <code>webGLRenderer</code>, <code>vendor</code>, <code>model</code>, <code>renderer</code> (WebGL-based, safe-mode)</li><li><strong>Device</strong> - placeholder base for vendor-specific device flags</li></ul>
 <h2>@detector-js/feature</h2>
 <blockquote>
 <p><strong>MDN Web API catalog</strong>: beyond the curated flags below, <code>Feature</code> probes <strong>every interface
@@ -61,10 +61,10 @@ Curated flags below always win over the catalog (never shadowed).
 Constructor-computed flags (instance properties): <code>addEventListener</code>, <code>asyncScript</code>, <code>battery</code>, <code>bluetooth</code>, <code>broadcastChannel</code>, <code>caches</code>, <code>clipboard</code>, <code>cors</code>, <code>credentials</code>, <code>deferScript</code>, <code>fetch</code>, <code>file</code>, <code>fileSystem</code>, <code>fullscreen</code>, <code>fullscreenKeyboard</code>, <code>gamepad</code>, <code>geolocation</code>, <code>historyAPI</code>, <code>indexedDB</code>, <code>intersectionObserver</code>, <code>littleEndian</code>, <code>localStorage</code>, <code>matchMedia</code>, <code>mediaCapabilities</code>, <code>mediaRecorder</code>, <code>mediaSession</code>, <code>nfc</code>, <code>notifications</code>, <code>offscreenCanvas</code>, <code>online</code>, <code>paymentRequest</code>, <code>permissions</code>, <code>querySelector</code>, <code>querySelectorAll</code>, <code>resizeObserver</code>, <code>serial</code>, <code>serviceWorker</code>, <code>speechSynthesis</code>, <code>storage</code>, <code>structuredClone</code>, <code>typedArray</code>, <code>usb</code>, <code>userMedia</code>, <code>vibration</code>, <code>visualViewport</code>, <code>wakeLock</code>, <code>webAssembly</code>, <code>webAuthn</code>, <code>webCrypto</code>, <code>webLocks</code>, <code>webRTC</code>, <code>webShare</code>, <code>webSocket</code>, <code>webXr</code>, <code>worker</code>.</p>
 </blockquote>
 <p>Read-only getters: <code>pointerEnabled</code>, <code>pixelRatio</code>, <code>pointerLock</code>, <code>quirksMode</code>, <code>css3D</code>, <code>cssTransform</code>, <code>cssTransition</code>, <code>deviceMotion</code>, <code>deviceOrientation</code>, <code>contextMenu</code>, <code>classList</code>, <code>placeholder</code>, <code>viewportUnit</code>, <code>remUnit</code>, <code>canvas</code>, <code>svg</code>, <code>webp</code>, <code>webGL</code>, <code>webGL2</code>, <code>webGPU</code>, <code>webVR</code>, <code>touch</code>, <code>forceTouch</code>, <code>pointerEvents</code>, <code>srcset</code>, <code>sizes</code>, <code>pictureElement</code>, <code>dialogElement</code>, <code>deviceMemory</code> (value), <code>touchPoints</code> (value).</p>
-<p><strong>AudioFeature</strong> — <code>supported</code>, <code>context</code>, <code>formats.{mp3,webm,ogg,opus,wav,m4a}</code>.
-<strong>VideoFeature</strong> — <code>supported</code>, <code>formats.{mp4,ogv,webm}</code>.</p>
+<p><strong>AudioFeature</strong> - <code>supported</code>, <code>context</code>, <code>formats.{mp3,webm,ogg,opus,wav,m4a}</code>.
+<strong>VideoFeature</strong> - <code>supported</code>, <code>formats.{mp4,ogv,webm}</code>.</p>
 <h2>@detector-js/detector</h2>
-<p><code>Detector extends FlagsClass</code> — composes everything:</p>
+<p><code>Detector extends FlagsClass</code> - composes everything:</p>
 <table>
 <thead>
 <tr>
@@ -102,19 +102,19 @@ Constructor-computed flags (instance properties): <code>addEventListener</code>,
 </tr>
 </tbody></table>
 <p>Methods: <code>toFlags()</code>, <code>toValues()</code>, <code>setCssFlags()</code>, <code>upgrade()</code> (async). Getters: <code>ua</code>, <code>root</code>, <code>process</code>, <code>navigator</code>, <code>document</code>, <code>booleanFlagsValuePropertyName</code>.</p>
-<h3><code>await detector.upgrade()</code> — real OS version via Client Hints</h3>
+<h3><code>await detector.upgrade()</code> - real OS version via Client Hints</h3>
 <p>Modern macOS browsers keep the legacy-compat UA <code>&quot;Mac OS X 10_15_7&quot;</code> (→ Catalina) even on
 macOS Sonoma, Sequoia or Tahoe. The real version lives in the high-entropy
 <code>navigator.userAgentData.getHighEntropyValues([&#39;platformVersion&#39;])</code> (User-Agent Client Hints).
 <code>upgrade()</code> (auto-started in the constructor, safe/no-op when hints are absent or denied by
-Permissions-Policy) refreshes <code>detector.os</code> with the real version and name — e.g.
+Permissions-Policy) refreshes <code>detector.os</code> with the real version and name - e.g.
 <code>{ name: &#39;macOS&#39;, version: &#39;26.6.2&#39;, versionName: &#39;Tahoe&#39; }</code>.</p>
 <p><strong>Safari (and WebKit)</strong>: no Client Hints exist, and the UA keeps the legacy-compat
 <code>&quot;Mac OS X 10_15_7&quot;</code>. Since Safari 26 is bundled 1:1 with macOS 26 (Apple renumbered in 2025),
 the UA <code>Version/26.x</code> token reveals the real version synchronously (no async needed) → Tahoe.
 Older Safari majors were back-ported across multiple macOS releases, so pre-26 values stay UA-based.</p>
 <p><strong>macOS version names</strong> (Tempo → Tahoe): 10.0–10.15, 11 Big Sur, 12 Monterey, 13 Ventura,
-14 Sonoma, 15 Sequoia — then <strong>26 Tahoe</strong> (versions 16–25 do not exist; Apple jumped 15 → 26).
+14 Sonoma, 15 Sequoia - then <strong>26 Tahoe</strong> (versions 16–25 do not exist; Apple jumped 15 → 26).
 Windows names incl. 11 (via hints), Android dessert names Cupcake → Pie then numerical (10–17+).</p>
 <h2>Versioning &amp; release</h2>
 <p>SemVer via <code>pnpm release</code> (single synced version for root + all <code>@detector-js/*</code>; Conventional Commits drive major/minor/patch). See <a href="../GOVERNANCE.html">GOVERNANCE</a>.</p>

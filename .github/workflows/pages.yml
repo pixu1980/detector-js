@@ -1,6 +1,6 @@
 # Publish the static site (index.html + generated docs pages) to GitHub Pages
 # at https://detector.js.org (CNAME at repo root). DNS must point the domain
-# to GitHub Pages (4 IPs) — already in place if Pages was used before.
+# to GitHub Pages (4 IPs) - already in place if Pages was used before.
 name: Pages
 
 on:

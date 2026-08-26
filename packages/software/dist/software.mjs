@@ -1274,7 +1274,7 @@ var Browser = class extends CssFlagsClass {
       this.OperaCoast,
       // UA-only: Coast/ token
       this.OperaTouch
-      // UA-only: OPT/ token — Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
+      // UA-only: OPT/ token - Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
     ]) && Asserts.one([
       this.OperaMini,
       this.OperaCoast,
@@ -1847,7 +1847,7 @@ var OS = class extends CssFlagsClass3 {
       "Tahoe": /^26(\.+\d)(\.+\d)?$/i.test(version)
     }, version);
   }
-  //! Client Hints (User-Agent Client Hints) — real OS version when the UA legacy-compat
+  //! Client Hints (User-Agent Client Hints) - real OS version when the UA legacy-compat
   //! string hides it (modern macOS always reports "Mac OS X 10_15_7" while the real
   //! version is, e.g., 26.6.2 "Tahoe"). platformVersion is high-entropy: only available
   //! through the async getHighEntropyValues() and can be denied (Permissions-Policy).

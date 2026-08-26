@@ -1,4 +1,4 @@
-// E2E: the static site — links point to built HTML pages (no raw .md links)
+// E2E: the static site - links point to built HTML pages (no raw .md links)
 // and every page shares the same chrome (site.css, header.site, footer.site).
 const { test, expect } = require('@playwright/test');
 
@@ -56,6 +56,50 @@ test.describe('static site', () => {
       return a ? a.textContent.trim() : null;
     });
     expect(gov).toBe('GOVERNANCE');
+  });
+
+  test('landing page cards use flex layout: grow when needed, never shrink', async ({ page }) => {
+    await page.goto('/index.html');
+    const layout = await page.evaluate(() => {
+      const grid = document.querySelector('#features .grid');
+      const card = document.querySelector('#features .card');
+      if (!grid || !card) return null;
+      const gs = getComputedStyle(grid);
+      const cs = getComputedStyle(card);
+      return { display: gs.display, flexGrow: cs.flexGrow, flexShrink: cs.flexShrink };
+    });
+    expect(layout, 'features grid/card found').not.toBeNull();
+    expect(layout.display, 'cards container is flex').toBe('flex');
+    expect(layout.flexGrow, 'cards grow to fill space').not.toBe('0');
+    expect(layout.flexShrink, 'cards never shrink').toBe('0');
+  });
+
+  test('landing page uses semantic HTML landmarks', async ({ page }) => {
+    await page.goto('/index.html');
+    const sem = await page.evaluate(() => {
+      const kv = document.querySelector('.kv');
+      const kvLabel = document.querySelector('.kv dt, .kv .label');
+      const cards = document.querySelectorAll('#features .card');
+      const chipList = document.querySelector('ul.integrations li.chip, ol.integrations li.chip');
+      const footerNavs = document.querySelectorAll('footer.site nav[aria-label]');
+      return {
+        kvTag: kv ? kv.tagName.toLowerCase() : null,
+        kvLabelIsDt: !!kvLabel && kvLabel.tagName.toLowerCase() === 'dt',
+        cardTags: Array.from(cards).map((c) => c.tagName.toLowerCase()),
+        chipListOk: !!chipList,
+        footerNavCount: footerNavs.length,
+      };
+    });
+    // live key/value panel is a definition list (dt/dd pairs)
+    expect(sem.kvTag, 'live panel uses <dl>').toBe('dl');
+    expect(sem.kvLabelIsDt, 'panel labels are <dt>').toBe(true);
+    // feature cards are self-contained articles
+    expect(sem.cardTags.length, 'feature cards exist').toBeGreaterThan(0);
+    for (const t of sem.cardTags) expect(t === 'article', `card is <article>, got <${t}>`).toBe(true);
+    // integration chips form a real list
+    expect(sem.chipListOk, 'chips are a <ul>/<ol> list').toBe(true);
+    // footer link columns are navigable regions
+    expect(sem.footerNavCount, 'footer columns are <nav aria-label>').toBeGreaterThanOrEqual(3);
   });
 
   test('every page shares the same chrome (site.css, header.site, footer.site)', async ({ page }) => {

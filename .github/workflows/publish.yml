@@ -1,4 +1,4 @@
-# Release validation (dry-run) — triggered after a tagged release (v2.0.11+):
+# Release validation (dry-run) - triggered after a tagged release (v2.0.11+):
 # packs every workspace package and runs the full suite. Actual `npm publish`
 # is executed by the maintainer (see GOVERNANCE.md / scripts/release.mjs).
 name: Publish check

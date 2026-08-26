@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>Governance — DetectorJS</title>
+<title>Governance - DetectorJS</title>
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -31,13 +31,13 @@
 <p>DetectorJS is an open-source project with a light, transparent governance model.</p>
 <h2>Project owner &amp; maintainers</h2>
 <ul>
-<li><strong>Owner / lead maintainer:</strong> Emiliano &quot;Pixu&quot; Pisu — <a href="mailto:pisuemiliano.1980@gmail.com">pisuemiliano.1980@gmail.com</a></li><li>Maintainers are listed in <code>package.json</code> (<code>author</code>, <code>contributors</code>) and on the GitHub team.</li></ul>
+<li><strong>Owner / lead maintainer:</strong> Emiliano &quot;Pixu&quot; Pisu - <a href="mailto:pisuemiliano.1980@gmail.com">pisuemiliano.1980@gmail.com</a></li><li>Maintainers are listed in <code>package.json</code> (<code>author</code>, <code>contributors</code>) and on the GitHub team.</li></ul>
 <h2>Decision-making</h2>
 <ul>
 <li><strong>Day-to-day changes:</strong> via pull request, reviewed and merged by at least one maintainer.</li><li><strong>API / breaking changes, new majors:</strong> require discussion (issue + proposal), and are recorded in <code>docs/adr/</code> (Architecture Decision Records) where useful.</li><li><strong>Any maintainer may veto a change</strong> with a stated technical/privacy reason; a second maintainer can override.</li><li><strong>Privacy-relevant changes</strong> (anything that touches network, storage, or globals) require an explicit review against <a href="PRIVACY.html">PRIVACY</a> and a note in the PR description.</li></ul>
 <h2>Releases &amp; versioning</h2>
 <ul>
-<li><strong>Semantic Versioning (SemVer 2.0.0).</strong> Current major: <strong>3.x</strong>.</li><li>Releases are cut from the default branch; tagged (<code>vX.Y.Z</code>), changelog updated (<code>CHANGELOG.md</code>), <code>dist/</code> rebuilt and verified by CI tests before tagging.</li><li>Zero external runtime dependencies is a <strong>hard contract</strong> — new majors justify exceptions via ADR.</li></ul>
+<li><strong>Semantic Versioning (SemVer 2.0.0).</strong> Current major: <strong>3.x</strong>.</li><li>Releases are cut from the default branch; tagged (<code>vX.Y.Z</code>), changelog updated (<code>CHANGELOG.md</code>), <code>dist/</code> rebuilt and verified by CI tests before tagging.</li><li>Zero external runtime dependencies is a <strong>hard contract</strong> - new majors justify exceptions via ADR.</li></ul>
 <h2>Contribution flow</h2>
 <ol>
 <li>Open an issue for anything non-trivial (or find one to fix).</li><li>Fork, branch (<code>feat/</code>, <code>fix/</code>, <code>docs/</code>, <code>chore/</code>), and open a PR.</li><li>PR must pass: lint, unit tests, e2e, and the privacy checklist.</li><li>A maintainer reviews and merges. See <a href="CONTRIBUTING.html">CONTRIBUTING</a>.</li></ol>

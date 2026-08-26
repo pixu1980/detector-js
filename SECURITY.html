@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>Security Policy — DetectorJS</title>
+<title>Security Policy - DetectorJS</title>
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="./favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -42,7 +42,7 @@
 </tr>
 <tr>
 <td>2.x (TypeScript monorepo)</td>
-<td>⚠️ legacy — fixes on request</td>
+<td>⚠️ legacy - fixes on request</td>
 </tr>
 <tr>
 <td>1.x (plain vanillaJS)</td>
@@ -55,10 +55,10 @@
 <li>GitHub Security Advisories: <code>https://github.com/pixu1980/detector-js/security/advisories/new</code></li><li>or email the maintainers (see <code>package.json</code> <code>author</code> / <code>contributors</code>).</li></ul>
 <p>You can expect:</p>
 <ul>
-<li>an acknowledgement within <strong>72 hours</strong>;</li><li>a triage/impact assessment within <strong>5 business days</strong>;</li><li>coordinated disclosure — we prefer a fix to be ready before public details are shared.</li></ul>
+<li>an acknowledgement within <strong>72 hours</strong>;</li><li>a triage/impact assessment within <strong>5 business days</strong>;</li><li>coordinated disclosure - we prefer a fix to be ready before public details are shared.</li></ul>
 <p>If you responsibly disclose, we&#39;re happy to credit you (unless you prefer anonymity).</p>
 <h2>Security model</h2>
-<p>DetectorJS runs <strong>entirely client-side</strong> and <strong>never sends data anywhere</strong> — see <a href="PRIVACY.html">PRIVACY</a>. Key guarantees:</p>
+<p>DetectorJS runs <strong>entirely client-side</strong> and <strong>never sends data anywhere</strong> - see <a href="PRIVACY.html">PRIVACY</a>. Key guarantees:</p>
 <ul>
 <li><strong>Zero network APIs</strong> in the library (no <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>sendBeacon</code>, pixies). Tests assert this.</li><li><strong>No persistence</strong>: no cookies/localStorage writes (except a self-cleaning API probe), no IndexedDB usage.</li><li><strong>No external resources</strong>: the library, its demo site and docs load nothing from third-party hosts.</li><li><strong>Graceful failures</strong>: capability probes run in safe mode (<code>try/catch</code>) so a hostile/limited environment never crashes the host page.</li><li><strong>No prototype pollution / no globals leak</strong>: the only global written is the <code>Detector</code> export in the browser bundle; polyfills only add standard-missing methods guarded by existence checks.</li></ul>
 <h3>Running untrusted input</h3>

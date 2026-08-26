@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TARGET = 'es2016';
 
-// brotli quality: best ratio (11) — emitted once, served as-is
+// brotli quality: best ratio (11) - emitted once, served as-is
 const BR = { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 } };
 
 function precompress(rel) {
@@ -79,7 +79,7 @@ async function buildRoot() {
   // self-contained browser bundles: window.Detector = Detector class
   //  - detector.browser(.min).js        → target ES2016 (standard, polyfills bundled)
   //  - detector.browser.es2015(.min).js → lowest esbuild target (legacy webviews).
-  //    NOTE: true ES5 (IE11) exceeds esbuild's transpiler — would need a Babel pass.
+  //    NOTE: true ES5 (IE11) exceeds esbuild's transpiler - would need a Babel pass.
   const browserEntry = path.join(ROOT, 'browser/index.js');
   const browserBase = {
     ...common,

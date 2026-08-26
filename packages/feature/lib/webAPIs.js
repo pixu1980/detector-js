@@ -1,5 +1,5 @@
-// AUTO-GENERATED — do not edit. Regenerate with:  node scripts/update-webapis.mjs [--file <list> | --scrape]
-// Source: MDN /docs/Web/API index — the windowGlobal names probed by Feature on the global root.
+// AUTO-GENERATED - do not edit. Regenerate with:  node scripts/update-webapis.mjs [--file <list> | --scrape]
+// Source: MDN /docs/Web/API index - the windowGlobal names probed by Feature on the global root.
 // featureFlag = globalName.toCamelCase(); mdn url = https://developer.mozilla.org/en-US/docs/Web/API/<globalName>
 
 export const WEB_API_GLOBALS = [

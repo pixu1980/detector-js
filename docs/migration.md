@@ -1,9 +1,9 @@
-# Migration Guide — v1 / v2 → v3 monorepo
+# Migration Guide - v1 / v2 → v3 monorepo
 
 This guide walks every breaking change between the published 1.x/2.x packages and
 **detector-js v3** (monorepo, vanillaJS, esbuild). Each section has a *before/after*.
 
-> The next release is **a new major** (baseline 2.0.11 + breaking commits — run `pnpm release`).
+> The next release is **a new major** (baseline 2.0.11 + breaking commits - run `pnpm release`).
 > Types, docs and bundles are built by `pnpm build` (esbuild + marked).
 
 ## 1. Structure & packages
@@ -11,12 +11,12 @@ This guide walks every breaking change between the published 1.x/2.x packages an
 | v1 / v2 | v3 |
 | --- | --- |
 | single `detector-js` (flat, or TS monorepo with `@detector-js/*` 0.0.x) | vanillaJS monorepo: `@detector-js/{core,feature,software,hardware,detector}` all **same version** (e.g. 2.0.11) |
-| build: rollup + babel / parcel | **esbuild** (`scripts/build.mjs`) — `pnpm build` |
+| build: rollup + babel / parcel | **esbuild** (`scripts/build.mjs`) - `pnpm build` |
 
 There is **no more TS source**: the implementation is zero-dependency ES6; types are
 **generated from the JSDoc comments** (`scripts/build-dts.mjs`, wired in `pnpm build`).
 
-## 2. Exports — named everywhere
+## 2. Exports - named everywhere
 
 Browser global (dist `detector.browser.min.js`):
 ```html
@@ -57,7 +57,7 @@ d.cpu  // { platform: 'MacIntel', cores: 10, architecture: 'arm64', vendor: 'app
 - `upgrade()` is auto-started by the constructor (non-blocking); safe no-op when hints are
   unavailable (Safari/Firefox) or denied (`Permissions-Policy: ch-ua-high-entropy-values`).
 - macOS version names run **Tempo → Tahoe (26)** (11 Big Sur, 12 Monterey, 13 Ventura,
-  14 Sonoma, 15 Sequoia — **16–25 do not exist**, Apple renumbered 15→26 in 2025).
+  14 Sonoma, 15 Sequoia - **16–25 do not exist**, Apple renumbered 15→26 in 2025).
 - Apple Silicon: detected from Client Hints `architecture` or the WebGL GPU identity
   ("Apple M1 …" / "Apple GPU").
 
@@ -80,10 +80,10 @@ plus ~90 feature flags (WebGPU, WebAuthn, Wake Lock, Web Share, Web Locks, WebXR
 - `Asserts._checkAssert` → **`Asserts.checkAssert`** (now public, upstream v2 naming).
 - Environment roots (`ua`, `root`, `process`, `navigator`, `document`, `flags`, `cssFlagsPrefix`)
   are **getters kept after construction** (v2 parity).
-- `Platform` no longer imports `OS`/`Browser` — it reads the injected `flags` object
-  (call it with the Detector output as before — no consumer change).
+- `Platform` no longer imports `OS`/`Browser` - it reads the injected `flags` object
+  (call it with the Detector output as before - no consumer change).
 - `Device` remains a base placeholder.
-- `index.d.ts` / per-package `.d.ts`: generated from JSDoc — run `pnpm build` to refresh;
+- `index.d.ts` / per-package `.d.ts`: generated from JSDoc - run `pnpm build` to refresh;
   `tsc`-checked via `pnpm types:check`.
 
 ## 7. Build & contribution toolchain
@@ -106,7 +106,7 @@ pnpm sri          # CDN integrity snippets
 | `dist/detector.browser.es2015.min.js` | ES2015 + polyfills | legacy iOS/Android WebViews |
 | `dist/detector.js` / `detector.mjs` | ES2016 | Node / bundlers (CJS + ESM via `exports`) |
 
-True ES5 (IE11) is not shipped (esbuild limitation) — see [docs/roadmap.md](roadmap.md).
+True ES5 (IE11) is not shipped (esbuild limitation) - see [docs/roadmap.md](roadmap.md).
 
 ## 9. Migration checklist
 

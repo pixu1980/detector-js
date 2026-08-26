@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#0b1020" />
-<title>Getting Started — DetectorJS</title>
+<title>Getting Started - DetectorJS</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="../favicon.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
@@ -28,7 +28,7 @@
     </div>
   </header>
 <main><h1>Getting Started</h1>
-<p>DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities — in pure vanillaJS, with zero runtime dependencies, and <strong>without ever sending data anywhere</strong> (<a href="../PRIVACY.html">PRIVACY</a>).</p>
+<p>DetectorJS detects the host environment: browser, engine, OS, CPU, GPU, platform and ~90 WebAPI capabilities - in pure vanillaJS, with zero runtime dependencies, and <strong>without ever sending data anywhere</strong> (<a href="../PRIVACY.html">PRIVACY</a>).</p>
 <h2>Install</h2>
 <pre tabindex="0"><code class="language-sh">npm install detector-js
 # or
@@ -95,7 +95,7 @@ detector.platform// 'desktop'
 detector.cpu     // { platform: 'MacIntel', cores: 8, architecture: 'x64', vendor: 'intel' }
 detector.gpu     // { webGLVendor: 'WebKit', vendor: 'Apple Inc.', model: 'Apple M1', ... }
 detector.feature // 1100+ flags: the curated WebAPIs (webGPU, webAuthn, …) plus the full MDN /Web/API catalog (abortController, rtcPeerConnection, …)</code></pre><h2>Using only a slice of the library</h2>
-<p>The monorepo ships scoped packages — use exactly what you need:</p>
+<p>The monorepo ships scoped packages - use exactly what you need:</p>
 <pre tabindex="0"><code class="language-js">import { Browser } from '@detector-js/software';
 import { Feature } from '@detector-js/feature';
 const browser = new Browser();

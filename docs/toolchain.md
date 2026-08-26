@@ -6,7 +6,7 @@ DetectorJS is a **vanillaJS monorepo**: no runtime dependencies, and a deliberat
 | --- | --- |
 | Bundling | **esbuild** (replaces the old rollup + babel stack) |
 | Linting | eslint 7 (airbnb config, tuned) |
-| Unit tests | `node:test` (Node's built-in runner — zero deps) |
+| Unit tests | `node:test` (Node's built-in runner - zero deps) |
 | Integration smoke | `node test/smoke.js` |
 | E2E | Playwright + Chromium |
 | Docs | jsdoc (optional) |
@@ -29,7 +29,7 @@ pnpm docs           # regenerate jsdoc docs/
 
 - **per package** (`packages/*`): `dist/<name>.js` (CJS) + `dist/<name>.mjs` (ESM), `@detector-js/*` kept **external** (resolved via node_modules/workspaces at runtime);
 - **root node builds**: `dist/detector.js` (CJS) + `dist/detector.mjs` (ESM), externals external;
-- **root browser builds**: `dist/detector.browser.js` + `.min.js` — **self-contained IIFE** (everything bundled) that assigns the `Detector` **class** to the global (entry: `browser/index.js`), so `new Detector()` works with a plain `<script>` tag.
+- **root browser builds**: `dist/detector.browser.js` + `.min.js` - **self-contained IIFE** (everything bundled) that assigns the `Detector` **class** to the global (entry: `browser/index.js`), so `new Detector()` works with a plain `<script>` tag.
 
 `--target=es2016` + bundled polyfills (core package) keep the library usable on **legacy browsers** (see [browser-support.md](./browser-support.md)).
 
@@ -42,4 +42,4 @@ pnpm docs           # regenerate jsdoc docs/
 ## Publishing
 Packages are SemVer-pinned (`workspace:*` internally, resolved to the real version at publish). `package.json` exposes `exports` (import/require/types), `sideEffects`, `types`, `unpkg`/`jsdelivr` (root), and CI builds `dist/` before tagging.
 
-*Recorded as ADR: [ADR-0001 — esbuild toolchain](../docs/adr/0001-esbuild-toolchain.md).*
+*Recorded as ADR: [ADR-0001 - esbuild toolchain](../docs/adr/0001-esbuild-toolchain.md).*

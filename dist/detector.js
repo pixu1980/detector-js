@@ -151,7 +151,7 @@ var Detector = class extends import_core.FlagsClass {
    * @memberOf Detector
    */
   /**
-   * Refines the CPU detection from the GPU (WebGL) identity — the only reliable
+   * Refines the CPU detection from the GPU (WebGL) identity - the only reliable
    * synchronous evidence for Apple Silicon, since UA/platform use the legacy
    * "MacIntel"/"Mac OS X 10_15_7" strings on both Intel and Apple chips.
    *
@@ -309,7 +309,7 @@ if (typeof process !== "undefined" && process.env && true) {
 //! Features
 //! Hardware
 //! Software
-//! MDN Web API catalog (probes + mdn urls) — exposed for tooling/UIs
+//! MDN Web API catalog (probes + mdn urls) - exposed for tooling/UIs
 //! Development-only startup log (upstream v2 behavior). The `__VERSION__`
 //! placeholder is rewritten at build time (esbuild `define`).
 //# sourceMappingURL=detector.js.map

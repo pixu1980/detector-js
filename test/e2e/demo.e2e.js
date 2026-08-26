@@ -1,4 +1,4 @@
-// E2E: live demo layout — two columns (cards + raw output),
+// E2E: live demo layout - two columns (cards + raw output),
 // WebAPI cards open their MDN page in a new tab; every card has a description,
 // full text (no ellipsis) and a generous width.
 const { test, expect } = require('@playwright/test');

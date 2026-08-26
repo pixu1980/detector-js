@@ -54,7 +54,7 @@ export class CPU extends CssFlagsClass {
     let cpuClass = this._navigator.cpuClass || 'x86';
 
     // NOTE: navigator.platform 'MacIntel' is a legacy compatibility string and does
-    // NOT prove an Intel CPU — Apple Silicon Macs report it too. ARM is checked first;
+    // NOT prove an Intel CPU - Apple Silicon Macs report it too. ARM is checked first;
     // 'arm64' is no longer lumped into the generic 64-bit 'x64' bucket (upstream bug).
     if (Asserts.one([
       cpuClass === 'arm64',

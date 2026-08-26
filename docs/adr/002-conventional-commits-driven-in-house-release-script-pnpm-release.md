@@ -11,7 +11,7 @@ After the v3 monorepo restructure we need a repeatable release flow: bump root d
 
 ## Decision
 
-Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, prints the CDN/SRI snippets, commits + tags the release and publishes to npm. **`pnpm release` is the only release command** — optional flags of the same command: `--dry-run` (preview only) and `--skip-publish` (prepare + tag, no upload).
+Implement an in-house, zero-dependency release script (scripts/release.mjs) driven by Conventional Commits: it analyzes the commit range since the last ancestor tag, computes the next SemVer (any BREAKING → major, else feat → minor, else fix/others → patch), bumps package.json + all packages/*/package.json in sync, prepends a grouped CHANGELOG entry, updates examples deps, runs build+tests, prints the CDN/SRI snippets, commits + tags the release and publishes to npm. **`pnpm release` is the only release command** - optional flags of the same command: `--dry-run` (preview only) and `--skip-publish` (prepare + tag, no upload).
 
 ## Consequences
 

@@ -51,7 +51,7 @@ export class Detector extends FlagsClass {
     this.checkCPU();
     this.checkGPU();
     // navigator.platform 'MacIntel' is legacy compat on Apple Silicon: infer the real
-    // CPU from the GPU (WebGL) evidence — works even where Client Hints are missing (Safari)
+    // CPU from the GPU (WebGL) evidence - works even where Client Hints are missing (Safari)
     this._refineCpuWithGpu();
     this.checkPlatform();
 
@@ -156,7 +156,7 @@ export class Detector extends FlagsClass {
    * @memberOf Detector
    */
   /**
-   * Refines the CPU detection from the GPU (WebGL) identity — the only reliable
+   * Refines the CPU detection from the GPU (WebGL) identity - the only reliable
    * synchronous evidence for Apple Silicon, since UA/platform use the legacy
    * "MacIntel"/"Mac OS X 10_15_7" strings on both Intel and Apple chips.
    *
@@ -339,7 +339,7 @@ export class Detector extends FlagsClass {
   }
 }
 
-//! MDN Web API catalog (probes + mdn urls) — exposed for tooling/UIs
+//! MDN Web API catalog (probes + mdn urls) - exposed for tooling/UIs
 if (Feature && Feature.APIS) {
   Detector.PROBES = Feature.APIS;
 }

@@ -30,7 +30,7 @@ docs/         governance, getting-started, API, privacy, security docs
 
 ## Rules
 
-1. **No new runtime dependencies — ever.** If you think one is needed, open an issue first (it will likely be closed: we polyfill or implement in-house).
+1. **No new runtime dependencies - ever.** If you think one is needed, open an issue first (it will likely be closed: we polyfill or implement in-house).
 2. **No network, no storage, no telemetry.** The privacy contract in [PRIVACY.md](PRIVACY.md) is a test: `test/e2e/privacy.e2e.js` asserts a page embedding the bundle makes zero requests. Any new capability probe must be read-only or self-cleaning, and added to that test.
 3. **Keep it vanilla & old-platform friendly.** Source is ES2016+ with optional chaining used sparingly; the build targets `es2016` (polyfills cover the rest). Avoid APIs like `Map`/`Set` in hot paths without need; keep `assists` in safe mode (`Asserts.one/all(..., true)`).
 4. **Style:** run `pnpm lint`. Follow existing patterns (getters + `_checkAssertsResult`, `toFlags`/`toValues`, `get`-prefixed factory methods in `Feature`).
@@ -50,8 +50,8 @@ pnpm exec playwright install chromium   # once, for e2e
 ```
 
 - Unit tests: `node:test` per package (`packages/*/__tests__/*.test.js`).
-- Integration smoke: `test/smoke.js` — real UA table against built bundles.
-- E2E: `test/e2e/*.e2e.js` — real Chromium, real `navigator`, privacy (zero requests).
+- Integration smoke: `test/smoke.js` - real UA table against built bundles.
+- E2E: `test/e2e/*.e2e.js` - real Chromium, real `navigator`, privacy (zero requests).
 
 ## Pull requests
 

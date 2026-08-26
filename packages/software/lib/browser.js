@@ -1334,7 +1334,7 @@ export class Browser extends CssFlagsClass {
       !!this._root.opr,
       this.OperaMini, // UA-only, e.g. Opera Mini (no window.opera on every build)
       this.OperaCoast, // UA-only: Coast/ token
-      this.OperaTouch, // UA-only: OPT/ token — Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
+      this.OperaTouch, // UA-only: OPT/ token - Opera for iOS is a WKWebView wrapper, it never sets window.opera/opr
     ]) && Asserts.one([
       this.OperaMini,
       this.OperaCoast,

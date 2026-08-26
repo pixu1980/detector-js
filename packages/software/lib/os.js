@@ -141,7 +141,7 @@ export class OS extends CssFlagsClass {
     }, version);
   }
 
-  //! Client Hints (User-Agent Client Hints) — real OS version when the UA legacy-compat
+  //! Client Hints (User-Agent Client Hints) - real OS version when the UA legacy-compat
   //! string hides it (modern macOS always reports "Mac OS X 10_15_7" while the real
   //! version is, e.g., 26.6.2 "Tahoe"). platformVersion is high-entropy: only available
   //! through the async getHighEntropyValues() and can be denied (Permissions-Policy).

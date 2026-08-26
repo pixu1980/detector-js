@@ -1,4 +1,4 @@
-// Regenerates packages/feature/lib/webAPIs.js — the catalog of MDN Web API
+// Regenerates packages/feature/lib/webAPIs.js - the catalog of MDN Web API
 // interfaces probed by Feature (global presence on the window/root).
 //
 // Sources (preferred order):
@@ -53,8 +53,8 @@ async function main() {
   globals.sort();
 
   const lines = [];
-  lines.push('// AUTO-GENERATED — do not edit. Regenerate with:  node scripts/update-webapis.mjs [--file <list> | --scrape]');
-  lines.push('// Source: MDN /docs/Web/API index — the windowGlobal names probed by Feature on the global root.');
+  lines.push('// AUTO-GENERATED - do not edit. Regenerate with:  node scripts/update-webapis.mjs [--file <list> | --scrape]');
+  lines.push('// Source: MDN /docs/Web/API index - the windowGlobal names probed by Feature on the global root.');
   lines.push('// featureFlag = globalName.toCamelCase(); mdn url = https://developer.mozilla.org/en-US/docs/Web/API/<globalName>');
   lines.push('');
   lines.push('export const WEB_API_GLOBALS = [');

@@ -1,4 +1,4 @@
-/* DetectorJS — shared design system.
+/* DetectorJS - shared design system.
    System font stack per https://systemfontstack.com, fluid typography (clamp),
    identical header/footer/container on every page (index, demo, built docs). */
 :root {

@@ -138,4 +138,4 @@ for (const k of expectedKeys) {
 }
 assert.ok(Object.keys(feat).length >= 1000, `feature keys: ${Object.keys(feat).length}`);
 
-console.log('SMOKE OK — monorepo vanillaJS v2.0.11');
+console.log('SMOKE OK - monorepo vanillaJS v2.0.11');

@@ -28,5 +28,5 @@ jobs:
       - run: pnpm check:size        # bundle size budget
       - run: pnpm test:coverage     # unit coverage (threshold enforced)
       - run: pnpm test              # full suite (unit + smoke + e2e)
-      - run: pnpm audit --prod      # runtime deps are zero — must stay clean
+      - run: pnpm audit --prod      # runtime deps are zero - must stay clean
       - run: pnpm pack --dry-run    # release readiness (root)

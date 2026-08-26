@@ -1,4 +1,4 @@
-// E2E: device gallery — real sample UAs parsed live, cards per device, own-UA analyzer.
+// E2E: device gallery - real sample UAs parsed live, cards per device, own-UA analyzer.
 const { test, expect } = require('@playwright/test');
 
 test.describe('device gallery', () => {
