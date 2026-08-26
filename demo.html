@@ -21,6 +21,20 @@
     /* ---------- left column: detection cards ---------- */
     .panel h2 { font-size: var(--fs-md); margin: 0 0 .6rem; display: flex; align-items: center; gap: .5rem; }
     .panel { margin-bottom: 1.25rem; }
+    /* sticky header of the Web APIs panel: same top offset as the raw panel */
+    .panel-head {
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+      z-index: 5;
+      margin: -.4rem -.4rem .6rem;
+      padding: .4rem .4rem .6rem;
+      background: rgba(11, 16, 32, .88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-head h2 { margin: 0; }
+    .panel-head .toolbar { margin-bottom: 0; }
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -137,11 +151,13 @@
           <div class="cards" id="cards-hardware"></div>
         </section>
         <section class="panel" id="panel-apis">
-          <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
-          <div class="toolbar">
-            <label><input type="checkbox" id="only-supported" checked /> only supported</label>
-            <input type="search" id="api-filter" aria-label="Filter APIs" placeholder="Filter APIs…" />
-            <span class="count" id="api-count"></span>
+          <div class="panel-head">
+            <h2>⚡ Web APIs <span style="font-size:.8rem;color:var(--muted);font-weight:400">(↗ = MDN reference)</span></h2>
+            <div class="toolbar">
+              <label><input type="checkbox" id="only-supported" checked /> only supported</label>
+              <input type="search" id="api-filter" aria-label="Filter APIs" placeholder="Filter APIs…" />
+              <span class="count" id="api-count"></span>
+            </div>
           </div>
           <div class="cards" id="cards-apis"></div>
         </section>

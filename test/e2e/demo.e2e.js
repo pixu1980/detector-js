@@ -4,6 +4,27 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('live demo layout', () => {
+  test('Web APIs panel header (h2 + toolbar) is sticky like the raw panel', async ({ page }) => {
+    await page.goto('/demo.html');
+    const head = await page.evaluate(() => {
+      const wrap = document.querySelector('#panel-apis .panel-head');
+      if (!wrap) return null;
+      const cs = getComputedStyle(wrap);
+      const raw = getComputedStyle(document.querySelector('.raw-panel'));
+      return {
+        position: cs.position,
+        top: cs.top,
+        rawTop: raw.top,
+        hasH2: !!wrap.querySelector('h2'),
+        hasToolbar: !!wrap.querySelector('.toolbar'),
+      };
+    });
+    expect(head, 'panel-head wrapper exists').not.toBeNull();
+    expect(head.position, 'panel-head is sticky').toBe('sticky');
+    expect(head.top, 'same sticky top as the raw output panel').toBe(head.rawTop);
+    expect(head.hasH2 && head.hasToolbar, 'wrapper contains h2 and toolbar').toBe(true);
+  });
+
   test('two columns, big cards with descriptions, MDN links on WebAPI cards', async ({ page }) => {
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e)));
