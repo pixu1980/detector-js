@@ -6,28 +6,18 @@ DetectorJS, zero-dependency platform/environment detector written in ES6
 
 Please feel free to ask for modifications, fixes or do a PR to improve Detector behavior or add detection rules
 
-{{#author}}
 ## Author
 Emiliano 'Pixu' Pisu <pisuemiliano.1980@gmail.com>
-{{/author}}
 
-{{#badges}}
 ## Badges
-{{#add_nodeico}}[![NPM](https://nodei.co/npm/detector-js.png)](https://nodei.co/npm/detector-js/){{/add_nodeico}}
-
-[![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](https://img.shields.io/npm/dm/detector-js.svg){{#add_github_badges}} {{#add_github_stars}}[![GitHub stars](https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/stargazers){{/add_github_stars}} {{#add_github_forks}}[![GitHub forks](https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/network){{/add_github_forks}} {{#add_github_issues}}[![GitHub issues](https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/issues){{/add_github_issues}} {{#add_github_license}}[![GitHub license](https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/blob/master/LICENSE){{/add_github_license}}{{/add_github_badges}} {{#add_travis}}[![Build Status](https://travis-ci.org/pixu1980/detector-js.svg?branch=master)](https://travis-ci.org/pixu1980/detector-js){{/add_travis}} {{#add_coverage}}[![Coverage Status](https://coveralls.io/repos/github/pixu1980/detector-js/badge.svg?branch=master)](https://coveralls.io/github/pixu1980/detector-js?branch=master){{/add_coverage}}
-{{/badges}}
-
-## Documentation
-Check out the [Latest Documentation](https://detector.js.org/docs/index.html) here
-
-{{#example}}
-## Example
-Check out this [Codepen]() example
-{{/example}}
+[![NPM downloads/month](https://img.shields.io/npm/dm/detector-js.svg)](https://img.shields.io/npm/dm/detector-js.svg)
+[![GitHub stars](https://img.shields.io/github/stars/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/network)
+[![GitHub issues](https://img.shields.io/github/issues/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/issues)
+[![GitHub license](https://img.shields.io/github/license/pixu1980/detector-js.svg?style=plastic)](https://github.com/pixu1980/detector-js/blob/master/LICENSE)
 
 ## Installation
-This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/). 
+This is a [Node.js](https://nodejs.org/) module available through the [npm registry](https://www.npmjs.com/).
 
 It can be installed using either [`npm`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) or [`yarn`](https://yarnpkg.com/en/) package managers.
 
@@ -55,7 +45,7 @@ yarn add detector-js
 </script>
 ```
 
-No build step, no bundler, no wrapper — `dist/detector.browser.min.js` (and the
+No build step, no bundler, no wrapper: `dist/detector.browser.min.js` (and the
 ES2015 build `dist/detector.browser.es2015.min.js` for legacy webviews) expose a
 `Detector` global that reads `navigator.userAgent` directly. For SRI-pinned CDN
 snippets run `pnpm sri` (integrity hashes change per version).
@@ -76,11 +66,13 @@ const { Detector } = require('detector-js'); // CJS
 Types ship with the package (`index.d.ts` + per-package `.d.ts`).
 
 ## Privacy
-**100% client-side — zero network calls, zero storage, zero telemetry.**
+**100% client-side - zero network calls, zero storage, zero telemetry.**
 DetectorJS never registers or sends anything anywhere; the data stays in the hands of whoever executes the library.
 Read the full legal walkthrough (GDPR, ePrivacy, D.Lgs. 196/2003, CCPA, papers) in [PRIVACY.md](PRIVACY.md).
 
 ## Documentation
+Check out the [Latest Documentation](https://detector.js.org/docs/index.html)
+
 - [Getting started](docs/getting-started.md)
 - [API reference](docs/api.md)
 - [Toolchain (esbuild)](docs/toolchain.md)
@@ -111,7 +103,8 @@ import { Browser } from '@detector-js/software';
 import { Detector } from '@detector-js/detector';
 ```
 
-## Usage
+### Full example output
+
 ```js
 import Detector from 'detector-js';
 
@@ -261,39 +254,19 @@ console.log(detector);
 - decide to implement or not device infos detection
 
 ## Dependencies
-{{#depDetails}}
-- [detector-js](https://github.com/pixu1980/detector-js): DetectorJS, zero-dependency platform/environment detector written in ES6
-{{/depDetails}}
-{{^depDetails}}
 None
-{{/depDetails}}
 
 ## Dev Dependencies
-{{#devDepDetails}}
-- [detector-js](https://github.com/pixu1980/detector-js): DetectorJS, zero-dependency platform/environment detector written in ES6
-{{/devDepDetails}}
-{{^devDepDetails}}
 None
-{{/devDepDetails}}
 
-{{#scripts.test}}
 ## Tests
 ```sh
 npm install
 npm test
 ```
-{{/scripts.test}}
 
-{{#testOutput}}
-```
-{{{testOutput}}}
-```
-{{/testOutput}}
-
-{{#license}}
 ## License
 MIT
-{{/license}}
 
 ## Powered By
 <a href="http://js.org" target="_blank" title="JS.ORG | JavaScript Community">
