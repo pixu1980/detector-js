@@ -1,8 +1,8 @@
 # Roadmap
 
-Priorities captured from the maintainer interview (3.0.0 release-prep cycle).
+Priorities captured from the maintainer interview (next-major release-prep cycle).
 
-## Next (post-3.0.0)
+## Next (after next major)
 
 - **[DONE] Full MDN Web API coverage** — `Feature` now probes the complete MDN `/docs/Web/API`
   interface index (1021 globals, camelCase flags, never shadowing curated ones); regenerable via

@@ -46,8 +46,8 @@ yarn add {{name}}
 ```html
 <!-- local build -->
 <script src="dist/detector.browser.min.js"></script>
-<!-- …or a pinned CDN copy (jsDelivr / unpkg) -->
-<script src="https://cdn.jsdelivr.net/npm/detector-js@{{version}}/detector.browser.min.js"></script>
+<!-- …or a CDN copy — jsDelivr/unpkg resolve "latest" automatically -->
+<script src="https://cdn.jsdelivr.net/npm/detector-js/detector.browser.min.js"></script>
 <script>
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
