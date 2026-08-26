@@ -44,13 +44,21 @@ yarn add {{name}}
 ### Browser (script tag)
 
 ```html
+<!-- local build -->
 <script src="dist/detector.browser.min.js"></script>
+<!-- …or a pinned CDN copy (jsDelivr / unpkg) -->
+<script src="https://cdn.jsdelivr.net/npm/detector-js@{{version}}/detector.browser.min.js"></script>
 <script>
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
   detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
 </script>
 ```
+
+No build step, no bundler, no wrapper — `dist/detector.browser.min.js` (and the
+ES2015 build `dist/detector.browser.es2015.min.js` for legacy webviews) expose a
+`Detector` global that reads `navigator.userAgent` directly. For SRI-pinned CDN
+snippets run `pnpm sri` (integrity hashes change per version).
 
 ### npm (ESM / CJS)
 

@@ -52,12 +52,19 @@
 <p>It can be installed using either <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm</code></a> or <a href="https://yarnpkg.com/en/"><code>yarn</code></a> package managers.</p>
 <pre tabindex="0"><code class="language-sh">npm i detector-js</code></pre><pre tabindex="0"><code class="language-sh">yarn add detector-js</code></pre><h2>Usage</h2>
 <h3>Browser (script tag)</h3>
-<pre tabindex="0"><code class="language-html"><script src="dist/detector.browser.min.js"></script>
+<pre tabindex="0"><code class="language-html"><!-- local build -->
+<script src="dist/detector.browser.min.js"></script>
+<!-- …or a pinned CDN copy (jsDelivr / unpkg) -->
+<script src="https://cdn.jsdelivr.net/npm/detector-js@2.0.11/detector.browser.min.js"></script>
 <script>
   const detector = new Detector();          // global class, no wrapper needed
   console.log(detector.toFlags());          // { browser, engine, os, cpu, gpu, feature, platform }
   detector.upgrade().then(render);          // optional: real OS via Client Hints (macOS 'Tahoe'…)
-</script></code></pre><h3>npm (ESM / CJS)</h3>
+</script></code></pre><p>No build step, no bundler, no wrapper — <code>dist/detector.browser.min.js</code> (and the
+ES2015 build <code>dist/detector.browser.es2015.min.js</code> for legacy webviews) expose a
+<code>Detector</code> global that reads <code>navigator.userAgent</code> directly. For SRI-pinned CDN
+snippets run <code>pnpm sri</code> (integrity hashes change per version).</p>
+<h3>npm (ESM / CJS)</h3>
 <pre tabindex="0"><code class="language-sh">npm i detector-js</code></pre><pre tabindex="0"><code class="language-js">import { Detector } from 'detector-js';      // ESM
 const { Detector } = require('detector-js'); // CJS</code></pre><h3>TypeScript</h3>
 <p>Types ship with the package (<code>index.d.ts</code> + per-package <code>.d.ts</code>).</p>
